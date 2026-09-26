@@ -13,30 +13,52 @@
 <title>Svampe</title>
 <style>
 /* =====================================================================
-   SVAMPE — stylesheet
-   Farve betyder noget:
-     sort/hvid  viden, feltguide (standard)
-     mos        skov, spiselighed, økologisk relevans (sparsomt)
-     rust       fare, giftighed, afgørende forskel (kun sikkerhed)
-     smørgul    køkkenet (hele fladen skifter, når man går derind)
-     brun       SVAMPEs bånd – kun top og bund
-   Fem typografiske roller:
-     Display (serif)  · Sektion (sans fed, versal) · Brød (sans)
-     Fortælling (serif) · Etiket (sans lille, versal)
-   Sans = instrumentet. Serif = historien.
+   SVAMPE — visuelt system, pass 02
+   Grundverdenen er papir og blæk. Farve optræder kun i to skalaer:
+   LILLE (et mærke) eller STOR (en hel flade). Aldrig mellemstore kasser.
+
+   PAPER     #FFFFFF  baggrund                         – alt
+   INK       #141414  tekst, piktogrammer, primærknap  – alt
+   INK-2     #3B3B3B  sekundær brødtekst               – tekst
+   GREY      #737373  metadata, billedtekster          – lille tekst (ikke på smørgul)
+   RULE      #E3E3E1  hårlinjer                        – kun ved reelle overgange
+   WASH      ink 5,5 % tonet flade (små interaktive flader, fotopladsholdere)
+   MOSS      #A3AF84  "God spisesvamp", skov-filtre, I skoven nu-fladen
+                      lille mærke / én stor flade på start. Aldrig tekst, streger.
+   BUTTER    #F6E8B1  køkkenet – hele siden. Mærker for køkkenfiltre.
+   RUST      #B4432A  fare: dødeligt/meget giftig (mærke, artsflade, STOP).
+                      Aldrig pynt, skillelinjer eller almindelige knapper.
+   RUST-PALE #F4DCD3  mærke for "Giftig" (tekst RUST-INK #8C2F1A)
+   CHESTNUT  #7E5536  redaktionel flade: sidefoden. Ikke en værktøjslinje.
+   LILAC     #CDD2E0  tid: sæsonfilter. Kun mærke.
+
+   Typografi — serif = navne og fortælling, sans = instrumentet
+     display  serif 44–60 / .98   artsnavn, sidetitel
+     state    serif 32 / 1.06     udsagn, spørgsmål
+     obs      serif 24 / 1.22     observation, sanseindtryk
+     read     serif 19 / 1.45     redaktionel prosa
+     cat      sans 28 / 1.08 500  kategorier (indgange, filtre)
+     body     sans 16 / 1.5
+     meta     sans 13 / 1.4       billedtekster, metadata
+     label    sans 11 / 600 / versal +.11em
+   Afstand: 4 8 12 16 24 32 48 72 112 · spalte 20 px
    ===================================================================== */
 :root{
-  --bg:#FFFFFF; --ink:#000000; --ink2:#2E2E2E; --mute:#666666; --faint:#9E9E9E;
-  --rule:#D2D2D2; --wash:#F2F2F2;
-  --moss:#35532A; --rust:#9E2F18; --kitchen:#FFF3C4; --brand:#3E2E22; --brand-ink:#F3EDE4;
+  --paper:#FFFFFF; --ink:#141414; --ink-2:#3B3B3B; --grey:#737373; --grey-2:#A6A6A6;
+  --rule:#E3E3E1; --wash:rgba(20,20,20,.055);
+  --moss:#A3AF84; --butter:#F6E8B1; --rust:#B4432A; --rust-pale:#F4DCD3; --rust-ink:#8C2F1A;
+  --chestnut:#7E5536; --lilac:#CDD2E0;
+  --bg:var(--paper);
   --serif:"Times New Roman",Times,serif;
   --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --g:20px; --top:52px; --tab:56px; --brandh:72px;
+  --fs-3xl:clamp(44px,12.4vw,60px);
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:72px;--s9:112px;
+  --g:20px; --r:10px; --top:52px; --tab:54px;
   --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;transition:background-color .45s ease}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;transition:background-color .4s ease}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:inherit}
 a{color:inherit}
 img{display:block;max-width:100%}
@@ -44,517 +66,547 @@ h1,h2,h3,h4,p,dl,dd,figure{margin:0}
 ul,ol{margin:0}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
-/* ---------- typografiske roller ---------- */
-.d{font:400 36px/1.05 var(--serif);letter-spacing:-.01em}
-.d.it{font-style:italic;color:var(--ink2)}
-.d-xl{font:400 clamp(52px,15vw,76px)/.98 var(--serif);letter-spacing:-.02em}
-.d-m{font:400 27px/1.12 var(--serif);letter-spacing:-.005em}
-.sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font:700 12.5px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;border-top:1px solid var(--ink);padding-top:12px;margin:0 0 28px}
-.ed,.lede{font:400 21px/1.42 var(--serif)}
-.lbl{font:600 11px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase}
-.la{font:italic 400 17px/1.3 var(--serif);color:var(--ink2)}
-.nm{font:400 20px/1.2 var(--serif)}
-.small{font-size:14px;line-height:1.45;color:var(--mute)}
+/* ---------- typografi ---------- */
+.t-display{font:400 var(--fs-3xl)/.98 var(--serif);letter-spacing:-.022em;hyphens:manual}
+.t-state{font:400 32px/1.06 var(--serif);letter-spacing:-.012em}
+.t-obs{font:400 24px/1.22 var(--serif);letter-spacing:-.004em}
+.t-read{font:400 19px/1.45 var(--serif)}
+.t-cat{font:500 28px/1.08 var(--sans);letter-spacing:-.022em}
+.lbl{font:600 11px/1.3 var(--sans);letter-spacing:.11em;text-transform:uppercase}
+.meta{font-size:13px;line-height:1.4;color:var(--grey)}
+.la{font:italic 400 19px/1.25 var(--serif);color:var(--ink-2)}
+.num{font:500 11px/1 var(--sans);font-variant-numeric:tabular-nums;letter-spacing:.04em;color:var(--grey)}
+.g{color:var(--grey)}
 .pad{padding-left:var(--g);padding-right:var(--g)}
-.dim{color:var(--ink2)}
+.arr{font:400 1.05em/1 var(--sans)}
 
-/* ---------- piktogrammer ---------- */
-.pg{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;flex:none;overflow:visible}
+/* ---------- piktogrammer: 24-gitter, 1,5 px linje, fyldt = det, der tales om ---------- */
+.pg{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round;flex:none;overflow:visible}
 .pg *{vector-effect:non-scaling-stroke}
 .pg .f{fill:currentColor}
 .pg .d{stroke:none}
+.pg.lg{stroke-width:1.75}
+.lock{display:flex;align-items:center;gap:10px}
+.lock-n{display:flex;align-items:center;gap:10px}
+.lock-n .num{min-width:18px}
 
-/* ---------- bånd, navigation ---------- */
-#brand{background:var(--brand);color:var(--brand-ink);padding-top:var(--sat)}
-#brand .in{max-width:620px;margin:0 auto;height:var(--brandh);display:flex;align-items:center;gap:6px;padding:0 var(--g)}
-#bback{display:none;width:40px;height:44px;margin-left:-12px;align-items:center;justify-content:center;color:inherit}
-#bback svg{width:22px;height:22px}
-.bname{flex:1;font:700 12px/1 var(--sans);letter-spacing:.16em;color:inherit;text-decoration:none}
-.breg{font:700 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:inherit;text-decoration:none;padding:16px 0 16px 12px}
-#top{position:fixed;left:0;right:0;top:0;z-index:30;padding-top:var(--sat);background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);transform:translateY(-100%);transition:transform .22s ease}
-#top.show{transform:none}
-#top .in{max-width:620px;margin:0 auto;height:var(--top);display:flex;align-items:center;gap:8px;padding:0 10px}
-#back{width:44px;height:44px;display:flex;align-items:center;justify-content:center}
-#back svg{width:22px;height:22px}
-#ttl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#reg{font:700 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding:16px 10px}
-#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--rule);padding-bottom:var(--sab)}
+/* ---------- hoved, navigation, fod ---------- */
+#top{position:sticky;top:0;z-index:30;background:var(--bg);padding-top:var(--sat);box-shadow:0 1px 0 transparent;transition:box-shadow .2s,background-color .4s}
+#top.scrolled{box-shadow:0 1px 0 var(--rule)}
+#top .in{max-width:620px;margin:0 auto;height:var(--top);display:flex;align-items:center;gap:4px;padding:0 14px 0 var(--g)}
+#back{display:flex;align-items:center;width:34px;height:44px;margin-left:-8px}
+#back svg{width:20px;height:20px}
+#wm{font:700 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
+#ttl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:600 11px/1 var(--sans);letter-spacing:.11em;text-transform:uppercase}
+#top.root #back,#top.root #ttl{display:none}
+#top.root #wm{flex:1}
+#top:not(.root) #wm{display:none}
+.pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 13px;border-radius:999px;background:var(--wash);color:var(--ink);font:600 13px/1 var(--sans);text-decoration:none;white-space:nowrap}
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);box-shadow:0 -1px 0 var(--rule);padding-bottom:var(--sab);transition:background-color .4s}
 #tabs .in{max-width:620px;margin:0 auto;display:flex}
-#tabs a{position:relative;flex:1;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-decoration:none;color:var(--faint)}
-#tabs a svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4}
-#tabs a span{font:600 9.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase}
+#tabs a{position:relative;flex:1;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-decoration:none;color:var(--grey)}
+#tabs a svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linejoin:round;stroke-linecap:round}
+#tabs a span{font:500 10px/1 var(--sans);letter-spacing:.02em}
 #tabs a.on{color:var(--ink)}
-#tabs a .n{position:absolute;top:8px;left:calc(50% + 8px);min-width:15px;height:15px;padding:0 4px;background:var(--ink);color:#fff;font:700 9.5px/15px var(--sans);letter-spacing:0;text-align:center}
-main{max-width:620px;margin:0 auto;padding-bottom:calc(var(--tab) + var(--sab))}
-.view{animation:vin .18s ease-out}
+#tabs a.on span{font-weight:700}
+#tabs a.on::before{content:"";position:absolute;top:0;left:50%;width:20px;height:2px;margin-left:-10px;background:var(--ink)}
+#tabs a .n{position:absolute;top:7px;left:calc(50% + 7px);min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:var(--ink);color:#fff;font:700 9.5px/15px var(--sans);text-align:center}
+main{max-width:620px;margin:0 auto}
+.view{animation:vin .18s ease-out;min-height:60vh}
 @keyframes vin{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.view,body{animation:none;transition:none}}
-.bfoot{margin-top:96px;background:var(--brand);color:var(--brand-ink);padding:30px var(--g) 34px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.bfoot b{font:700 12px/1 var(--sans);letter-spacing:.16em}
-.bfoot p{font:400 18px/1.4 var(--serif);max-width:30em}
-.bfoot a{font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:8px 0}
-.bfoot span{font:600 11px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.foot{margin-top:var(--s9);background:var(--chestnut);color:#fff;padding:var(--s7) var(--g) calc(var(--tab) + var(--sab) + var(--s7))}
+.foot .wmk{font:700 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.foot p{margin-top:var(--s5);font:400 21px/1.35 var(--serif);max-width:24em}
+.foot a{display:inline-flex;gap:8px;margin-top:var(--s5);font:500 15px/1 var(--sans);text-decoration:none}
+.foot small{display:block;margin-top:var(--s7);font:500 11px/1.4 var(--sans);letter-spacing:.04em;opacity:.72}
 
-/* ---------- sidehoved, sektioner, knapper ---------- */
-.ph-head{padding:48px var(--g) 0}
-.ph-head>.lbl{display:block;color:var(--mute);margin-bottom:14px}
+/* ---------- sidehoved, sektioner ---------- */
+.ph-head{padding:var(--s7) var(--g) 0}
+.ph-head>.lbl{margin-bottom:var(--s4);color:var(--grey)}
 .ph-head.danger>.lbl{color:var(--rust)}
-.intro{margin-top:18px;color:var(--ink2);max-width:34em}
-.sec{margin-top:80px;padding:0 var(--g)}
-.sh-link{font:600 11px/1 var(--sans);letter-spacing:.12em;text-decoration:none;color:var(--mute);display:inline-flex;gap:6px}
-.arr{font:400 22px/1 var(--sans)}
-.sh-link .arr{font-size:13px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 18px;border:1px solid var(--ink);background:#fff;color:var(--ink);font:700 12.5px/1.1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;text-align:center;position:relative}
-.btn.fill,.btn.big{background:var(--ink);color:#fff}
-.btn.big{width:100%;min-height:88px}
+.intro{margin-top:var(--s5);color:var(--ink-2);max-width:32em}
+.sec{margin-top:var(--s8);padding:0 var(--g)}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 var(--s6);padding-top:var(--s3);border-top:1px solid var(--rule);font:600 11px/1.3 var(--sans);letter-spacing:.11em;text-transform:uppercase}
+.sh a{font:500 13px/1 var(--sans);letter-spacing:0;text-transform:none;text-decoration:none;color:var(--grey)}
+.say{margin:var(--s5) var(--g) 0;max-width:34em}
+.say b{font-weight:600}
+.say.danger b{color:var(--rust)}
+.say .txt-link{display:flex;color:var(--rust)}
+.count{padding:0 var(--g) var(--s4);font-size:13px;color:var(--grey)}
+.aside{padding:var(--s6) var(--g) 0;font-size:14px;color:var(--grey)}
+.aside a{color:var(--ink)}
+.note{margin:var(--s8) var(--g) 0;padding-top:var(--s3);border-top:1px solid var(--rule)}
+.note .lbl{display:block;margin-bottom:var(--s3);color:var(--grey)}
+.note p{font-size:15px;color:var(--ink-2)}
+
+/* ---------- mærker (tags) ---------- */
+.tag{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:var(--wash);color:var(--ink);font:600 10.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.tag.moss{background:var(--moss)}
+.tag.butter{background:var(--butter)}
+.tag.lilac{background:var(--lilac)}
+.tag.rust{background:var(--rust);color:#fff}
+.tag.rust-pale{background:var(--rust-pale);color:var(--rust-ink)}
+.tag.paper{background:#fff;color:var(--rust)}
+button.tag{height:30px;padding:0 8px 0 12px;font-size:11px}
+button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
+
+/* ---------- knapper: primær · sekundær · tekst · kompakt ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 20px;border-radius:var(--r);background:var(--wash);color:var(--ink);font:500 16px/1.2 var(--sans);text-decoration:none;text-align:center;position:relative}
+.btn.fill{background:var(--ink);color:#fff}
+.btn.big{width:100%;min-height:72px;justify-content:space-between;padding:0 22px;background:var(--ink);color:#fff;font-size:18px}
+.btn.big .bl{display:flex;align-items:center;gap:14px}
 .btn[disabled]{opacity:.5}
-.btn-row{display:flex;gap:10px;padding:44px var(--g) 0}
+.btn-row{display:flex;gap:8px;padding:var(--s6) var(--g) 0}
 .btn-row .btn{flex:1}
 .btn-row.in{padding:0}
-.btn-col{display:grid;gap:10px;padding:44px var(--g) 0}
-.cta-wrap{padding:56px var(--g) 0}
-.txt-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:inherit}
-.txt-link .arr{font-size:14px}
-.quiet{display:flex;align-items:center;gap:10px;min-height:48px;margin:40px var(--g) 0;font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink2)}
-.minor{margin:56px var(--g) 0;border-top:1px solid var(--rule)}
-.minor a{display:flex;align-items:center;gap:10px;min-height:54px;border-bottom:1px solid var(--rule);text-decoration:none;font:600 15px/1.2 var(--sans)}
-.minor a .arr{margin-left:auto;font-size:18px}
-.minor a .m{margin-left:auto;font-weight:400;color:var(--mute);font-size:14px}
-.minor a .m+.arr{margin-left:12px}
-.minor a.warn{color:var(--rust)}
-.danger,.caution{margin:24px var(--g) 0;padding:1px 0 1px 14px;border-left:2px solid var(--rust);font-size:15.5px;line-height:1.5}
-.caution{border-left-color:var(--ink)}
-.danger b{color:var(--rust);font-weight:700}
-.danger .txt-link{color:var(--rust);min-height:0;padding-top:6px}
-.note{margin:80px var(--g) 0;padding-top:14px;border-top:1px solid var(--rule)}
-.note h3{color:var(--mute);margin-bottom:10px}
-.note p{font-size:15px;color:var(--ink2)}
-.count{padding:0 var(--g) 22px;font-size:14px;color:var(--mute)}
-.aside{padding:32px var(--g) 0;font-size:14px;color:var(--mute)}
-.aside a{color:var(--ink)}
+.btn-col{display:grid;gap:8px;padding:var(--s6) var(--g) 0}
+.cta-wrap{padding:var(--s7) var(--g) 0}
+.txt-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:500 15px/1.2 var(--sans);text-decoration:none;color:inherit}
+.quiet{display:flex;align-items:center;gap:10px;min-height:48px;margin:var(--s6) var(--g) 0;font:500 15px/1.2 var(--sans);text-decoration:none;color:var(--ink-2)}
+.util{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin:var(--s7) var(--g) 0}
+.util a{display:flex;align-items:baseline;gap:8px;padding:9px 0;font:500 16px/1.3 var(--sans);text-decoration:none}
+.util a .m{font-size:13px;font-weight:400;color:var(--grey)}
 
-/* ---------- status ---------- */
-.status{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:7px 10px 7px 9px;border:1px solid currentColor;font:700 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase}
-.status i{display:block;width:8px;height:8px;border:1.5px solid currentColor}
-.st{display:block;margin-top:8px;font:700 10.5px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase}
-.s-god,.s-spis{color:var(--moss)}
-.s-god i{background:currentColor}
-.s-ikke,.s-fra{color:var(--ink2)}
-.s-ikke i,.s-fra i{height:1.5px;border:0;background:currentColor}
-.s-gift,.s-meget{color:var(--rust)}
-.s-gift i,.s-meget i{width:0;height:0;border:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid currentColor}
-.status.s-meget{background:var(--rust);border-color:var(--rust);color:#fff}
-.st-note{margin-top:12px;font-size:14px;color:var(--mute)}
-
-/* ---------- fotos ---------- */
+/* ---------- fotos og annotationer ---------- */
 .ph{position:relative;overflow:hidden;background:var(--wash)}
 .ph img{width:100%;height:100%;object-fit:cover}
-.ph.empty{display:flex;align-items:center;justify-content:center}
-.ph.empty span{font:600 10px/1.3 var(--sans);letter-spacing:.1em;color:var(--faint);text-transform:uppercase;text-align:center;padding:6px}
+.ph.empty,.ph.none{display:flex;align-items:center;justify-content:center;color:var(--grey)}
+.ph.empty span{font:500 11px/1.3 var(--sans);color:var(--grey);text-align:center;padding:6px}
 .ann{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.ann circle{fill:none;stroke:#fff;stroke-width:2.2}
-.ann circle.o{stroke:rgba(0,0,0,.5);stroke-width:4.5}
-.ann rect{fill:#fff}
-.ann text{font:700 12.5px var(--sans);fill:#000;letter-spacing:.06em}
+.ann .o{fill:none;stroke:#141414;stroke-width:4.5;vector-effect:non-scaling-stroke}
+.ann .i{fill:none;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.ann-m{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#141414;color:#fff;font:700 11px/22px var(--sans);text-align:center;box-shadow:0 0 0 2px #fff;pointer-events:none}
+.lg{display:inline-flex;align-items:center;gap:7px;margin-right:14px;color:var(--ink);font-weight:500}
+.lg i{display:inline-block;width:17px;height:17px;border-radius:50%;background:var(--ink);color:#fff;font:700 9.5px/17px var(--sans);font-style:normal;text-align:center}
 .gal{position:relative}
 .gal-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
 .gal-track::-webkit-scrollbar{display:none}
 .gal-track .slide{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always}
 .gal-track .ph{aspect-ratio:4/3}
-.gal-meta{display:flex;align-items:baseline;gap:12px;padding:12px var(--g) 0}
-.gal-meta .cap{flex:1;font-size:14px;line-height:1.4;color:var(--ink2)}
-.gal-meta .cap .lbl{color:var(--ink);margin-right:4px}
-.gal-n{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
-.credit{padding:4px var(--g) 0;font-size:11px;line-height:1.35;color:var(--faint)}
+.gal-meta{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:12px var(--g) 0}
+.gal-meta .v{color:var(--ink)}
+.gal-meta .cap{grid-column:1/-1;font-size:13px;line-height:1.45;color:var(--ink-2)}
+.gal-n{font:500 11px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--grey)}
+.credit{padding:4px var(--g) 0;font-size:11px;line-height:1.35;color:var(--grey)}
 .arr-btn{position:absolute;top:0;width:48px;height:0;padding-top:37.5%;display:none}
 .arr-btn button{position:absolute;top:calc(100% - 22px);width:40px;height:44px;background:rgba(255,255,255,.9);font-size:22px}
 .arr-btn.l{left:0}.arr-btn.r{right:0}.arr-btn.r button{right:0}
 @media (hover:hover) and (min-width:700px){.arr-btn{display:block}.gal.single .arr-btn{display:none}}
 
 /* ---------- artssiden ---------- */
-.sp-head{padding:44px var(--g) 32px}
-.sp-head .la{margin-top:10px}
-.sp-head .alt{display:block;margin-top:4px;font:400 14px/1.4 var(--sans);color:var(--mute);font-style:normal}
-.sp-head .danger,.sp-head .caution{margin:20px 0 0}
-.lede{padding:36px var(--g) 0;font-size:23px}
-.sig{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin:40px var(--g) 0;padding:22px 0 0;border-top:1px solid var(--rule)}
-.sig li{display:flex;align-items:center;gap:12px;font:600 14.5px/1.25 var(--sans)}
-.kdp{margin:32px var(--g) 0;font:600 18px/1.4 var(--sans)}
-.kdp .lbl{display:block;color:var(--mute);margin-bottom:8px}
-.kt{margin-bottom:44px}
-.kt:last-of-type{margin-bottom:28px}
-.kt-h{display:flex;align-items:center;gap:10px;margin:0 0 12px;font:700 12.5px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase}
-.kt-t p{margin:0 0 8px}
-.kt-t b{font-weight:600}
-.nb{display:block;margin-top:3px;font-size:14px;color:var(--mute)}
-.kt-ph{margin:18px calc(-1 * var(--g)) 0}
+.sp-id{padding:var(--s7) var(--g) var(--s6)}
+.sp-id .la{margin-top:var(--s3)}
+.sp-id .syn{margin-top:var(--s1);font-size:13px;color:var(--grey)}
+.sp-id .st-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s5)}
+.sp-id .st-note{margin-top:10px;font-size:13px;color:var(--grey)}
+.sp-id .warn{margin-top:var(--s5);max-width:30em}
+.sp-id .warn b{color:var(--rust);font-weight:400}
+.sp-id.field{background:var(--rust);color:#fff;padding-bottom:var(--s7)}
+.sp-id.field .la{color:#fff}
+.sp-id.field .syn{color:rgba(255,255,255,.8)}
+.sp-id.field .warn b{color:#fff;font-weight:700;font-family:var(--sans);font-size:15px;letter-spacing:.02em}
+.lede{padding:var(--s7) var(--g) 0;max-width:36em}
+.sig-w{margin:var(--s7) var(--g) 0}
+.sig-w>.lbl{color:var(--grey)}
+.sig{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin:var(--s4) 0 0;padding:0}
+.sig li{font:500 15px/1.25 var(--sans)}
+.kt+.kt{margin-top:var(--s8)}
+.kt-h .lbl{color:var(--ink)}
+.kt .t-obs{margin-top:var(--s4)}
+.kt .nb{display:block;margin-top:var(--s2);font-size:13px;line-height:1.45;color:var(--grey)}
+.kt-more{margin-top:var(--s4);font-size:16px;color:var(--ink-2)}
+.kt-more b{font-weight:600;color:var(--ink)}
+.kt-ph{margin:var(--s5) calc(-1 * var(--g)) 0}
 .kt-ph .ph{aspect-ratio:4/3}
-.kt-ph figcaption{padding:10px var(--g) 0;font-size:14px;color:var(--ink2)}
-.anat{margin-top:4px}
-.anat summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px;font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.kt-ph figcaption{padding:10px var(--g) 0;font-size:13px;line-height:1.45;color:var(--ink-2)}
+.kt-ph figcaption .lgs{display:block;margin-bottom:4px}
+.anat{margin-top:var(--s8)}
+.anat summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:44px;font:500 15px/1 var(--sans)}
 .anat summary::-webkit-details-marker{display:none}
-.anat summary::after{content:"+";font:400 18px/1 var(--sans)}
+.anat summary::after{content:"+";font:300 20px/1 var(--sans)}
 .anat[open] summary::after{content:"–"}
-.anat .dia{max-width:260px;margin:10px 0 10px;border:1px solid var(--rule)}
+.plate{margin-top:var(--s5)}
+.plate .dia{width:78%;max-width:320px}
+.plate figcaption{margin-top:var(--s3)}
 .dia svg{display:block;width:100%;height:auto}
-.hab-r{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-weight:600}
-.hab{margin-top:18px}
-.sec .small{margin-top:10px}
-.season{margin-top:32px}
-.season .lbl{color:var(--mute)}
-.months{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;margin-top:12px}
-.months span{position:relative;text-align:center;padding:0 0 9px;font:600 11px/1 var(--sans);color:var(--faint);border-bottom:3px solid var(--wash)}
-.months span.on{color:var(--ink);border-bottom-color:var(--moss)}
-.months span.now{color:var(--ink);font-weight:800}
-.months span.now::before{content:"";position:absolute;top:-9px;left:50%;width:4px;height:4px;margin-left:-2px;background:var(--ink);border-radius:50%}
-.ctx{margin-top:18px;font-size:14px;color:var(--mute)}
-.ctx.on{color:var(--moss);font-weight:600}
-.taste{display:grid;grid-template-columns:92px 1fr;gap:22px 14px}
-.taste dt{padding-top:5px;color:var(--mute)}
-.taste dd b{display:block;font:600 15px/1.3 var(--sans)}
-.taste dd .ed{display:block;margin-top:6px;font-size:19px}
-.lk{border-bottom:1px solid var(--rule)}
-.lk a,.res a{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--rule);text-decoration:none}
-.lk .ph,.res .ph{aspect-ratio:1/1}
-.lk .t,.res .t{display:flex;flex-direction:column}
-.lk .st,.res .st{margin-top:6px}
-.lk .q{margin-top:6px;font-size:14px;line-height:1.4;color:var(--ink2)}
-.lk+.caution{margin:28px 0 0}
-.to-kitchen{display:block;margin-top:88px;padding:30px var(--g) 32px;background:var(--kitchen);text-decoration:none}
-.to-kitchen .lbl{color:var(--ink2)}
-.to-kitchen .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px}
-.to-kitchen .s{display:block;margin-top:10px;font-size:15px;color:var(--ink2)}
-.sp-head+.gal{margin-top:0}
+.hab-r{margin:0 0 var(--s3);font:500 16px/1.3 var(--sans)}
+.hab{margin-top:var(--s5);color:var(--ink-2)}
+.sec .meta{margin-top:var(--s3)}
+.season{margin-top:var(--s7)}
+.season>.lbl{color:var(--grey)}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:var(--s3)}
+.months span{position:relative;padding-top:9px;text-align:center;font:500 10.5px/1 var(--sans);color:var(--grey-2);border-top:6px solid var(--wash)}
+.months span.on{border-top-color:var(--ink);color:var(--ink)}
+.months span.now{font-weight:800}
+.months span.now::after{content:"";position:absolute;left:50%;bottom:-10px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
+.ctx{margin-top:var(--s5);font-size:14px;color:var(--grey)}
+.ctx.on{color:var(--ink);font-weight:500}
+.sense{display:grid;gap:var(--s6)}
+.sense dt{color:var(--grey)}
+.sense dd{margin-top:var(--s2)}
+.sense dd p{margin-top:var(--s2);font-size:15px;color:var(--ink-2);max-width:32em}
+.to-kitchen{display:block;margin-top:var(--s9);padding:var(--s6) var(--g) var(--s7);background:var(--butter);text-decoration:none}
+.to-kitchen .lbl{color:var(--ink-2)}
+.to-kitchen .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s7)}
+.to-kitchen .s{display:block;margin-top:var(--s3);font-size:14px;color:var(--ink-2)}
 
-/* ---------- lister, kort, filtre ---------- */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:48px 16px;padding:0 var(--g)}
-@media (min-width:560px){.grid{grid-template-columns:1fr 1fr 1fr}}
-.ph-head+.grid{margin-top:40px}
-.card{display:block;text-decoration:none}
-.card-ph{position:relative}
-.card .ph{aspect-ratio:4/5}
-.card .nm{margin-top:12px}
-.card .la{font-size:15px;margin-top:2px}
-.cul{display:block;margin-top:6px;font:600 10.5px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.kdp-s{margin-top:12px;font:600 14px/1.4 var(--sans)}
-.kdp-s .lbl{display:block;color:var(--mute);margin-bottom:4px}
-.num{position:absolute;left:0;bottom:0;background:#fff;font:700 11px/1 var(--sans);letter-spacing:.06em;padding:7px 8px 6px}
-.found{position:absolute;left:0;top:0;background:var(--moss);color:#fff;font:700 9.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:6px 7px}
-.flt{margin:36px var(--g) 40px;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:12px 0 14px}
-.flt-g{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:baseline;padding:4px 0}
-.flt-g>.lbl{color:var(--mute)}
-.flt-c{display:flex;flex-wrap:wrap;gap:0 18px}
-.flt-c button{min-height:40px;font:500 15px/1 var(--sans);border-bottom:1px solid transparent}
-.flt-c button.set{font-weight:700}
-.flt-c button.set::before{content:"";display:inline-block;width:6px;height:6px;margin-right:7px;vertical-align:2px;background:var(--ink)}
-.flt-c button.open{border-bottom-color:var(--ink)}
-.flt-o{display:flex;flex-wrap:wrap;gap:8px;padding:14px 0 6px}
-.flt-o button{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 13px;border:1px solid var(--rule);font:500 14.5px/1 var(--sans)}
-.flt-o button.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.flt-a{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);font:600 14px/1.3 var(--sans)}
-.flt-a button{min-height:40px;font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:3px}
-.cmp-list{border-bottom:1px solid var(--rule)}
-.ph-head+.cmp-list{margin:40px var(--g) 0}
-.cmp-list a{display:grid;grid-template-columns:104px 1fr auto;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--rule);text-decoration:none}
-.pair-ph{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.pair-ph .ph{aspect-ratio:1/1}
-.cmp-list .t{display:flex;flex-direction:column;gap:4px}
-.cmp-list .nm{font-size:18px}
-.cmp-list .nm i{font-style:italic;color:var(--mute)}
-.cmp-list .t>span{font-size:14px;color:var(--ink2)}
+/* ---------- indeks (artslister, resultater, fund) ---------- */
+.ix{margin:0 var(--g);border-top:1px solid var(--rule)}
+.ph-head+.ix,.ph-head+.flt{margin-top:var(--s7)}
+.ix>a{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:start;padding:16px 0;border-bottom:1px solid var(--rule);text-decoration:none}
+.ix .ph{aspect-ratio:4/5}
+.ix .t{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.ix .num{margin-bottom:8px}
+.ix .nm{font:400 22px/1.12 var(--serif);letter-spacing:-.005em}
+.ix .nm.unk{font-style:italic}
+.ix .la2{margin-top:3px;font:italic 15px/1.3 var(--serif);color:var(--grey)}
+.ix .tag{margin-top:12px}
+.ix .m{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;line-height:1.35;color:var(--ink-2)}
+.ix .m+.m{margin-top:4px}
+.ix .kd{margin-top:10px;font-size:14px;line-height:1.4;color:var(--ink-2)}
+.ix .found{margin-left:6px}
+.ix.sq>a{grid-template-columns:72px 1fr}
+.ix.sq .ph{aspect-ratio:1/1}
+.ix .q{margin-top:6px;font-size:14px;line-height:1.4;color:var(--ink-2)}
+
+/* ---------- filtre: kategorier som store ord, valg først når de åbnes ---------- */
+.flt{margin:0 var(--g)}
+.flt-h{display:flex;justify-content:space-between;align-items:center;width:100%;padding:18px 0 17px;border-top:1px solid var(--rule)}
+.flt-h .chev{width:18px;height:18px;transition:transform .2s}
+.flt-h[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.flt-h .k{font-size:13px;font-weight:500;letter-spacing:0;color:var(--grey);margin-left:auto;margin-right:12px}
+.flt-b{padding:4px 0 var(--s6)}
+.flt-c+.flt-c{margin-top:var(--s5)}
+.flt-c>.lbl{display:block;margin-bottom:10px;color:var(--grey)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills button{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:999px;background:var(--wash);font:500 15px/1 var(--sans)}
+.pills button.on{background:var(--ink);color:#fff}
+.pills button.dk{background:none;box-shadow:inset 0 0 0 1px var(--rule);color:var(--ink-2)}
+.pills button.dk.on{background:none;box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+.pills i{display:block;width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.flt-end{border-top:1px solid var(--rule)}
+.flt-act{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:var(--s4) var(--g) 0}
+.flt-act .clr{margin-left:4px;font:500 13px/1 var(--sans);color:var(--grey);text-decoration:underline;text-underline-offset:3px;min-height:30px}
+.res-n{margin:var(--s6) var(--g) var(--s3);font-size:13px;color:var(--grey)}
 
 /* ---------- start ---------- */
-.home-area{padding:44px var(--g) 0}
-.home-area>.lbl{display:block;color:var(--mute)}
-.home-area .d-xl{margin-top:12px}
-.home-area .meta{margin-top:16px;font-size:15px;color:var(--ink2)}
-.home-area .txt-link{margin-top:10px}
-.home-now{display:block;margin-top:56px;text-decoration:none}
-.home-now .ph{aspect-ratio:4/3}
-.home-now figcaption{padding:10px var(--g) 0;font:italic 15px/1.3 var(--serif);color:var(--mute)}
-.home-now>.lbl{display:block;padding:30px var(--g) 0;color:var(--mute)}
-.home-now .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px var(--g) 0}
-.entrances{margin:72px var(--g) 0;border-top:1px solid var(--ink)}
-.entrances a{display:grid;grid-template-columns:1fr auto;gap:8px 12px;padding:26px 0 28px;border-bottom:1px solid var(--rule);text-decoration:none}
-.entrances .t{grid-column:1}
-.entrances .alpha{grid-column:1;display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 4px}
-.entrances .s{grid-column:1;font-size:15px;color:var(--ink2)}
-.entrances .arr{grid-column:2;grid-row:1;align-self:center}
+.home-area{padding:var(--s6) var(--g) 0}
+.home-area>.lbl{color:var(--grey)}
+.home-area .t-display{margin-top:var(--s3)}
+.home-area .txt-link{margin-top:var(--s2);color:var(--ink-2)}
+.hm-hero{display:block;margin-top:var(--s6);text-decoration:none}
+.hm-hero .ph{aspect-ratio:4/5}
+.hm-now{display:block;background:var(--moss);padding:14px var(--g) var(--s6);text-decoration:none}
+.hm-now .cap{font-size:13px;color:var(--ink)}
+.hm-now .cap i{font-family:var(--serif);font-size:15px}
+.hm-now .lbl{display:block;margin-top:var(--s8)}
+.hm-now .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s3)}
+.hm-go{margin:var(--s8) var(--g) 0}
+.hm-go a{display:grid;grid-template-columns:30px 1fr auto;gap:6px 0;align-items:baseline;padding:22px 0 24px;border-top:1px solid var(--rule);text-decoration:none}
+.hm-go a:last-child{border-bottom:1px solid var(--rule)}
+.hm-go .num{grid-column:1;grid-row:1}
+.hm-go .t-cat{grid-column:2}
+.hm-go .arr{grid-column:3;grid-row:1;font-size:22px}
+.hm-go .s{grid-column:2/4;font-size:15px;color:var(--ink-2)}
+.hm-go .alpha{grid-column:2/4;display:flex;gap:14px;margin-top:10px}
 
 /* ---------- lær at se ---------- */
-.alphabet{display:grid;grid-template-columns:repeat(3,1fr);margin:44px var(--g) 0;border-top:1px solid var(--ink)}
-.alphabet a{display:flex;flex-direction:column;gap:10px;padding:18px 8px 16px 0;border-bottom:1px solid var(--rule);text-decoration:none;font:600 13px/1.25 var(--sans)}
-.lesson{margin:80px var(--g) 0;padding-top:16px;border-top:1px solid var(--ink)}
-.lesson-h{display:flex;align-items:center;gap:14px}
-.tech{margin-top:8px;font:italic 16px/1.3 var(--serif);color:var(--mute)}
-.lesson .ed{margin-top:18px}
-.lesson-fig{display:grid;grid-template-columns:40% 1fr;gap:3px;margin-top:24px}
-.lesson-fig .dia{border:1px solid var(--rule);display:flex;align-items:center}
+.alphabet{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:var(--s7) var(--g) 0}
+.alphabet a{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1;padding:14px;border-radius:12px;background:var(--wash);text-decoration:none;font:500 14px/1.2 var(--sans)}
+.lesson{margin-top:var(--s9);padding:0 var(--g)}
+.lesson .t-state{margin-top:var(--s4)}
+.tech{margin-top:var(--s2);font-size:13px;color:var(--grey)}
+.lesson .t-read{margin-top:var(--s4);max-width:34em}
+.lesson-fig{display:grid;grid-template-columns:40% 1fr;gap:2px;margin:var(--s5) calc(-1 * var(--g)) 0;align-items:center}
+.lesson-fig .dia{padding:0 8px 0 var(--g)}
 .lesson-fig .ph{aspect-ratio:4/3}
-.ex{margin-top:14px;font-size:14px;color:var(--mute)}
+.ex{margin-top:var(--s3);font-size:14px;color:var(--grey)}
 .ex a{color:var(--ink)}
-.lesson .btn-row{padding:32px 0 0}
+.lesson .btn-row{padding:var(--s6) 0 0}
 
 /* ---------- se forskellen ---------- */
-.cmp-head{position:sticky;top:calc(var(--top) + var(--sat));z-index:5;display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.97);border-bottom:1px solid var(--rule)}
-.cmp-head a{display:block;padding:16px var(--g) 14px;text-decoration:none}
-.cmp-head a+a{border-left:1px solid var(--rule)}
-.cmp-key{padding:40px var(--g) 0;font:400 22px/1.42 var(--serif)}
-.cmp-key .lbl{display:block;margin-bottom:12px;color:var(--mute)}
-.cmp-row{margin-top:64px}
-.cmp-row .kt-h{padding:0 var(--g)}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.pl{margin-top:var(--s6)}
+.pl>a{display:block;padding-bottom:var(--s7);text-decoration:none}
+.ab{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.ab .ph{aspect-ratio:1/1}
+.ab.tall .ph{aspect-ratio:3/4}
+.pl .t{padding:14px var(--g) 0}
+.pl .nm{display:block;font:400 22px/1.15 var(--serif)}
+.pl .nm .vs{font-family:var(--sans);font-size:17px;color:var(--grey);margin:0 4px}
+.pl .q{display:block;margin-top:6px;font-size:14px;color:var(--ink-2)}
+.ab-names{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px var(--g) 0}
+.ab-names a{display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-decoration:none}
+.ab-names .nm{font:400 22px/1.12 var(--serif)}
+.decisive{padding:var(--s8) var(--g) 0}
+.decisive>.lbl{color:var(--grey)}
+.decisive .t-state{margin-top:var(--s4)}
+.decisive p.k{margin-top:var(--s4);color:var(--ink-2);max-width:32em}
+.cmp-head{position:sticky;top:calc(var(--top) + var(--sat));z-index:5;display:grid;grid-template-columns:1fr 1fr;background:var(--bg);box-shadow:0 1px 0 var(--rule);transform:translateY(-100%);opacity:0;transition:.2s;pointer-events:none}
+.cmp-head.show{transform:none;opacity:1;pointer-events:auto}
+.cmp-head a{display:block;padding:10px var(--g);text-decoration:none;font:400 16px/1.2 var(--serif)}
+.cmp-row{margin-top:var(--s8)}
+.cmp-row>.lock-n{padding:0 var(--g)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:var(--s4)}
 .pair .ph{aspect-ratio:4/3}
-.txt{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:14px var(--g) 0}
-.txt p{font-size:15.5px;line-height:1.45}
+.txt{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px var(--g) 0}
+.txt p{font-size:15px;line-height:1.45}
 .txt p .pg{display:block;margin-bottom:8px}
 
-/* ---------- kig nærmere ---------- */
-.key-top{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:28px var(--g) 0}
-.key-top .lbl{color:var(--mute)}
-.key-prog{display:flex;gap:3px;padding:12px var(--g) 0}
+/* ---------- undersøg ---------- */
+.key-top{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:var(--s4) var(--g) 0}
+.key-top .lbl{color:var(--grey)}
+.key-top .txt-link{font-size:14px;color:var(--ink-2)}
+.key-prog{display:flex;gap:4px;padding:8px var(--g) 0}
 .key-prog i{flex:1;height:2px;background:var(--rule)}
 .key-prog i.on{background:var(--ink)}
-.key-q{padding:44px var(--g) 0}
-.key-q>.pg{display:block;margin-bottom:18px}
-.key-q .d{font-size:32px}
-.opts{display:grid;gap:10px;padding:32px var(--g) 0}
-.opts.grid2{grid-template-columns:1fr 1fr}
-.opt{display:flex;align-items:center;gap:14px;min-height:64px;padding:14px 16px;border:1px solid var(--rule);background:#fff}
-.opts.grid2 .opt{flex-direction:column;align-items:flex-start;padding:20px 16px 18px}
-.opt b{display:block;font:600 16px/1.25 var(--sans)}
-.opt small{display:block;margin-top:4px;font-size:13.5px;line-height:1.35;color:var(--ink2)}
-.opt.dk{border-style:dashed;justify-content:center}
-.opts.grid2 .opt.dk{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:center}
-.opt:active,.opt:hover{border-color:var(--ink)}
-.sw{display:block;width:30px;height:30px;flex:none;border:1px solid rgba(0,0,0,.14)}
-.given{padding:16px var(--g) 0;font-size:14px;color:var(--mute)}
-.res{margin:36px var(--g) 0;border-bottom:1px solid var(--rule)}
-.res a{grid-template-columns:88px 1fr auto}
-.res .la{font-size:15px}
-.sep dt{margin-top:22px}
+.key-q{padding:var(--s7) var(--g) 0}
+.key-q>.lbl{color:var(--grey)}
+.key-q .t-state{margin-top:var(--s3)}
+.key-q .intro{margin-top:var(--s3);font-size:15px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:var(--s6) var(--g) 0}
+.tile{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:150px;padding:16px;border-radius:12px;background:var(--wash);text-align:left}
+.tile b{display:block;font:500 18px/1.2 var(--sans)}
+.tile small{display:block;margin-top:4px;font-size:13px;line-height:1.35;color:var(--ink-2)}
+.tile:active{background:var(--ink);color:#fff}
+.tile:active small{color:rgba(255,255,255,.7)}
+.tile .sw{width:40px;height:40px}
+.rows{margin:var(--s6) var(--g) 0;border-top:1px solid var(--rule)}
+.rowo{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.rowo b{display:block;font:500 19px/1.25 var(--sans)}
+.rowo small{display:block;margin-top:3px;font-size:13px;line-height:1.35;color:var(--grey)}
+.rowo .arr{margin-left:auto;color:var(--grey)}
+.rowo:active{color:var(--grey)}
+.opt.dk{color:var(--grey)}
+.tiles .opt.dk{grid-column:1/-1;min-height:52px;flex-direction:row;align-items:center;background:none;box-shadow:inset 0 0 0 1px var(--rule)}
+.sw{display:block;width:28px;height:28px;flex:none;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+.given{display:flex;flex-wrap:wrap;gap:6px;padding:var(--s5) var(--g) 0}
+.res-ix{margin-top:var(--s6)}
+.sep dt{margin-top:var(--s5)}
 .sep dt:first-child{margin-top:0}
-.sep dd{margin-top:8px}
+.sep dd{margin-top:var(--s2)}
 .sep dd p{margin:0 0 4px}
 .sep dd b{font-weight:600}
 
-/* ---------- stop ---------- */
-#stop{position:fixed;inset:0;z-index:60;background:#fff;overflow-y:auto;padding-bottom:var(--sab);animation:vin .2s ease-out}
+/* ---------- stop: én fuld rustflade ---------- */
+#stop{position:fixed;inset:0;z-index:60;background:#fff;overflow-y:auto;padding-bottom:var(--sab)}
 #stop .in{max-width:620px;margin:0 auto}
-.stop-sign{background:var(--rust);color:#fff;padding:calc(var(--sat) + 30px) var(--g) 26px}
-.stop-sign h1{font:800 72px/.85 var(--sans);letter-spacing:-.02em}
-.stop-sign p{margin-top:16px;font:400 20px/1.35 var(--serif)}
-.stop-body{padding:30px var(--g) 44px}
-.stop-body .sh{margin-top:36px}
+.stop-sign{background:var(--rust);color:#fff;padding:calc(var(--sat) + 36px) var(--g) var(--s6)}
+.stop-sign h1{font:700 88px/.82 var(--sans);letter-spacing:-.04em}
+.stop-sign p{margin-top:var(--s5);font:400 22px/1.3 var(--serif);max-width:20em}
+.stop-body{padding:var(--s6) var(--g) var(--s7)}
+.stop-body .sh{margin-top:var(--s7)}
 .stop-body ol{list-style:none;padding:0}
-.stop-body li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;padding:14px 0;border-top:1px solid var(--rule)}
-.stop-body li b{display:block}
-.stop-body .pair{margin:28px calc(-1 * var(--g)) 0}
+.stop-body li{display:grid;grid-template-columns:22px 28px 1fr;gap:10px;align-items:start;padding:14px 0;border-bottom:1px solid var(--rule)}
+.stop-body li .num{padding-top:5px}
+.stop-body li b{display:block;font-weight:600}
+.stop-body .pair{margin:var(--s6) calc(-1 * var(--g)) 0}
 .stop-body .txt{padding:10px 0 0}
-.stop-body .small{margin-top:22px}
-.stop-body .btn-col{padding:28px 0 0}
+.stop-body .meta{margin-top:var(--s5)}
+.stop-body .btn-col{padding:var(--s6) 0 0}
 
 /* ---------- quiz ---------- */
-.qz-q{padding:32px var(--g) 0;font:400 25px/1.25 var(--serif)}
-.qz-img{margin-top:24px}
+.qz-q{padding:var(--s6) var(--g) 0}
+.qz-img{margin-top:var(--s5)}
 .qz-img .ph{aspect-ratio:4/3}
-.qz-q+.pair{margin-top:24px}
-.txt .nm{font-size:17px}
-.qz-opts{display:grid;gap:10px;padding:28px var(--g) 0}
-.qz-opt{display:flex;align-items:center;gap:14px;min-height:58px;padding:12px 16px;border:1px solid var(--rule);background:#fff;font-size:16px;line-height:1.3}
-.qz-opt.ok{background:var(--ink);border-color:var(--ink);color:#fff}
-.qz-opt.no{border-color:var(--rust);color:var(--rust)}
-.qz-exp{margin:24px var(--g) 0;padding:1px 0 1px 14px;border-left:2px solid var(--moss);font-size:15.5px}
-.qz-exp.bad{border-left-color:var(--rust)}
-.qz-exp .lbl{display:block;margin-bottom:6px}
+.qz-q+.pair{margin-top:var(--s5)}
+.txt .nm{font:400 17px/1.2 var(--serif)}
+.qz-opt{text-align:left}
+.qz-opt span{font:500 17px/1.3 var(--sans)}
+.qz-opt.ok span{font-weight:700}
+.qz-opt.ok::after{content:"Rigtigt";margin-left:auto;display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;background:var(--moss);font:600 10.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.qz-opt.no{color:var(--grey);text-decoration:line-through;text-decoration-thickness:1px}
+.qz-opt[disabled]{cursor:default}
+.qz-exp{margin:var(--s6) var(--g) 0;max-width:34em}
+.qz-exp .lbl{display:block;margin-bottom:var(--s2);color:var(--grey)}
+.qz-score{font:400 clamp(96px,32vw,150px)/.85 var(--serif);letter-spacing:-.04em}
 
-/* ---------- fund ---------- */
-.fd-day{display:flex;justify-content:space-between;margin:64px var(--g) 0;padding-bottom:12px;border-bottom:1px solid var(--ink)}
-.fd-day .lbl+.lbl{color:var(--mute)}
-.fd-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px 16px;padding:22px var(--g) 0}
-.fd-card{display:block;text-decoration:none}
-.fd-card .ph{aspect-ratio:1/1}
-.fd-card .ph.guide img{filter:grayscale(.4);opacity:.75}
-.fd-card .ph.guide span{position:absolute;left:0;bottom:0;background:#fff;font:600 9.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:5px 6px}
-.fd-card b{display:block;margin-top:12px;font:400 19px/1.2 var(--serif)}
-.fd-card b.unk{font-style:italic;color:var(--ink2)}
-.fd-card .m{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:13px;line-height:1.35;color:var(--ink2)}
-#fdList+.small{margin-top:40px}
-.fd-slots{display:grid;grid-template-columns:1fr 1fr;gap:16px 3px;margin-top:36px}
+/* ---------- fund: feltnotesbog ---------- */
+.fd-day{display:flex;justify-content:space-between;align-items:baseline;margin:var(--s8) var(--g) var(--s3)}
+.fd-day .lbl{color:var(--grey)}
+.fd-slots{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:var(--s6)}
 .fd-slot .ph{display:block;width:100%;aspect-ratio:1/1}
-.fd-slot .ph.empty{display:flex}
-.fd-slot figcaption{padding:8px 0 0 8px;color:var(--mute)}
-.fd-rows{margin:44px var(--g) 0}
-.fd-row{display:grid;grid-template-columns:112px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--rule)}
-.fd-row>.lbl{padding-top:4px;color:var(--mute)}
+.fd-slot figcaption{display:flex;align-items:center;gap:8px;padding:10px 12px 14px}
+.fd-rows{margin:var(--s6) var(--g) 0}
+.fd-row{display:grid;grid-template-columns:104px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--rule)}
+.fd-row>.lbl{padding-top:4px;color:var(--grey)}
 .fd-row p{display:flex;align-items:center;gap:10px}
-.fd-row .unk-big{font:italic 26px/1.1 var(--serif)}
-.fd-row .bud{margin-top:6px;font:400 26px/1.1 var(--serif)}
-.fd-row div>.lbl{color:var(--mute)}
-.del{color:var(--rust)}
+.fd-id{margin:var(--s7) var(--g) 0}
+.fd-id>.lbl{color:var(--grey)}
+.fd-id .t-state{margin-top:var(--s3)}
+.fd-id .t-state.unk{font-style:italic}
+.fd-id .meta{margin-top:var(--s2)}
+.del{color:var(--grey);font-size:14px}
+.empty-st{padding:var(--s7) var(--g) 0}
+.empty-st .pg{color:var(--grey-2)}
+.empty-st .t-obs{margin-top:var(--s5);max-width:20em}
 
 /* ---------- registrér ---------- */
-.rg-top{display:flex;justify-content:space-between;align-items:center;padding:24px var(--g) 0}
-.rg-top>.lbl{color:var(--mute)}
-.rg-top button{min-height:44px}
-.rg-prog{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:12px 0 0;padding:0 var(--g)}
-.rg-prog button{width:100%;padding:8px 0 4px;border-top:2px solid var(--rule);font:600 9.5px/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);white-space:nowrap;overflow:hidden}
-.rg-prog button span{display:block;margin-bottom:2px;font:700 12px/1 var(--sans)}
-.rg-prog li.done button{border-top-color:var(--ink);color:var(--ink)}
-.rg-prog li.cur button{border-top:3px solid var(--ink);color:var(--ink)}
-.rg-q{padding:40px var(--g) 0}
-.rg-n{display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;color:var(--mute)}
-.rg-q h1{margin-top:10px;font:400 32px/1.08 var(--serif)}
-.rg-q p{margin-top:12px;color:var(--ink2)}
-.rg-q p.dim{font-size:14.5px;color:var(--mute)}
-.rg-shot{position:relative;margin:28px var(--g) 0;aspect-ratio:4/3;background:var(--wash);overflow:hidden}
+.rg-top{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) var(--g) 0}
+.rg-top>.lbl{color:var(--grey)}
+.rg-top button{min-height:44px;font-size:14px;color:var(--ink-2)}
+.rg-prog{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:8px 0 0;padding:0 var(--g)}
+.rg-prog button{width:100%;padding:9px 0 4px;border-top:2px solid var(--rule);font:500 11px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--grey);text-align:left}
+.rg-prog li.done button{border-top-color:var(--grey);color:var(--ink)}
+.rg-prog li.cur button{border-top-color:var(--ink);color:var(--ink);font-weight:700}
+.rg-q{padding:var(--s7) var(--g) 0}
+.rg-q .t-state{margin-top:var(--s4)}
+.rg-q p{margin-top:var(--s3);color:var(--ink-2);max-width:32em}
+.rg-q p.dim{font-size:14px;color:var(--grey)}
+.rg-shot{position:relative;margin-top:var(--s5);aspect-ratio:4/3;background:var(--wash);overflow:hidden}
 .rg-shot img{width:100%;height:100%;object-fit:cover}
-.rg-cam{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;border:1px solid var(--ink)}
-.rg-cam b{font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.rg-cam{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer}
+.rg-cam b{font:500 16px/1 var(--sans)}
 .rg-cam input,.rg-act label input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.rg-act{display:flex;gap:10px;padding:16px var(--g) 0}
+.rg-act{display:flex;gap:8px;padding:12px var(--g) 0}
 .rg-act .btn{flex:1}
 .rg-act label{cursor:pointer}
-.rg-note{padding:14px var(--g) 0;font-size:13px;color:var(--mute)}
-.rg-obs{padding:44px var(--g) 0}
-.rg-obs h2{font:700 12.5px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding-top:12px;border-top:1px solid var(--ink)}
-.rg-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.rg-chips button{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 14px;border:1px solid var(--rule);font:500 15px/1 var(--sans)}
-.rg-chips button.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.rg-chips button.dk{border-style:dashed}
-.rg-chips button.dk.on{background:#fff;color:var(--ink);border-style:solid;border-color:var(--ink)}
-.rg-chips i{display:block;width:16px;height:16px;border:1px solid rgba(0,0,0,.18)}
-.rg-id{display:grid;gap:10px;padding:28px var(--g) 0}
-.rg-id button{padding:16px;border:1px solid var(--rule)}
-.rg-id button b{display:block;font:600 16px/1.2 var(--sans)}
-.rg-id button span{display:block;margin-top:4px;font-size:14px;color:var(--ink2)}
-.rg-id button.on{border-color:var(--ink);box-shadow:inset 3px 0 0 var(--ink)}
-.rg-field{padding:28px var(--g) 0}
-.rg-field .lbl{display:block;margin-bottom:8px;color:var(--mute)}
-.rg-field p{font:400 21px/1.3 var(--serif)}
-.rg-field select,.rg-field input,.rg-field textarea{width:100%;min-height:50px;padding:10px 12px;border:1px solid var(--ink);border-radius:0;background:#fff;color:var(--ink);font:16px/1.4 var(--sans);-webkit-appearance:none}
-.rg-field textarea{min-height:96px;resize:vertical}
+.rg-note{padding:12px var(--g) 0;font-size:13px;color:var(--grey)}
+.rg-obs{padding:var(--s7) var(--g) 0}
+.rg-obs .sh{margin-bottom:var(--s4)}
+.rg-id{display:grid;gap:8px;padding:var(--s6) var(--g) 0}
+.rg-id button{padding:16px 18px;border-radius:12px;background:var(--wash)}
+.rg-id button b{display:block;font:500 17px/1.2 var(--sans)}
+.rg-id button span{display:block;margin-top:4px;font-size:13px;color:var(--ink-2)}
+.rg-id button.on{background:var(--ink);color:#fff}
+.rg-id button.on span{color:rgba(255,255,255,.72)}
+.rg-field{padding:var(--s5) var(--g) 0}
+.rg-field .lbl{display:block;margin-bottom:8px;color:var(--grey)}
+.rg-field p{font:400 22px/1.3 var(--serif)}
+.rg-field select,.rg-field input,.rg-field textarea{width:100%;min-height:50px;padding:12px 14px;border:0;border-radius:var(--r);background:var(--wash);color:var(--ink);font:16px/1.4 var(--sans);-webkit-appearance:none}
+.rg-field textarea{min-height:104px;resize:vertical}
 
-/* ---------- område (kort) ---------- */
-.area-h{margin:36px var(--g) 48px;padding-top:14px;border-top:1px solid var(--ink)}
-.area-h .meta{margin-top:10px;font-size:15px;color:var(--ink2)}
-.area-h .small{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+/* ---------- område ---------- */
+.area-h{margin:var(--s7) var(--g) 0;padding-top:var(--s3);border-top:1px solid var(--rule)}
+.area-h .t-obs{margin-top:var(--s3)}
+.area-h .meta{margin-top:var(--s2)}
+.area-h .cov{margin-top:var(--s4);font-size:13px;color:var(--grey);max-width:32em}
 body.noscroll{overflow:hidden}
 #areaov{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;background:#fff;padding:calc(var(--sat) + 4px) 0 calc(var(--sab) + 12px);animation:vin .2s ease-out}
 .ov-top{display:flex;justify-content:space-between;align-items:center;height:48px;padding:0 12px 0 var(--g)}
-.ov-top .lbl{color:var(--mute)}
-.ov-x{width:44px;height:44px;font:300 30px/1 var(--sans)}
+.ov-top .lbl{color:var(--grey)}
+.ov-x{width:44px;height:44px;font:300 28px/1 var(--sans)}
 .ov-q{padding:8px var(--g) 16px}
-.ov-q h1{font:400 30px/1.08 var(--serif)}
-.ov-q>.lbl{display:block;margin-bottom:8px;color:var(--mute)}
-.ov-q p{margin-top:8px}
-.ov-search{display:flex;margin:0 var(--g);border:1px solid var(--ink)}
-.ov-search input{flex:1;min-width:0;height:46px;padding:0 12px;border:0;border-radius:0;background:#fff;color:var(--ink);font:16px var(--sans);-webkit-appearance:none}
-.ov-search button{padding:0 14px;border-left:1px solid var(--ink);font:700 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.ov-q h1{font:400 30px/1.06 var(--serif);letter-spacing:-.01em}
+.ov-q>.lbl{display:block;margin-bottom:10px;color:var(--grey)}
+.ov-q p{margin-top:8px;color:var(--ink-2)}
+.ov-search{display:flex;align-items:center;margin:0 var(--g);border-radius:var(--r);background:var(--wash)}
+.ov-search input{flex:1;min-width:0;height:48px;padding:0 14px;border:0;background:none;color:var(--ink);font:16px var(--sans);-webkit-appearance:none}
+.ov-search button{height:36px;margin-right:6px;padding:0 14px;border-radius:8px;background:var(--ink);color:#fff;font:500 14px/1 var(--sans);letter-spacing:0;text-transform:none}
 .ov-res{max-height:34vh;overflow:auto;margin:0 var(--g)}
 .ov-res p{padding:10px 0;font-size:14px}
 .ov-res>button,.presets button{display:block;width:100%;padding:11px 0;border-bottom:1px solid var(--rule)}
-.ov-res b,.presets b{display:block;font-weight:600}
-.ov-res span,.presets span{font-size:13px;color:var(--ink2)}
+.ov-res b,.presets b{display:block;font-weight:500}
+.ov-res span,.presets span{font-size:13px;color:var(--grey)}
 #map{position:relative;flex:1;min-height:180px;margin-top:12px;background:var(--wash)}
 #map .leaflet-tile-pane{filter:grayscale(1) contrast(1.02) brightness(1.04)}
-.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g);font-size:14px;color:var(--ink2)}
+.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g);font-size:14px;color:var(--ink-2)}
 .map-msg p{margin-bottom:12px}
-.map-msg .lbl{display:block;color:var(--mute)}
-.pin{background:var(--ink);border:2px solid #fff;box-shadow:0 0 0 1px var(--ink)}
+.map-msg .lbl{display:block;color:var(--grey)}
+.pin{background:var(--ink);border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px var(--ink)}
 .leaflet-control-attribution{font-size:9px!important}
-.ov-bottom{padding:14px var(--g) 0;border-top:1px solid var(--ink)}
-.ov-sel .lbl{color:var(--mute)}
+.ov-bottom{padding:14px var(--g) 0;box-shadow:0 -1px 0 var(--rule)}
+.ov-sel .lbl{color:var(--grey)}
 .ov-sel b{display:block;margin-top:4px;font:400 28px/1.1 var(--serif)}
-.ov-sel span.dim{font-size:13px}
-.ov-rad{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border:1px solid var(--ink)}
-.ov-rad button{padding:10px 12px;font:700 11.5px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase}
-.ov-rad button+button{border-left:1px solid var(--ink)}
-.ov-rad button small{display:block;margin-top:3px;font:400 12.5px var(--sans);letter-spacing:0;text-transform:none;color:var(--ink2)}
+.ov-sel span.dim{font-size:13px;color:var(--grey)}
+.ov-rad{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+.ov-rad button{padding:10px 12px;border-radius:var(--r);background:var(--wash);font:500 14px/1.2 var(--sans)}
+.ov-rad button small{display:block;margin-top:2px;font-size:12.5px;color:var(--grey)}
 .ov-rad button.on{background:var(--ink);color:#fff}
-.ov-rad button.on small{color:#ccc}
+.ov-rad button.on small{color:rgba(255,255,255,.7)}
 .ov-recent{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px}
-.ov-recent .lbl{color:var(--mute);margin-right:4px}
-.ov-recent button{height:34px;padding:0 10px;border:1px solid var(--rule);font-size:13px}
+.ov-recent .lbl{color:var(--grey);margin-right:4px}
+.ov-recent button{height:30px;padding:0 12px;border-radius:999px;background:var(--wash);font-size:13px}
 .ov-btns{display:flex;gap:8px;margin-top:12px}
 .ov-btns .btn{flex:1;padding:0 10px}
-.ov-btns.col{flex-direction:column;padding:28px var(--g) 0}
-.ov-skip{min-height:44px;font:700 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.hab-opts{display:grid;gap:10px;padding:10px var(--g) 0}
-.hab-opts button{min-height:58px;padding:0 16px;border:1px solid var(--rule);font:600 17px/1.2 var(--sans)}
-.hab-opts button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.ov-btns.col{flex-direction:column;padding:var(--s6) var(--g) 0}
+.ov-skip{min-height:44px;font:500 14px/1 var(--sans);color:var(--grey)}
+.hab-opts{display:grid;gap:8px;padding:10px var(--g) 0}
+.hab-opts button{min-height:56px;padding:0 18px;border-radius:12px;background:var(--wash);font:500 17px/1.2 var(--sans)}
+.hab-opts button.on{background:var(--ink);color:#fff}
 
 /* ---------- køkkenet: hele fladen bliver smørgul ---------- */
-body.kitchen{--bg:var(--kitchen)}
-body.kitchen #top{background:rgba(255,243,196,.96)}
-body.kitchen #tabs{background:var(--kitchen)}
-.k-first{margin-top:24px;padding:1px 0 1px 12px;border-left:2px solid var(--rust);font-size:14.5px;color:var(--ink2)}
-.k-meta{display:grid;grid-template-columns:80px 1fr;gap:10px 12px;margin:40px var(--g) 0;padding-top:14px;border-top:1px solid var(--ink)}
-.k-meta dt{padding-top:3px;color:var(--mute)}
-.k-meta dd{font-weight:600}
-.k-why{font:400 23px/1.42 var(--serif)}
-.k-list{padding-left:18px}
-.k-list li{margin:0 0 8px}
-.k-pair{font:500 17px/1.6 var(--sans)}
-.k-pair+.small{margin-top:10px}
-.k-dish{border-top:1px solid var(--ink)}
-.k-dish:last-child{border-bottom:1px solid var(--ink)}
-.k-dish summary{display:grid;grid-template-columns:36px 1fr;gap:10px;padding:20px 0;cursor:pointer;list-style:none}
+body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
+.k-id{padding:var(--s7) var(--g) 0}
+.k-id>.lbl{color:var(--grey)}
+.k-id .t-display{margin-top:var(--s3)}
+.k-id .la{margin-top:var(--s3)}
+.k-safe{margin-top:var(--s5);font-size:14px;line-height:1.45;color:var(--ink-2);max-width:26em}
+.k-sense{display:grid;gap:var(--s5);margin:var(--s8) var(--g) 0}
+.k-sense dt{color:var(--grey)}
+.k-sense dd{margin-top:6px;font:400 30px/1.1 var(--serif);letter-spacing:-.01em}
+.k-img{margin-top:var(--s8)}
+.k-img .ph{aspect-ratio:4/5}
+.k-img figcaption{padding:10px var(--g) 0;font-size:13px;color:var(--ink-2)}
+.k-list{padding:0;list-style:none}
+.k-list li{padding:10px 0;border-bottom:1px solid var(--rule)}
+.k-list li:first-child{padding-top:0}
+.k-pair{font:400 24px/1.3 var(--serif)}
+.k-pair+.meta{margin-top:var(--s3)}
+.k-dish{border-top:1px solid var(--rule)}
+.k-dish:last-child{border-bottom:1px solid var(--rule)}
+.k-dish summary{display:grid;grid-template-columns:44px 1fr auto;gap:8px;padding:22px 0 24px;cursor:pointer;list-style:none}
 .k-dish summary::-webkit-details-marker{display:none}
-.k-n{padding-top:3px;font:700 13px/1 var(--sans)}
-.k-t{display:flex;flex-direction:column;gap:5px}
-.k-t .lbl{color:var(--mute)}
-.k-t .nm{font-size:22px}
-.k-t .small{margin:0}
-.k-body{padding:0 0 26px 46px}
-.k-body h4{margin:14px 0 8px;color:var(--mute)}
+.k-dish summary::after{content:"+";font:300 22px/1 var(--sans)}
+.k-dish[open] summary::after{content:"–"}
+.k-n{font:400 30px/1 var(--serif);font-variant-numeric:tabular-nums}
+.k-t{display:flex;flex-direction:column;gap:6px}
+.k-t .lbl{color:var(--grey)}
+.k-t .nm{font:400 24px/1.15 var(--serif)}
+.k-body{padding:0 0 var(--s6) 52px}
+.k-body h4{margin:var(--s4) 0 var(--s2);color:var(--grey)}
 .k-body ul,.k-body ol{padding-left:18px}
 .k-body li{margin:0 0 6px}
-.k-tip{margin-top:14px;padding-top:12px;border-top:1px solid rgba(0,0,0,.15)}
-.k-tip .lbl{display:block;margin-bottom:6px;color:var(--mute)}
+.k-tip{margin-top:var(--s4)}
+.k-tip .lbl{display:block;margin-bottom:6px;color:var(--grey)}
 
 /* ---------- sikkerhed og kilder ---------- */
-.big-safe{margin:28px var(--g) 0;font:400 22px/1.42 var(--serif)}
+.big-safe{margin:var(--s6) var(--g) 0}
 .prose{padding:0 var(--g)}
-.prose .sh{margin-top:56px}
-.prose p,.prose li{margin-top:8px}
+.prose .sh{margin-top:var(--s8)}
+.prose p,.prose li{margin-top:8px;max-width:34em}
 .prose ul{padding-left:18px}
-.phone{display:block;margin-top:4px;font:700 28px/1.1 var(--sans);text-decoration:none}
+.phone{display:block;margin-top:4px;font:400 36px/1.1 var(--serif);text-decoration:none}
 .credits{margin-top:14px}
 .credits div{padding:6px 0;border-top:1px solid var(--rule)}
 .credits b{font-weight:600}
 
 /* ---------- lysboks ---------- */
-#lb{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;justify-content:center;background:#0B0B0B}
+#lb{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;justify-content:center;background:#0E0E0E}
 #lb img{width:100%;max-height:78vh;object-fit:contain}
 #lb .c{padding:14px var(--g);color:#EAEAEA;font-size:15px}
 #lb .c small{display:block;margin-top:6px;font-size:11px;color:#9A9A9A}
 #lb button{position:absolute;top:calc(var(--sat) + 10px);right:10px;width:48px;height:48px;color:#fff;font:300 30px/1 var(--sans)}
 
-@media (min-width:700px){.d{font-size:42px}.lede{font-size:25px}}
-.sec .grid,.sec .cmp-list{padding:0;margin-left:0;margin-right:0}
+.sec .ix,.sec .pl{margin-left:0;margin-right:0}
+.sec .pl>a .t{padding-left:0;padding-right:0}
+.sec .pl .ab{margin:0 calc(-1 * var(--g))}
+.sense .t-obs{display:block}
+.sec .say{margin-left:0;margin-right:0}
+.ix>a.found-t{}
+.ph-head .qz-score{margin-top:var(--s3)}
+.pl .t{display:block}
+.txt .lgs,.ex .lgs{display:block;margin-bottom:6px}
+.home-area .t-display{font-size:clamp(48px,15vw,72px);letter-spacing:-.028em;overflow-wrap:anywhere}
+.fd-slot .ph.none{display:flex}
 
 </style>
 
 </head>
 <body>
-<div id="brand"><div class="in">
-  <button id="bback" aria-label="Gå tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 4 7 12l8 8"/></svg></button>
-  <a class="bname" href="#/">SVAMPEGUIDEN</a>
-  <a class="breg" href="#/registrer" aria-label="Registrér et fund">+ Fund</a>
-</div></div>
 <header id="top"><div class="in">
-  <button id="back" aria-label="Gå tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 4 7 12l8 8"/></svg></button>
-  <div id="ttl" class="lbl"></div>
-  <a id="reg" class="lbl" href="#/registrer" aria-label="Registrér et fund">+ Fund</a>
+  <button id="back" aria-label="Tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5 7.5 12l7 7"/></svg></button>
+  <a id="wm" href="#/">Svampe</a>
+  <div id="ttl"></div>
+  <a id="reg" class="pill" href="#/registrer" aria-label="Registrér et fund">+ Fund</a>
 </div></header>
 <main id="app"></main>
 <nav id="tabs" aria-label="Hovedmenu"><div class="in">
-  <a href="#/" data-t="hjem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5v-5H9v5H4z"/></svg><span>Start</span></a>
+  <a href="#/" data-t="hjem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10.5 12 4.5l7.5 6V19.5h-15z"/><path d="M10 19.5v-5h4v5"/></svg><span>Start</span></a>
   <a href="#/arter" data-t="arter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5C3.5 6.5 7.5 3.5 12 3.5S20.5 6.5 20.5 11.5Z"/><path d="M10.5 11.5V20.5H13.5V11.5"/></svg><span>Arter</span></a>
-  <a href="#/noegle" data-t="noegle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></svg><span>Undersøg</span></a>
-  <a href="#/forskelle" data-t="forskelle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5H10.5V19H3.5ZM13.5 5H20.5V19H13.5Z"/></svg><span>Forskel</span></a>
-  <a href="#/fund" data-t="fund"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>Fund</span></a>
+  <a href="#/noegle" data-t="noegle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></svg><span>Undersøg</span></a>
+  <a href="#/forskelle" data-t="forskelle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6.5v14H4zM13.5 5H20v14h-6.5z"/></svg><span>Forskel</span></a>
+  <a href="#/fund" data-t="fund"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11v17l-5.5-4-5.5 4z"/></svg><span>Fund</span></a>
 </div></nav>
 
 <script>
@@ -2286,25 +2338,41 @@ const MONN=["januar","februar","marts","april","maj","juni","juli","august","sep
 function photos(id){return (typeof PH!=="undefined"&&PH[id])||[]}
 function photo(id,views){const p=photos(id);if(!views)return p[0];for(const v of [].concat(views)){const f=p.find(x=>x.v===v);if(f)return f}return null}
 function photoKey(p){for(const id in PH){const i=PH[id].indexOf(p);if(i>=0)return id+":"+i}return null}
+const nn=i=>String(i).padStart(2,"0");
+const MSHORT=["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec"];
+function monthRange(m){
+  if(!m||!m.length) return ""; if(m.length>=12) return "hele året";
+  const s=new Set(m); let a=m.find(x=>!s.has(x===1?12:x-1)); if(a==null) a=m[0];
+  let b=a; while(s.has(b%12+1)&&b%12+1!==a) b=b%12+1;
+  return a===b?MSHORT[a-1]:MSHORT[a-1]+"–"+MSHORT[b-1];
+}
+const cap1=t=>t.charAt(0).toUpperCase()+t.slice(1);
+
+/* ---------- annotationer: dobbelt kontrastlinje + nummer; forklaringen står under billedet ---------- */
 function annSVG(a){
   if(!a||!a.length) return "";
-  let g="";
-  for(const [x,y,r,t] of a){
-    const cx=x*4, cy=y*3, rr=r*4;
-    g+=`<circle class="o" cx="${cx}" cy="${cy}" r="${rr}"/><circle cx="${cx}" cy="${cy}" r="${rr}"/>`;
-    if(t){const w=t.length*9.4+16, lx=Math.min(Math.max(cx-w/2,6),394-w), ly=cy+rr+8>270?cy-rr-30:cy+rr+8;
-      g+=`<rect x="${lx}" y="${ly}" width="${w}" height="22"/><text x="${lx+7}" y="${ly+15.5}">${esc(t.toUpperCase())}</text>`;}
-  }
-  return `<svg class="ann" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">${g}</svg>`;
+  let g="",m="";
+  a.forEach(([x,y,r],i)=>{
+    g+=`<circle class="o" cx="${x*4}" cy="${y*3}" r="${r*4}"/><circle class="i" cx="${x*4}" cy="${y*3}" r="${r*4}"/>`;
+    const lx=Math.min(94,Math.max(6,x+r*.72)), ly=Math.min(92,Math.max(8,y-r*4/3*.72));
+    m+=`<span class="ann-m" style="left:${lx.toFixed(1)}%;top:${ly.toFixed(1)}%">${i+1}</span>`;
+  });
+  return `<svg class="ann" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">${g}</svg>${m}`;
 }
+function legend(a){return a&&a.some(x=>x[3])?`<span class="lgs">${a.map((x,i)=>x[3]?`<span class="lg"><i>${i+1}</i>${esc(x[3])}</span>`:"").join("")}</span>`:""}
 function phHTML(p,label,opts={}){
-  if(!p) return `<div class="ph empty"><span>${esc(label||"Foto mangler")}</span></div>`;
+  if(!p) return `<div class="ph none">${pg(opts.icon||"hele",32)}</div>`;
   const src=opts.thumb?p.t:p.s, att=opts.defer?`data-src="${src}"`:`src="${src}" loading="lazy"`;
   return `<div class="ph"${opts.lb?` data-lb="${opts.lb}"`:""}><img ${att} alt="${esc(p.c||label||"")}" decoding="async">${opts.ann===false?"":annSVG(p.a)}</div>`;
 }
 const SPIS=s=>s.st==="god"||s.st==="spis";
-function statusHTML(s){const t=STATUS[s.st];return `<span class="status ${t.c}"><i aria-hidden="true"></i>${t.t}${s.deadly?" · dødelig":""}</span>`}
-function stTxt(s){const t=STATUS[s.st];return `<span class="st ${t.c}">${t.t}${s.deadly?" · dødelig":""}</span>`}
+/* Kulinarisk kvalitet og sikkerhed er to forskellige ting: mærket siger status, linjen under siger betingelsen. */
+function stInfo(s){
+  if(s.st==="meget") return {t:s.deadly?"Dødeligt giftig":"Meget giftig",c:"rust"};
+  return ({god:{t:"God spisesvamp",c:"moss"},spis:{t:"Spiselig",c:""},ikke:{t:"Ikke spiselig",c:""},fra:{t:"Frarådes",c:""},gift:{t:"Giftig",c:"rust-pale"}})[s.st];
+}
+function statusTag(s,c){const x=stInfo(s);return `<span class="tag ${c==null?x.c:c}">${x.t}</span>`}
+const stTxt=s=>statusTag(s);
 function monthsHTML(m){const now=new Date().getMonth()+1;return `<div class="months" role="img" aria-label="Sæson: ${m.map(x=>MONN[x-1]).join(", ")}">${MONTHS.map((l,i)=>`<span class="${m.includes(i+1)?"on":""}${now===i+1?" now":""}">${l}</span>`).join("")}</div>`}
 const arrow=`<span class="arr" aria-hidden="true">→</span>`;
 
@@ -2315,6 +2383,7 @@ const arrow=`<span class="arr" aria-hidden="true">→</span>`;
    ===================================================================== */
 const CAP="M3.5 11.5C3.5 6.5 7.5 3.5 12 3.5S20.5 6.5 20.5 11.5Z", STEM='<path d="M10.5 11.5V20.5H13.5V11.5"/>';
 const PG={
+  hele:`<path d="${CAP}"/>${STEM}`,
   hat:`<path class="f" d="${CAP}"/>${STEM}`,
   under:`<path d="${CAP}"/><path class="f" d="M3.5 11.5H20.5C17 14.6 7 14.6 3.5 11.5Z"/><path d="M10.5 13.8V20.5H13.5V13.8"/>`,
   lameller:`<path d="${CAP}"/><path d="M3.5 11.5C7 14.6 17 14.6 20.5 11.5M6 11.5V12.9M8 11.5V13.5M10 11.5V13.8M14 11.5V13.8M16 11.5V13.5M18 11.5V12.9"/><path d="M10.5 13.9V20.5H13.5V13.9"/>`,
@@ -2331,14 +2400,13 @@ const PG={
   form:`<circle cx="12" cy="12.3" r="6.6"/><path d="M4.5 19.5H19.5"/>`,
   kamera:`<path d="M3 8H7.5L9 5.5H15L16.5 8H21V19H3Z"/><circle cx="12" cy="13.3" r="3.6"/>`
 };
-const PGN={hat:"Hat",under:"Underside",lameller:"Lameller",ror:"Rør",ribber:"Ribber",pigge:"Pigge",stok:"Stok",ring:"Ring",basis:"Basis med pose",knold:"Basis med knold",kod:"Kød og snit",trae:"Træ",bund:"Voksested",form:"Anden form",kamera:"Kamera"};
-function pg(n,size=22,label){const t=label||PGN[n]||n;return `<svg class="pg" viewBox="0 0 24 24" width="${size}" height="${size}" role="img" aria-label="${esc(t)}">${PG[n]||""}</svg>`}
+const PGN={hele:"Hele svampen",hat:"Hat",under:"Underside",lameller:"Lameller",ror:"Rør",ribber:"Ribber",pigge:"Pigge",stok:"Stok",ring:"Ring",basis:"Basis med pose",knold:"Basis med knold",kod:"Kød og snit",trae:"Træ",bund:"Voksested",form:"Anden form",kamera:"Kamera"};
+function pg(n,size=22,label){const t=label||PGN[n]||n;return `<svg class="pg${size>=40?" lg":""}" viewBox="0 0 24 24" width="${size}" height="${size}" role="img" aria-label="${esc(t)}">${PG[n]||""}</svg>`}
 const UNDERN={lameller:"Lameller",ror:"Rør",ribber:"Ribber",pigge:"Pigge",andet:"Anden form"};
 const FORMN={kugle:"Kugle",morkel:"Bikagehat",hjerne:"Hjernefoldet hat",ore:"Øreformet"};
 function underIcon(s){return s.under==="andet"?"form":(s.id==="falsk"?"lameller":s.under)}
 function underLabel(s){if(s.under==="andet")return FORMN[(s.k.form||[])[0]]||"Anden form";if(s.underNote)return s.underNote;return UNDERN[s.id==="falsk"?"lameller":s.under]}
 const VVN={fyr:"Fyr",gran:"Gran",birk:"Birk",lov:"Bøg og eg",ved:"Dødt ved"};
-
 /* ---------- store anatomiske tegninger (kun hvor de lærer noget) ---------- */
 function dia(type,hl,o={}){
   const INK="var(--ink)", HL="#D6D6D6";
@@ -2380,29 +2448,28 @@ function diaFor(s,hl){
   const t=s.id==="falsk"?"lameller":s.under;
   return dia(t,hl,{ring:s.k.ring&&s.k.ring[0]==="ja",volva:s.k.basis&&(s.k.basis[0]==="pose"||s.k.basis[0]==="knold")?s.k.basis[0]:null});
 }
-
 /* =====================================================================
    GALLERI — swipe; kun det første billede hentes med det samme
    ===================================================================== */
 function gallery(id,list){
   const all=photos(id); list=list||all;
-  if(!list.length) return `<div class="gal"><div class="gal-track"><div class="slide">${phHTML(null,"Foto mangler")}</div></div></div>`;
+  if(!list.length) return `<div class="gal"><div class="gal-track"><div class="slide">${phHTML(null,"")}</div></div></div>`;
   const ix=list.map(p=>all.indexOf(p));
   return `<div class="gal" data-sp="${id}" data-ix="${ix.join(",")}">
     <div class="gal-track">${list.map((x,i)=>`<div class="slide">${phHTML(x,"",{lb:id+":"+ix[i],defer:i>0})}</div>`).join("")}</div>
     <div class="arr-btn l"><button aria-label="Forrige billede">‹</button></div><div class="arr-btn r"><button aria-label="Næste billede">›</button></div>
-    <div class="gal-meta"><p class="cap"></p><span class="gal-n"></span></div>
+    <div class="gal-meta"><span class="lbl v"></span><span class="gal-n"></span><p class="cap"></p></div>
     <p class="credit"></p>
   </div>`;
 }
 function initGalleries(root){
   root.querySelectorAll(".gal[data-sp]").forEach(g=>{
-    const all=photos(g.dataset.sp), p=g.dataset.ix.split(",").map(i=>all[+i]), tr=$(".gal-track",g), cap=$(".cap",g), n=$(".gal-n",g), cr=$(".credit",g);
+    const all=photos(g.dataset.sp), p=g.dataset.ix.split(",").map(i=>all[+i]), tr=$(".gal-track",g), cap=$(".cap",g), v=$(".v",g), n=$(".gal-n",g), cr=$(".credit",g);
     let cur=-1;
     const imgs=[...g.querySelectorAll(".gal-track img")];
     const load=i=>{for(const j of [i,i+1,i-1]){const im=imgs[j];if(im&&im.dataset.src){im.src=im.dataset.src;delete im.dataset.src}}};
     const set=i=>{ if(i===cur)return; cur=i; const x=p[i]; if(!x) return; load(i);
-      cap.innerHTML=`<span class="lbl">${VIEWN[x.v]||""}</span> ${esc(x.c||"")}`; n.textContent=p.length>1?(i+1)+" / "+p.length:""; cr.textContent=x.by?"Foto: "+x.by:"";
+      v.textContent=VIEWN[x.v]||""; cap.innerHTML=`${legend(x.a)}${esc(x.c||"")}`; n.textContent=p.length>1?(i+1)+" / "+p.length:""; cr.textContent=x.by?"Foto: "+x.by:"";
     };
     set(0);
     tr.addEventListener("scroll",()=>set(Math.round(tr.scrollLeft/tr.clientWidth)),{passive:true});
@@ -2421,46 +2488,48 @@ document.addEventListener("click",e=>{
    FÆLLES BYGGESTEN
    ===================================================================== */
 const V={};
-function pageHead(label,title,intro,cls=""){return `<header class="ph-head ${cls}">${label?`<span class="lbl">${label}</span>`:""}<h1 class="d">${title}</h1>${intro?`<p class="intro">${intro}</p>`:""}</header>`}
-function sh(t,extra=""){return `<h2 class="sh">${t}${extra}</h2>`}
+function pageHead(label,title,intro,cls=""){return `<header class="ph-head ${cls}">${label?`<p class="lbl">${label}</p>`:""}<h1 class="t-display">${title}</h1>${intro?`<p class="intro">${intro}</p>`:""}</header>`}
+function sh(t,extra=""){return `<h2 class="sh"><span>${t}</span>${extra}</h2>`}
 function tagsOf(s){const g=typeof GASTRO!=="undefined"&&GASTRO[s.id];return g&&g.tags&&SPIS(s)&&!s.noGastro?g.tags:null}
-function culLine(s){const t=tagsOf(s);if(!t)return "";const w=[...t.s.map(x=>GVOC.s[x]),...t.t.slice(0,1).map(x=>GVOC.t[x])];return w.length?`<span class="cul">${w.join(" · ")}</span>`:""}
-function card(s,opt={}){
-  return `<a class="card" href="#/art/${s.id}"><div class="card-ph">${phHTML(photo(s.id,"typisk")||photo(s.id),s.da,{ann:false,thumb:true})}${opt.n?`<span class="num">${opt.n}</span>`:""}${foundToday(s.id)?`<span class="found">Set i dag</span>`:""}</div>
-    <h3 class="nm">${s.da}</h3><p class="la">${s.la}</p>${stTxt(s)}${opt.spot?`<p class="kdp-s"><span class="lbl">Kend den på</span>${s.spot||""}</p>`:culLine(s)}</a>`;
+function tasteWords(s){const t=tagsOf(s);if(!t)return "";const w=[...t.s.map(x=>GVOC.s[x]),...t.t.slice(0,1).map(x=>GVOC.t[x])];return w.length?cap1(w.join(" · ").toLowerCase()):""}
+/* Indeksrække: billede · navn · latin · ét mærke · én–to linjer metadata */
+function ixRow(s,o={}){
+  const p=photo(s.id,"typisk")||photo(s.id), tw=tasteWords(s);
+  return `<a href="#/art/${s.id}">${phHTML(p,s.da,{ann:false,thumb:true})}<span class="t">${o.n?`<span class="num">${o.n}</span>`:""}<b class="nm">${s.da}</b><i class="la2">${s.la}</i>${statusTag(s)}
+    ${o.spot&&s.spot?`<span class="kd">${s.spot}</span>`:`<span class="m">${pg(underIcon(s),16)}${underLabel(s)} · ${monthRange(s.m)}</span>${o.taste&&tw?`<span class="m">${tw}</span>`:""}`}
+    ${foundToday(s.id)?`<span class="m">Set i dag</span>`:""}</span></a>`;
 }
-function russula(){return `<aside class="note"><h3 class="lbl">Skørhatte og mælkehatte</h3><p>Du vil møde mange skørhatte (<i>Russula</i>). Kødet knækker som kridt, og der kommer ingen mælk. Der er mange arter, og flere er skarpe eller giftige, så de er ikke med i guiden. Mælkehatte ligner dem, men bløder mælk, når du brækker en lamel.</p></aside>`}
+const ixList=(l,o={})=>`<div class="ix">${l.map((s,i)=>ixRow(s,o.num?{...o,n:nn(i+1)}:o)).join("")}</div>`;
+function pairItem(p){const a=S[p.a],b=S[p.b];return `<a href="#/forskel/${p.id}"><div class="ab">${phHTML(photo(a.id,"typisk")||photo(a.id),"",{ann:false,thumb:true})}${phHTML(photo(b.id,"typisk")||photo(b.id),"",{ann:false,thumb:true})}</div><span class="t"><b class="nm">${a.da}<span class="vs">↔</span>${b.da}</b><span class="q">${p.q}</span></span></a>`}
+const pairList=l=>`<div class="pl">${l.map(pairItem).join("")}</div>`;
+function russula(){return `<aside class="note"><span class="lbl">Skørhatte og mælkehatte</span><p>Du vil møde mange skørhatte (<i>Russula</i>). Kødet knækker som kridt, og der kommer ingen mælk. Der er mange arter, flere er skarpe eller giftige, og ingen er med i guiden. Mælkehatte ligner dem, men bløder mælk, når du brækker en lamel.</p></aside>`}
 
 /* =====================================================================
    START
    ===================================================================== */
 V.home=()=>{
   const a=area(), top=watchList(a), hero=top[0]&&top[0].s;
-  const meta=[a.skov?SKOV[a.skov]:null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null,MONN[new Date().getMonth()]].filter(Boolean).join(" · ");
+  const meta=[MONN[new Date().getMonth()],a.skov?SKOV[a.skov]:null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · ");
   const alpha=["lameller","ror","ribber","pigge","ring","basis"];
+  const hp=hero&&(photo(hero.id,"typisk")||photo(hero.id));
+  const best=LS.get("quizBest",null);
   return `
   <section class="home-area">
-    <span class="lbl">Område</span>
-    <h1 class="d-xl">${esc(a.name)}</h1>
-    <p class="meta">${esc(meta)}</p>
+    <p class="lbl">${esc(meta)}</p>
+    <h1 class="t-display">${esc(a.name)}</h1>
     <button class="txt-link" data-area>Skift område ${arrow}</button>
   </section>
-  <a class="home-now" href="#/omraade">
-    ${hero?`<figure>${phHTML(photo(hero.id,"typisk")||photo(hero.id),hero.da,{ann:false})}<figcaption>${hero.da}</figcaption></figure>`:""}
-    <span class="lbl">I skoven nu</span>
-    <span class="row"><b class="d-m">${top.length} arter, du kan møde</b>${arrow}</span>
-  </a>
-  <nav class="entrances" aria-label="Indgange">
-    <a href="#/laer"><span class="t d-m">Lær at se</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span><span class="s">De seks tegn, der gør svampe lettere at forstå.</span>${arrow}</a>
-    <a href="#/noegle"><span class="t d-m">Kig nærmere</span><span class="s">Undersøg det, du står med – trin for trin.</span>${arrow}</a>
-    <a href="#/arter/godt"><span class="t d-m">Spisesvampe</span><span class="s">Smag, kendetegn og forvekslinger.</span>${arrow}</a>
+  ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
+  <a class="hm-now" href="#/omraade">${hero?`<p class="cap">${hero.da}, <i>${hero.la}</i></p>`:""}<span class="lbl">I skoven nu</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
+  <nav class="hm-go" aria-label="Indgange">
+    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span></a>
+    <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
+    <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span>${arrow}<span class="s">Smag, kendetegn og forvekslinger.</span></a>
   </nav>
-  <div class="cta-wrap"><a class="btn big" href="#/registrer">${pg("kamera",24)}Registrér et fund</a></div>
-  <nav class="minor" aria-label="Mere">
-    <a href="#/arter/pas" class="warn">Pas på${arrow}</a>
-    <a href="#/forskelle">Se forskellen${arrow}</a>
-    <a href="#/quiz">Quiz${LS.get("quizBest",null)!=null?`<span class="m">bedst ${LS.get("quizBest")}/10</span>`:""}${arrow}</a>
-    <a href="#/fund">Mine fund${FINDS.length?`<span class="m">${FINDS.length}</span>`:""}${arrow}</a>
+  <div class="cta-wrap"><a class="btn big" href="#/registrer"><span class="bl">${pg("kamera",24)}Registrér et fund</span>${arrow}</a></div>
+  <nav class="util" aria-label="Mere">
+    <a href="#/arter/pas">Pas på</a><a href="#/forskelle">Se forskellen</a>
+    <a href="#/quiz">Quiz${best!=null?`<span class="m">${best}/10</span>`:""}</a><a href="#/fund">Mine fund${FINDS.length?`<span class="m">${FINDS.length}</span>`:""}</a>
   </nav>`;
 };
 
@@ -2472,31 +2541,33 @@ V.lesson=()=>{
     {id:"lameller",t:"Lameller",tech:"",d:dia("lameller","under"),p:photo("snehvid","under")||photo("kliddet","under"),
       x:"Tynde, bladagtige plader under hatten – som siderne i en bog, der står på højkant.", ex:["gron","parasol","falsk"]},
     {id:"ror",t:"Rør og porer",tech:"",d:dia("ror","under"),p:photo("karljohan","under"),
-      x:"En svampet flade af tætte små huller. Hvert hul er åbningen på et lille rør. Svampe med rør kaldes rørhatte.", ex:["karljohan","brunstokket","galde"]},
-    {id:"ribber",t:"Ribber og folder",tech:"Også kaldet lister",d:dia("ribber","under"),p:photo("kantarel","under"),
+      x:"En svampet flade af tætte små huller. Hvert hul er åbningen på et rør. Svampe med rør hedder rørhatte.", ex:["karljohan","brunstokket","galde"]},
+    {id:"ribber",t:"Ribber",tech:"Også kaldet lister eller folder",d:dia("ribber","under"),p:photo("kantarel","under"),
       x:"Lave, butte, grenede folder, der løber ned ad stokken. Mere som rynker end som blade.", ex:["kantarel","tragt"]},
     {id:"pigge",t:"Pigge",tech:"",d:dia("pigge","under"),p:photo("pigsvamp","under"),
       x:"Små tapper, der hænger ned som istapper. Ingen blade, ingen huller.", ex:["pigsvamp"]},
     {id:"ring",t:"Ring",tech:"Fagord: annulus",d:dia("lameller","ring",{ring:true}),p:photo("parasol","ring")||photo("parasol","stok"),
-      x:"Et skørt eller en krave om stokken – rester af en hinde, der dækkede lamellerne på den unge svamp. Den kan falde af.", ex:["parasol","rod","slimror"]},
-    {id:"basis",t:"Basis og volva",tech:"Volva: en pose om stokkens fod",d:dia("lameller","basis",{ring:true,volva:"pose"}),p:photo("gron","basis")||photo("snehvid","basis"),
-      x:"Nederst på stokken kan der sidde en pose eller en knold. Hos de giftigste fluesvampe sidder posen ofte skjult i jorden. Grav derfor altid hele svampen fri.", ex:["gron","snehvid","kliddet"]}
+      x:"Et skørt eller en krave om stokken – resten af en hinde, der dækkede lamellerne på den unge svamp. Den kan falde af.", ex:["parasol","rod","slimror"]},
+    {id:"basis",t:"Basis",tech:"Volva: en pose om stokkens fod",d:dia("lameller","basis",{ring:true,volva:"pose"}),p:photo("gron","basis")||photo("snehvid","basis"),
+      x:"Nederst på stokken kan der sidde en pose eller en knold. Hos de giftigste fluesvampe sidder posen ofte skjult i jorden. Grav altid hele svampen fri.", ex:["gron","snehvid","kliddet"]}
   ];
   return `${pageHead("Før du går i skoven","Lær at se","Næsten al bestemmelse begynder under hatten. Fire slags underside – og to steder på stokken, der skiller spisesvampe fra de farligste fluesvampe. Tegnene går igen overalt i guiden.")}
-    <nav class="alphabet" aria-label="Indhold">${L.map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,40,l.t)}<span>${l.t}</span></a>`).join("")}</nav>
-    ${L.map(l=>`<section class="lesson" id="les-${l.id}">
-      <div class="lesson-h">${pg(l.id,30,l.t)}<h2 class="d-m">${l.t}</h2></div>
+    <nav class="alphabet" aria-label="Indhold">${L.map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,44,l.t)}<span>${l.t}</span></a>`).join("")}</nav>
+    ${L.map((l,i)=>`<section class="lesson" id="les-${l.id}">
+      <div class="lock-n"><span class="num">${nn(i+1)}</span>${pg(l.id,24,l.t)}</div>
+      <h2 class="t-state">${l.t}</h2>
       ${l.tech?`<p class="tech">${l.tech}</p>`:""}
-      <p class="ed">${l.x}</p>
+      <p class="t-read">${l.x}</p>
       <div class="lesson-fig"><div class="dia">${l.d}</div>${phHTML(l.p,l.t,{lb:l.p?photoKey(l.p):null})}</div>
+      ${legend(l.p&&l.p.a)?`<p class="ex">${legend(l.p.a)}</p>`:""}
       <p class="ex">Fx ${l.ex.map(id=>`<a href="#/art/${id}">${S[id].da}</a>`).join(", ")}</p>
     </section>`).join("")}
-    <section class="lesson"><h2 class="d-m">Husk</h2><p class="ed">Se under hatten. Se på stokken. Grav basis fri. Se, hvilke træer den står ved. Og smag aldrig på en svamp, du ikke kender.</p>
-    <div class="btn-row"><a class="btn fill" href="#/quiz">Test dig selv</a><a class="btn" href="#/noegle">Kig nærmere</a></div></section>`;
+    <section class="lesson"><h2 class="t-state">Husk</h2><p class="t-read">Se under hatten. Se på stokken. Grav basis fri. Se, hvilke træer den står ved. Og smag aldrig på en svamp, du ikke kender.</p>
+    <div class="btn-row"><a class="btn fill" href="#/quiz">Test dig selv</a><a class="btn" href="#/noegle">Find en art</a></div></section>`;
 };
 
 /* =====================================================================
-   ARTER — lister og filtre (SKOVEN / KØKKENET)
+   ARTER — indeks og filtre (SKOVEN / KØKKENET)
    ===================================================================== */
 const FILT={
   skov:{t:"Skoven",c:[
@@ -2511,19 +2582,20 @@ const FILT={
 };
 let F={}, FOPEN=null;
 const allCats=()=>[...FILT.skov.c,...FILT.koekken.c];
+const fTone=c=>FILT.koekken.c.includes(c)?"butter":c.id==="saeson"?"lilac":"moss";
+const CHEV=`<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>`;
 function filterUI(groups){
-  const cat=allCats().find(c=>c.id===FOPEN&&groups.some(g=>FILT[g].c.includes(c)));
   const active=allCats().filter(c=>F[c.id]&&groups.some(g=>FILT[g].c.includes(c)));
-  return `<div class="flt">
-    ${groups.map(g=>`<div class="flt-g"><span class="lbl">${FILT[g].t}</span><div class="flt-c">${FILT[g].c.map(c=>`<button data-fc="${c.id}" class="${F[c.id]?"set":""}${FOPEN===c.id?" open":""}" aria-expanded="${FOPEN===c.id}">${c.t}</button>`).join("")}</div></div>`).join("")}
-    ${cat?`<div class="flt-o" role="group" aria-label="${cat.t}">${cat.o.map(([v,l])=>`<button data-fv="${v}" class="${F[cat.id]===v?"on":""}" aria-pressed="${F[cat.id]===v}">${cat.icon?pg(cat.icon(v),20,l):""}${l}</button>`).join("")}</div>`:""}
-    ${active.length?`<div class="flt-a"><span>${active.map(c=>(c.o.find(o=>o[0]===F[c.id])||[,""])[1]).join(" · ")}</span><button id="fClear">Nulstil</button></div>`:""}
-  </div>`;
+  return `<div class="flt">${groups.map(g=>{const open=FOPEN===g, n=FILT[g].c.filter(c=>F[c.id]).length;
+    return `<button class="flt-h" data-fg="${g}" aria-expanded="${open}"><span class="t-cat">${FILT[g].t}</span>${n?`<span class="k">${n} valgt</span>`:""}${CHEV}</button>
+    ${open?`<div class="flt-b">${FILT[g].c.map(c=>`<div class="flt-c"><span class="lbl">${c.t}</span><div class="pills">${c.o.map(([v,l])=>`<button data-fc="${c.id}" data-fv="${v}" class="${F[c.id]===v?"on":""}" aria-pressed="${F[c.id]===v}">${c.icon?pg(c.icon(v),18,l):""}${l}</button>`).join("")}</div></div>`).join("")}</div>`:""}`}).join("")}<div class="flt-end"></div></div>
+  ${active.length?`<div class="flt-act">${active.map(c=>{const l=(c.o.find(o=>o[0]===F[c.id])||[,""])[1];return `<button class="tag ${fTone(c)}" data-fx="${c.id}" aria-label="Fjern ${esc(l)}">${l}<span class="x" aria-hidden="true">×</span></button>`}).join("")}<button class="clr" id="fClear">Nulstil</button></div>`:""}`;
 }
 function bindFilters(root){
-  root.querySelectorAll("[data-fc]").forEach(b=>b.onclick=()=>{FOPEN=FOPEN===b.dataset.fc?null:b.dataset.fc;render(true)});
-  root.querySelectorAll("[data-fv]").forEach(b=>b.onclick=()=>{F[FOPEN]=F[FOPEN]===b.dataset.fv?undefined:b.dataset.fv;if(!F[FOPEN])delete F[FOPEN];render(true)});
-  const c=$("#fClear",root);if(c)c.onclick=()=>{F={};FOPEN=null;render(true)};
+  root.querySelectorAll("[data-fg]").forEach(b=>b.onclick=()=>{FOPEN=FOPEN===b.dataset.fg?null:b.dataset.fg;render(true)});
+  root.querySelectorAll("[data-fv]").forEach(b=>b.onclick=()=>{const c=b.dataset.fc;F[c]=F[c]===b.dataset.fv?undefined:b.dataset.fv;if(!F[c])delete F[c];render(true)});
+  root.querySelectorAll("[data-fx]").forEach(b=>b.onclick=()=>{delete F[b.dataset.fx];render(true)});
+  const c=$("#fClear",root);if(c)c.onclick=()=>{F={};render(true)};
 }
 function applyFilters(list,groups){
   const cats=allCats().filter(c=>F[c.id]&&groups.some(g=>FILT[g].c.includes(c)));
@@ -2532,13 +2604,12 @@ function applyFilters(list,groups){
 V.list=(grp)=>{
   const A=area(), RK=ranked(SP,A), REL=Object.fromEntries(RK.map(x=>[x.s.id,x.r]));
   const ord=l=>l.slice().sort((x,y)=>REL[y.id].sc-REL[x.id].sc);
-  const grid=l=>`<div class="grid">${l.map(s=>card(s)).join("")}</div>`;
   if(grp==="pas"){
     const four=["snehvid","gron","giftslor","hjelmhat"].map(id=>S[id]);
     return `${pageHead("Pas på","Arter, du bør kende","Fire arter er dødeligt giftige og vokser samme steder som spisesvampe. De to fluesvampe kendes på posen ved basis, gift-slørhatten på de rustbrune lameller, hjelmhatten på de sølvhvide trævler og det døde træ.","danger")}
-    <div class="grid">${four.map(s=>card(s)).join("")}</div>
-    <section class="sec">${sh("Giftige og ikke-spiselige")}${grid(ord(SP.filter(s=>s.grp==="pas"&&!four.includes(s))))}</section>
-    <section class="sec">${sh("Se forskellen")}<div class="cmp-list">${PAIRS.map(cmpLink).join("")}</div></section>
+    ${ixList(four)}
+    <section class="sec">${sh("Giftige og ikke spiselige")}${ixList(ord(SP.filter(s=>s.grp==="pas"&&!four.includes(s))))}</section>
+    <section class="sec">${sh("Se forskellen")}${pairList(PAIRS)}</section>
     ${russula()}`;
   }
   const groups=grp==="godt"?["koekken"]:["skov","koekken"];
@@ -2547,21 +2618,19 @@ V.list=(grp)=>{
   let base=grp==="godt"?SP.filter(s=>s.grp==="godt"):SP;
   if(kitchenOn) base=base.filter(s=>tagsOf(s));
   const res=ord(applyFilters(base,groups));
-  const head=grp==="godt"?pageHead("Spisesvampe","Spisesvampe","Spiselig betyder spiselig efter sikker artsbestemmelse. Hver art har en forveksling – se den altid.")
-    :pageHead("Arter","Arter",`${SP.length} arter – et udvalg, ikke en komplet liste. Ordnet efter, hvad du kan møde i ${esc(A.name)} nu.`);
-  const body=filtering
-    ?`<p class="count">${res.length?res.length+" "+(res.length===1?"art":"arter"):"Ingen arter passer"}${kitchenOn?" · kun arter, der regnes for spiselige":""}</p>${grid(res)}`
-    :grp==="godt"?grid(res)
-    :`<section class="sec">${sh("Spisesvampe",`<a class="sh-link" href="#/arter/godt">Alle ${arrow}</a>`)}${grid(ord(SP.filter(s=>s.grp==="godt")))}</section>
-      <section class="sec">${sh("Pas på",`<a class="sh-link" href="#/arter/pas">Alle ${arrow}</a>`)}${grid(ord(SP.filter(s=>s.grp==="pas")))}</section>`;
+  const head=grp==="godt"?pageHead("","Spisesvampe","Spiselig betyder spiselig efter sikker artsbestemmelse. Hver art har en forveksling – se den altid.")
+    :pageHead("","Arter",`${SP.length} arter – et udvalg, ikke en komplet liste. Ordnet efter, hvad du kan møde i ${esc(A.name)} nu.`);
+  const body=filtering||grp==="godt"
+    ?`<p class="res-n">${res.length?res.length+" "+(res.length===1?"art.":"arter."):"Ingen arter passer."}${kitchenOn&&grp!=="godt"?" Kun arter, der regnes for spiselige.":""}</p>${res.length?ixList(res,{taste:kitchenOn||grp==="godt"}):""}`
+    :`<section class="sec">${sh("Spisesvampe",`<a href="#/arter/godt">Alle ${arrow}</a>`)}${ixList(ord(SP.filter(s=>s.grp==="godt")))}</section>
+      <section class="sec">${sh("Pas på",`<a href="#/arter/pas">Alle ${arrow}</a>`)}${ixList(ord(SP.filter(s=>s.grp==="pas")))}</section>`;
   return `${head}${filterUI(groups)}${body}`;
 };
-function cmpLink(p){const a=S[p.a],b=S[p.b];return `<a href="#/forskel/${p.id}"><span class="pair-ph">${phHTML(photo(a.id,"typisk")||photo(a.id),"",{ann:false,thumb:true})}${phHTML(photo(b.id,"typisk")||photo(b.id),"",{ann:false,thumb:true})}</span><span class="t"><b class="nm">${a.da} <i>og</i> ${b.da}</b><span>${p.q}</span></span>${arrow}</a>`}
 
 /* =====================================================================
    ARTSSIDEN — én redaktionel profil
-   navn · status · foto · karakter · signatur · kendetegn · voksested ·
-   smag og tekstur · forvekslinger · køkkenet
+   navn · status · foto · karakter · kend den på · kendetegn (nummereret) ·
+   voksested og sæson · smag og tekstur · forvekslinger · køkkenet
    ===================================================================== */
 const LOOKMAP={Hat:"hat",Form:"hat",Farve:"hat",Overflade:"hat",Hud:"hat",Underside:"under",Stok:"stok",Ring:"stok",Basis:"basis",Kød:"kod",Snit:"kod",Mælk:"kod",Indre:"kod",Duft:"kod",Smag:"kod",Vækst:"vaekst",Alder:"alder",Tilberedning:"tilb"};
 const PARTS=[["hat","Hat",["top"]],["under","Underside",["under"]],["stok","Stok",["stok","ring"]],["basis","Basis",["basis"]],["kod","Kød",["kod"]],["vaekst","Vækst",[]],["alder","Alder",[]],["tilb","Tilberedning",[]]];
@@ -2580,26 +2649,28 @@ function signature(s){
   if(vv.length) items.push(["trae",vv.map(v=>VVN[v]).join(" · ")]);
   else if((s.vv||[]).includes("ved")||(s.k.sted||[]).includes("ved")) items.push(["bund","Dødt ved"]);
   else if((s.k.sted||[]).includes("graes")) items.push(["bund","Græs"]);
-  return `<ul class="sig" aria-label="Kendetegn i korte træk">${items.slice(0,4).map(([i,l])=>`<li>${pg(i,28,l)}<span>${l}</span></li>`).join("")}</ul>`;
+  return `<ul class="sig" aria-label="Kendetegn i korte træk">${items.slice(0,4).map(([i,l])=>`<li class="lock">${pg(i,24,l)}<span>${l}</span></li>`).join("")}</ul>`;
 }
 function kendetegn(s){
   const groups={}, used=new Set();
   for(const [k,v,n] of s.look){const key=LOOKMAP[k]||"hat";(groups[key]=groups[key]||[]).push([k,v,n])}
   if(!groups.basis&&(s.amanita||photo(s.id,"basis"))&&s.sides&&s.sides.basis) groups.basis=[["Basis",s.sides.basis]];
   const all=photos(s.id);
-  let html="";
+  let html="", no=0;
   for(const [key,title0,views] of PARTS){
     const e=groups[key]; if(!e) continue;
     const title=key==="hat"&&s.under==="andet"?"Form":title0;
     const icon=key==="hat"?(s.under==="andet"?"form":"hat"):key==="under"?underIcon(s):key==="basis"?(s.k.basis&&s.k.basis.includes("knold")&&!s.k.basis.includes("pose")?"knold":"basis"):key==="vaekst"?"bund":["stok","kod"].includes(key)?key:null;
     const ph=all.filter((p,i)=>i>0&&views.includes(p.v)&&!used.has(p)); ph.forEach(p=>used.add(p));
+    const [f,...rest]=e, pre=f[0]!==title0&&f[0]!==title?`${f[0]}. `:"";
     html+=`<div class="kt">
-      <h3 class="kt-h">${icon?pg(icon,24,title):""}<span>${title}</span></h3>
-      <div class="kt-t">${e.map(([k,v,n])=>`<p>${k!==title0&&k!==title?`<b>${k}.</b> `:""}${v}${n?` <span class="nb">${n}</span>`:""}</p>`).join("")}</div>
-      ${ph.map(p=>`<figure class="kt-ph">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${esc(p.c||"")}</figcaption></figure>`).join("")}
+      <div class="lock-n kt-h"><span class="num">${nn(++no)}</span>${icon?pg(icon,22,title):""}<span class="lbl">${title}</span></div>
+      <p class="t-obs">${pre}${f[1]}</p>${f[2]?`<span class="nb">${f[2]}</span>`:""}
+      ${rest.map(([k,v,n])=>`<p class="kt-more"><b>${k}.</b> ${v}${n?`<span class="nb">${n}</span>`:""}</p>`).join("")}
+      ${ph.map(p=>`<figure class="kt-ph">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${legend(p.a)}${esc(p.c||"")}</figcaption></figure>`).join("")}
     </div>`;
   }
-  if(s.under!=="andet") html+=`<details class="anat"><summary>Se anatomien</summary><div class="dia">${diaFor(s,null)}</div><p class="small">Skematisk tegning: underside${s.k.ring&&s.k.ring[0]==="ja"?", ring":""}${s.k.basis&&(s.k.basis.includes("pose")||s.k.basis.includes("knold"))?" og basis":""} hos ${lcName(s)}.</p></details>`;
+  if(s.under!=="andet") html+=`<details class="anat"><summary>Se anatomien</summary><figure class="plate"><div class="dia">${diaFor(s,null)}</div><figcaption class="meta">Skematisk tegning: underside${s.k.ring&&s.k.ring[0]==="ja"?", ring":""}${s.k.basis&&(s.k.basis.includes("pose")||s.k.basis.includes("knold"))?" og basis":""} hos ${lcName(s)}.</figcaption></figure></details>`;
   return {html,used};
 }
 V.species=(id)=>{
@@ -2610,74 +2681,82 @@ V.species=(id)=>{
   const likeOnly=s.like.filter(x=>!pairs.some(p=>p.a===x||p.b===x));
   const KT=kendetegn(s);
   const hero=photos(id).filter(p=>!KT.used.has(p));
-  const note=SPIS(s)?`<p class="st-note">Kun efter sikker artsbestemmelse.</p>`:"";
-  const danger=s.danger?`<p class="${isDanger(s)?"danger":"caution"}">${s.danger}</p>`:"";
+  const field=s.st==="meget";
+  let warn="";
+  if(s.danger){ if(isDanger(s)){const m=s.danger.match(/^(.+?[.!])\s(.*)$/);warn=m?`<b>${m[1]}</b> ${m[2]}`:s.danger}else warn=s.danger;
+    warn=`<p class="warn t-read">${warn}</p>`; }
   const vv=(s.vv||[]).filter(v=>v!=="ved"), bund=(s.bund||[]).map(b=>BUND[b]);
   if((s.vv||[]).includes("ved")) bund.unshift("Dødt ved");
   const mo=MONN[new Date().getMonth()];
   const ctx=!rel.inS?`Ikke i sæson i ${mo}.`:rel.n>0?`Kan mødes i ${esc(A.name)} nu.`:`I sæson nu.`;
+  const W=o=>cap1(o.join(" · ").toLowerCase());
   return `
-  <header class="sp-head">
-    <h1 class="d">${s.da}</h1>
-    <p class="la">${s.la}${s.alt?`<span class="alt">${s.alt}</span>`:""}</p>
-    ${statusHTML(s)}${note}${danger}
+  <header class="sp-id${field?" field":""}">
+    <h1 class="t-display">${s.da}</h1>
+    <p class="la">${s.la}</p>${s.alt?`<p class="syn">${s.alt}</p>`:""}
+    <div class="st-row">${statusTag(s,field?"paper":null)}</div>
+    ${SPIS(s)?`<p class="st-note">Kun efter sikker artsbestemmelse.</p>`:""}
+    ${warn}
   </header>
   ${gallery(id,hero)}
-  <p class="lede">${s.lede}</p>
-  ${signature(s)}
-  ${s.spot?`<p class="kdp"><span class="lbl">Kend den på</span>${s.spot}</p>`:""}
+  <p class="lede t-obs">${s.lede}</p>
+  <div class="sig-w"><p class="lbl">Kend den på</p>${signature(s)}</div>
 
   <section class="sec">${sh("Kendetegn")}${KT.html}</section>
 
   <section class="sec">${sh("Voksested")}
-    ${vv.length?`<p class="hab-r">${pg("trae",24)}<span>${vv.map(v=>VVN[v]).join(" · ")}</span></p>`:""}
-    ${bund.length?`<p class="hab-r">${pg("bund",24)}<span>${[...new Set(bund)].join(" · ")}</span></p>`:""}
+    ${vv.length?`<p class="hab-r lock">${pg("trae",22)}<span>${vv.map(v=>VVN[v]).join(" · ")}</span></p>`:""}
+    ${bund.length?`<p class="hab-r lock">${pg("bund",22)}<span>${[...new Set(bund)].join(" · ")}</span></p>`:""}
     <p class="hab">${s.hab}</p>
-    ${s.rare?`<p class="small">${s.rare}</p>`:""}
-    <div class="season"><span class="lbl">Sæson</span>${monthsHTML(s.m)}</div>
+    ${s.rare?`<p class="meta">${s.rare}</p>`:""}
+    <div class="season"><p class="lbl">Sæson</p>${monthsHTML(s.m)}</div>
     <p class="ctx${rel.inS?" on":""}">${ctx}</p>
   </section>
 
   ${tags&&g?`<section class="sec">${sh("Smag og tekstur")}
-    <dl class="taste">
-      ${tags.s.length?`<dt class="lbl">Smag</dt><dd><b>${tags.s.map(x=>GVOC.s[x]).join(" · ")}</b><span class="ed">${g.smag}</span></dd>`:`<dt class="lbl">Smag</dt><dd><span class="ed">${g.smag}</span></dd>`}
-      <dt class="lbl">Tekstur</dt><dd><b>${tags.t.map(x=>GVOC.t[x]).join(" · ")}</b><span class="ed">${g.tekstur}</span></dd>
-      <dt class="lbl">Bedst til</dt><dd><b>${tags.k.map(x=>GVOC.k[x]).join(" · ")}</b></dd>
+    <dl class="sense">
+      <div><dt class="lbl">Smag</dt><dd>${tags.s.length?`<span class="t-obs">${W(tags.s.map(x=>GVOC.s[x]))}</span>`:""}<p>${g.smag}</p></dd></div>
+      <div><dt class="lbl">Tekstur</dt><dd><span class="t-obs">${W(tags.t.map(x=>GVOC.t[x]))}</span><p>${g.tekstur}</p></dd></div>
+      <div><dt class="lbl">Bedst</dt><dd><span class="t-obs">${W(tags.k.map(x=>GVOC.k[x]))}</span></dd></div>
     </dl></section>`:""}
-  ${s.noGastro&&SPIS(s)?`<section class="sec">${sh("Smag og tekstur")}<p class="caution">Ingen køkkenbeskrivelse: arten har en dødelig dobbeltgænger og er kun for meget erfarne samlere.</p></section>`:""}
+  ${s.noGastro&&SPIS(s)?`<section class="sec">${sh("Smag og tekstur")}<p class="say">Ingen køkkenbeskrivelse: arten har en dødelig dobbeltgænger og er kun for meget erfarne samlere.</p></section>`:""}
 
   ${(pairs.length||likeOnly.length||s.extra)?`<section class="sec">${sh("Forvekslinger")}
-    <div class="lk">${pairs.map(p=>{const o=S[p.a===id?p.b:p.a];return `<a href="#/forskel/${p.id}">${phHTML(photo(o.id,"typisk")||photo(o.id),"",{ann:false,thumb:true})}<span class="t"><b class="nm">${o.da}</b>${stTxt(o)}<span class="q">${p.q}</span></span>${arrow}</a>`}).join("")}
-    ${likeOnly.map(x=>`<a href="#/art/${x}">${phHTML(photo(x,"typisk")||photo(x),"",{ann:false,thumb:true})}<span class="t"><b class="nm">${S[x].da}</b>${stTxt(S[x])}</span>${arrow}</a>`).join("")}</div>
-    ${s.extra?`<p class="caution">${s.extra}</p>`:""}</section>`:""}
+    <div class="ix sq">${pairs.map(p=>{const o=S[p.a===id?p.b:p.a];return `<a href="#/forskel/${p.id}">${phHTML(photo(o.id,"typisk")||photo(o.id),"",{ann:false,thumb:true})}<span class="t"><b class="nm">${o.da}</b>${statusTag(o)}<span class="q">${p.q} Se forskellen ${arrow}</span></span></a>`}).join("")}
+    ${likeOnly.map(x=>`<a href="#/art/${x}">${phHTML(photo(x,"typisk")||photo(x),"",{ann:false,thumb:true})}<span class="t"><b class="nm">${S[x].da}</b>${statusTag(S[x])}</span></a>`).join("")}</div>
+    ${s.extra?`<p class="say">${s.extra}</p>`:""}</section>`:""}
 
-  ${tags&&g?`<a class="to-kitchen" href="#/art/${id}/koekken"><span class="lbl">Gastronomi</span><span class="row"><b class="d-m">Gå i køkkenet</b>${arrow}</span><span class="s">Hvorfor den opfører sig, som den gør – og tre måder at lave den på.</span></a>`:""}
-  <a class="quiet" href="#/registrer/art/${id}">${pg("kamera",20)}<span>Registrér et fund</span></a>`;
+  ${tags&&g?`<a class="to-kitchen" href="#/art/${id}/koekken"><span class="lbl">I køkkenet</span><span class="row"><b class="t-display">Gå i køkkenet</b>${arrow}</span><span class="s">Hvorfor den opfører sig, som den gør – og tre måder at lave den på.</span></a>`:""}
+  <a class="quiet" href="#/registrer/art/${id}">${pg("kamera",20)}<span>Registrér et fund af arten</span></a>`;
 };
 
 /* =====================================================================
-   SE FORSKELLEN
+   SE FORSKELLEN — A / B, én afgørende forskel, så detaljerne
    ===================================================================== */
 const ROWICON={Underside:"under",Porer:"under",Lameller:"under",Stok:"stok",Ring:"ring",Stokbasis:"basis",Basis:"basis",Kød:"kod",Snit:"kod",Smag:"kod",Duft:"kod",Konsistens:"kod",Mælk:"kod",Hat:"hat",Form:"hat",Farve:"hat",Voksested:"bund"};
-V.pairs=()=>`${pageHead("Forvekslinger","Se forskellen","To arter side om side. Én detalje ad gangen.")}<div class="cmp-list">${PAIRS.map(cmpLink).join("")}</div>`;
+V.pairs=()=>`${pageHead("","Se forskellen","To arter side om side. Én detalje ad gangen.")}${pairList(PAIRS)}`;
 V.pair=(pid)=>{
   const p=PAIRS.find(x=>x.id===pid); if(!p) return V.pairs();
   const a=S[p.a], b=S[p.b];
+  const ha=photo(a.id,"typisk")||photo(a.id), hb=photo(b.id,"typisk")||photo(b.id);
   const lead=(sp,lbl)=>lbl==="Underside"||lbl==="Lameller"||lbl==="Porer"?pg(underIcon(sp),20,underLabel(sp)):"";
-  return `<div class="cmp-head"><a href="#/art/${a.id}"><b class="nm">${a.da}</b>${stTxt(a)}</a><a href="#/art/${b.id}"><b class="nm">${b.da}</b>${stTxt(b)}</a></div>
-  <p class="cmp-key"><span class="lbl">Se efter</span>${p.key}</p>
-  ${(()=>{const used=new Set();return p.rows.map(([lbl,view,ta,tb])=>{
-    const pa=photo(a.id,view), pb=photo(b.id,view);
+  const used=new Set([ha,hb]); let no=0;
+  return `<div class="cmp-head"><a href="#/art/${a.id}">${a.da}</a><a href="#/art/${b.id}">${b.da}</a></div>
+  <div class="ab tall">${phHTML(ha,a.da,{ann:false,lb:photoKey(ha)})}${phHTML(hb,b.da,{ann:false,lb:photoKey(hb)})}</div>
+  <div class="ab-names"><a href="#/art/${a.id}"><b class="nm">${a.da}</b>${statusTag(a)}</a><a href="#/art/${b.id}"><b class="nm">${b.da}</b>${statusTag(b)}</a></div>
+  <section class="decisive"><p class="lbl">Det afgørende</p><h1 class="t-state">${p.q}</h1><p class="k">${p.key}</p></section>
+  ${p.rows.map(([lbl,view,ta,tb])=>{
+    const pa=view&&photo(a.id,view), pb=view&&photo(b.id,view);
     const show=pa&&pb&&!used.has(pa)&&!used.has(pb); if(show){used.add(pa);used.add(pb)}
     const ic=ROWICON[lbl];
-    return `<section class="cmp-row"><h3 class="kt-h">${ic?pg(ic,24,lbl):""}<span>${lbl}</span></h3>
+    return `<section class="cmp-row"><div class="lock-n"><span class="num">${nn(++no)}</span>${ic?pg(ic,22,lbl):""}<span class="lbl">${lbl}</span></div>
       ${show?`<div class="pair">${phHTML(pa,a.da,{lb:photoKey(pa)})}${phHTML(pb,b.da,{lb:photoKey(pb)})}</div>`:""}
-      <div class="txt"><p>${lead(a,lbl)}${ta}</p><p>${lead(b,lbl)}${tb}</p></div></section>`}).join("")})()}
-  <nav class="minor"><a href="#/art/${a.id}">${a.da}${arrow}</a><a href="#/art/${b.id}">${b.da}${arrow}</a></nav>`;
+      <div class="txt"><p>${lead(a,lbl)}${show?legend(pa.a):""}${ta}</p><p>${lead(b,lbl)}${show?legend(pb.a):""}${tb}</p></div></section>`}).join("")}
+  <nav class="util"><a href="#/art/${a.id}">${a.da} ${arrow}</a><a href="#/art/${b.id}">${b.da} ${arrow}</a></nav>`;
 };
 
 /* =====================================================================
-   KIG NÆRMERE — nøglen (morfologi først)
+   UNDERSØG — nøglen (morfologi først)
    ===================================================================== */
 let K={a:{},step:0,stopShown:false};
 function keyQs(){return K.a.under?["under"].concat(FLOW[K.a.under]):["under"]}
@@ -2703,19 +2782,23 @@ function amanitaSignal(){
   return lam&&(a.basis==="pose"||a.basis==="knold"||(a.ring==="ja"&&a.basis==="vedikke")||(a.farve==="hvid"&&a.basis!=="ingen"));
 }
 const QICON={under:"under",ring:"ring",basis:"basis",farve:"hat",pletter:"hat",slim:"hat",skift:"kod",maelk:"kod",pore:"ror",net:"stok",hul:"stok",ribtype:"ribber",trae:"trae",sted:"bund",hab:"trae",form:"form"};
-const SWATCH={hvid:"#F2F2F2",gulgron:"#B9B77A",gulorange:"#E0A12E",rod:"#C23B22",brun:"#7A5234",grasort:"#3C3A36",lyserod:"#E6B8B0",gul:"#D9C04A"};
+const SWATCH={hvid:"#F4F4F2",gulgron:"#B9B77A",gulorange:"#E0A12E",rod:"#C23B22",brun:"#7A5234",grasort:"#3C3A36",lyserod:"#E6B8B0",gul:"#D9C04A"};
 V.key=()=>{
   const qs=keyQs();
   if(K.step>=qs.length&&K.a.under) return keyResult();
   const qid=qs[K.step], q=Q[qid];
   const total=K.a.under?qs.length:6;
   const icon=v=>qid==="under"?(v==="andet"?"form":v):qid==="ring"?(v==="ja"?"ring":"stok"):qid==="basis"?({pose:"basis",knold:"knold",ingen:"stok"})[v]:qid==="form"?"form":null;
-  const withIcon=["under","ring","basis"].includes(qid), sw=qid==="farve"||qid==="pore";
-  const opts=q.o.map(([v,l,h])=>`<button class="opt" data-v="${v}">${withIcon?pg(icon(v),52,l):sw?`<i class="sw" style="background:${SWATCH[v]}"></i>`:""}<span class="tx"><b>${l}</b>${h?`<small>${h}</small>`:""}</span></button>`).join("");
-  return `<div class="key-top"><span class="lbl">Kig nærmere · ${K.step+1} / ${total}</span>${K.step?`<button class="txt-link" id="kRestart">Start forfra</button>`:""}</div>
+  const withIcon=["under","ring","basis"].includes(qid), sw=qid==="farve"||qid==="pore", tiles=withIcon||sw;
+  const body=(l,h)=>`<span><b>${l}</b>${h?`<small>${h}</small>`:""}</span>`;
+  const opts=q.o.map(([v,l,h])=>tiles
+    ?`<button class="opt tile" data-v="${v}">${withIcon?pg(icon(v),52,l):`<i class="sw" style="background:${SWATCH[v]}"></i>`}${body(l,h)}</button>`
+    :`<button class="opt rowo" data-v="${v}">${body(l,h)}${arrow}</button>`).join("");
+  const dk=`<button class="opt ${tiles?"tile":"rowo"} dk" data-v="vedikke">${body("Ved ikke")}${tiles?"":arrow}</button>`;
+  return `<div class="key-top"><span class="lbl">Undersøg · ${K.step+1} / ${total}</span>${K.step?`<button class="txt-link" id="kRestart">Start forfra</button>`:""}</div>
   <div class="key-prog" aria-hidden="true">${Array.from({length:total},(_,i)=>`<i class="${i<=K.step?"on":""}"></i>`).join("")}</div>
-  <div class="key-q">${QICON[qid]?pg(QICON[qid],32):""}<h1 class="d">${q.t}</h1><p class="intro">${q.h}</p></div>
-  <div class="opts ${withIcon||sw?"grid2":""}">${opts}<button class="opt dk" data-v="vedikke"><span class="tx"><b>Ved ikke</b></span></button></div>
+  <div class="key-q"><p class="lbl">Hvad ser du?</p><h1 class="t-state">${q.t}</h1><p class="intro">${q.h}</p></div>
+  <div class="${tiles?"tiles":"rows"}">${opts}${dk}</div>
   ${K.step?`<div class="btn-row"><button class="btn" id="kBack">Tilbage</button></div>`:`<p class="aside">Usikker? <a href="#/laer">Lær de fire slags underside</a>.</p>`}`;
 };
 function keyResult(){
@@ -2725,18 +2808,18 @@ function keyResult(){
   const best=r.length?r[0].sc:0;
   let top=r.filter(x=>x.sc>=best-3&&x.sc>0).slice(0,3);
   const danger=amanitaSignal()||top.some(x=>x.s.st==="meget");
-  let html=`${pageHead("Kig nærmere","Det kan være","Et forslag blandt guidens "+SP.length+" arter – ikke en sikker bestemmelse.")}<p class="given">${esc(given)}</p>`;
-  if(K.a.form==="kugle") html+=`<p class="caution"><b>Skær den igennem.</b> Ser du omridset af en hat og lameller, er det en fluesvamp i ‘æg’-stadiet. Er den sortviolet indeni, er det en giftig bruskbold.</p>`;
-  if(K.a.form==="morkel"||K.a.form==="hjerne") html+=`<p class="caution"><b>Skær på langs.</b> Spiselig morkel har ét gennemgående hulrum. Ægte stenmorkel har hjernefolder og kamre – og er meget giftig.</p>`;
-  if(danger) html+=`<p class="danger"><b>Dødeligt giftige arter er mulige.</b> Dine svar udelukker dem ikke. <button class="txt-link" id="kStop">Se, hvad du skal undersøge ${arrow}</button></p>`;
+  let html=`${pageHead("Undersøg","Det kan være","Et forslag blandt guidens "+SP.length+" arter – ikke en sikker bestemmelse.")}<p class="given meta">${esc(given)}</p>`;
+  if(K.a.form==="kugle") html+=`<p class="say"><b>Skær den igennem.</b> Ser du omridset af en hat og lameller, er det en fluesvamp i ‘æg’-stadiet. Er den sortviolet indeni, er det en giftig bruskbold.</p>`;
+  if(K.a.form==="morkel"||K.a.form==="hjerne") html+=`<p class="say"><b>Skær på langs.</b> Spiselig morkel har ét gennemgående hulrum. Ægte stenmorkel har hjernefolder og kamre – og er meget giftig.</p>`;
+  if(danger) html+=`<p class="say danger"><b>Dødeligt giftige arter er mulige.</b> Dine svar udelukker dem ikke. <button class="txt-link" id="kStop">Se, hvad du skal undersøge ${arrow}</button></p>`;
   if(!top.length){
-    html+=`<p class="ed pad">Ingen af guidens arter passer godt. Det er helt normalt – der findes tusindvis af svampearter i Danmark, og guiden rummer kun ${SP.length}.</p>`;
+    html+=`<div class="empty-st">${pg("form",48)}<p class="t-obs">Ingen af guidens arter passer godt.</p><p class="intro">Det er normalt. Der findes tusindvis af svampearter i Danmark, og guiden rummer ${SP.length}. Registrér den som ukendt – det er også et fund.</p></div>`;
   } else {
-    html+=`<div class="res">${top.map(x=>`<a href="#/art/${x.s.id}">${phHTML(photo(x.s.id,"typisk")||photo(x.s.id),"",{ann:false,thumb:true})}<span class="t"><b class="nm">${x.s.da}</b><span class="la">${x.s.la}</span>${stTxt(x.s)}</span>${arrow}</a>`).join("")}</div>`;
+    html+=`<div class="ix res-ix">${top.map(x=>ixRow(x.s)).join("").replace(/<a /g,"<a ")}</div>`;
     if(top.length>1){
       const qs=["under"].concat(FLOW[u]||[]).concat(["skift"]).filter((v,i,a)=>a.indexOf(v)===i);
       const rows=qs.filter(q=>{const vs=top.map(x=>(x.s.k[q]||(q==="under"?[x.s.under]:[])).join());return vs.every(Boolean)&&new Set(vs).size>1});
-      if(rows.length) html+=`<section class="sec">${sh("Det skiller dem ad")}<dl class="sep">${rows.map(q=>`<dt class="kt-h">${QICON[q]?pg(QICON[q],20):""}<span>${QLBL[q]}</span></dt><dd>${top.map(x=>{const vals=q==="under"?[x.s.under]:x.s.k[q];return `<p><b>${x.s.da}</b> ${vals.map(v=>{const o=Q[q].o.find(z=>z[0]===v);return o?o[1].toLowerCase():v}).join(" eller ")}</p>`}).join("")}</dd>`).join("")}</dl></section>`;
+      if(rows.length) html+=`<section class="sec">${sh("Det skiller dem ad")}<dl class="sep">${rows.map(q=>`<dt class="lock">${QICON[q]?pg(QICON[q],20):""}<span class="lbl">${QLBL[q]}</span></dt><dd>${top.map(x=>{const vals=q==="under"?[x.s.under]:x.s.k[q];return `<p><b>${x.s.da}</b> ${vals.map(v=>{const o=Q[q].o.find(z=>z[0]===v);return o?o[1].toLowerCase():v}).join(" eller ")}</p>`}).join("")}</dd>`).join("")}</dl></section>`;
       const pr=PAIRS.find(p=>top.slice(0,2).every(x=>x.s.id===p.a||x.s.id===p.b));
       if(pr) html+=`<div class="btn-row"><a class="btn fill" href="#/forskel/${pr.id}">Se forskellen side om side</a></div>`;
     }
@@ -2748,26 +2831,26 @@ function keyResult(){
 function showStop(){
   if($("#stop")) return;
   const el=document.createElement("div"); el.id="stop"; el.setAttribute("role","dialog"); el.setAttribute("aria-label","Stop");
+  const L=[["basis","Hele basis.","Grav svampen fri med en kniv. En løs pose? En knold med kant eller vortebælter? Posen sidder ofte under jorden."],
+    ["ring","Ring.","Et hængende skørt under hatten – eller mærket efter et, der er faldet af."],
+    ["lameller","Lameller.","Hvide? Frie af stokken?"],
+    ["hat","Hat.","Vorter, flager eller hudrester? Regnen kan have vasket dem af."]];
   el.innerHTML=`<div class="in">
     <div class="stop-sign"><h1>STOP</h1><p>Gruppen rummer dødeligt giftige arter. Spis ikke en svamp på grundlag af denne guide.</p></div>
     <div class="stop-body">
-      <p class="ed">Lameller sammen med ring, pose eller knold ved basis er kendetegn for fluesvampe (<i>Amanita</i>). Grøn fluesvamp og Snehvid fluesvamp vokser i Danmark.</p>
+      <p class="t-read">Lameller sammen med ring, pose eller knold ved basis er kendetegn for fluesvampe (<i>Amanita</i>). Grøn fluesvamp og Snehvid fluesvamp vokser i Danmark.</p>
       <h2 class="sh">Undersøg – uden at smage</h2>
-      <ol>
-        <li>${pg("basis",28)}<span><b>Hele basis.</b> Grav svampen fri med en kniv. En løs pose? En knold med kant eller vortebælter? Posen sidder ofte under jorden.</span></li>
-        <li>${pg("ring",28)}<span><b>Ring.</b> Et hængende skørt under hatten – eller mærket efter et, der er faldet af.</span></li>
-        <li>${pg("lameller",28)}<span><b>Lameller.</b> Hvide? Frie af stokken?</span></li>
-        <li>${pg("hat",28)}<span><b>Hat.</b> Vorter, flager eller hudrester? Regnen kan have vasket dem af.</span></li>
-      </ol>
+      <ol>${L.map(([i,b,t],n)=>`<li><span class="num">${nn(n+1)}</span>${pg(i,26)}<span><b>${b}</b>${t}</span></li>`).join("")}</ol>
       <div class="pair">${phHTML(photo("gron","basis"),"Grøn fluesvamp – basis")}${phHTML(photo("kliddet","basis")||photo("panter","basis"),"Knold")}</div>
       <div class="txt"><p>Grøn fluesvamp: løs pose</p><p>Kliddet fluesvamp: knold med kant</p></div>
-      <p class="small">Hold svampen adskilt fra spisesvampe i kurven, og vis den til jeres guide. Mistanke om forgiftning: Giftlinjen <a href="tel:82121212">82 12 12 12</a>. Akut fare: 112.</p>
-      <div class="btn-col"><a class="btn" href="#/forskel/gron-kliddet" id="stopCmp">Se forskellen: pose og knold</a><button class="btn fill" id="stopOk">Forstået</button></div>
+      <p class="meta">Hold svampen adskilt fra spisesvampe i kurven, og vis den til jeres guide. Mistanke om forgiftning: Giftlinjen <a href="tel:82121212">82 12 12 12</a>. Akut fare: 112.</p>
+      <div class="btn-col"><button class="btn fill" id="stopOk">Forstået</button><a class="btn" href="#/forskel/gron-kliddet" id="stopCmp">Se forskellen: pose og knold</a></div>
     </div></div>`;
   document.body.appendChild(el);
   $("#stopOk",el).onclick=()=>el.remove();
   $("#stopCmp",el).onclick=()=>el.remove();
 }
+
 function bindKey(root){
   root.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
     const qs=keyQs(), qid=qs[K.step];
@@ -2781,7 +2864,6 @@ function bindKey(root){
   root.querySelectorAll("#kRestart").forEach(b=>b.onclick=()=>{K={a:{},step:0,stopShown:false};render();window.scrollTo(0,0)});
   const ks=$("#kStop",root); if(ks) ks.onclick=showStop;
 }
-
 /* =====================================================================
    QUIZ — træner øjet, ikke spiselighed
    ===================================================================== */
@@ -2839,8 +2921,8 @@ V.quiz=()=>{
   if(QZ.i>=n){
     const best=Math.max(LS.get("quizBest",0),QZ.score); LS.set("quizBest",best);
     LS.set("quizRounds",LS.get("quizRounds",0)+1);
-    const msg=QZ.score>=9?"Du ser detaljerne. Brug dem i skoven – og vis stadig alt til en kyndig.":QZ.score>=6?"Godt set. Tag en runde mere, og kig på dem, du missede.":"Det er svært i begyndelsen. Se Lær at se, og prøv igen.";
-    return `${pageHead("Quiz",`${QZ.score} / ${n}`,msg)}<p class="small pad">Bedste resultat ${best} / ${n} · ${LS.get("quizRounds",0)} runder</p>
+    const msg=QZ.score>=9?"Du ser detaljerne. Brug dem i skoven – og vis stadig alt til en kyndig.":QZ.score>=6?"Godt set. Tag en runde mere, og se igen på dem, du missede.":"Det er svært i begyndelsen. Læs Lær at se, og prøv igen.";
+    return `<header class="ph-head"><p class="lbl">Quiz · resultat</p><p class="qz-score">${QZ.score}<span class="g">/${n}</span></p><p class="intro">${msg}</p><p class="meta" style="margin-top:12px">Bedste resultat ${best} / ${n} · ${LS.get("quizRounds",0)} runder</p></header>
     <div class="btn-row"><button class="btn fill" id="qzAgain">Ny runde</button><a class="btn" href="#/laer">Lær at se</a></div>`;
   }
   const q=QZ.qs[QZ.i];
@@ -2849,16 +2931,17 @@ V.quiz=()=>{
   else if(q.p) media=`<div class="qz-img">${phHTML(q.p,"",{ann:false})}</div>`;
   const ans=QZ.ans;
   return `<div class="key-top"><span class="lbl">Quiz · ${QZ.i+1} / ${n}</span><span class="lbl">${QZ.score} rigtige</span></div>
-  <h1 class="qz-q">${q.q}</h1>${media}
-  <div class="qz-opts">${q.o.map((o,i)=>`<button class="qz-opt ${ans!=null?(i===q.c?"ok":i===ans?"no":""):""}" data-i="${i}" ${ans!=null?"disabled":""}>${q.icons?pg(q.icons[i],28,o):""}<span>${o}</span></button>`).join("")}</div>
-  ${ans!=null?`<p class="qz-exp ${ans===q.c?"":"bad"}"><span class="lbl">${ans===q.c?"Rigtigt":"Ikke helt"}</span>${q.e}</p><div class="btn-row"><button class="btn fill" id="qzNext">${QZ.i+1<n?"Næste":"Se resultat"}</button></div>`:""}`;
+  <div class="key-prog" aria-hidden="true">${Array.from({length:n},(_,i)=>`<i class="${i<=QZ.i?"on":""}"></i>`).join("")}</div>
+  <h1 class="qz-q t-obs">${q.q}</h1>${media}
+  <div class="rows">${q.o.map((o,i)=>`<button class="qz-opt rowo ${ans!=null?(i===q.c?"ok":i===ans?"no":""):""}" data-i="${i}" ${ans!=null?"disabled":""}>${q.icons?pg(q.icons[i],26,o):""}<span>${o}</span></button>`).join("")}</div>
+  ${ans!=null?`<div class="qz-exp"><span class="lbl">${ans===q.c?"Rigtigt":"Ikke helt"}</span><p>${q.e}</p></div><div class="btn-row"><button class="btn fill" id="qzNext">${QZ.i+1<n?"Næste":"Se resultat"}</button></div>`:""}`;
 };
+
 function bindQuiz(root){
   root.querySelectorAll(".qz-opt").forEach(b=>b.onclick=()=>{if(QZ.ans!=null)return;QZ.ans=+b.dataset.i;if(QZ.ans===QZ.qs[QZ.i].c)QZ.score++;render(true);setTimeout(()=>{const e=$(".qz-exp");e&&e.scrollIntoView({behavior:"smooth",block:"center"})},50)});
   const nx=$("#qzNext",root); if(nx) nx.onclick=()=>{QZ.i++;QZ.ans=null;render();window.scrollTo(0,0)};
   const ag=$("#qzAgain",root); if(ag) ag.onclick=()=>{QZ=null;render()};
 }
-
 
 /* =====================================================================
    OMRÅDE — valgt område gemmes kun lokalt (localStorage), aldrig uploadet.
@@ -3055,8 +3138,9 @@ async function migrateOld(){
 const SLOTS=[["hele","Hele svampen","Tag den, hvor den står. Få gerne skovbunden og træerne omkring med.",""],
   ["hat","Hatten","Tag hatten ovenfra. Få farve, overflade og form med.",""],
   ["under","Undersiden","Fotografér tydeligt under hatten.","Se efter lameller, rør, ribber eller pigge."],
-  ["stok","Stok + basis","Få hele stokken med – også helt ned til basis.","Stokbasis kan være afgørende for bestemmelsen. Fotografér gerne svampen, hvor den står, før du plukker den – og grav basis fri."]];
-const SLOTN={hele:"Hele",hat:"Hat",under:"Underside",stok:"Stok"};
+  ["stok","Stok og basis","Få hele stokken med – også helt ned til basis.","Stokbasis kan være afgørende for bestemmelsen. Fotografér gerne svampen, hvor den står, før du plukker den – og grav basis fri."]];
+const SLOTN={hele:"Hele svampen",hat:"Hatten",under:"Undersiden",stok:"Stok og basis"};
+const SLOTI={hele:"hele",hat:"hat",under:"under",stok:"basis"};
 const OBS={
   under:{t:"Hvad er der under hatten?",multi:false,o:[["lameller","Lameller"],["ror","Rør / porer"],["ribber","Ribber / folder"],["pigge","Pigge"],["andet","Anden form"]]},
   trees:{t:"Hvilke træer står den ved?",multi:true,o:[["fyr","Fyr"],["gran","Gran"],["birk","Birk"],["lov","Andet løvtræ"],["bland","Blandskov"]]},
@@ -3085,31 +3169,31 @@ let REG=null;
 function newReg(guess){REG={id:null,created:null,step:0,ph:{},prev:{},obs:{trees:[],sted:[]},ident:{status:guess?"bud":"ukendt",species:guess||null,by:""},note:"",busy:false}}
 async function editReg(id){const f=await DB.get(id);if(!f)return false;newReg();Object.assign(REG,{id:f.id,created:f.created,obs:{trees:[],sted:[],...f.obs},ident:{...f.ident},note:f.note||"",step:4,area:f.area,legacyPh:f.photos||{}});
   for(const k in (f.photos||{})){REG.prev[k]=objURL(f.photos[k].thumb);REG.ph[k]={keep:true,...f.photos[k]}}return true}
-function regProg(){const lab=["Hele","Hat","Under","Stok","Se","Gem"];
-  return `<ol class="rg-prog">${lab.map((l,i)=>`<li class="${i===REG.step?"cur":""}${i<4&&REG.ph[SLOTS[i][0]]?" done":""}"><button data-go="${i}"><span>${i+1}</span>${l}${i<4&&REG.ph[SLOTS[i][0]]?" ✓":""}</button></li>`).join("")}</ol>`}
+function regProg(){const lab=["Hele svampen","Hatten","Undersiden","Stok og basis","Se efter","Gem"];
+  return `<ol class="rg-prog">${lab.map((l,i)=>`<li class="${i===REG.step?"cur":""}${i<4&&REG.ph[SLOTS[i][0]]?" done":""}"><button data-go="${i}" aria-label="${i+1}: ${l}">${nn(i+1)}</button></li>`).join("")}</ol>`}
 V.reg=()=>{
   if(!REG) newReg();
-  const top=`<div class="rg-top"><span class="lbl dim">${REG.id?"Redigér fund":"Registrér et fund"}</span><button id="rgCancel" class="lbl">Annullér</button></div>${regProg()}`;
+  const top=`<div class="rg-top"><span class="lbl dim">${REG.id?"Redigér fund":"Registrér et fund"}</span><button id="rgCancel">Annullér</button></div>${regProg()}`;
   if(REG.step<4){
     const [k,t,ins,help]=SLOTS[REG.step], pv=REG.prev[k];
-    return `${top}<div class="rg-q"><span class="rg-n">0${REG.step+1}</span><h1>${t}</h1><p>${ins}</p>${help?`<p class="dim">${help}</p>`:""}</div>
-    <div class="rg-shot">${pv?`<img src="${pv}" alt="">`:`<label class="rg-cam"><input type="file" accept="image/*" capture="environment" data-slot="${k}">${pg("kamera",52)}<b>${REG.busy?"Behandler …":"Tag foto"}</b></label>`}</div>
-    <div class="rg-act">${pv?`<label class="btn grow"><input type="file" accept="image/*" capture="environment" data-slot="${k}">Tag igen</label><button class="btn fill grow" id="rgNext">Brug foto →</button>`
+    return `${top}<div class="rg-q"><div class="lock-n"><span class="num">${nn(REG.step+1)}</span>${pg(SLOTI[k],22)}<span class="lbl">${SLOTN[k]}</span></div><h1 class="t-state">${t}</h1><p>${ins}</p>${help?`<p class="dim">${help}</p>`:""}</div>
+    <div class="rg-shot">${pv?`<img src="${pv}" alt="">`:`<label class="rg-cam"><input type="file" accept="image/*" capture="environment" data-slot="${k}">${pg("kamera",48)}<b>${REG.busy?"Behandler …":"Tag foto"}</b></label>`}</div>
+    <div class="rg-act">${pv?`<label class="btn grow"><input type="file" accept="image/*" capture="environment" data-slot="${k}">Tag igen</label><button class="btn fill grow" id="rgNext">Brug foto</button>`
       :`<label class="btn grow"><input type="file" accept="image/*" data-slot="${k}">Vælg fra billeder</label><button class="btn grow" id="rgNext">Spring over</button>`}</div>
     <p class="rg-note">Billeder gemmes kun på denne enhed.</p>`;
   }
   if(REG.step===4){
-    const q=(key)=>{const d=OBS[key],v=REG.obs[key];return `<section class="rg-obs"><h2 class="sh">${d.t}</h2><div class="rg-chips ${key==="farve"?"sw":""}">${d.o.map(([o,l])=>`<button data-k="${key}" data-v="${o}" class="${(d.multi?(v||[]).includes(o):v===o)?"on":""}">${key==="farve"?`<i style="background:${SWATCH[o]}"></i>`:key==="under"?pg(o==="andet"?"form":o,22,l):""}${l}</button>`).join("")}<button data-k="${key}" data-v="" class="dk ${(d.multi?!(v||[]).length:!v)?"on":""}">Ved ikke</button></div></section>`};
-    return `${top}<div class="rg-q"><span class="rg-n">05</span><h1>Se efter</h1><p class="dim">Kun det, du faktisk kan se. Spring over, hvis du er i tvivl.</p></div>
+    const q=(key)=>{const d=OBS[key],v=REG.obs[key];return `<section class="rg-obs"><h2 class="sh">${d.t}</h2><div class="pills rg-chips">${d.o.map(([o,l])=>`<button data-k="${key}" data-v="${o}" class="${(d.multi?(v||[]).includes(o):v===o)?"on":""}">${key==="farve"?`<i style="background:${SWATCH[o]}"></i>`:key==="under"?pg(o==="andet"?"form":o,22,l):""}${l}</button>`).join("")}<button data-k="${key}" data-v="" class="dk ${(d.multi?!(v||[]).length:!v)?"on":""}">Ved ikke</button></div></section>`};
+    return `${top}<div class="rg-q"><div class="lock-n"><span class="num">05</span>${pg("under",22)}<span class="lbl">Se efter</span></div><h1 class="t-state">Hvad ser du?</h1><p class="dim">Kun det, du faktisk kan se. Spring over, hvis du er i tvivl.</p></div>
       ${q("under")}${q("trees")}${q("sted")}${q("farve")}
-      <div class="rg-act"><button class="btn grow" id="rgNext">Spring over</button><button class="btn fill grow" id="rgNext2">Videre →</button></div>`;
+      <div class="rg-act"><button class="btn grow" id="rgNext">Spring over</button><button class="btn fill grow" id="rgNext2">Videre</button></div>`;
   }
   const u=REG.obs.under; const opts=SP.slice().sort((a,b)=>((b.under===u||b.underAlt===u)-(a.under===u||a.underAlt===u))||a.da.localeCompare(b.da,"da"));
   const sel=`<select id="rgSp"><option value="">Vælg art …</option>${u?`<optgroup label="Passer med undersiden">${opts.filter(s=>s.under===u||s.underAlt===u).map(s=>`<option value="${s.id}" ${REG.ident.species===s.id?"selected":""}>${s.da}</option>`).join("")}</optgroup><optgroup label="Øvrige arter">`:""}${opts.filter(s=>!u||!(s.under===u||s.underAlt===u)).map(s=>`<option value="${s.id}" ${REG.ident.species===s.id?"selected":""}>${s.da}</option>`).join("")}${u?"</optgroup>":""}</select>`;
   const st=REG.ident.status;
-  return `${top}<div class="rg-q"><span class="rg-n">06</span><h1>Hvad tror du, det er?</h1><p class="dim">Ukendt er et fint svar.</p></div>
+  return `${top}<div class="rg-q"><div class="lock-n"><span class="num">06</span><span class="lbl">Gem</span></div><h1 class="t-state">Hvad tror du, det er?</h1><p class="dim">Ukendt er et fint svar.</p></div>
     <div class="rg-id">
-      <button data-st="ukendt" class="${st==="ukendt"?"on":""}"><b>Ukendt</b><span>Helt i orden. Du har stadig set, fotograferet og noteret.</span></button>
+      <button data-st="ukendt" class="${st==="ukendt"?"on":""}"><b>Ukendt</b><span>Et gyldigt svar. Du har set, fotograferet og noteret.</span></button>
       <button data-st="bud" class="${st==="bud"?"on":""}"><b>Jeg tror, det er …</b><span>Dit eget bud – ikke en bestemmelse.</span></button>
       <button data-st="bestemt" class="${st==="bestemt"?"on":""}"><b>Bestemt af en kyndig</b><span>Fx jeres guide, der har set netop dette eksemplar.</span></button>
     </div>
@@ -3118,7 +3202,7 @@ V.reg=()=>{
     <div class="rg-field"><span class="lbl">Note</span><textarea id="rgNote" placeholder="Hvad så du? Duft, farveskift, antal …">${esc(REG.note)}</textarea></div>
     <div class="rg-field"><span class="lbl">Område</span><p>${esc((REG.area||area()).name)}</p></div>
     <p class="rg-note">Billeder og noter gemmes kun på denne enhed.</p>
-    <div class="rg-act"><button class="btn fill wide" id="rgSave">Gem fund</button></div>`;
+    <div class="rg-act"><button class="btn big" id="rgSave"><span class="bl">Gem fund</span>${arrow}</button></div>`;
 };
 function bindReg(root){
   $("#rgCancel",root).onclick=()=>{if(Object.keys(REG.ph).some(k=>!REG.ph[k].keep)&&!confirm("Kassér fotos og observationer?"))return;const back=REG.id?"#/fund/"+REG.id:"#/fund";REG=null;freeURLs();location.hash=back};
@@ -3154,32 +3238,33 @@ async function saveReg(){
 }
 
 /* ---------- FUND: notesbog ---------- */
-V.finds=()=>`${pageHead("Din notesbog","Fund","Det, du har set og fotograferet. Et fund er en observation – ikke en bestemmelse.")}
-  <div class="cta-wrap"><a class="btn big" href="#/registrer">${pg("kamera",24)}Registrér et fund</a></div>
-  <div id="fdList"><p class="ed pad">Henter …</p></div>
-  <p class="small pad">Billederne gemmes kun på denne enhed. Læg guiden på hjemmeskærmen, så gemmer Safari dine fund mere sikkert.</p>`;
+V.finds=()=>`${pageHead("","Fund","Det, du har set og fotograferet. Et fund er en observation – ikke en bestemmelse.")}
+  <div class="cta-wrap"><a class="btn big" href="#/registrer"><span class="bl">${pg("kamera",24)}Registrér et fund</span>${arrow}</a></div>
+  <div id="fdList"><p class="meta pad" style="padding-top:48px">Henter …</p></div>
+  <p class="meta pad" style="margin-top:32px">Billederne gemmes kun på denne enhed. Læg guiden på hjemmeskærmen, så gemmer Safari dine fund mere sikkert.</p>`;
 async function bindFinds(root){
   freeURLs(); const list=await loadFinds(); const box=$("#fdList",root); if(!box)return;
-  if(!list.length){box.innerHTML=`<p class="ed pad">Ingen fund endnu. Når du ser en svamp, så tag fire billeder og notér, hvad du ser. Du behøver ikke vide, hvad det er.</p>`;return}
+  if(!list.length){box.innerHTML=`<div class="empty-st">${pg("hele",48)}<p class="t-obs">Notesbogen er tom.</p><p class="intro">Når du ser en svamp, så tag fire billeder og notér, hvad du ser. Du behøver ikke vide, hvad det er.</p></div>`;return}
   let html="",last="";
-  for(const f of list){const dk=dayKey(f.created);if(dk!==last){if(last)html+=`</div>`;html+=`<div class="fd-day"><span class="lbl">${dayLabel(f.created)}</span><span class="lbl dim">${DAYN[new Date(f.created).getDay()]}</span></div><div class="fd-grid">`;last=dk}
-    const slot=["hele","hat","under","stok"].find(k=>f.photos&&f.photos[k]);const s=S[f.ident&&f.ident.species];
-    const img=slot?`<div class="ph"><img src="${objURL(f.photos[slot].thumb)}" alt=""></div>`:(s&&photo(s.id)?`<div class="ph guide">${`<img src="${photo(s.id).t}" alt="">`}<span>Guidefoto</span></div>`:`<div class="ph empty"><span>Intet foto</span></div>`);const ui=f.obs&&f.obs.under;
-    html+=`<a class="fd-card" href="#/fund/${f.id}">${img}<b class="${f.ident&&f.ident.status==="ukendt"?"unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span><span class="m">${ui?pg(ui==="andet"?"form":ui,16):""}${esc(obsLine(f.obs||{}))}</span></a>`}
+  for(const f of list){const dk=dayKey(f.created);if(dk!==last){if(last)html+=`</div>`;html+=`<div class="fd-day"><h2 class="t-obs">${dayLabel(f.created)}</h2><span class="lbl">${DAYN[new Date(f.created).getDay()]}</span></div><div class="ix">`;last=dk}
+    const slot=["hele","hat","under","stok"].find(k=>f.photos&&f.photos[k]);const ui=f.obs&&f.obs.under;const unk=!f.ident||f.ident.status==="ukendt";
+    const img=slot?`<div class="ph"><img src="${objURL(f.photos[slot].thumb)}" alt=""></div>`:`<div class="ph none">${pg(ui?(ui==="andet"?"form":ui):"hele",32)}</div>`;
+    html+=`<a href="#/fund/${f.id}">${img}<span class="t"><b class="nm${unk?" unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span>${obsLine(f.obs||{})?`<span class="m">${ui?pg(ui==="andet"?"form":ui,16):""}${esc(obsLine(f.obs||{}))}</span>`:""}</span></a>`}
   box.innerHTML=html+`</div>`;
 }
-V.find=(id)=>`<div id="fdDetail"><p class="ed pad">Henter …</p></div>`;
+V.find=(id)=>`<div id="fdDetail"><p class="meta pad" style="padding-top:48px">Henter …</p></div>`;
 async function bindFind(root,id){
   freeURLs();const f=await DB.get(id).catch(()=>null);const box=$("#fdDetail",root);if(!box)return;
-  if(!f){box.innerHTML=`<p class="ed pad">Fundet findes ikke længere.</p><div class="btn-row"><a class="btn" href="#/fund">Til fund</a></div>`;return}
+  if(!f){box.innerHTML=`<p class="t-obs pad" style="padding-top:48px">Fundet findes ikke længere.</p><div class="btn-row"><a class="btn" href="#/fund">Til fund</a></div>`;return}
   const s=S[f.ident&&f.ident.species], st=(f.ident||{}).status||"ukendt", d=new Date(f.created);
-  const slots=SLOTS.map(([k])=>{const p=f.photos&&f.photos[k];return `<figure class="fd-slot">${p?`<button class="ph" data-full="${k}"><img src="${objURL(p.thumb)}" alt=""></button>`:`<div class="ph empty"><span>–</span></div>`}<figcaption class="lbl">${SLOTN[k]}</figcaption></figure>`}).join("");
+  const slots=SLOTS.map(([k],i)=>{const p=f.photos&&f.photos[k];return `<figure class="fd-slot">${p?`<button class="ph" data-full="${k}"><img src="${objURL(p.thumb)}" alt=""></button>`:`<div class="ph none">${pg(SLOTI[k],28)}</div>`}<figcaption><span class="num">${nn(i+1)}</span><span class="lbl">${SLOTN[k]}</span></figcaption></figure>`}).join("");
   const row=(l,v,ic)=>v?`<div class="fd-row"><span class="lbl">${l}</span><p>${ic?pg(ic,20):""}${v}</p></div>`:"";
-  const idHTML=st==="ukendt"?`<p class="unk-big">Ukendt</p><p class="small">Et ubestemt fund er stadig et godt fund.</p>`
-    :st==="bud"?`<span class="lbl dim">Dit bud</span><p class="bud">${s?s.da:""}</p>`:`<span class="lbl">Bestemt af en kyndig${f.ident.by?" · "+esc(f.ident.by):""}</span><p class="bud">${s?s.da:""}</p>`;
+  const idHTML=st==="ukendt"?`<p class="lbl">Identifikation</p><p class="meta">Ubestemt. Et ukendt fund er stadig en observation.</p>`
+    :st==="bud"?`<p class="lbl">Identifikation</p><p class="meta">Dit eget bud – ikke en bestemmelse.</p>`:`<p class="lbl">Identifikation</p><p class="meta">Bestemt af en kyndig${f.ident.by?": "+esc(f.ident.by):""}.</p>`;
   const gastroOK=s&&typeof GASTRO!=="undefined"&&GASTRO[s.id]&&!s.noGastro;
-  box.innerHTML=`<header class="ph-head"><span class="lbl">Fund</span><h1 class="d${st==="ukendt"?" it":""}">${esc(identTitle(f))}</h1></header>
+  box.innerHTML=`<header class="ph-head"><p class="lbl">${d.getDate()}. ${MONN[d.getMonth()]} · ${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</p><h1 class="t-display"${st==="ukendt"?' style="font-style:italic"':""}>${esc(identTitle(f))}</h1></header>
     <div class="fd-slots">${slots}</div>
+    <div class="fd-id">${idHTML}</div>
     <div class="fd-rows">
       ${row("Fundet",`${d.getDate()}. ${MONN[d.getMonth()]} · ${hhmm(f.created)}`)}
       ${row("Område",f.area?esc(f.area.name):"")}
@@ -3188,12 +3273,11 @@ async function bindFind(root,id){
       ${row("Underside",f.obs.under?OBS.under.o.find(x=>x[0]===f.obs.under)[1]:"",f.obs.under?(f.obs.under==="andet"?"form":f.obs.under):null)}
       ${row("Hatfarve",f.obs.farve?OBS.farve.o.find(x=>x[0]===f.obs.farve)[1]:"","hat")}
       ${row("Note",f.note?esc(f.note).replace(/\n/g,"<br>"):"")}
-      <div class="fd-row"><span class="lbl">Identifikation</span><div>${idHTML}</div></div>
     </div>
-    ${s&&isDanger(s)?`<p class="danger"><b>${STATUS[s.st].t}.</b> ${s.danger||""}</p>`:""}
+    ${s&&isDanger(s)?`<p class="say danger"><b>${stInfo(s).t}.</b> ${s.danger||""}</p>`:""}
     <div class="btn-col"><button class="btn fill" id="fdCmp">Sammenlign med guiden</button><div class="btn-row in"><a class="btn" href="#/registrer/ret/${f.id}">Redigér</a>${navigator.canShare?`<button class="btn" id="fdShare">Del billeder</button>`:""}</div></div>
-    ${gastroOK?`${st!=="bestemt"?`<p class="danger"><b>Ikke sikkert bestemt.</b> Dit bud er ikke en bestemmelse. Spis ikke svampen, før en kyndig har bestemt netop dette eksemplar.</p>`:""}
-      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="lbl">Gastronomi</span><span class="row"><b class="d-m">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
+    ${gastroOK?`${st!=="bestemt"?`<p class="say"><b>Ikke sikkert bestemt.</b> Spis ikke svampen, før en kyndig har bestemt netop dette eksemplar.</p>`:""}
+      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="lbl">I køkkenet</span><span class="row"><b class="t-state">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
     <div class="btn-row"><button class="txt-link del" id="fdDel">Slet fund</button></div>`;
   box.querySelectorAll("[data-full]").forEach(b=>b.onclick=async()=>{const r=await DB.photo(f.id+":"+b.dataset.full);const u=r?objURL(r):$("img",b).src;showLB(u,`${SLOTN[b.dataset.full]} · ${esc(identTitle(f))}`,dayLabel(f.created)+" · "+hhmm(f.created))});
   $("#fdDel",box).onclick=async()=>{if(!confirm("Slet dette fund og dets billeder fra enheden?"))return;await DB.del(f.id);await loadFinds();location.hash="#/fund"};
@@ -3210,34 +3294,37 @@ async function bindFind(root,id){
 function showLB(src,cap,small){const lb=document.createElement("div");lb.id="lb";lb.innerHTML=`<button aria-label="Luk">×</button><img src="${src}" alt=""><div class="c">${cap}<small>${esc(small||"")}</small></div>`;lb.onclick=()=>lb.remove();document.body.appendChild(lb)}
 
 /* ---------- I SKOVEN NU ---------- */
-function areaHead(a){const cov=coverage(a);return `<div class="area-h"><h2 class="d">${esc(a.name)}</h2><p class="meta">${esc([a.region,areaLine(a)].filter(Boolean).join(" · "))||"Ingen skovtype valgt"}</p><button class="txt-link" data-area>Skift område ${arrow}</button>
-  ${cov!=="god"?`<p class="small">Guiden viser relevante arter fra sit eget artsbibliotek. ${cov==="ude"?"Området ligger uden for de fund, guiden bygger på, så":"Der er få fund herfra, så"} rækkefølgen bygger kun på årstiden og det, du har fortalt om skoven.</p>`:""}</div>`}
+function areaHead(a){const cov=coverage(a);return `<div class="area-h"><p class="lbl g">Område</p><h2 class="t-obs">${esc(a.name)}</h2><p class="meta">${esc([a.region,areaLine(a)].filter(Boolean).join(" · "))||"Ingen skovtype valgt"}</p><button class="txt-link" data-area>Skift område ${arrow}</button>
+  ${cov!=="god"?`<p class="cov">Guiden viser relevante arter fra sit eget artsbibliotek. ${cov==="ude"?"Området ligger uden for de fund, guiden bygger på, så":"Der er få fund herfra, så"} rækkefølgen bygger kun på årstiden og det, du har fortalt om skoven.</p>`:""}</div>`}
 V.omraade=()=>{
   const a=area(), top=watchList(a);
   return `${pageHead("I skoven nu · "+MONN[new Date().getMonth()],"Arter, du kan møde","Ud fra årstiden, skoven og hvor arterne er fundet før. Det siger, hvad du kan møde – ikke hvad du har fundet.")}
   ${areaHead(a)}
-  <div class="grid">${top.map((x,i)=>card(x.s,{n:String(i+1).padStart(2,"0"),spot:true})).join("")}</div>
+  <div style="height:32px"></div>${ixList(top.map(x=>x.s),{num:true,spot:true})}
   ${russula()}
-  <div class="btn-row"><a class="btn fill" href="#/noegle">Kig nærmere</a><a class="btn" href="#/arter">Alle arter</a></div>`;
+  <div class="btn-row"><a class="btn fill" href="#/noegle">Find en art</a><a class="btn" href="#/arter">Alle arter</a></div>`;
 };
 
 /* ---------- GASTRONOMI — lys smørgul: fra skoven ind i køkkenet ---------- */
 V.kitchen=(id)=>{
   const s=S[id], g=typeof GASTRO!=="undefined"&&GASTRO[id], t=g&&g.tags;
-  if(!s||!g||s.noGastro||!SPIS(s)) return `<p class="ed pad">Ingen køkkenbeskrivelse for denne art.</p>`;
+  if(!s||!g||s.noGastro||!SPIS(s)) return `<p class="t-obs pad" style="padding-top:48px">Ingen køkkenbeskrivelse for denne art.</p>`;
   const li=a=>a.map(x=>`<li>${x}</li>`).join("");
-  return `<header class="ph-head"><span class="lbl">I køkkenet</span><h1 class="d">${s.da}</h1><p class="la">${s.la}</p>
-    <p class="k-first">Gastronomien gælder arten – ikke dit konkrete fund. Kun efter sikker artsbestemmelse.</p></header>
-  ${t?`<dl class="k-meta">${t.s.length?`<dt class="lbl">Smag</dt><dd>${t.s.map(x=>GVOC.s[x]).join(" · ")}</dd>`:""}<dt class="lbl">Tekstur</dt><dd>${t.t.map(x=>GVOC.t[x]).join(" · ")}</dd></dl>`:""}
-  ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="k-why">${g.hvorfor}</p></section>`:""}
+  const W=o=>cap1(o.join(" · ").toLowerCase());
+  const im=photo(id,"kod")||photo(id,"typisk")||photo(id);
+  return `<header class="k-id"><p class="lbl">I køkkenet</p><h1 class="t-display">${s.da}</h1><p class="la">${s.la}</p>
+    <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund. Kun efter sikker artsbestemmelse.</p></header>
+  ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
+  ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="t-read">${g.hvorfor}</p></section>`:""}
+  ${im?`<figure class="k-img">${phHTML(im,s.da,{ann:false,lb:photoKey(im)})}<figcaption>${esc(im.c||"")}</figcaption></figure>`:""}
   <section class="sec">${sh("Hvad den kan")}<ul class="k-list">${li(g.bedstTil)}</ul></section>
-  <section class="sec">${sh("Behandling")}<ul class="k-list">${li(g.behandling)}</ul></section>
-  <section class="sec">${sh("Passer godt med")}<p class="k-pair">${g.passer.join(" · ")}</p><p class="small">${g.koekken.join(" · ")} køkken</p></section>
+  <section class="sec">${sh("Behandling")}<ol class="k-list">${li(g.behandling)}</ol></section>
+  <section class="sec">${sh("Passer godt med")}<p class="k-pair">${W(g.passer)}</p><p class="meta">${g.koekken.join(" · ")} køkken</p></section>
   <section class="sec">${sh("Tre måder")}
-    ${g.retter.map(r=>`<details class="k-dish"><summary><span class="k-n">${r.n}</span><span class="k-t"><span class="lbl">${r.type} · ${r.ker}</span><b class="nm">${r.titel}</b><span class="small">${[r.tid,r.til].filter(Boolean).join(" · ")}</span></span></summary>
+    ${g.retter.map(r=>`<details class="k-dish"><summary><span class="k-n">${r.n}</span><span class="k-t"><span class="lbl">${r.type} · ${r.ker}</span><b class="nm">${r.titel}</b><span class="meta">${[r.tid,r.til].filter(Boolean).join(" · ")}</span></span></summary>
       <div class="k-body"><h4 class="lbl">Ingredienser</h4><ul>${li(r.ingr)}</ul><h4 class="lbl">Fremgangsmåde</h4><ol>${li(r.metode)}</ol>${r.tip?`<p class="k-tip"><span class="lbl">Tip</span>${r.tip}</p>`:""}</div></details>`).join("")}
   </section>
-  <nav class="minor"><a href="#/art/${id}">Tilbage til ${lcName(s)}${arrow}</a></nav>`;
+  <a class="quiet" href="#/art/${id}">Tilbage til ${lcName(s)} ${arrow}</a>`;
 };
 
 /* ---------- offline: gem alle guidens billeder ---------- */
@@ -3245,7 +3332,7 @@ function precacheImages(btn){
   if(!("serviceWorker" in navigator)||!navigator.serviceWorker.controller){alert("Offline-lagring er ikke tilgængelig i denne browser.");return}
   const urls=[];for(const id in PH)PH[id].forEach(p=>{urls.push(p.s);urls.push(p.t)});
   btn.disabled=true;btn.textContent="Gemmer billeder …";
-  const ch=new MessageChannel();ch.port1.onmessage=e=>{const d=e.data;if(d.done){btn.textContent=`✓ ${d.ok} billeder gemt offline`;LS.set("offlineImgs",Date.now())}else btn.textContent=`Gemmer … ${d.n}/${urls.length}`};
+  const ch=new MessageChannel();ch.port1.onmessage=e=>{const d=e.data;if(d.done){btn.textContent=`${d.ok} billeder gemt offline`;LS.set("offlineImgs",Date.now())}else btn.textContent=`Gemmer … ${d.n}/${urls.length}`};
   navigator.serviceWorker.controller.postMessage({type:"precache",urls},[ch.port2]);
 }
 
@@ -3254,10 +3341,10 @@ function precacheImages(btn){
 V.info=()=>{
   const cr=[];for(const id in (typeof PH!=="undefined"?PH:{})) PH[id].forEach(p=>cr.push(`<div><b>${S[id]?S[id].da:id}</b> · ${VIEWN[p.v]||p.v}: ${esc(p.by||"")}</div>`));
   return `${pageHead("Om guiden","Sikkerhed og kilder","")}
-  <div class="big-safe">Svampe kan variere meget i udseende. Fotos og digitale bestemmelsesnøgler kan ikke alene afgøre, om en svamp er sikker at spise. Spis kun svampe, som er sikkert bestemt af en person med den nødvendige viden.</div>
+  <div class="big-safe t-read">Svampe kan variere meget i udseende. Fotos og digitale bestemmelsesnøgler kan ikke alene afgøre, om en svamp er sikker at spise. Spis kun svampe, som er sikkert bestemt af en person med den nødvendige viden.</div>
   <div class="prose">
     <h2 class="sh">“Det kan være” er ikke “sikker at spise”</h2>
-    <p>Guiden lærer dig at se forskelle. Den bestemmer ikke svampe. Når Kig nærmere siger “det kan være”, betyder det kun, at dine svar ligner beskrivelsen af en af guidens ${SP.length} arter. Der findes tusindvis af arter i Danmark.</p>
+    <p>Guiden lærer dig at se forskelle. Den bestemmer ikke svampe. Når Undersøg siger “det kan være”, betyder det kun, at dine svar ligner beskrivelsen af en af guidens ${SP.length} arter. Der findes tusindvis af arter i Danmark.</p>
     <h2 class="sh">Tre ting, der ikke må blandes sammen</h2>
     <p><b>Bestemmelse</b> – hvilken art er det? <b>Spiselighed</b> – kan arten spises? <b>Gastronomi</b> – hvordan bruges arten i køkkenet? Kun en sikker bestemmelse af netop dit eksemplar gør de to sidste relevante.</p>
     <h2 class="sh">Forgiftning</h2>
@@ -3273,13 +3360,13 @@ V.info=()=>{
     <div class="credits small">${cr.join("")||"<div>Ingen fotos indlejret.</div>"}</div>
     <h2 class="sh">Offline</h2>
     <p>Tekster, Undersøg, quiz og dine fund virker uden net, når siden først er åbnet. Billeder hentes, når du ser dem – eller alle på én gang her (ca. 12 MB):</p>
-    <p><button class="btn" id="precache">${LS.get("offlineImgs",null)?"✓ Billeder gemt – opdatér":"Gem alle billeder offline"}</button></p>
+    <p style="margin-top:16px"><button class="btn" id="precache">${LS.get("offlineImgs",null)?"Billeder gemt – opdatér":"Gem alle billeder offline"}</button></p>
     <p>Kortet og stedsøgningen kræver internet.</p>
     <h2 class="sh">Privatliv</h2>
     <p>Dine fund, billeder og dit valgte område gemmes kun på denne enhed. Intet uploades. Din position bruges kun, når du trykker ‘Brug min position’, og gemmes afrundet.</p>
     <p>Kortdata © OpenStreetMap-bidragydere. Stedsøgning: Nominatim.</p>
     <h2 class="sh">Indstillinger</h2>
-    <p><button class="btn" id="resetAll">Nulstil fund, område og quiz</button></p>
+    <p style="margin-top:16px"><button class="btn" id="resetAll">Nulstil fund, område og quiz</button></p>
   </div>`;
 };
 
@@ -3292,26 +3379,27 @@ function route(){
   const h=(location.hash||"#/").slice(2).split("/");
   const [a,b,c]=h;
   switch(a){
-    case "": case undefined: return {v:V.home(),t:"",tab:"hjem",home:true};
-    case "omraade": case "asserbo": return {v:V.omraade(),t:"I skoven nu",tab:"hjem"};
-    case "laer": return {v:V.lesson(),t:"Lær at se",tab:"hjem"};
-    case "arter": return {v:V.list(b),t:b==="godt"?"Spisesvampe":b==="pas"?"Pas på":"Arter",tab:"arter",list:b!=="pas"};
-    case "art": if(c==="koekken") return {v:V.kitchen(b),t:"I køkkenet",tab:"arter",kitchen:true};
-      return {v:V.species(b),t:S[b]?S[b].da:"",tab:"arter",sp:b};
-    case "forskelle": return {v:V.pairs(),t:"Se forskellen",tab:"forskelle"};
-    case "forskel": return {v:V.pair(b),t:"Se forskellen",tab:"forskelle"};
-    case "noegle": return {v:V.key(),t:"Kig nærmere",tab:"noegle",key:true};
-    case "quiz": return {v:V.quiz(),t:"Quiz",tab:"hjem",quiz:true};
+    case "": case undefined: return {v:V.home(),root:true,tab:"hjem",home:true};
+    case "omraade": case "asserbo": return {v:V.omraade(),t:"Start",tab:"hjem"};
+    case "laer": return {v:V.lesson(),t:"Start",tab:"hjem"};
+    case "arter": if(!b) return {v:V.list(),root:true,tab:"arter",list:true};
+      return {v:V.list(b),t:"Arter",tab:"arter",list:b!=="pas"};
+    case "art": if(c==="koekken") return {v:V.kitchen(b),t:S[b]?S[b].da:"",tab:"arter",kitchen:true};
+      return {v:V.species(b),t:"Arter",tab:"arter",sp:b};
+    case "forskelle": return {v:V.pairs(),root:true,tab:"forskelle"};
+    case "forskel": return {v:V.pair(b),t:"Se forskellen",tab:"forskelle",pair:true};
+    case "noegle": return {v:V.key(),root:true,tab:"noegle",key:true};
+    case "quiz": return {v:V.quiz(),t:"Start",tab:"hjem",quiz:true};
     case "registrer": {
       const mode=b==="ret"?"ret:"+c:b==="art"?"art:"+c:"ny";
-      if(!REG||REG.mode!==mode){ if(b==="ret") return {v:`<p class="ed pad">Henter …</p>`,t:"Redigér fund",tab:"fund",loadEdit:c,mode};
+      if(!REG||REG.mode!==mode){ if(b==="ret") return {v:`<p class="meta pad" style="padding-top:48px">Henter …</p>`,t:"Fund",tab:"fund",loadEdit:c,mode};
         newReg(b==="art"?c:null); REG.mode=mode; }
-      return {v:V.reg(),t:REG.id?"Redigér fund":"Registrér et fund",tab:"fund",reg:true};
+      return {v:V.reg(),t:"Fund",tab:"fund",reg:true};
     }
     case "fund": if(b) return {v:V.find(b),t:"Fund",tab:"fund",find:b};
-      return {v:V.finds(),t:"Fund",tab:"fund",finds:true};
-    case "info": return {v:V.info(),t:"Sikkerhed og kilder",tab:"hjem",info:true};
-    default: return {v:V.home(),t:"",tab:"hjem",home:true};
+      return {v:V.finds(),root:true,tab:"fund",finds:true};
+    case "info": return {v:V.info(),t:"Start",tab:"hjem",info:true};
+    default: return {v:V.home(),root:true,tab:"hjem",home:true};
   }
 }
 let lastHash=null;
@@ -3319,10 +3407,10 @@ function render(keepScroll){
   const r=route();
   const y=window.scrollY;
   document.body.classList.toggle("kitchen",!!r.kitchen);
-  document.querySelector('meta[name="theme-color"]').content=r.kitchen?"#FFF3C4":"#FFFFFF";
-  app.innerHTML=`<div class="view">${r.v}</div><footer class="bfoot"><b>SVAMPEGUIDEN</b><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><span>Testversion · Opdateret ${UPDATED}</span></footer>`;
-  $("#ttl").textContent=r.t;
-  $("#back").style.visibility=r.home?"hidden":"visible";$("#bback").style.display=r.home?"none":"flex";$(".breg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
+  document.querySelector('meta[name="theme-color"]').content=r.kitchen?"#F6E8B1":"#FFFFFF";
+  app.innerHTML=`<div class="view">${r.v}</div><footer class="foot"><span class="wmk">Svampe</span><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><small>Testversion · Opdateret ${UPDATED}</small></footer>`;
+  $("#ttl").textContent=r.t||"";
+  $("#top").classList.toggle("root",!!r.root);
   $("#reg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
   document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("on",a.dataset.t===r.tab));
   initGalleries(app);
@@ -3333,6 +3421,7 @@ function render(keepScroll){
   if(r.reg) bindReg(app);
   if(r.loadEdit) editReg(r.loadEdit).then(ok=>{if(ok){REG.mode=r.mode;render()}else location.hash="#/fund"});
   if(r.list) bindFilters(app);
+  if(r.pair){const hd=$(".cmp-head",app),nm=$(".ab-names",app);if(hd&&nm&&"IntersectionObserver" in window){new IntersectionObserver(([e])=>hd.classList.toggle("show",!e.isIntersecting&&e.boundingClientRect.top<0)).observe(nm)}}
   if(r.info){
     const rs=$("#resetAll");if(rs)rs.onclick=async()=>{if(confirm("Slet alle fund, billeder, valgt område og quiz-resultater på denne enhed?")){await DB.clear().catch(()=>{});["omraade","omraader","quizBest","quizRounds","fund_migreret"].forEach(k=>{try{localStorage.removeItem("svampe."+k)}catch(e){}});await loadFinds();render()}};
     const pc=$("#precache");if(pc)pc.onclick=()=>precacheImages(pc);
@@ -3348,11 +3437,10 @@ function updBadge(){
   if(!b){b=document.createElement("span");b.className="n";a.appendChild(b)} b.textContent=n;
 }
 document.addEventListener("click",e=>{if(e.target.closest("[data-area]")){e.preventDefault();openArea()}});
-$("#bback").onclick=()=>$("#back").click();
 $("#back").onclick=()=>{if(history.length>1&&lastHashStack>0){history.back()}else location.hash="#/"};
 let lastHashStack=0;
 window.addEventListener("hashchange",()=>{lastHashStack++;const st=document.getElementById("stop");if(st)st.remove();render()});
-const topUpd=()=>{$("#top").classList.toggle("show",scrollY>$("#brand").offsetHeight-8)};window.addEventListener("scroll",topUpd,{passive:true});
+const topUpd=()=>{$("#top").classList.toggle("scrolled",scrollY>4)};window.addEventListener("scroll",topUpd,{passive:true});
 try{localStorage.removeItem("svampe.felt")}catch(e){}
 render();
 migrateOld().then(loadFinds).then(()=>{if(location.hash===""||location.hash==="#/"||location.hash.startsWith("#/arter"))render(true)});
