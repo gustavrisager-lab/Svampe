@@ -78,7 +78,8 @@ ul,ol{margin:0}
 .num{font:500 11px/1 var(--sans);font-variant-numeric:tabular-nums;letter-spacing:.04em;color:var(--grey)}
 .g{color:var(--grey)}
 .pad{padding-left:var(--g);padding-right:var(--g)}
-.arr{font:400 1.05em/1 var(--sans)}
+.arr{display:inline-block;flex:none;width:1.1em;height:1.1em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.arr path{vector-effect:non-scaling-stroke}
 
 /* ---------- piktogrammer: 24-gitter, 1,5 px linje, fyldt = det, der tales om ---------- */
 .pg{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round;flex:none;overflow:visible}
@@ -101,7 +102,7 @@ ul,ol{margin:0}
 #top.root #back,#top.root #ttl{display:none}
 #top.root #wm{flex:1}
 #top:not(.root) #wm{display:none}
-.pill{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 15px;border-radius:999px;background:var(--wash);color:var(--ink);font:600 11.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;height:37px;padding:0 17px;border-radius:999px;background:var(--wash);color:var(--ink);font:600 11.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
 #tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);box-shadow:0 -1px 0 var(--rule);padding-bottom:var(--sab);transition:background-color .4s}
 #tabs .in{max-width:620px;margin:0 auto;display:flex}
 #tabs a{position:relative;flex:1;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-decoration:none;color:var(--grey)}
@@ -111,9 +112,10 @@ ul,ol{margin:0}
 #tabs a.on span{font-weight:700}
 #tabs a.on::before{content:"";position:absolute;top:0;left:50%;width:20px;height:2px;margin-left:-10px;background:var(--ink)}
 #tabs a .n{position:absolute;top:7px;left:calc(50% + 7px);min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:var(--ink);color:#fff;font:700 9.5px/15px var(--sans);text-align:center}
-body{padding-bottom:calc(var(--tab) + var(--sab))}
+#navspace{height:calc(var(--navh,calc(var(--tab) + var(--sab))) + 12px)}
+body.kitchen #navspace{background:var(--bg)}
 main{max-width:620px;margin:0 auto}
-.view{animation:vin .18s ease-out;min-height:60vh}
+.view{animation:vin .18s ease-out;min-height:60vh;min-height:60svh}
 @keyframes vin{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.view,body{animation:none;transition:none}}
 .foot{margin-top:var(--s9);background:var(--chestnut);color:#fff;padding:var(--s6) var(--g) var(--s6)}
@@ -308,7 +310,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .home-area>.lbl{color:var(--grey)}
 .area-name{display:block;width:100%;min-height:48px;font:inherit;letter-spacing:inherit;text-align:left}
 .area-name .nw{white-space:nowrap}
-.area-chev{width:.34em;height:.34em;margin-left:.1em;vertical-align:.12em;stroke-width:1.5}
+.area-chev{width:.44em;height:.44em;margin-left:.16em;vertical-align:.06em;stroke-width:1.6}
 .area-chev path{vector-effect:non-scaling-stroke}
 .home-area .meta{margin-top:var(--s3);font-size:14px}
 .num.rust{color:var(--rust);font-weight:700}
@@ -506,9 +508,9 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .area-h .meta{margin-top:var(--s2)}
 .area-h .cov{margin-top:var(--s4);font-size:13px;color:var(--grey);max-width:32em}
 body.noscroll{overflow:hidden}
-#areaov{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;overflow-y:auto;background:#fff;padding:calc(var(--sat) + 4px) 0 calc(var(--sab) + 12px);animation:vin .2s ease-out}
+#areaov{position:fixed;inset:0;height:100vh;height:100dvh;z-index:70;display:flex;flex-direction:column;overflow-y:auto;background:#fff;padding:calc(var(--sat) + 4px) 0 calc(var(--sab) + 12px);animation:vin .2s ease-out}
 #areaov>*{flex-shrink:0}
-#areaov>#map{flex:1 0 180px}
+#areaov>#map{flex:1 0 260px}
 .ov-top{display:flex;justify-content:space-between;align-items:center;height:48px;padding:0 8px 0 var(--g)}
 .ov-top .lbl{color:var(--grey)}
 .ov-x{display:flex;align-items:center;justify-content:center;width:44px;height:44px}
@@ -516,12 +518,12 @@ body.noscroll{overflow:hidden}
 .ov-q h1{font:400 30px/1.06 var(--serif);letter-spacing:-.01em}
 .ov-q>.lbl{display:block;margin-bottom:10px;color:var(--grey)}
 .ov-q p{margin-top:8px;color:var(--ink-2)}
-.ov-search{display:flex;align-items:center;margin:0 var(--g);border-bottom:1px solid var(--ink)}
+.ov-search{display:flex;align-items:center;margin:4px var(--g) 0;border-bottom:1px solid var(--ink)}
 .ov-search input{flex:1;min-width:0;height:48px;padding:0;border:0;border-radius:0;background:none;color:var(--ink);font:17px var(--sans);-webkit-appearance:none}
 .ov-search input::placeholder{color:var(--grey)}
 .ov-search button{width:44px;height:44px;margin-right:-10px;font-size:20px}
 .ov-pos{margin:4px var(--g) 0;font-size:14px;color:var(--ink-2)}
-.ov-res{max-height:34vh;overflow:auto;margin:0 var(--g)}
+.ov-res{max-height:34vh;max-height:34svh;overflow:auto;margin:0 var(--g)}
 .ov-res p{padding:10px 0;font-size:14px;color:var(--grey)}
 .ov-res>button,.presets button{display:block;width:100%;padding:11px 0;border-bottom:1px solid var(--rule)}
 .ov-res b,.presets b{display:block;font-weight:500}
@@ -533,11 +535,11 @@ body.noscroll{overflow:hidden}
 .map-msg .lbl{display:block;color:var(--grey)}
 .pin{background:var(--ink);border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px var(--ink)}
 .leaflet-control-attribution{font-size:9px!important;background:rgba(255,255,255,.75)!important}
-.ov-bottom{padding:var(--s4) var(--g) 0}
+.ov-bottom{padding:var(--s3) var(--g) 0}
 .ov-sel .lbl{color:var(--grey)}
-.ov-sel b{display:block;margin-top:6px;font:400 clamp(34px,10vw,44px)/1 var(--serif);letter-spacing:-.02em;overflow-wrap:anywhere}
-.ov-sel span{display:block;margin-top:6px;font-size:13px;color:var(--grey)}
-.ov-rad{display:grid;grid-template-columns:1fr 1fr;margin-top:var(--s4);border:1px solid var(--ink);border-radius:4px;overflow:hidden}
+.ov-sel b{display:block;margin-top:4px;font:400 30px/1.05 var(--serif);letter-spacing:-.02em;overflow-wrap:anywhere}
+.ov-sel span{display:block;margin-top:3px;font-size:13px;color:var(--grey)}
+.ov-rad{display:grid;grid-template-columns:1fr 1fr;margin-top:var(--s3);border:1px solid var(--ink);border-radius:4px;overflow:hidden}
 .ov-rad button{min-height:52px;padding:8px 12px;font:600 11px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase}
 .ov-rad button+button{border-left:1px solid var(--ink)}
 .ov-rad button small{display:block;margin-top:3px;font:400 13px/1.2 var(--sans);letter-spacing:0;text-transform:none;color:var(--grey)}
@@ -604,7 +606,7 @@ body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
 
 /* ---------- lysboks ---------- */
 #lb{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;justify-content:center;background:#0E0E0E}
-#lb img{width:100%;max-height:78vh;object-fit:contain}
+#lb img{width:100%;max-height:78vh;max-height:78dvh;object-fit:contain}
 #lb .c{padding:14px var(--g);color:#EAEAEA;font-size:15px}
 #lb .c small{display:block;margin-top:6px;font-size:11px;color:#9A9A9A}
 #lb button{position:absolute;top:calc(var(--sat) + 10px);right:10px;width:48px;height:48px;color:#fff;font:300 30px/1 var(--sans)}
@@ -625,7 +627,9 @@ body.kitchen .sec{margin-top:48px}
 .ov-search input:focus{outline:none}
 .ov-search:focus-within{box-shadow:0 1px 0 var(--ink)}
 .ov-search input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
-@media (max-height:700px){#areaov>#map{flex-basis:140px;min-height:140px}.ov-q h1{font-size:26px}.ov-bottom{padding-top:var(--s3)}}
+@media (max-height:700px){#areaov>#map{flex-basis:200px;min-height:200px}}
+.hm-go .arr,.flt-h .arr{align-self:center}
+.more a,.to-kitchen .row,.hm-now .row{align-items:center}
 
 </style>
 
@@ -638,6 +642,7 @@ body.kitchen .sec{margin-top:48px}
   <a id="reg" class="pill" href="#/registrer" aria-label="Registrér et fund">+ Fund</a>
 </div></header>
 <main id="app"></main>
+<div id="navspace" aria-hidden="true"></div>
 <nav id="tabs" aria-label="Hovedmenu"><div class="in">
   <a href="#/" data-t="hjem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10.5 12 4.5l7.5 6V19.5h-15z"/><path d="M10 19.5v-5h4v5"/></svg><span>Start</span></a>
   <a href="#/arter" data-t="arter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5C3.5 6.5 7.5 3.5 12 3.5S20.5 6.5 20.5 11.5Z"/><path d="M10.5 11.5V20.5H13.5V11.5"/></svg><span>Arter</span></a>
@@ -2411,7 +2416,8 @@ function stInfo(s){
 function statusTag(s,c){const x=stInfo(s),k=c==null?x.c:c;return k?`<span class="tag ${k}">${x.t}</span>`:`<span class="st-plain">${x.t}</span>`}
 const stTxt=s=>statusTag(s);
 function monthsHTML(m){const now=new Date().getMonth()+1;return `<div class="months" role="img" aria-label="Sæson: ${m.map(x=>MONN[x-1]).join(", ")}">${MONTHS.map((l,i)=>`<span class="${m.includes(i+1)?"on":""}${now===i+1?" now":""}">${l}</span>`).join("")}</div>`}
-const arrow=`<span class="arr" aria-hidden="true">→</span>`;
+/* Én pil: tegnet på samme 24-gitter og med samme linje som piktogrammerne */
+const arrow=`<svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12H19.5M13.5 6L19.5 12L13.5 18"/></svg>`;
 
 /* =====================================================================
    PIKTOGRAMMER — SVAMPEGUIDENs botaniske alfabet.
@@ -3081,7 +3087,6 @@ function drawArea(){
   if(AOV.step==="map"){
     const rec=LS.get("omraader",[]).filter(x=>x.name!==d.name).slice(0,4);
     el.innerHTML=`<div class="ov-top"><span class="lbl">Vælg område</span><button class="ov-x" aria-label="Luk">${XICON}</button></div>
-    <div class="ov-q"><h1>Hvor skal du på svampetur?</h1></div>
     <form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Søg efter et sted"><button aria-label="Søg">${arrow}</button></form>
     <button id="myPos" class="txt-link ov-pos">Brug min position</button>
     <div class="ov-res"></div>
@@ -3483,6 +3488,8 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-area]")){e.prev
 $("#back").onclick=()=>{if(history.length>1&&lastHashStack>0){history.back()}else location.hash="#/"};
 let lastHashStack=0;
 window.addEventListener("hashchange",()=>{lastHashStack++;const st=document.getElementById("stop");if(st)st.remove();render()});
+/* Bundafstand måles fra den faktiske navigation (inkl. safe area), ikke gættes */
+const navH=()=>document.documentElement.style.setProperty("--navh",$("#tabs").getBoundingClientRect().height+"px");navH();window.addEventListener("resize",navH);if(window.visualViewport)visualViewport.addEventListener("resize",navH);
 const topUpd=()=>{$("#top").classList.toggle("scrolled",scrollY>4)};window.addEventListener("scroll",topUpd,{passive:true});
 try{localStorage.removeItem("svampe.felt")}catch(e){}
 render();

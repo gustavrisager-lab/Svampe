@@ -96,7 +96,6 @@ function drawArea(){
   if(AOV.step==="map"){
     const rec=LS.get("omraader",[]).filter(x=>x.name!==d.name).slice(0,4);
     el.innerHTML=`<div class="ov-top"><span class="lbl">Vælg område</span><button class="ov-x" aria-label="Luk">${XICON}</button></div>
-    <div class="ov-q"><h1>Hvor skal du på svampetur?</h1></div>
     <form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Søg efter et sted"><button aria-label="Søg">${arrow}</button></form>
     <button id="myPos" class="txt-link ov-pos">Brug min position</button>
     <div class="ov-res"></div>
@@ -498,6 +497,8 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-area]")){e.prev
 $("#back").onclick=()=>{if(history.length>1&&lastHashStack>0){history.back()}else location.hash="#/"};
 let lastHashStack=0;
 window.addEventListener("hashchange",()=>{lastHashStack++;const st=document.getElementById("stop");if(st)st.remove();render()});
+/* Bundafstand måles fra den faktiske navigation (inkl. safe area), ikke gættes */
+const navH=()=>document.documentElement.style.setProperty("--navh",$("#tabs").getBoundingClientRect().height+"px");navH();window.addEventListener("resize",navH);if(window.visualViewport)visualViewport.addEventListener("resize",navH);
 const topUpd=()=>{$("#top").classList.toggle("scrolled",scrollY>4)};window.addEventListener("scroll",topUpd,{passive:true});
 try{localStorage.removeItem("svampe.felt")}catch(e){}
 render();
