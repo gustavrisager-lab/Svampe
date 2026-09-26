@@ -55,7 +55,8 @@ function stInfo(s){
 function statusTag(s,c){const x=stInfo(s),k=c==null?x.c:c;return k?`<span class="tag ${k}">${x.t}</span>`:`<span class="st-plain">${x.t}</span>`}
 const stTxt=s=>statusTag(s);
 function monthsHTML(m){const now=new Date().getMonth()+1;return `<div class="months" role="img" aria-label="Sæson: ${m.map(x=>MONN[x-1]).join(", ")}">${MONTHS.map((l,i)=>`<span class="${m.includes(i+1)?"on":""}${now===i+1?" now":""}">${l}</span>`).join("")}</div>`}
-const arrow=`<span class="arr" aria-hidden="true">→</span>`;
+/* Én pil: tegnet på samme 24-gitter og med samme linje som piktogrammerne */
+const arrow=`<svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12H19.5M13.5 6L19.5 12L13.5 18"/></svg>`;
 
 /* =====================================================================
    PIKTOGRAMMER — SVAMPEGUIDENs botaniske alfabet.
