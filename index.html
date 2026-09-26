@@ -863,7 +863,7 @@ a.btn[href^="#/registrer/ret"]::before{display:none}
   <a href="#/" data-t="hjem"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V20h-5v-5H9v5H4z"/></svg><span>Start</span></a>
   <a href="#/arter" data-t="arter"><svg viewBox="0 0 24 24"><path d="M3 11.5C3 6.8 7 4 12 4s9 2.8 9 7.5z"/><path d="M10 11.5V20h4v-8.5"/></svg><span>Arter</span></a>
   <a href="#/forskelle" data-t="forskelle"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="7.5" height="14"/><rect x="13.5" y="5" width="7.5" height="14"/></svg><span>Forskel</span></a>
-  <a href="#/noegle" data-t="noegle"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></svg><span>Nøgle</span></a>
+  <a href="#/noegle" data-t="noegle"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></svg><span>Undersøg</span></a>
   <a href="#/fund" data-t="fund"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>Fund</span></a>
 </div></nav>
 
@@ -2717,7 +2717,7 @@ V.home=()=>{
     <div class="hm-ph">${top.map(x=>phHTML(photo(x.s.id,"typisk")||photo(x.s.id),"",{ann:false,thumb:true})).join("")}</div><span class="arr">→</span></a>
   <div class="home-choices">
   <a class="choice" href="#/arter/godt"><div><h2>SPISESVAMPE</h2><p>Og hvad de kan forveksles med.</p></div>${phHTML(photo("kantarel","under")||photo("kantarel"),"",{ann:false,thumb:true})}</a>
-  <a class="choice" href="#/noegle"><div><h2>HVAD SER DU?</h2><p>Svar på et par spørgsmål om det, du kan se.</p></div>${phHTML(photo("karljohan","under")||photo("karljohan"),"",{ann:false,thumb:true})}</a>
+  <a class="choice" href="#/noegle"><div><h2>KIG NÆRMERE</h2><p>Se efter det, der skiller arterne ad – trin for trin.</p></div>${phHTML(photo("karljohan","under")||photo("karljohan"),"",{ann:false,thumb:true})}</a>
   <a class="choice warn" href="#/arter/pas"><div><h2>PAS PÅ</h2><p>Giftige arter og de klassiske forvekslinger.</p></div>${phHTML(photo("gron","basis")||photo("gron"),"",{ann:false,thumb:true})}</a>
   </div>
   <div class="pad home-reg"><a class="btn fill wide" href="#/registrer">+ Registrér en svamp</a></div>
@@ -2756,7 +2756,7 @@ V.lesson=()=>{
       <p class="ex">Findes fx hos: ${l.ex.map(id=>`<a href="#/art/${id}">${S[id].da}</a>`).join(", ")}</p>
     </section>`).join("")}
     <section class="les-card"><h2>Husk</h2><p class="t">Se på <b>undersiden</b>. Se på <b>stokken</b>. Grav <b>basis</b> fri. Se på <b>voksestedet</b>. Og smag aldrig på en svamp, du ikke kender.</p>
-    <div style="display:flex;gap:8px;margin-top:18px"><a class="btn fill grow" href="#/quiz">Test dig selv</a><a class="btn grow" href="#/noegle">Hvad ser du?</a></div></section></div>
+    <div style="display:flex;gap:8px;margin-top:18px"><a class="btn fill grow" href="#/quiz">Test dig selv</a><a class="btn grow" href="#/noegle">Kig nærmere</a></div></section></div>
     ${safety()}`;
 };
 function photoKey(p){for(const id in PH){const i=PH[id].indexOf(p);if(i>=0)return id+":"+i}return null}
@@ -2911,7 +2911,7 @@ V.key=()=>{
     const ic=icon(qid,v); const sw=swatch[v]&&(qid==="farve"||qid==="pore");
     return `<button class="opt" data-v="${v}">${ic?`<span class="ic">${ic}</span>`:sw?`<span class="ic" style="background:${swatch[v]}"></span>`:""}<span class="tx"><b>${l}</b>${h?`<small>${h}</small>`:""}</span></button>`}).join("");
   const rowStyle=!q.o.some(([v])=>icon(qid,v))&&!(qid==="farve"||qid==="pore");
-  return `<div class="key-top"><span class="lbl dim">Hvad ser du? · ${K.step+1}/${total}</span>${K.step?`<button class="lbl" id="kRestart" style="height:36px">Start forfra</button>`:""}</div>
+  return `<div class="key-top"><span class="lbl dim">Kig nærmere · ${K.step+1}/${total}</span>${K.step?`<button class="lbl" id="kRestart" style="height:36px">Start forfra</button>`:""}</div>
   <div class="key-prog">${Array.from({length:total},(_,i)=>`<i class="${i<=K.step?"on":""}"></i>`).join("")}</div>
   <div class="key-q"><h1>${q.t}</h1><p class="x-more">${q.h}</p></div>
   <div class="opts ${rowStyle?"one":""}">${opts}<button class="opt dk" data-v="vedikke"><b>Ved ikke</b></button></div>
@@ -3310,7 +3310,7 @@ V.reg=()=>{
   }
   if(REG.step===4){
     const q=(key)=>{const d=OBS[key],v=REG.obs[key];return `<section class="rg-obs"><h2>${d.t}</h2><div class="rg-chips ${key==="farve"?"sw":""}">${d.o.map(([o,l])=>`<button data-k="${key}" data-v="${o}" class="${(d.multi?(v||[]).includes(o):v===o)?"on":""}">${key==="farve"?`<i style="background:${SWATCH[o]}"></i>`:""}${l}</button>`).join("")}<button data-k="${key}" data-v="" class="dk ${(d.multi?!(v||[]).length:!v)?"on":""}">Ved ikke</button></div></section>`};
-    return `${top}<div class="rg-q"><span class="rg-n">05</span><h1>Hvad ser du?</h1><p class="dim">Kun det, du faktisk kan se. Spring over, hvis du er i tvivl.</p></div>
+    return `${top}<div class="rg-q"><span class="rg-n">05</span><h1>Se efter</h1><p class="dim">Kun det, du faktisk kan se. Spring over, hvis du er i tvivl.</p></div>
       ${q("under")}${q("trees")}${q("sted")}${q("farve")}
       <div class="rg-act"><button class="btn grow" id="rgNext">Spring over</button><button class="btn fill grow" id="rgNext2">Videre →</button></div>`;
   }
@@ -3434,7 +3434,7 @@ V.omraade=()=>{
   ${areaHead(a)}
   <div class="as-grid">${top.map(card).join("")}</div>
   ${russula()}
-  <div class="sec" style="display:flex;gap:8px"><a class="btn fill grow" href="#/noegle">Hvad ser du?</a><a class="btn grow" href="#/arter">Alle arter</a></div>
+  <div class="sec" style="display:flex;gap:8px"><a class="btn fill grow" href="#/noegle">Kig nærmere</a><a class="btn grow" href="#/arter">Alle arter</a></div>
   ${safety()}`;
 };
 
@@ -3520,7 +3520,7 @@ function route(){
       return {v:V.species(b),t:S[b]?S[b].da:"",tab:"arter",sp:b};
     case "forskelle": return {v:V.pairs(),t:"Se forskellen",tab:"forskelle"};
     case "forskel": return {v:V.pair(b),t:"Se forskellen",tab:"forskelle"};
-    case "noegle": return {v:V.key(),t:"Hvad ser du?",tab:"noegle",key:true};
+    case "noegle": return {v:V.key(),t:"Kig nærmere",tab:"noegle",key:true};
     case "quiz": return {v:V.quiz(),t:"Quiz",tab:"hjem",quiz:true};
     case "registrer": {
       const mode=b==="ret"?"ret:"+c:b==="art"?"art:"+c:"ny";
