@@ -1,9 +1,21 @@
-# Svampe · Asserbo
+# Svampe – en visuel feltguide
 
-En visuel feltguide til svampe i nåleskoven ved Asserbo (Nordsjælland, sidst i september).
+En mobil feltguide til svampe: **sted → observation → art → forskel → dokumentation → køkken.**
+Den lærer dig at *se* svampe. Den bestemmer dem ikke.
 
-Hele guiden er én selvstændig fil: `index.html` (HTML, CSS, JavaScript og indlejrede fotos). Den virker offline, når den først er åbnet.
+Statisk side til GitHub Pages – ingen build, ingen konti, ingen API-nøgler.
 
-**Vigtigt:** Guiden er til at lære at se forskelle. Den kan ikke afgøre, om en svamp er sikker at spise. Spis kun svampe, som er sikkert bestemt af en person med den nødvendige viden. Giftlinjen: 82 12 12 12.
+## Filer
+- `index.html` – hele appen (HTML, CSS, JS, artsdata, gastronomi, udbredelsesgitter)
+- `img/` – kontrollerede fotos (800×600) · `img/t/` – miniaturer (400×300)
+- `sw.js` – service worker (offline) · `manifest.webmanifest`, `icons/` – hjemmeskærm
 
-Fotos: iNaturalist-observationer under Creative Commons-licenser – se krediteringer under "Sikkerhed" i guiden.
+## Privatliv
+Fund, fotos og valgt område gemmes kun på enheden (IndexedDB / localStorage). Intet uploades.
+Kort: © OpenStreetMap-bidragydere (Leaflet via cdnjs). Stedsøgning: Nominatim.
+
+## Sikkerhed
+Fotos og digitale nøgler kan ikke afgøre, om en svamp er sikker at spise. Spis kun svampe, der er sikkert
+bestemt af en person med den nødvendige viden. Giftlinjen: 82 12 12 12.
+
+Fotos: iNaturalist-observationer (research grade) under Creative Commons – krediteret i appen under "Om guiden".
