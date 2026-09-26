@@ -56,6 +56,7 @@ function statusTag(s,c){const x=stInfo(s),k=c==null?x.c:c;return k?`<span class=
 const stTxt=s=>statusTag(s);
 function monthsHTML(m){const now=new Date().getMonth()+1;return `<div class="months" role="img" aria-label="Sæson: ${m.map(x=>MONN[x-1]).join(", ")}">${MONTHS.map((l,i)=>`<span class="${m.includes(i+1)?"on":""}${now===i+1?" now":""}">${l}</span>`).join("")}</div>`}
 /* Én pil: tegnet på samme 24-gitter og med samme linje som piktogrammerne */
+const VS=`<svg class="arr vs" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12H20.5M8.5 6.5L3 12L8.5 17.5M15.5 6.5L21 12L15.5 17.5"/></svg>`;
 const arrow=`<svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12H19.5M13.5 6L19.5 12L13.5 18"/></svg>`;
 
 /* =====================================================================
@@ -139,7 +140,7 @@ function gallery(id,list){
   const ix=list.map(p=>all.indexOf(p));
   return `<div class="gal" data-sp="${id}" data-ix="${ix.join(",")}">
     <div class="gal-track">${list.map((x,i)=>`<div class="slide">${phHTML(x,"",{lb:id+":"+ix[i],defer:i>0})}</div>`).join("")}</div>
-    <div class="arr-btn l"><button aria-label="Forrige billede">‹</button></div><div class="arr-btn r"><button aria-label="Næste billede">›</button></div>
+    <div class="arr-btn l"><button aria-label="Forrige billede">${arrow.replace('class="arr"','class="arr back"')}</button></div><div class="arr-btn r"><button aria-label="Næste billede">${arrow}</button></div>
     <div class="gal-meta"><span class="lbl v"></span><span class="gal-n"></span><p class="cap"></p></div>
     <p class="credit"></p>
   </div>`;
@@ -183,7 +184,7 @@ function ixRow(s,o={}){
 }
 const ixList=(l,o={})=>`<div class="ix">${l.map((s,i)=>ixRow(s,o.num?{...o,n:nn(i+1)}:o)).join("")}</div>`;
 function pairItem(p){const a=S[p.a],b=S[p.b],pa=photo(a.id,"typisk")||photo(a.id),pb=photo(b.id,"typisk")||photo(b.id),both=pa&&pb;
-  return `<a href="#/forskel/${p.id}"${both?"":` class="txt-only"`}>${both?`<div class="ab">${phHTML(pa,"",{ann:false,thumb:true})}${phHTML(pb,"",{ann:false,thumb:true})}</div>`:""}<span class="t"${both?"":` style="padding:0"`}><b class="nm">${a.da}<span class="vs">↔</span>${b.da}</b><span class="q">${p.q}${arrow}</span></span></a>`}
+  return `<a href="#/forskel/${p.id}"${both?"":` class="txt-only"`}>${both?`<div class="ab">${phHTML(pa,"",{ann:false,thumb:true})}${phHTML(pb,"",{ann:false,thumb:true})}</div>`:""}<span class="t"${both?"":` style="padding:0"`}><b class="nm">${a.da}${VS}${b.da}</b><span class="q">${p.q}${arrow}</span></span></a>`}
 const pairList=l=>`<div class="pl">${l.map(pairItem).join("")}</div>`;
 function russula(){return `<aside class="note"><span class="lbl">Skørhatte og mælkehatte</span><p>Du vil møde mange skørhatte (<i>Russula</i>). Kødet knækker som kridt, og der kommer ingen mælk. Der er mange arter, flere er skarpe eller giftige, og ingen er med i guiden. Mælkehatte ligner dem, men bløder mælk, når du brækker en lamel.</p></aside>`}
 
