@@ -193,8 +193,9 @@ async function migrateOld(){
 const SLOTS=[["hele","Hele svampen","Tag den, hvor den står. Få gerne skovbunden og træerne omkring med.",""],
   ["hat","Hatten","Tag hatten ovenfra. Få farve, overflade og form med.",""],
   ["under","Undersiden","Fotografér tydeligt under hatten.","Se efter lameller, rør, ribber eller pigge."],
-  ["stok","Stok + basis","Få hele stokken med – også helt ned til basis.","Stokbasis kan være afgørende for bestemmelsen. Fotografér gerne svampen, hvor den står, før du plukker den – og grav basis fri."]];
-const SLOTN={hele:"Hele",hat:"Hat",under:"Underside",stok:"Stok"};
+  ["stok","Stok og basis","Få hele stokken med – også helt ned til basis.","Stokbasis kan være afgørende for bestemmelsen. Fotografér gerne svampen, hvor den står, før du plukker den – og grav basis fri."]];
+const SLOTN={hele:"Hele svampen",hat:"Hatten",under:"Undersiden",stok:"Stok og basis"};
+const SLOTI={hele:"hele",hat:"hat",under:"under",stok:"basis"};
 const OBS={
   under:{t:"Hvad er der under hatten?",multi:false,o:[["lameller","Lameller"],["ror","Rør / porer"],["ribber","Ribber / folder"],["pigge","Pigge"],["andet","Anden form"]]},
   trees:{t:"Hvilke træer står den ved?",multi:true,o:[["fyr","Fyr"],["gran","Gran"],["birk","Birk"],["lov","Andet løvtræ"],["bland","Blandskov"]]},
@@ -223,31 +224,31 @@ let REG=null;
 function newReg(guess){REG={id:null,created:null,step:0,ph:{},prev:{},obs:{trees:[],sted:[]},ident:{status:guess?"bud":"ukendt",species:guess||null,by:""},note:"",busy:false}}
 async function editReg(id){const f=await DB.get(id);if(!f)return false;newReg();Object.assign(REG,{id:f.id,created:f.created,obs:{trees:[],sted:[],...f.obs},ident:{...f.ident},note:f.note||"",step:4,area:f.area,legacyPh:f.photos||{}});
   for(const k in (f.photos||{})){REG.prev[k]=objURL(f.photos[k].thumb);REG.ph[k]={keep:true,...f.photos[k]}}return true}
-function regProg(){const lab=["Hele","Hat","Under","Stok","Se","Gem"];
-  return `<ol class="rg-prog">${lab.map((l,i)=>`<li class="${i===REG.step?"cur":""}${i<4&&REG.ph[SLOTS[i][0]]?" done":""}"><button data-go="${i}"><span>${i+1}</span>${l}${i<4&&REG.ph[SLOTS[i][0]]?" ✓":""}</button></li>`).join("")}</ol>`}
+function regProg(){const lab=["Hele svampen","Hatten","Undersiden","Stok og basis","Se efter","Gem"];
+  return `<ol class="rg-prog">${lab.map((l,i)=>`<li class="${i===REG.step?"cur":""}${i<4&&REG.ph[SLOTS[i][0]]?" done":""}"><button data-go="${i}" aria-label="${i+1}: ${l}">${nn(i+1)}</button></li>`).join("")}</ol>`}
 V.reg=()=>{
   if(!REG) newReg();
-  const top=`<div class="rg-top"><span class="lbl dim">${REG.id?"Redigér fund":"Registrér et fund"}</span><button id="rgCancel" class="lbl">Annullér</button></div>${regProg()}`;
+  const top=`<div class="rg-top"><span class="lbl dim">${REG.id?"Redigér fund":"Registrér et fund"}</span><button id="rgCancel">Annullér</button></div>${regProg()}`;
   if(REG.step<4){
     const [k,t,ins,help]=SLOTS[REG.step], pv=REG.prev[k];
-    return `${top}<div class="rg-q"><span class="rg-n">0${REG.step+1}</span><h1>${t}</h1><p>${ins}</p>${help?`<p class="dim">${help}</p>`:""}</div>
-    <div class="rg-shot">${pv?`<img src="${pv}" alt="">`:`<label class="rg-cam"><input type="file" accept="image/*" capture="environment" data-slot="${k}">${pg("kamera",52)}<b>${REG.busy?"Behandler …":"Tag foto"}</b></label>`}</div>
-    <div class="rg-act">${pv?`<label class="btn grow"><input type="file" accept="image/*" capture="environment" data-slot="${k}">Tag igen</label><button class="btn fill grow" id="rgNext">Brug foto →</button>`
+    return `${top}<div class="rg-q"><div class="lock-n"><span class="num">${nn(REG.step+1)}</span>${pg(SLOTI[k],22)}<span class="lbl">${SLOTN[k]}</span></div><h1 class="t-state">${t}</h1><p>${ins}</p>${help?`<p class="dim">${help}</p>`:""}</div>
+    <div class="rg-shot">${pv?`<img src="${pv}" alt="">`:`<label class="rg-cam"><input type="file" accept="image/*" capture="environment" data-slot="${k}">${pg("kamera",48)}<b>${REG.busy?"Behandler …":"Tag foto"}</b></label>`}</div>
+    <div class="rg-act">${pv?`<label class="btn grow"><input type="file" accept="image/*" capture="environment" data-slot="${k}">Tag igen</label><button class="btn fill grow" id="rgNext">Brug foto</button>`
       :`<label class="btn grow"><input type="file" accept="image/*" data-slot="${k}">Vælg fra billeder</label><button class="btn grow" id="rgNext">Spring over</button>`}</div>
     <p class="rg-note">Billeder gemmes kun på denne enhed.</p>`;
   }
   if(REG.step===4){
-    const q=(key)=>{const d=OBS[key],v=REG.obs[key];return `<section class="rg-obs"><h2 class="sh">${d.t}</h2><div class="rg-chips ${key==="farve"?"sw":""}">${d.o.map(([o,l])=>`<button data-k="${key}" data-v="${o}" class="${(d.multi?(v||[]).includes(o):v===o)?"on":""}">${key==="farve"?`<i style="background:${SWATCH[o]}"></i>`:key==="under"?pg(o==="andet"?"form":o,22,l):""}${l}</button>`).join("")}<button data-k="${key}" data-v="" class="dk ${(d.multi?!(v||[]).length:!v)?"on":""}">Ved ikke</button></div></section>`};
-    return `${top}<div class="rg-q"><span class="rg-n">05</span><h1>Se efter</h1><p class="dim">Kun det, du faktisk kan se. Spring over, hvis du er i tvivl.</p></div>
+    const q=(key)=>{const d=OBS[key],v=REG.obs[key];return `<section class="rg-obs"><h2 class="sh">${d.t}</h2><div class="pills rg-chips">${d.o.map(([o,l])=>`<button data-k="${key}" data-v="${o}" class="${(d.multi?(v||[]).includes(o):v===o)?"on":""}">${key==="farve"?`<i style="background:${SWATCH[o]}"></i>`:key==="under"?pg(o==="andet"?"form":o,22,l):""}${l}</button>`).join("")}<button data-k="${key}" data-v="" class="dk ${(d.multi?!(v||[]).length:!v)?"on":""}">Ved ikke</button></div></section>`};
+    return `${top}<div class="rg-q"><div class="lock-n"><span class="num">05</span>${pg("under",22)}<span class="lbl">Se efter</span></div><h1 class="t-state">Hvad ser du?</h1><p class="dim">Kun det, du faktisk kan se. Spring over, hvis du er i tvivl.</p></div>
       ${q("under")}${q("trees")}${q("sted")}${q("farve")}
-      <div class="rg-act"><button class="btn grow" id="rgNext">Spring over</button><button class="btn fill grow" id="rgNext2">Videre →</button></div>`;
+      <div class="rg-act"><button class="btn grow" id="rgNext">Spring over</button><button class="btn fill grow" id="rgNext2">Videre</button></div>`;
   }
   const u=REG.obs.under; const opts=SP.slice().sort((a,b)=>((b.under===u||b.underAlt===u)-(a.under===u||a.underAlt===u))||a.da.localeCompare(b.da,"da"));
   const sel=`<select id="rgSp"><option value="">Vælg art …</option>${u?`<optgroup label="Passer med undersiden">${opts.filter(s=>s.under===u||s.underAlt===u).map(s=>`<option value="${s.id}" ${REG.ident.species===s.id?"selected":""}>${s.da}</option>`).join("")}</optgroup><optgroup label="Øvrige arter">`:""}${opts.filter(s=>!u||!(s.under===u||s.underAlt===u)).map(s=>`<option value="${s.id}" ${REG.ident.species===s.id?"selected":""}>${s.da}</option>`).join("")}${u?"</optgroup>":""}</select>`;
   const st=REG.ident.status;
-  return `${top}<div class="rg-q"><span class="rg-n">06</span><h1>Hvad tror du, det er?</h1><p class="dim">Ukendt er et fint svar.</p></div>
+  return `${top}<div class="rg-q"><div class="lock-n"><span class="num">06</span><span class="lbl">Gem</span></div><h1 class="t-state">Hvad tror du, det er?</h1><p class="dim">Ukendt er et fint svar.</p></div>
     <div class="rg-id">
-      <button data-st="ukendt" class="${st==="ukendt"?"on":""}"><b>Ukendt</b><span>Helt i orden. Du har stadig set, fotograferet og noteret.</span></button>
+      <button data-st="ukendt" class="${st==="ukendt"?"on":""}"><b>Ukendt</b><span>Et gyldigt svar. Du har set, fotograferet og noteret.</span></button>
       <button data-st="bud" class="${st==="bud"?"on":""}"><b>Jeg tror, det er …</b><span>Dit eget bud – ikke en bestemmelse.</span></button>
       <button data-st="bestemt" class="${st==="bestemt"?"on":""}"><b>Bestemt af en kyndig</b><span>Fx jeres guide, der har set netop dette eksemplar.</span></button>
     </div>
@@ -256,7 +257,7 @@ V.reg=()=>{
     <div class="rg-field"><span class="lbl">Note</span><textarea id="rgNote" placeholder="Hvad så du? Duft, farveskift, antal …">${esc(REG.note)}</textarea></div>
     <div class="rg-field"><span class="lbl">Område</span><p>${esc((REG.area||area()).name)}</p></div>
     <p class="rg-note">Billeder og noter gemmes kun på denne enhed.</p>
-    <div class="rg-act"><button class="btn fill wide" id="rgSave">Gem fund</button></div>`;
+    <div class="rg-act"><button class="btn big" id="rgSave"><span class="bl">Gem fund</span>${arrow}</button></div>`;
 };
 function bindReg(root){
   $("#rgCancel",root).onclick=()=>{if(Object.keys(REG.ph).some(k=>!REG.ph[k].keep)&&!confirm("Kassér fotos og observationer?"))return;const back=REG.id?"#/fund/"+REG.id:"#/fund";REG=null;freeURLs();location.hash=back};
@@ -292,32 +293,33 @@ async function saveReg(){
 }
 
 /* ---------- FUND: notesbog ---------- */
-V.finds=()=>`${pageHead("Din notesbog","Fund","Det, du har set og fotograferet. Et fund er en observation – ikke en bestemmelse.")}
-  <div class="cta-wrap"><a class="btn big" href="#/registrer">${pg("kamera",24)}Registrér et fund</a></div>
-  <div id="fdList"><p class="ed pad">Henter …</p></div>
-  <p class="small pad">Billederne gemmes kun på denne enhed. Læg guiden på hjemmeskærmen, så gemmer Safari dine fund mere sikkert.</p>`;
+V.finds=()=>`${pageHead("","Fund","Det, du har set og fotograferet. Et fund er en observation – ikke en bestemmelse.")}
+  <div class="cta-wrap"><a class="btn big" href="#/registrer"><span class="bl">${pg("kamera",24)}Registrér et fund</span>${arrow}</a></div>
+  <div id="fdList"><p class="meta pad" style="padding-top:48px">Henter …</p></div>
+  <p class="meta pad" style="margin-top:32px">Billederne gemmes kun på denne enhed. Læg guiden på hjemmeskærmen, så gemmer Safari dine fund mere sikkert.</p>`;
 async function bindFinds(root){
   freeURLs(); const list=await loadFinds(); const box=$("#fdList",root); if(!box)return;
-  if(!list.length){box.innerHTML=`<p class="ed pad">Ingen fund endnu. Når du ser en svamp, så tag fire billeder og notér, hvad du ser. Du behøver ikke vide, hvad det er.</p>`;return}
+  if(!list.length){box.innerHTML=`<div class="empty-st">${pg("hele",48)}<p class="t-obs">Notesbogen er tom.</p><p class="intro">Når du ser en svamp, så tag fire billeder og notér, hvad du ser. Du behøver ikke vide, hvad det er.</p></div>`;return}
   let html="",last="";
-  for(const f of list){const dk=dayKey(f.created);if(dk!==last){if(last)html+=`</div>`;html+=`<div class="fd-day"><span class="lbl">${dayLabel(f.created)}</span><span class="lbl dim">${DAYN[new Date(f.created).getDay()]}</span></div><div class="fd-grid">`;last=dk}
-    const slot=["hele","hat","under","stok"].find(k=>f.photos&&f.photos[k]);const s=S[f.ident&&f.ident.species];
-    const img=slot?`<div class="ph"><img src="${objURL(f.photos[slot].thumb)}" alt=""></div>`:(s&&photo(s.id)?`<div class="ph guide">${`<img src="${photo(s.id).t}" alt="">`}<span>Guidefoto</span></div>`:`<div class="ph empty"><span>Intet foto</span></div>`);const ui=f.obs&&f.obs.under;
-    html+=`<a class="fd-card" href="#/fund/${f.id}">${img}<b class="${f.ident&&f.ident.status==="ukendt"?"unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span><span class="m">${ui?pg(ui==="andet"?"form":ui,16):""}${esc(obsLine(f.obs||{}))}</span></a>`}
+  for(const f of list){const dk=dayKey(f.created);if(dk!==last){if(last)html+=`</div>`;html+=`<div class="fd-day"><h2 class="t-obs">${dayLabel(f.created)}</h2><span class="lbl">${DAYN[new Date(f.created).getDay()]}</span></div><div class="ix">`;last=dk}
+    const slot=["hele","hat","under","stok"].find(k=>f.photos&&f.photos[k]);const ui=f.obs&&f.obs.under;const unk=!f.ident||f.ident.status==="ukendt";
+    const img=slot?`<div class="ph"><img src="${objURL(f.photos[slot].thumb)}" alt=""></div>`:`<div class="ph none">${pg(ui?(ui==="andet"?"form":ui):"hele",32)}</div>`;
+    html+=`<a href="#/fund/${f.id}">${img}<span class="t"><b class="nm${unk?" unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span>${obsLine(f.obs||{})?`<span class="m">${ui?pg(ui==="andet"?"form":ui,16):""}${esc(obsLine(f.obs||{}))}</span>`:""}</span></a>`}
   box.innerHTML=html+`</div>`;
 }
-V.find=(id)=>`<div id="fdDetail"><p class="ed pad">Henter …</p></div>`;
+V.find=(id)=>`<div id="fdDetail"><p class="meta pad" style="padding-top:48px">Henter …</p></div>`;
 async function bindFind(root,id){
   freeURLs();const f=await DB.get(id).catch(()=>null);const box=$("#fdDetail",root);if(!box)return;
-  if(!f){box.innerHTML=`<p class="ed pad">Fundet findes ikke længere.</p><div class="btn-row"><a class="btn" href="#/fund">Til fund</a></div>`;return}
+  if(!f){box.innerHTML=`<p class="t-obs pad" style="padding-top:48px">Fundet findes ikke længere.</p><div class="btn-row"><a class="btn" href="#/fund">Til fund</a></div>`;return}
   const s=S[f.ident&&f.ident.species], st=(f.ident||{}).status||"ukendt", d=new Date(f.created);
-  const slots=SLOTS.map(([k])=>{const p=f.photos&&f.photos[k];return `<figure class="fd-slot">${p?`<button class="ph" data-full="${k}"><img src="${objURL(p.thumb)}" alt=""></button>`:`<div class="ph empty"><span>–</span></div>`}<figcaption class="lbl">${SLOTN[k]}</figcaption></figure>`}).join("");
+  const slots=SLOTS.map(([k],i)=>{const p=f.photos&&f.photos[k];return `<figure class="fd-slot">${p?`<button class="ph" data-full="${k}"><img src="${objURL(p.thumb)}" alt=""></button>`:`<div class="ph none">${pg(SLOTI[k],28)}</div>`}<figcaption><span class="num">${nn(i+1)}</span><span class="lbl">${SLOTN[k]}</span></figcaption></figure>`}).join("");
   const row=(l,v,ic)=>v?`<div class="fd-row"><span class="lbl">${l}</span><p>${ic?pg(ic,20):""}${v}</p></div>`:"";
-  const idHTML=st==="ukendt"?`<p class="unk-big">Ukendt</p><p class="small">Et ubestemt fund er stadig et godt fund.</p>`
-    :st==="bud"?`<span class="lbl dim">Dit bud</span><p class="bud">${s?s.da:""}</p>`:`<span class="lbl">Bestemt af en kyndig${f.ident.by?" · "+esc(f.ident.by):""}</span><p class="bud">${s?s.da:""}</p>`;
+  const idHTML=st==="ukendt"?`<p class="lbl">Identifikation</p><p class="meta">Ubestemt. Et ukendt fund er stadig en observation.</p>`
+    :st==="bud"?`<p class="lbl">Identifikation</p><p class="meta">Dit eget bud – ikke en bestemmelse.</p>`:`<p class="lbl">Identifikation</p><p class="meta">Bestemt af en kyndig${f.ident.by?": "+esc(f.ident.by):""}.</p>`;
   const gastroOK=s&&typeof GASTRO!=="undefined"&&GASTRO[s.id]&&!s.noGastro;
-  box.innerHTML=`<header class="ph-head"><span class="lbl">Fund</span><h1 class="d${st==="ukendt"?" it":""}">${esc(identTitle(f))}</h1></header>
+  box.innerHTML=`<header class="ph-head"><p class="lbl">${d.getDate()}. ${MONN[d.getMonth()]} · ${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</p><h1 class="t-display"${st==="ukendt"?' style="font-style:italic"':""}>${esc(identTitle(f))}</h1></header>
     <div class="fd-slots">${slots}</div>
+    <div class="fd-id">${idHTML}</div>
     <div class="fd-rows">
       ${row("Fundet",`${d.getDate()}. ${MONN[d.getMonth()]} · ${hhmm(f.created)}`)}
       ${row("Område",f.area?esc(f.area.name):"")}
@@ -326,12 +328,11 @@ async function bindFind(root,id){
       ${row("Underside",f.obs.under?OBS.under.o.find(x=>x[0]===f.obs.under)[1]:"",f.obs.under?(f.obs.under==="andet"?"form":f.obs.under):null)}
       ${row("Hatfarve",f.obs.farve?OBS.farve.o.find(x=>x[0]===f.obs.farve)[1]:"","hat")}
       ${row("Note",f.note?esc(f.note).replace(/\n/g,"<br>"):"")}
-      <div class="fd-row"><span class="lbl">Identifikation</span><div>${idHTML}</div></div>
     </div>
-    ${s&&isDanger(s)?`<p class="danger"><b>${STATUS[s.st].t}.</b> ${s.danger||""}</p>`:""}
+    ${s&&isDanger(s)?`<p class="say danger"><b>${stInfo(s).t}.</b> ${s.danger||""}</p>`:""}
     <div class="btn-col"><button class="btn fill" id="fdCmp">Sammenlign med guiden</button><div class="btn-row in"><a class="btn" href="#/registrer/ret/${f.id}">Redigér</a>${navigator.canShare?`<button class="btn" id="fdShare">Del billeder</button>`:""}</div></div>
-    ${gastroOK?`${st!=="bestemt"?`<p class="danger"><b>Ikke sikkert bestemt.</b> Dit bud er ikke en bestemmelse. Spis ikke svampen, før en kyndig har bestemt netop dette eksemplar.</p>`:""}
-      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="lbl">Gastronomi</span><span class="row"><b class="d-m">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
+    ${gastroOK?`${st!=="bestemt"?`<p class="say"><b>Ikke sikkert bestemt.</b> Spis ikke svampen, før en kyndig har bestemt netop dette eksemplar.</p>`:""}
+      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="lbl">I køkkenet</span><span class="row"><b class="t-state">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
     <div class="btn-row"><button class="txt-link del" id="fdDel">Slet fund</button></div>`;
   box.querySelectorAll("[data-full]").forEach(b=>b.onclick=async()=>{const r=await DB.photo(f.id+":"+b.dataset.full);const u=r?objURL(r):$("img",b).src;showLB(u,`${SLOTN[b.dataset.full]} · ${esc(identTitle(f))}`,dayLabel(f.created)+" · "+hhmm(f.created))});
   $("#fdDel",box).onclick=async()=>{if(!confirm("Slet dette fund og dets billeder fra enheden?"))return;await DB.del(f.id);await loadFinds();location.hash="#/fund"};
@@ -348,34 +349,37 @@ async function bindFind(root,id){
 function showLB(src,cap,small){const lb=document.createElement("div");lb.id="lb";lb.innerHTML=`<button aria-label="Luk">×</button><img src="${src}" alt=""><div class="c">${cap}<small>${esc(small||"")}</small></div>`;lb.onclick=()=>lb.remove();document.body.appendChild(lb)}
 
 /* ---------- I SKOVEN NU ---------- */
-function areaHead(a){const cov=coverage(a);return `<div class="area-h"><h2 class="d">${esc(a.name)}</h2><p class="meta">${esc([a.region,areaLine(a)].filter(Boolean).join(" · "))||"Ingen skovtype valgt"}</p><button class="txt-link" data-area>Skift område ${arrow}</button>
-  ${cov!=="god"?`<p class="small">Guiden viser relevante arter fra sit eget artsbibliotek. ${cov==="ude"?"Området ligger uden for de fund, guiden bygger på, så":"Der er få fund herfra, så"} rækkefølgen bygger kun på årstiden og det, du har fortalt om skoven.</p>`:""}</div>`}
+function areaHead(a){const cov=coverage(a);return `<div class="area-h"><p class="lbl g">Område</p><h2 class="t-obs">${esc(a.name)}</h2><p class="meta">${esc([a.region,areaLine(a)].filter(Boolean).join(" · "))||"Ingen skovtype valgt"}</p><button class="txt-link" data-area>Skift område ${arrow}</button>
+  ${cov!=="god"?`<p class="cov">Guiden viser relevante arter fra sit eget artsbibliotek. ${cov==="ude"?"Området ligger uden for de fund, guiden bygger på, så":"Der er få fund herfra, så"} rækkefølgen bygger kun på årstiden og det, du har fortalt om skoven.</p>`:""}</div>`}
 V.omraade=()=>{
   const a=area(), top=watchList(a);
   return `${pageHead("I skoven nu · "+MONN[new Date().getMonth()],"Arter, du kan møde","Ud fra årstiden, skoven og hvor arterne er fundet før. Det siger, hvad du kan møde – ikke hvad du har fundet.")}
   ${areaHead(a)}
-  <div class="grid">${top.map((x,i)=>card(x.s,{n:String(i+1).padStart(2,"0"),spot:true})).join("")}</div>
+  <div style="height:32px"></div>${ixList(top.map(x=>x.s),{num:true,spot:true})}
   ${russula()}
-  <div class="btn-row"><a class="btn fill" href="#/noegle">Kig nærmere</a><a class="btn" href="#/arter">Alle arter</a></div>`;
+  <div class="btn-row"><a class="btn fill" href="#/noegle">Find en art</a><a class="btn" href="#/arter">Alle arter</a></div>`;
 };
 
 /* ---------- GASTRONOMI — lys smørgul: fra skoven ind i køkkenet ---------- */
 V.kitchen=(id)=>{
   const s=S[id], g=typeof GASTRO!=="undefined"&&GASTRO[id], t=g&&g.tags;
-  if(!s||!g||s.noGastro||!SPIS(s)) return `<p class="ed pad">Ingen køkkenbeskrivelse for denne art.</p>`;
+  if(!s||!g||s.noGastro||!SPIS(s)) return `<p class="t-obs pad" style="padding-top:48px">Ingen køkkenbeskrivelse for denne art.</p>`;
   const li=a=>a.map(x=>`<li>${x}</li>`).join("");
-  return `<header class="ph-head"><span class="lbl">I køkkenet</span><h1 class="d">${s.da}</h1><p class="la">${s.la}</p>
-    <p class="k-first">Gastronomien gælder arten – ikke dit konkrete fund. Kun efter sikker artsbestemmelse.</p></header>
-  ${t?`<dl class="k-meta">${t.s.length?`<dt class="lbl">Smag</dt><dd>${t.s.map(x=>GVOC.s[x]).join(" · ")}</dd>`:""}<dt class="lbl">Tekstur</dt><dd>${t.t.map(x=>GVOC.t[x]).join(" · ")}</dd></dl>`:""}
-  ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="k-why">${g.hvorfor}</p></section>`:""}
+  const W=o=>cap1(o.join(" · ").toLowerCase());
+  const im=photo(id,"kod")||photo(id,"typisk")||photo(id);
+  return `<header class="k-id"><p class="lbl">I køkkenet</p><h1 class="t-display">${s.da}</h1><p class="la">${s.la}</p>
+    <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund. Kun efter sikker artsbestemmelse.</p></header>
+  ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
+  ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="t-read">${g.hvorfor}</p></section>`:""}
+  ${im?`<figure class="k-img">${phHTML(im,s.da,{ann:false,lb:photoKey(im)})}<figcaption>${esc(im.c||"")}</figcaption></figure>`:""}
   <section class="sec">${sh("Hvad den kan")}<ul class="k-list">${li(g.bedstTil)}</ul></section>
-  <section class="sec">${sh("Behandling")}<ul class="k-list">${li(g.behandling)}</ul></section>
-  <section class="sec">${sh("Passer godt med")}<p class="k-pair">${g.passer.join(" · ")}</p><p class="small">${g.koekken.join(" · ")} køkken</p></section>
+  <section class="sec">${sh("Behandling")}<ol class="k-list">${li(g.behandling)}</ol></section>
+  <section class="sec">${sh("Passer godt med")}<p class="k-pair">${W(g.passer)}</p><p class="meta">${g.koekken.join(" · ")} køkken</p></section>
   <section class="sec">${sh("Tre måder")}
-    ${g.retter.map(r=>`<details class="k-dish"><summary><span class="k-n">${r.n}</span><span class="k-t"><span class="lbl">${r.type} · ${r.ker}</span><b class="nm">${r.titel}</b><span class="small">${[r.tid,r.til].filter(Boolean).join(" · ")}</span></span></summary>
+    ${g.retter.map(r=>`<details class="k-dish"><summary><span class="k-n">${r.n}</span><span class="k-t"><span class="lbl">${r.type} · ${r.ker}</span><b class="nm">${r.titel}</b><span class="meta">${[r.tid,r.til].filter(Boolean).join(" · ")}</span></span></summary>
       <div class="k-body"><h4 class="lbl">Ingredienser</h4><ul>${li(r.ingr)}</ul><h4 class="lbl">Fremgangsmåde</h4><ol>${li(r.metode)}</ol>${r.tip?`<p class="k-tip"><span class="lbl">Tip</span>${r.tip}</p>`:""}</div></details>`).join("")}
   </section>
-  <nav class="minor"><a href="#/art/${id}">Tilbage til ${lcName(s)}${arrow}</a></nav>`;
+  <a class="quiet" href="#/art/${id}">Tilbage til ${lcName(s)} ${arrow}</a>`;
 };
 
 /* ---------- offline: gem alle guidens billeder ---------- */
@@ -383,7 +387,7 @@ function precacheImages(btn){
   if(!("serviceWorker" in navigator)||!navigator.serviceWorker.controller){alert("Offline-lagring er ikke tilgængelig i denne browser.");return}
   const urls=[];for(const id in PH)PH[id].forEach(p=>{urls.push(p.s);urls.push(p.t)});
   btn.disabled=true;btn.textContent="Gemmer billeder …";
-  const ch=new MessageChannel();ch.port1.onmessage=e=>{const d=e.data;if(d.done){btn.textContent=`✓ ${d.ok} billeder gemt offline`;LS.set("offlineImgs",Date.now())}else btn.textContent=`Gemmer … ${d.n}/${urls.length}`};
+  const ch=new MessageChannel();ch.port1.onmessage=e=>{const d=e.data;if(d.done){btn.textContent=`${d.ok} billeder gemt offline`;LS.set("offlineImgs",Date.now())}else btn.textContent=`Gemmer … ${d.n}/${urls.length}`};
   navigator.serviceWorker.controller.postMessage({type:"precache",urls},[ch.port2]);
 }
 
@@ -392,10 +396,10 @@ function precacheImages(btn){
 V.info=()=>{
   const cr=[];for(const id in (typeof PH!=="undefined"?PH:{})) PH[id].forEach(p=>cr.push(`<div><b>${S[id]?S[id].da:id}</b> · ${VIEWN[p.v]||p.v}: ${esc(p.by||"")}</div>`));
   return `${pageHead("Om guiden","Sikkerhed og kilder","")}
-  <div class="big-safe">Svampe kan variere meget i udseende. Fotos og digitale bestemmelsesnøgler kan ikke alene afgøre, om en svamp er sikker at spise. Spis kun svampe, som er sikkert bestemt af en person med den nødvendige viden.</div>
+  <div class="big-safe t-read">Svampe kan variere meget i udseende. Fotos og digitale bestemmelsesnøgler kan ikke alene afgøre, om en svamp er sikker at spise. Spis kun svampe, som er sikkert bestemt af en person med den nødvendige viden.</div>
   <div class="prose">
     <h2 class="sh">“Det kan være” er ikke “sikker at spise”</h2>
-    <p>Guiden lærer dig at se forskelle. Den bestemmer ikke svampe. Når Kig nærmere siger “det kan være”, betyder det kun, at dine svar ligner beskrivelsen af en af guidens ${SP.length} arter. Der findes tusindvis af arter i Danmark.</p>
+    <p>Guiden lærer dig at se forskelle. Den bestemmer ikke svampe. Når Undersøg siger “det kan være”, betyder det kun, at dine svar ligner beskrivelsen af en af guidens ${SP.length} arter. Der findes tusindvis af arter i Danmark.</p>
     <h2 class="sh">Tre ting, der ikke må blandes sammen</h2>
     <p><b>Bestemmelse</b> – hvilken art er det? <b>Spiselighed</b> – kan arten spises? <b>Gastronomi</b> – hvordan bruges arten i køkkenet? Kun en sikker bestemmelse af netop dit eksemplar gør de to sidste relevante.</p>
     <h2 class="sh">Forgiftning</h2>
@@ -411,13 +415,13 @@ V.info=()=>{
     <div class="credits small">${cr.join("")||"<div>Ingen fotos indlejret.</div>"}</div>
     <h2 class="sh">Offline</h2>
     <p>Tekster, Undersøg, quiz og dine fund virker uden net, når siden først er åbnet. Billeder hentes, når du ser dem – eller alle på én gang her (ca. 12 MB):</p>
-    <p><button class="btn" id="precache">${LS.get("offlineImgs",null)?"✓ Billeder gemt – opdatér":"Gem alle billeder offline"}</button></p>
+    <p style="margin-top:16px"><button class="btn" id="precache">${LS.get("offlineImgs",null)?"Billeder gemt – opdatér":"Gem alle billeder offline"}</button></p>
     <p>Kortet og stedsøgningen kræver internet.</p>
     <h2 class="sh">Privatliv</h2>
     <p>Dine fund, billeder og dit valgte område gemmes kun på denne enhed. Intet uploades. Din position bruges kun, når du trykker ‘Brug min position’, og gemmes afrundet.</p>
     <p>Kortdata © OpenStreetMap-bidragydere. Stedsøgning: Nominatim.</p>
     <h2 class="sh">Indstillinger</h2>
-    <p><button class="btn" id="resetAll">Nulstil fund, område og quiz</button></p>
+    <p style="margin-top:16px"><button class="btn" id="resetAll">Nulstil fund, område og quiz</button></p>
   </div>`;
 };
 
@@ -430,26 +434,27 @@ function route(){
   const h=(location.hash||"#/").slice(2).split("/");
   const [a,b,c]=h;
   switch(a){
-    case "": case undefined: return {v:V.home(),t:"",tab:"hjem",home:true};
-    case "omraade": case "asserbo": return {v:V.omraade(),t:"I skoven nu",tab:"hjem"};
-    case "laer": return {v:V.lesson(),t:"Lær at se",tab:"hjem"};
-    case "arter": return {v:V.list(b),t:b==="godt"?"Spisesvampe":b==="pas"?"Pas på":"Arter",tab:"arter",list:b!=="pas"};
-    case "art": if(c==="koekken") return {v:V.kitchen(b),t:"I køkkenet",tab:"arter",kitchen:true};
-      return {v:V.species(b),t:S[b]?S[b].da:"",tab:"arter",sp:b};
-    case "forskelle": return {v:V.pairs(),t:"Se forskellen",tab:"forskelle"};
-    case "forskel": return {v:V.pair(b),t:"Se forskellen",tab:"forskelle"};
-    case "noegle": return {v:V.key(),t:"Kig nærmere",tab:"noegle",key:true};
-    case "quiz": return {v:V.quiz(),t:"Quiz",tab:"hjem",quiz:true};
+    case "": case undefined: return {v:V.home(),root:true,tab:"hjem",home:true};
+    case "omraade": case "asserbo": return {v:V.omraade(),t:"Start",tab:"hjem"};
+    case "laer": return {v:V.lesson(),t:"Start",tab:"hjem"};
+    case "arter": if(!b) return {v:V.list(),root:true,tab:"arter",list:true};
+      return {v:V.list(b),t:"Arter",tab:"arter",list:b!=="pas"};
+    case "art": if(c==="koekken") return {v:V.kitchen(b),t:S[b]?S[b].da:"",tab:"arter",kitchen:true};
+      return {v:V.species(b),t:"Arter",tab:"arter",sp:b};
+    case "forskelle": return {v:V.pairs(),root:true,tab:"forskelle"};
+    case "forskel": return {v:V.pair(b),t:"Se forskellen",tab:"forskelle",pair:true};
+    case "noegle": return {v:V.key(),root:true,tab:"noegle",key:true};
+    case "quiz": return {v:V.quiz(),t:"Start",tab:"hjem",quiz:true};
     case "registrer": {
       const mode=b==="ret"?"ret:"+c:b==="art"?"art:"+c:"ny";
-      if(!REG||REG.mode!==mode){ if(b==="ret") return {v:`<p class="ed pad">Henter …</p>`,t:"Redigér fund",tab:"fund",loadEdit:c,mode};
+      if(!REG||REG.mode!==mode){ if(b==="ret") return {v:`<p class="meta pad" style="padding-top:48px">Henter …</p>`,t:"Fund",tab:"fund",loadEdit:c,mode};
         newReg(b==="art"?c:null); REG.mode=mode; }
-      return {v:V.reg(),t:REG.id?"Redigér fund":"Registrér et fund",tab:"fund",reg:true};
+      return {v:V.reg(),t:"Fund",tab:"fund",reg:true};
     }
     case "fund": if(b) return {v:V.find(b),t:"Fund",tab:"fund",find:b};
-      return {v:V.finds(),t:"Fund",tab:"fund",finds:true};
-    case "info": return {v:V.info(),t:"Sikkerhed og kilder",tab:"hjem",info:true};
-    default: return {v:V.home(),t:"",tab:"hjem",home:true};
+      return {v:V.finds(),root:true,tab:"fund",finds:true};
+    case "info": return {v:V.info(),t:"Start",tab:"hjem",info:true};
+    default: return {v:V.home(),root:true,tab:"hjem",home:true};
   }
 }
 let lastHash=null;
@@ -457,10 +462,10 @@ function render(keepScroll){
   const r=route();
   const y=window.scrollY;
   document.body.classList.toggle("kitchen",!!r.kitchen);
-  document.querySelector('meta[name="theme-color"]').content=r.kitchen?"#FFF3C4":"#FFFFFF";
-  app.innerHTML=`<div class="view">${r.v}</div><footer class="bfoot"><b>SVAMPEGUIDEN</b><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><span>Testversion · Opdateret ${UPDATED}</span></footer>`;
-  $("#ttl").textContent=r.t;
-  $("#back").style.visibility=r.home?"hidden":"visible";$("#bback").style.display=r.home?"none":"flex";$(".breg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
+  document.querySelector('meta[name="theme-color"]').content=r.kitchen?"#F6E8B1":"#FFFFFF";
+  app.innerHTML=`<div class="view">${r.v}</div><footer class="foot"><span class="wmk">Svampe</span><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><small>Testversion · Opdateret ${UPDATED}</small></footer>`;
+  $("#ttl").textContent=r.t||"";
+  $("#top").classList.toggle("root",!!r.root);
   $("#reg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
   document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("on",a.dataset.t===r.tab));
   initGalleries(app);
@@ -471,6 +476,7 @@ function render(keepScroll){
   if(r.reg) bindReg(app);
   if(r.loadEdit) editReg(r.loadEdit).then(ok=>{if(ok){REG.mode=r.mode;render()}else location.hash="#/fund"});
   if(r.list) bindFilters(app);
+  if(r.pair){const hd=$(".cmp-head",app),nm=$(".ab-names",app);if(hd&&nm&&"IntersectionObserver" in window){new IntersectionObserver(([e])=>hd.classList.toggle("show",!e.isIntersecting&&e.boundingClientRect.top<0)).observe(nm)}}
   if(r.info){
     const rs=$("#resetAll");if(rs)rs.onclick=async()=>{if(confirm("Slet alle fund, billeder, valgt område og quiz-resultater på denne enhed?")){await DB.clear().catch(()=>{});["omraade","omraader","quizBest","quizRounds","fund_migreret"].forEach(k=>{try{localStorage.removeItem("svampe."+k)}catch(e){}});await loadFinds();render()}};
     const pc=$("#precache");if(pc)pc.onclick=()=>precacheImages(pc);
@@ -486,11 +492,10 @@ function updBadge(){
   if(!b){b=document.createElement("span");b.className="n";a.appendChild(b)} b.textContent=n;
 }
 document.addEventListener("click",e=>{if(e.target.closest("[data-area]")){e.preventDefault();openArea()}});
-$("#bback").onclick=()=>$("#back").click();
 $("#back").onclick=()=>{if(history.length>1&&lastHashStack>0){history.back()}else location.hash="#/"};
 let lastHashStack=0;
 window.addEventListener("hashchange",()=>{lastHashStack++;const st=document.getElementById("stop");if(st)st.remove();render()});
-const topUpd=()=>{$("#top").classList.toggle("show",scrollY>$("#brand").offsetHeight-8)};window.addEventListener("scroll",topUpd,{passive:true});
+const topUpd=()=>{$("#top").classList.toggle("scrolled",scrollY>4)};window.addEventListener("scroll",topUpd,{passive:true});
 try{localStorage.removeItem("svampe.felt")}catch(e){}
 render();
 migrateOld().then(loadFinds).then(()=>{if(location.hash===""||location.hash==="#/"||location.hash.startsWith("#/arter"))render(true)});
