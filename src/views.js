@@ -207,8 +207,8 @@ V.home=()=>{
     <p class="meta">${esc(meta)}</p>
   </section>
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
-  <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
-  <nav class="hm-go" aria-label="Indgange">
+  <a class="hm-now" href="#/omraade"><span class="lbl">${esc(a.name)} · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
+  <nav class="hm-go" aria-label="Guiden"><p class="lbl">Guiden</p>
     <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span></a>
     <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
     <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span>${arrow}<span class="s">Smag, kendetegn og forvekslinger.</span></a>
@@ -285,6 +285,8 @@ function bindFilters(root){
   root.querySelectorAll("[data-fx]").forEach(b=>b.onclick=()=>{delete F[b.dataset.fx];render(true)});
   const c=$("#fClear",root);if(c)c.onclick=()=>{F={};render(true)};
 }
+/* Indholdet er generelt; kun rækkefølgen er lokal – det siges diskret, dér hvor listen starter */
+function localNote(A){return `<p class="local-note lbl">Ordnet for ${esc(A.name)} · ${MONN[new Date().getMonth()]}</p>`}
 function applyFilters(list,groups){
   const cats=allCats().filter(c=>F[c.id]&&groups.some(g=>FILT[g].c.includes(c)));
   return list.filter(s=>cats.every(c=>c.test(s,F[c.id])));
@@ -296,7 +298,7 @@ V.list=(grp)=>{
     const four=["snehvid","gron","giftslor","hjelmhat"].map(id=>S[id]);
     return `${pageHead("Pas på","Arter, du bør kende","Fire arter er dødeligt giftige og vokser samme steder som spisesvampe. De to fluesvampe kendes på posen ved basis, gift-slørhatten på de rustbrune lameller, hjelmhatten på de sølvhvide trævler og det døde træ.","danger")}
     ${ixList(four)}
-    <section class="sec">${sh("Giftige og ikke spiselige")}${ixList(ord(SP.filter(s=>s.grp==="pas"&&!four.includes(s))))}</section>
+    <section class="sec">${sh("Giftige og ikke spiselige")}${localNote(A)}${ixList(ord(SP.filter(s=>s.grp==="pas"&&!four.includes(s))))}</section>
     <section class="sec">${sh("Se forskellen")}${pairList(PAIRS)}</section>
     ${russula()}`;
   }
@@ -309,7 +311,7 @@ V.list=(grp)=>{
   const head=grp==="godt"?pageHead("","Spisesvampe","Spiselig betyder spiselig efter sikker artsbestemmelse. Hver art har en forveksling – se den altid.")
     :pageHead("","Arter",`<b>${SP.length} arter</b>, ordnet efter, hvad du kan møde i ${esc(A.name)} nu.`);
   const body=filtering||grp==="godt"
-    ?`<p class="res-n">${res.length?res.length+" "+(res.length===1?"art.":"arter."):"Ingen arter passer."}${kitchenOn&&grp!=="godt"?" Kun arter, der regnes for spiselige.":""}</p>${res.length?ixList(res,{taste:kitchenOn||grp==="godt"}):""}`
+    ?`${grp==="godt"&&!filtering?localNote(A):""}<p class="res-n">${res.length?res.length+" "+(res.length===1?"art.":"arter."):"Ingen arter passer."}${kitchenOn&&grp!=="godt"?" Kun arter, der regnes for spiselige.":""}</p>${res.length?ixList(res,{taste:kitchenOn||grp==="godt"}):""}`
     :`<section class="sec">${sh("Spisesvampe",`<a href="#/arter/godt">Alle ${arrow}</a>`)}${ixList(ord(SP.filter(s=>s.grp==="godt")))}</section>
       <section class="sec">${sh("Pas på",`<a href="#/arter/pas">Alle ${arrow}</a>`)}${ixList(ord(SP.filter(s=>s.grp==="pas")))}</section>`;
   return `${head}${filterUI(groups)}${body}`;
