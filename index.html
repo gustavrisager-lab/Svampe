@@ -840,6 +840,11 @@ body,.look .row p,.fd-row p,.cmp-row .txt p,.sides-body p,.k-list li,.k-body li,
 .status-note,.small-note,.credit,.gal-n{color:var(--ink3)}
 .chip{border-color:var(--rule)}
 .card .st,.as-card .st{margin-top:8px}
+/* Registrér-knap: samme store sorte knap overalt */
+a.btn[href^="#/registrer"]{min-height:96px;gap:12px;background:var(--ink);border-color:var(--ink);color:#fff}
+a.btn[href^="#/registrer"]::before{content:"";width:24px;height:24px;flex:none;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M6 15h9l3-5h12l3 5h9v23H6z'/%3E%3Ccircle cx='24' cy='26' r='7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M6 15h9l3-5h12l3 5h9v23H6z'/%3E%3Ccircle cx='24' cy='26' r='7.5'/%3E%3C/svg%3E") center/contain no-repeat}
+a.btn[href^="#/registrer/ret"]{min-height:56px;background:#fff;color:var(--ink)}
+a.btn[href^="#/registrer/ret"]::before{display:none}
 </style>
 </head>
 <body>
