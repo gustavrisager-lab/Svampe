@@ -1,0 +1,1435 @@
+{
+"kantarel": [
+{
+"s": "img/kantarel-0.jpg",
+"t": "img/t/kantarel-0.jpg",
+"v": "typisk",
+"c": "Voksen: tragtform og bølget kant",
+"by": "tabacwoman (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/kantarel-1.jpg",
+"t": "img/t/kantarel-1.jpg",
+"v": "under",
+"c": "Butte, grenede ribber – ikke tynde lameller",
+"by": "esdena (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+55,
+15,
+"Butte ribber"
+]
+]
+},
+{
+"s": "img/kantarel-2.jpg",
+"t": "img/t/kantarel-2.jpg",
+"v": "stok",
+"c": "Ribberne løber langt ned ad stokken",
+"by": "esdena (iNaturalist, CC BY NC)",
+"a": [
+[
+72,
+38,
+12,
+"Løber ned"
+]
+]
+},
+{
+"s": "img/kantarel-3.jpg",
+"t": "img/t/kantarel-3.jpg",
+"v": "ung",
+"c": "Ung: lille, hvælvet og kompakt",
+"by": "miro (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/kantarel-4.jpg",
+"t": "img/t/kantarel-4.jpg",
+"v": "habitat",
+"c": "Ofte flere sammen i løvet",
+"by": "Rune Bjerre (iNaturalist, CC BY NC)"
+}
+],
+"falsk": [
+{
+"s": "img/falsk-0.jpg",
+"t": "img/t/falsk-0.jpg",
+"v": "typisk",
+"c": "Klart orange med tynd, blød stok",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/falsk-1.jpg",
+"t": "img/t/falsk-1.jpg",
+"v": "under",
+"c": "Tynde, tætte, gaffeldelte lameller",
+"by": "Phaulactis (iNaturalist, CC BY NC)",
+"a": [
+[
+62,
+50,
+15,
+"Tynde lameller"
+]
+]
+},
+{
+"s": "img/falsk-2.jpg",
+"t": "img/t/falsk-2.jpg",
+"v": "stok",
+"c": "Tynd, ofte buet stok",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/falsk-3.jpg",
+"t": "img/t/falsk-3.jpg",
+"v": "habitat",
+"c": "Ved rådnende træ og nålestrøelse",
+"by": "Pipann (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/falsk-4.jpg",
+"t": "img/t/falsk-4.jpg",
+"v": "top",
+"c": "Hatten: fløjlsagtig, mørkere i midten",
+"by": "Pipann (iNaturalist, CC BY NC)"
+}
+],
+"tragt": [
+{
+"s": "img/tragt-0.jpg",
+"t": "img/t/tragt-0.jpg",
+"v": "typisk",
+"c": "Brun tragt på gul stok, i mos",
+"by": "Mette Hesselholt Henne Hansen (iNaturalist, CC BY NC)",
+"a": [
+[
+36,
+68,
+9,
+"Gul stok"
+]
+]
+},
+{
+"s": "img/tragt-1.jpg",
+"t": "img/t/tragt-1.jpg",
+"v": "under",
+"c": "Grå, lave, grenede ribber",
+"by": "darmozrac (iNaturalist, CC BY)",
+"a": [
+[
+35,
+50,
+15,
+"Grå ribber"
+]
+]
+},
+{
+"s": "img/tragt-2.jpg",
+"t": "img/t/tragt-2.jpg",
+"v": "stok",
+"c": "Gule, ofte sammentrykte stokke",
+"by": "Mette Hesselholt Henne Hansen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/tragt-3.jpg",
+"t": "img/t/tragt-3.jpg",
+"v": "habitat",
+"c": "Ofte mange sammen i nålestrøelse",
+"by": "darmozrac (iNaturalist, CC BY)"
+}
+],
+"trompet": [
+{
+"s": "img/trompet-0.jpg",
+"t": "img/t/trompet-0.jpg",
+"v": "typisk",
+"c": "Sorte trompeter i grupper",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/trompet-1.jpg",
+"t": "img/t/trompet-1.jpg",
+"v": "top",
+"c": "Set ovenfra: næsten usynlig i løvet",
+"by": "birdguy12 (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/trompet-2.jpg",
+"t": "img/t/trompet-2.jpg",
+"v": "under",
+"c": "Ydersiden: askegrå og næsten glat",
+"by": "torstendavidsen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/trompet-3.jpg",
+"t": "img/t/trompet-3.jpg",
+"v": "habitat",
+"c": "I bøgeløv",
+"by": "mortenbn (iNaturalist, CC BY NC)"
+}
+],
+"pigsvamp": [
+{
+"s": "img/pigsvamp-0.jpg",
+"t": "img/t/pigsvamp-0.jpg",
+"v": "typisk",
+"c": "Lys, uregelmæssig hat",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/pigsvamp-1.jpg",
+"t": "img/t/pigsvamp-1.jpg",
+"v": "under",
+"c": "Pigge i stedet for lameller",
+"by": "Yibo Liu (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/pigsvamp-2.jpg",
+"t": "img/t/pigsvamp-2.jpg",
+"v": "under",
+"c": "Tæt på: pigge som små istapper",
+"by": "abumadsen (iNaturalist, CC0)"
+},
+{
+"s": "img/pigsvamp-3.jpg",
+"t": "img/t/pigsvamp-3.jpg",
+"v": "stok",
+"c": "Hvidlig, kraftig stok",
+"by": "abumadsen (iNaturalist, CC0)"
+},
+{
+"s": "img/pigsvamp-4.jpg",
+"t": "img/t/pigsvamp-4.jpg",
+"v": "habitat",
+"c": "I mos og løv",
+"by": "alexbarnard (iNaturalist, CC BY NC)"
+}
+],
+"karljohan": [
+{
+"s": "img/karljohan-0.jpg",
+"t": "img/t/karljohan-0.jpg",
+"v": "typisk",
+"c": "Voksen: brun hat, tyk lys stok",
+"by": "Daniel Ellehammer Larsen (iNaturalist, CC BY)"
+},
+{
+"s": "img/karljohan-1.jpg",
+"t": "img/t/karljohan-1.jpg",
+"v": "ung",
+"c": "Ung: tyk, køllet stok",
+"by": "Daniel Ellehammer Larsen (iNaturalist, CC BY)"
+},
+{
+"s": "img/karljohan-2.jpg",
+"t": "img/t/karljohan-2.jpg",
+"v": "stok",
+"c": "Tæt på: fint, LYST net på stokken",
+"by": "Pipann (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+40,
+18,
+"Lyst net"
+]
+]
+},
+{
+"s": "img/karljohan-3.jpg",
+"t": "img/t/karljohan-3.jpg",
+"v": "under",
+"c": "Ung: hvide porer, tyk stok",
+"by": "Camilla Lund Kristensen (iNaturalist, CC BY)"
+},
+{
+"s": "img/karljohan-4.jpg",
+"t": "img/t/karljohan-4.jpg",
+"v": "habitat",
+"c": "Ung og gammel i græs og bregner",
+"by": "lenaquist (iNaturalist, CC BY NC)"
+}
+],
+"brunstokket": [
+{
+"s": "img/brunstokket-0.jpg",
+"t": "img/t/brunstokket-0.jpg",
+"v": "typisk",
+"c": "Kastanjebrun hat, i mos",
+"by": "julia_demtroder_2022 (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/brunstokket-1.jpg",
+"t": "img/t/brunstokket-1.jpg",
+"v": "ung",
+"c": "Ungt eksemplar",
+"by": "julia_demtroder_2022 (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/brunstokket-2.jpg",
+"t": "img/t/brunstokket-2.jpg",
+"v": "under",
+"c": "Gullige porer blåner ved tryk",
+"by": "Michael Hansen (iNaturalist, CC BY)",
+"a": [
+[
+58,
+24,
+12,
+"Blåner"
+]
+]
+},
+{
+"s": "img/brunstokket-3.jpg",
+"t": "img/t/brunstokket-3.jpg",
+"v": "stok",
+"c": "Brunlig, stribet stok – intet net",
+"by": "julia_demtroder_2022 (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/brunstokket-4.jpg",
+"t": "img/t/brunstokket-4.jpg",
+"v": "kod",
+"c": "Snit: blegt kød, svagt blånende",
+"by": "dakramar (iNaturalist, CC BY NC)"
+}
+],
+"slimror": [
+{
+"s": "img/slimror-0.jpg",
+"t": "img/t/slimror-0.jpg",
+"v": "typisk",
+"c": "Blank, mørkebrun hat",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/slimror-1.jpg",
+"t": "img/t/slimror-1.jpg",
+"v": "top",
+"c": "Slimet, glinsende hathud",
+"by": "Christian Sørensen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/slimror-2.jpg",
+"t": "img/t/slimror-2.jpg",
+"v": "stok",
+"c": "Tydelig, hudagtig ring",
+"by": "michaelst (iNaturalist, CC BY NC)",
+"a": [
+[
+48,
+60,
+12,
+"Ring"
+]
+]
+},
+{
+"s": "img/slimror-3.jpg",
+"t": "img/t/slimror-3.jpg",
+"v": "under",
+"c": "Små, gule porer",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/slimror-4.jpg",
+"t": "img/t/slimror-4.jpg",
+"v": "habitat",
+"c": "Flere sammen i græs og nåle",
+"by": "michaelst (iNaturalist, CC BY NC)"
+}
+],
+"parasol": [
+{
+"s": "img/parasol-0.jpg",
+"t": "img/t/parasol-0.jpg",
+"v": "typisk",
+"c": "Voksen: brune skæl, mørk pukkel",
+"by": "Mette Hesselholt Henne Hansen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/parasol-1.jpg",
+"t": "img/t/parasol-1.jpg",
+"v": "ung",
+"c": "Ung: formet som en trommestik",
+"by": "esdena (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/parasol-2.jpg",
+"t": "img/t/parasol-2.jpg",
+"v": "stok",
+"c": "Slangeskindsmønster på stokken",
+"by": "Anders Dahl (iNaturalist, CC BY NC)",
+"a": [
+[
+42,
+50,
+18,
+"Slangeskind"
+]
+]
+},
+{
+"s": "img/parasol-3.jpg",
+"t": "img/t/parasol-3.jpg",
+"v": "ring",
+"c": "Den løse, dobbelte ring",
+"by": "Anders Dahl (iNaturalist, CC BY NC)",
+"a": [
+[
+42,
+45,
+18,
+"Løs ring"
+]
+]
+},
+{
+"s": "img/parasol-4.jpg",
+"t": "img/t/parasol-4.jpg",
+"v": "under",
+"c": "Hvide, frie lameller",
+"by": "Mette Hesselholt Henne Hansen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/parasol-5.jpg",
+"t": "img/t/parasol-5.jpg",
+"v": "basis",
+"c": "Knoldet basis – men ingen pose",
+"by": "esdena (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+86,
+14,
+"Ingen pose"
+]
+]
+},
+{
+"s": "img/parasol-6.jpg",
+"t": "img/t/parasol-6.jpg",
+"v": "habitat",
+"c": "Lysninger og græs",
+"by": "Anders Dahl (iNaturalist, CC BY NC)"
+}
+],
+"gron": [
+{
+"s": "img/gron-0.jpg",
+"t": "img/t/gron-0.jpg",
+"v": "typisk",
+"c": "Olivengrøn hat, hvid stok",
+"by": "lenaquist (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/gron-1.jpg",
+"t": "img/t/gron-1.jpg",
+"v": "ung",
+"c": "Unge hatte – farven varierer",
+"by": "janenoehr (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/gron-2.jpg",
+"t": "img/t/gron-2.jpg",
+"v": "basis",
+"c": "Gravet fri: den hvide pose ved basis",
+"by": "lenaquist (iNaturalist, CC BY NC)",
+"a": [
+[
+52,
+80,
+16,
+"Pose"
+]
+]
+},
+{
+"s": "img/gron-3.jpg",
+"t": "img/t/gron-3.jpg",
+"v": "under",
+"c": "Hvide, tætte lameller",
+"by": "Martin Høj Hansen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/gron-4.jpg",
+"t": "img/t/gron-4.jpg",
+"v": "ring",
+"c": "Hængende hvid ring",
+"by": "Martin Høj Hansen (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+55,
+18,
+"Ring"
+]
+]
+},
+{
+"s": "img/gron-5.jpg",
+"t": "img/t/gron-5.jpg",
+"v": "top",
+"c": "Farven varierer – her gullig",
+"by": "Charlotte Ardal (iNaturalist, CC BY NC)"
+}
+],
+"snehvid": [
+{
+"s": "img/snehvid-0.jpg",
+"t": "img/t/snehvid-0.jpg",
+"v": "typisk",
+"c": "Hvid overalt – med pose ved basis",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/snehvid-1.jpg",
+"t": "img/t/snehvid-1.jpg",
+"v": "ung",
+"c": "Ung: klokkeformet hat",
+"by": "Daniel Ellehammer Larsen (iNaturalist, CC BY)"
+},
+{
+"s": "img/snehvid-2.jpg",
+"t": "img/t/snehvid-2.jpg",
+"v": "basis",
+"c": "Den løse pose om stokbasis",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)",
+"a": [
+[
+55,
+75,
+20,
+"Pose"
+]
+]
+},
+{
+"s": "img/snehvid-3.jpg",
+"t": "img/t/snehvid-3.jpg",
+"v": "stok",
+"c": "Fnugget-skællet stok",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/snehvid-4.jpg",
+"t": "img/t/snehvid-4.jpg",
+"v": "under",
+"c": "Hvide lameller, trævlet ring",
+"by": "michaelst (iNaturalist, CC BY NC)"
+}
+],
+"kliddet": [
+{
+"s": "img/kliddet-0.jpg",
+"t": "img/t/kliddet-0.jpg",
+"v": "typisk",
+"c": "Bleg hat med hudflager",
+"by": "Michael Hansen (iNaturalist, CC BY)"
+},
+{
+"s": "img/kliddet-1.jpg",
+"t": "img/t/kliddet-1.jpg",
+"v": "basis",
+"c": "Rund knold med skarp kant – ingen løs pose",
+"by": "Andreas Schneider (iNaturalist, CC BY)",
+"a": [
+[
+58,
+82,
+14,
+"Knold"
+]
+]
+},
+{
+"s": "img/kliddet-2.jpg",
+"t": "img/t/kliddet-2.jpg",
+"v": "under",
+"c": "Hvide lameller, hængende ring",
+"by": "dakramar (iNaturalist, CC BY NC)",
+"a": [
+[
+45,
+78,
+11,
+"Ring"
+]
+]
+},
+{
+"s": "img/kliddet-3.jpg",
+"t": "img/t/kliddet-3.jpg",
+"v": "habitat",
+"c": "Ofte flere sammen i løvet",
+"by": "lenaquist (iNaturalist, CC BY NC)"
+}
+],
+"rod": [
+{
+"s": "img/rod-0.jpg",
+"t": "img/t/rod-0.jpg",
+"v": "typisk",
+"c": "Rød hat med hvide vorter",
+"by": "Fredrik Sørensen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rod-1.jpg",
+"t": "img/t/rod-1.jpg",
+"v": "ung",
+"c": "Ung: tæt dækket af vorter",
+"by": "Rasmus Keis Neerbek (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rod-2.jpg",
+"t": "img/t/rod-2.jpg",
+"v": "under",
+"c": "Hvide lameller",
+"by": "Camilla Lund Kristensen (iNaturalist, CC BY)"
+},
+{
+"s": "img/rod-3.jpg",
+"t": "img/t/rod-3.jpg",
+"v": "basis",
+"c": "Knold med ringe af vorter",
+"by": "christinalorenzen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rod-4.jpg",
+"t": "img/t/rod-4.jpg",
+"v": "gammel",
+"c": "Blegnet og uden vorter – stadig rød fluesvamp",
+"by": "mettelille (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rod-5.jpg",
+"t": "img/t/rod-5.jpg",
+"v": "habitat",
+"c": "Ofte mange sammen",
+"by": "nosilkcut (iNaturalist, CC BY NC)"
+}
+],
+"panter": [
+{
+"s": "img/panter-0.jpg",
+"t": "img/t/panter-0.jpg",
+"v": "typisk",
+"c": "Voksen: hvide lameller, glat ring",
+"by": "esdena (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/panter-1.jpg",
+"t": "img/t/panter-1.jpg",
+"v": "top",
+"c": "Brun hat med rent hvide vorter",
+"by": "esdena (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/panter-2.jpg",
+"t": "img/t/panter-2.jpg",
+"v": "ung",
+"c": "Ung",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/panter-3.jpg",
+"t": "img/t/panter-3.jpg",
+"v": "basis",
+"c": "Knold med krave og ringbælter af hvide rester",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/panter-4.jpg",
+"t": "img/t/panter-4.jpg",
+"v": "under",
+"c": "Hvide lameller",
+"by": "Camilla Lund Kristensen (iNaturalist, CC BY)"
+},
+{
+"s": "img/panter-5.jpg",
+"t": "img/t/panter-5.jpg",
+"v": "habitat",
+"c": "I bøgeskov",
+"by": "zeit.fläche (iNaturalist, CC BY NC)"
+}
+],
+"rodmende": [
+{
+"s": "img/rodmende-0.jpg",
+"t": "img/t/rodmende-0.jpg",
+"v": "typisk",
+"c": "Rødbrun hat, rødlige toner på stokken",
+"by": "korsakimu (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rodmende-1.jpg",
+"t": "img/t/rodmende-1.jpg",
+"v": "ung",
+"c": "Ung: tæt dækket af vorter",
+"by": "alexbarnard (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rodmende-2.jpg",
+"t": "img/t/rodmende-2.jpg",
+"v": "kod",
+"c": "Kødet rødmer ved skader",
+"by": "korsakimu (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+35,
+11,
+"Rødmer"
+]
+]
+},
+{
+"s": "img/rodmende-3.jpg",
+"t": "img/t/rodmende-3.jpg",
+"v": "stok",
+"c": "Ringen er riflet på oversiden",
+"by": "korsakimu (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+42,
+15,
+"Riflet ring"
+]
+]
+},
+{
+"s": "img/rodmende-4.jpg",
+"t": "img/t/rodmende-4.jpg",
+"v": "basis",
+"c": "Knold uden skarp krave",
+"by": "korsakimu (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rodmende-5.jpg",
+"t": "img/t/rodmende-5.jpg",
+"v": "under",
+"c": "Lameller med rødlige pletter",
+"by": "Emil Førby (iNaturalist, CC BY NC)"
+}
+],
+"giftslor": [
+{
+"s": "img/giftslor-0.jpg",
+"t": "img/t/giftslor-0.jpg",
+"v": "typisk",
+"c": "Orangebrun hat, bånd på stokken",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/giftslor-1.jpg",
+"t": "img/t/giftslor-1.jpg",
+"v": "under",
+"c": "Rustbrune, tykke lameller",
+"by": "fx_kling (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/giftslor-2.jpg",
+"t": "img/t/giftslor-2.jpg",
+"v": "stok",
+"c": "Gule bånd på stokken",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)",
+"a": [
+[
+35,
+65,
+15,
+"Gule bånd"
+]
+]
+},
+{
+"s": "img/giftslor-3.jpg",
+"t": "img/t/giftslor-3.jpg",
+"v": "kod",
+"c": "Snit: massiv stok, gulbrunt kød",
+"by": "Kim Falck (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/giftslor-4.jpg",
+"t": "img/t/giftslor-4.jpg",
+"v": "top",
+"c": "Filtet hat med pukkel",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/giftslor-5.jpg",
+"t": "img/t/giftslor-5.jpg",
+"v": "habitat",
+"c": "I mos",
+"by": "Rene Weigelt (iNaturalist, CC BY NC)"
+}
+],
+"galde": [
+{
+"s": "img/galde-0.jpg",
+"t": "img/t/galde-0.jpg",
+"v": "typisk",
+"c": "Brun, mat hat – ligner Karl Johan",
+"by": "jbrinck (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/galde-1.jpg",
+"t": "img/t/galde-1.jpg",
+"v": "under",
+"c": "Porerne bliver lyserøde",
+"by": "Kåre Würtz Sørensen (iNaturalist, CC BY NC)",
+"a": [
+[
+60,
+45,
+15,
+"Lyserøde porer"
+]
+]
+},
+{
+"s": "img/galde-2.jpg",
+"t": "img/t/galde-2.jpg",
+"v": "stok",
+"c": "Groft, MØRKT net på stokken",
+"by": "jbrinck (iNaturalist, CC BY NC)",
+"a": [
+[
+70,
+70,
+16,
+"Mørkt net"
+]
+]
+},
+{
+"s": "img/galde-3.jpg",
+"t": "img/t/galde-3.jpg",
+"v": "ung",
+"c": "Ung: porerne er endnu hvide",
+"by": "Kåre Würtz Sørensen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/galde-4.jpg",
+"t": "img/t/galde-4.jpg",
+"v": "habitat",
+"c": "I nåleskov",
+"by": "Pipann (iNaturalist, CC BY NC)"
+}
+],
+"sandror": [
+{
+"s": "img/sandror-0.jpg",
+"t": "img/t/sandror-0.jpg",
+"v": "typisk",
+"c": "Gulbrun hat, gullig stok uden ring",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/sandror-1.jpg",
+"t": "img/t/sandror-1.jpg",
+"v": "top",
+"c": "Kornet-filtet hat – ikke blank",
+"by": "Ludvig S. (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/sandror-2.jpg",
+"t": "img/t/sandror-2.jpg",
+"v": "under",
+"c": "Små, olivenbrune porer",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/sandror-3.jpg",
+"t": "img/t/sandror-3.jpg",
+"v": "kod",
+"c": "Blåner svagt ved tryk og i snit",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)",
+"a": [
+[
+80,
+25,
+12,
+"Blåner"
+]
+]
+},
+{
+"s": "img/sandror-4.jpg",
+"t": "img/t/sandror-4.jpg",
+"v": "habitat",
+"c": "På sandet bund under fyr",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)"
+}
+],
+"maelkehat": [
+{
+"s": "img/maelkehat-0.jpg",
+"t": "img/t/maelkehat-0.jpg",
+"v": "typisk",
+"c": "Orange hat, orange lameller",
+"by": "Yibo Liu (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/maelkehat-1.jpg",
+"t": "img/t/maelkehat-1.jpg",
+"v": "top",
+"c": "Orange hat med svage ringe",
+"by": "Yibo Liu (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/maelkehat-2.jpg",
+"t": "img/t/maelkehat-2.jpg",
+"v": "kod",
+"c": "Brækket: gulerodsorange mælk",
+"by": "michaelst (iNaturalist, CC BY NC)",
+"a": [
+[
+55,
+40,
+16,
+"Orange mælk"
+]
+]
+},
+{
+"s": "img/maelkehat-3.jpg",
+"t": "img/t/maelkehat-3.jpg",
+"v": "under",
+"c": "Tætte, orange lameller",
+"by": "Yibo Liu (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/maelkehat-4.jpg",
+"t": "img/t/maelkehat-4.jpg",
+"v": "stok",
+"c": "Grønne pletter ved tryk og alder",
+"by": "michaelst (iNaturalist, CC BY NC)"
+}
+],
+"rodbrun": [
+{
+"s": "img/rodbrun-0.jpg",
+"t": "img/t/rodbrun-0.jpg",
+"v": "typisk",
+"c": "Rødbrun hat i mos og nåle",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rodbrun-1.jpg",
+"t": "img/t/rodbrun-1.jpg",
+"v": "top",
+"c": "Tør, mat rødbrun hat",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rodbrun-2.jpg",
+"t": "img/t/rodbrun-2.jpg",
+"v": "kod",
+"c": "Hvide mælkedråber på lamellerne",
+"by": "Mette Hesselholt Henne Hansen (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+70,
+14,
+"Hvid mælk"
+]
+]
+},
+{
+"s": "img/rodbrun-3.jpg",
+"t": "img/t/rodbrun-3.jpg",
+"v": "under",
+"c": "Lyse, tætte lameller",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/rodbrun-4.jpg",
+"t": "img/t/rodbrun-4.jpg",
+"v": "habitat",
+"c": "I mos og nåledække",
+"by": "Rasmus Allesoee (iNaturalist, CC BY NC)"
+}
+],
+"netblad": [
+{
+"s": "img/netblad-0.jpg",
+"t": "img/t/netblad-0.jpg",
+"v": "typisk",
+"c": "Brun hat med indrullet kant",
+"by": "Kim Falck (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/netblad-1.jpg",
+"t": "img/t/netblad-1.jpg",
+"v": "top",
+"c": "Kanten er rullet ind",
+"by": "lotte0812 (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/netblad-2.jpg",
+"t": "img/t/netblad-2.jpg",
+"v": "under",
+"c": "Lamellerne brunes ved tryk",
+"by": "lotte0812 (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+55,
+18,
+"Brunes"
+]
+]
+},
+{
+"s": "img/netblad-3.jpg",
+"t": "img/t/netblad-3.jpg",
+"v": "habitat",
+"c": "Under nåletræer",
+"by": "Karina Anne Hjorth Andersen (iNaturalist, CC BY NC)"
+}
+],
+"ridder": [
+{
+"s": "img/ridder-0.jpg",
+"t": "img/t/ridder-0.jpg",
+"v": "typisk",
+"c": "Gul hat, svovlgule lameller",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/ridder-1.jpg",
+"t": "img/t/ridder-1.jpg",
+"v": "top",
+"c": "Klæbrig hat – ofte med sand og nåle",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/ridder-2.jpg",
+"t": "img/t/ridder-2.jpg",
+"v": "under",
+"c": "Klart svovlgule lameller",
+"by": "torstendavidsen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/ridder-3.jpg",
+"t": "img/t/ridder-3.jpg",
+"v": "kod",
+"c": "Snit: ingen ring, ingen pose",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/ridder-4.jpg",
+"t": "img/t/ridder-4.jpg",
+"v": "habitat",
+"c": "Sandet fyrreskov",
+"by": "Alexis Tinker-Tsavalas (iNaturalist, CC BY)"
+}
+],
+"markchamp": [
+{
+"s": "img/markchamp-0.jpg",
+"t": "img/t/markchamp-0.jpg",
+"v": "typisk",
+"c": "Hvid, silkeagtig hat i græsset",
+"by": "agnes2705-_kpf_- (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/markchamp-1.jpg",
+"t": "img/t/markchamp-1.jpg",
+"v": "under",
+"c": "Lyserøde lameller og tynd ring",
+"by": "agnes2705-_kpf_- (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/markchamp-2.jpg",
+"t": "img/t/markchamp-2.jpg",
+"v": "ung",
+"c": "Ung: klart lyserøde lameller",
+"by": "Mette Hesselholt Henne Hansen (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/markchamp-3.jpg",
+"t": "img/t/markchamp-3.jpg",
+"v": "gammel",
+"c": "Ældre: chokoladebrune lameller",
+"by": "Jonas Storm (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/markchamp-4.jpg",
+"t": "img/t/markchamp-4.jpg",
+"v": "habitat",
+"c": "På græsplæne og eng",
+"by": "Tobias S. Radmer (iNaturalist, CC BY NC)"
+}
+],
+"karbol": [
+{
+"s": "img/karbol-0.jpg",
+"t": "img/t/karbol-0.jpg",
+"v": "typisk",
+"c": "Hvide hatte i løvet – ligner en champignon",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/karbol-1.jpg",
+"t": "img/t/karbol-1.jpg",
+"v": "basis",
+"c": "Stokbasis gulner kraftigt",
+"by": "rasmusjes (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/karbol-2.jpg",
+"t": "img/t/karbol-2.jpg",
+"v": "kod",
+"c": "Tæt på: kromgul stokbasis",
+"by": "daniel_koerbaecher (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+62,
+20,
+"Kromgul"
+]
+]
+},
+{
+"s": "img/karbol-3.jpg",
+"t": "img/t/karbol-3.jpg",
+"v": "under",
+"c": "Lyserøde til brune lameller",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/karbol-4.jpg",
+"t": "img/t/karbol-4.jpg",
+"v": "habitat",
+"c": "Ofte i haver, parker og skovbryn",
+"by": "daniel_koerbaecher (iNaturalist, CC BY NC)"
+}
+],
+"stoevbold": [
+{
+"s": "img/stoevbold-0.jpg",
+"t": "img/t/stoevbold-0.jpg",
+"v": "typisk",
+"c": "Hvid kugle i græsset",
+"by": "Pipann (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/stoevbold-1.jpg",
+"t": "img/t/stoevbold-1.jpg",
+"v": "top",
+"c": "Glat overflade som ruskind",
+"by": "Pipann (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/stoevbold-2.jpg",
+"t": "img/t/stoevbold-2.jpg",
+"v": "kod",
+"c": "Snit: helt hvid og ensartet",
+"by": "antonia_me (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/stoevbold-3.jpg",
+"t": "img/t/stoevbold-3.jpg",
+"v": "gammel",
+"c": "Ældre: overfladen sprækker",
+"by": "Capreolus (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/stoevbold-4.jpg",
+"t": "img/t/stoevbold-4.jpg",
+"v": "habitat",
+"c": "På eng og i græs",
+"by": "vesper (iNaturalist, CC BY NC)"
+}
+],
+"parykhat": [
+{
+"s": "img/parykhat-0.jpg",
+"t": "img/t/parykhat-0.jpg",
+"v": "typisk",
+"c": "Hvid ‘paryk’ med pjuskede skæl",
+"by": "Rune Bjerre (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/parykhat-1.jpg",
+"t": "img/t/parykhat-1.jpg",
+"v": "ung",
+"c": "Ung: tæt lukket",
+"by": "Marie Schnell (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/parykhat-2.jpg",
+"t": "img/t/parykhat-2.jpg",
+"v": "under",
+"c": "Lamellerne bliver sorte fra kanten",
+"by": "Rune Bjerre (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/parykhat-3.jpg",
+"t": "img/t/parykhat-3.jpg",
+"v": "gammel",
+"c": "Ældre: opløses til sort blæk",
+"by": "topios (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/parykhat-4.jpg",
+"t": "img/t/parykhat-4.jpg",
+"v": "habitat",
+"c": "I græs",
+"by": "Mo Hartmann (iNaturalist, CC BY NC)"
+}
+],
+"svovlhat": [
+{
+"s": "img/svovlhat-0.jpg",
+"t": "img/t/svovlhat-0.jpg",
+"v": "typisk",
+"c": "Svovlgule hatte i knipper",
+"by": "topios (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/svovlhat-1.jpg",
+"t": "img/t/svovlhat-1.jpg",
+"v": "under",
+"c": "Grønlige lameller",
+"by": "esdena (iNaturalist, CC BY NC)",
+"a": [
+[
+45,
+45,
+18,
+"Grønlige"
+]
+]
+},
+{
+"s": "img/svovlhat-2.jpg",
+"t": "img/t/svovlhat-2.jpg",
+"v": "top",
+"c": "Gul hat med brunere midte",
+"by": "topios (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/svovlhat-3.jpg",
+"t": "img/t/svovlhat-3.jpg",
+"v": "habitat",
+"c": "Knipper på stubbe og rødder",
+"by": "topios (iNaturalist, CC BY NC)"
+}
+],
+"skaelhat": [
+{
+"s": "img/skaelhat-0.jpg",
+"t": "img/t/skaelhat-0.jpg",
+"v": "typisk",
+"c": "Honningbrune hatte i tætte knipper",
+"by": "xez (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/skaelhat-1.jpg",
+"t": "img/t/skaelhat-1.jpg",
+"v": "stok",
+"c": "Små brune skæl under ringen",
+"by": "Christian Sørensen (iNaturalist, CC BY NC)",
+"a": [
+[
+35,
+35,
+16,
+"Skæl"
+]
+]
+},
+{
+"s": "img/skaelhat-2.jpg",
+"t": "img/t/skaelhat-2.jpg",
+"v": "under",
+"c": "Kanelbrune lameller",
+"by": "xez (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/skaelhat-3.jpg",
+"t": "img/t/skaelhat-3.jpg",
+"v": "top",
+"c": "Tofarvet hat, når den tørrer",
+"by": "Skjold Søndergaard (iNaturalist, CC BY)"
+},
+{
+"s": "img/skaelhat-4.jpg",
+"t": "img/t/skaelhat-4.jpg",
+"v": "habitat",
+"c": "På løvtræstubbe",
+"by": "Ulrik Jes Hansen (iNaturalist, CC BY NC)"
+}
+],
+"hjelmhat": [
+{
+"s": "img/hjelmhat-0.jpg",
+"t": "img/t/hjelmhat-0.jpg",
+"v": "typisk",
+"c": "Lille brun svamp med trævlet stok",
+"by": "Nicolai Berg (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/hjelmhat-1.jpg",
+"t": "img/t/hjelmhat-1.jpg",
+"v": "stok",
+"c": "Sølvhvide trævler – ingen skæl",
+"by": "Nicolai Berg (iNaturalist, CC BY NC)",
+"a": [
+[
+45,
+55,
+18,
+"Sølvtrævler"
+]
+]
+},
+{
+"s": "img/hjelmhat-2.jpg",
+"t": "img/t/hjelmhat-2.jpg",
+"v": "under",
+"c": "Brune lameller og tynd ring",
+"by": "michaelst (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/hjelmhat-3.jpg",
+"t": "img/t/hjelmhat-3.jpg",
+"v": "habitat",
+"c": "På dødt, formuldet træ",
+"by": "lara_privat (iNaturalist, CC BY NC)"
+}
+],
+"morkel": [
+{
+"s": "img/morkel-0.jpg",
+"t": "img/t/morkel-0.jpg",
+"v": "typisk",
+"c": "Bikagehat på hvidlig stok",
+"by": "Anders Dahl (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/morkel-1.jpg",
+"t": "img/t/morkel-1.jpg",
+"v": "top",
+"c": "Dybe gruber adskilt af ribber",
+"by": "Daniel Petersen och Peter Sullivan (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/morkel-2.jpg",
+"t": "img/t/morkel-2.jpg",
+"v": "stok",
+"c": "Hvidlig, kornet stok",
+"by": "drudem (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/morkel-3.jpg",
+"t": "img/t/morkel-3.jpg",
+"v": "habitat",
+"c": "Om foråret på bar, næringsrig jord",
+"by": "agnes2705-_kpf_- (iNaturalist, CC BY NC)"
+}
+],
+"stenmorkel": [
+{
+"s": "img/stenmorkel-0.jpg",
+"t": "img/t/stenmorkel-0.jpg",
+"v": "typisk",
+"c": "Hjerneagtigt foldet, rødbrun hat",
+"by": "Anders Dahl (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/stenmorkel-1.jpg",
+"t": "img/t/stenmorkel-1.jpg",
+"v": "top",
+"c": "Folder – ikke gruber",
+"by": "soestberg (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/stenmorkel-2.jpg",
+"t": "img/t/stenmorkel-2.jpg",
+"v": "kod",
+"c": "Snit: uregelmæssige kamre",
+"by": "Jens Carlsson (iNaturalist, CC BY NC)",
+"a": [
+[
+50,
+52,
+22,
+"Kamre"
+]
+]
+},
+{
+"s": "img/stenmorkel-3.jpg",
+"t": "img/t/stenmorkel-3.jpg",
+"v": "habitat",
+"c": "Om foråret i nåleskov på sandet bund",
+"by": "Carlos (iNaturalist, CC BY NC)"
+}
+],
+"ostershat": [
+{
+"s": "img/ostershat-0.jpg",
+"t": "img/t/ostershat-0.jpg",
+"v": "typisk",
+"c": "Muslingeformede hatte i etager",
+"by": "lemur007 (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/ostershat-1.jpg",
+"t": "img/t/ostershat-1.jpg",
+"v": "under",
+"c": "Hvide lameller, der løber ned",
+"by": "esdena (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/ostershat-2.jpg",
+"t": "img/t/ostershat-2.jpg",
+"v": "top",
+"c": "Glatte, grå til brune hatte",
+"by": "lemur007 (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/ostershat-3.jpg",
+"t": "img/t/ostershat-3.jpg",
+"v": "habitat",
+"c": "På død bøgestamme",
+"by": "esdena (iNaturalist, CC BY NC)"
+}
+],
+"judasore": [
+{
+"s": "img/judasore-0.jpg",
+"t": "img/t/judasore-0.jpg",
+"v": "typisk",
+"c": "Brune, gummiagtige ‘ører’",
+"by": "topios (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/judasore-1.jpg",
+"t": "img/t/judasore-1.jpg",
+"v": "under",
+"c": "Indersiden: glat med svage årer",
+"by": "Rune Bjerre (iNaturalist, CC BY NC)"
+},
+{
+"s": "img/judasore-2.jpg",
+"t": "img/t/judasore-2.jpg",
+"v": "habitat",
+"c": "På hyldegrene",
+"by": "topios (iNaturalist, CC BY NC)"
+}
+]
+}
