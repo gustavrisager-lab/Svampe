@@ -497,8 +497,6 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-area]")){e.prev
 $("#back").onclick=()=>{if(history.length>1&&lastHashStack>0){history.back()}else location.hash="#/"};
 let lastHashStack=0;
 window.addEventListener("hashchange",()=>{lastHashStack++;const st=document.getElementById("stop");if(st)st.remove();render()});
-/* Bundafstand måles fra den faktiske navigation (inkl. safe area), ikke gættes */
-const navH=()=>document.documentElement.style.setProperty("--navh",$("#tabs").getBoundingClientRect().height+"px");navH();window.addEventListener("resize",navH);if(window.visualViewport)visualViewport.addEventListener("resize",navH);
 const topUpd=()=>{$("#top").classList.toggle("scrolled",scrollY>4)};window.addEventListener("scroll",topUpd,{passive:true});
 try{localStorage.removeItem("svampe.felt")}catch(e){}
 render();
