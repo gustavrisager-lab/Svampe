@@ -1,6 +1,6 @@
 {
-  "name": "Svampe – en visuel feltguide",
-  "short_name": "Svampe",
+  "name": "Svampeguiden",
+  "short_name": "Svampeguiden",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

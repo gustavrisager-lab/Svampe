@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Svampe">
+<meta name="apple-mobile-web-app-title" content="Svampeguiden">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="icon" href="icons/icon-180.png">
-<title>Svampe</title>
+<title>Svampeguiden</title>
 <style>
 /* =====================================================================
    SVAMPE — visuelt system, pass 02
@@ -596,7 +596,7 @@ body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
 <body>
 <header id="top"><div class="in">
   <button id="back" aria-label="Tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5 7.5 12l7 7"/></svg></button>
-  <a id="wm" href="#/">Svampe</a>
+  <a id="wm" href="#/">Svampeguiden</a>
   <div id="ttl"></div>
   <a id="reg" class="pill" href="#/registrer" aria-label="Registrér et fund">+ Fund</a>
 </div></header>
@@ -3408,7 +3408,7 @@ function render(keepScroll){
   const y=window.scrollY;
   document.body.classList.toggle("kitchen",!!r.kitchen);
   document.querySelector('meta[name="theme-color"]').content=r.kitchen?"#F6E8B1":"#FFFFFF";
-  app.innerHTML=`<div class="view">${r.v}</div><footer class="foot"><span class="wmk">Svampe</span><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><small>Testversion · Opdateret ${UPDATED}</small></footer>`;
+  app.innerHTML=`<div class="view">${r.v}</div><footer class="foot"><span class="wmk">Svampeguiden</span><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><small>Testversion · Opdateret ${UPDATED}</small></footer>`;
   $("#ttl").textContent=r.t||"";
   $("#top").classList.toggle("root",!!r.root);
   $("#reg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
