@@ -463,7 +463,7 @@ function render(keepScroll){
   const y=window.scrollY;
   document.body.classList.toggle("kitchen",!!r.kitchen);
   document.querySelector('meta[name="theme-color"]').content=r.kitchen?"#F6E8B1":"#FFFFFF";
-  app.innerHTML=`<div class="view">${r.v}</div><footer class="foot"><span class="wmk">Svampe</span><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><small>Testversion · Opdateret ${UPDATED}</small></footer>`;
+  app.innerHTML=`<div class="view">${r.v}</div><footer class="foot"><span class="wmk">Svampeguiden</span><p>Et foto eller en nøgle kan ikke afgøre, om en svamp kan spises. Spis kun svampe, der er sikkert bestemt af en kyndig.</p><a href="#/info">Sikkerhed og kilder ${arrow}</a><small>Testversion · Opdateret ${UPDATED}</small></footer>`;
   $("#ttl").textContent=r.t||"";
   $("#top").classList.toggle("root",!!r.root);
   $("#reg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
