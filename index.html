@@ -52,7 +52,7 @@
   --serif:"Times New Roman",Times,serif;
   --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
   --fs-3xl:clamp(44px,12.4vw,60px);
-  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:72px;--s9:112px;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:56px;--s9:80px;
   --g:20px; --r:10px; --top:52px; --tab:54px;
   --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
 }
@@ -68,10 +68,10 @@ ul,ol{margin:0}
 
 /* ---------- typografi ---------- */
 .t-display{font:400 var(--fs-3xl)/.98 var(--serif);letter-spacing:-.022em;hyphens:manual}
-.t-state{font:400 32px/1.06 var(--serif);letter-spacing:-.012em}
-.t-obs{font:400 24px/1.22 var(--serif);letter-spacing:-.004em}
-.t-read{font:400 19px/1.45 var(--serif)}
-.t-cat{font:500 28px/1.08 var(--sans);letter-spacing:-.022em}
+.t-state{font:400 28px/1.1 var(--serif);letter-spacing:-.01em}
+.t-obs{font:400 20px/1.4 var(--serif)}
+.t-read{font:400 20px/1.4 var(--serif)}
+.t-cat{font:500 26px/1.1 var(--sans);letter-spacing:-.02em}
 .lbl{font:600 11px/1.3 var(--sans);letter-spacing:.11em;text-transform:uppercase}
 .meta{font-size:13px;line-height:1.4;color:var(--grey)}
 .la{font:italic 400 19px/1.25 var(--serif);color:var(--ink-2)}
@@ -127,7 +127,7 @@ main{max-width:620px;margin:0 auto}
 .ph-head.danger>.lbl{color:var(--rust)}
 .intro{margin-top:var(--s5);color:var(--ink-2);max-width:32em}
 .sec{margin-top:var(--s8);padding:0 var(--g)}
-.sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 var(--s6);padding-top:var(--s3);border-top:1px solid var(--rule);font:600 11px/1.3 var(--sans);letter-spacing:.11em;text-transform:uppercase}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 var(--s5);font:600 11px/1.3 var(--sans);letter-spacing:.11em;text-transform:uppercase}
 .sh a{font:500 13px/1 var(--sans);letter-spacing:0;text-transform:none;text-decoration:none;color:var(--grey)}
 .say{margin:var(--s5) var(--g) 0;max-width:34em}
 .say b{font-weight:600}
@@ -136,12 +136,15 @@ main{max-width:620px;margin:0 auto}
 .count{padding:0 var(--g) var(--s4);font-size:13px;color:var(--grey)}
 .aside{padding:var(--s6) var(--g) 0;font-size:14px;color:var(--grey)}
 .aside a{color:var(--ink)}
-.note{margin:var(--s8) var(--g) 0;padding-top:var(--s3);border-top:1px solid var(--rule)}
+.note{margin:var(--s8) var(--g) 0}
 .note .lbl{display:block;margin-bottom:var(--s3);color:var(--grey)}
 .note p{font-size:15px;color:var(--ink-2)}
 
 /* ---------- mærker (tags) ---------- */
 .tag{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:var(--wash);color:var(--ink);font:600 10.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.st-plain{display:inline-block;font:600 10.5px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.ix .st-plain{margin-top:10px}
+.sp-id .st-plain{padding-top:4px}
 .tag.moss{background:var(--moss)}
 .tag.butter{background:var(--butter)}
 .tag.lilac{background:var(--lilac)}
@@ -154,7 +157,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 /* ---------- knapper: primær · sekundær · tekst · kompakt ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 20px;border-radius:var(--r);background:var(--wash);color:var(--ink);font:500 16px/1.2 var(--sans);text-decoration:none;text-align:center;position:relative}
 .btn.fill{background:var(--ink);color:#fff}
-.btn.big{width:100%;min-height:72px;justify-content:space-between;padding:0 22px;background:var(--ink);color:#fff;font-size:18px}
+.btn.big{width:100%;min-height:64px;border-radius:8px;justify-content:space-between;padding:0 22px;background:var(--ink);color:#fff;font-size:18px}
 .btn.big .bl{display:flex;align-items:center;gap:14px}
 .btn[disabled]{opacity:.5}
 .btn-row{display:flex;gap:8px;padding:var(--s6) var(--g) 0}
@@ -164,6 +167,11 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .cta-wrap{padding:var(--s7) var(--g) 0}
 .txt-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:500 15px/1.2 var(--sans);text-decoration:none;color:inherit}
 .quiet{display:flex;align-items:center;gap:10px;min-height:48px;margin:var(--s6) var(--g) 0;font:500 15px/1.2 var(--sans);text-decoration:none;color:var(--ink-2)}
+.more{margin:var(--s8) var(--g) 0}
+.more>.lbl{margin-bottom:var(--s2);color:var(--grey)}
+.more a{display:flex;align-items:baseline;gap:10px;min-height:48px;padding:13px 0;border-bottom:1px solid var(--rule);font:500 16px/1.3 var(--sans);text-decoration:none}
+.more a .m{font-size:13px;font-weight:400;color:var(--grey)}
+.more a .arr{margin-left:auto}
 .util{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin:var(--s7) var(--g) 0}
 .util a{display:flex;align-items:baseline;gap:8px;padding:9px 0;font:500 16px/1.3 var(--sans);text-decoration:none}
 .util a .m{font-size:13px;font-weight:400;color:var(--grey)}
@@ -206,14 +214,16 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .sp-id.field .la{color:#fff}
 .sp-id.field .syn{color:rgba(255,255,255,.8)}
 .sp-id.field .warn b{color:#fff;font-weight:700;font-family:var(--sans);font-size:15px;letter-spacing:.02em}
-.lede{padding:var(--s7) var(--g) 0;max-width:36em}
+.lede{padding:var(--s6) var(--g) 0;max-width:36em}
 .sig-w{margin:var(--s7) var(--g) 0}
 .sig-w>.lbl{color:var(--grey)}
 .sig{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin:var(--s4) 0 0;padding:0}
 .sig li{font:500 15px/1.25 var(--sans)}
-.kt+.kt{margin-top:var(--s8)}
+.kt+.kt{margin-top:var(--s7)}
+.kt:nth-of-type(even) .kt-ph{margin-left:0;margin-right:0}
+.kt:nth-of-type(even) .kt-ph figcaption{padding-left:0;padding-right:0}
 .kt-h .lbl{color:var(--ink)}
-.kt .t-obs{margin-top:var(--s4)}
+.kt .t-obs{margin-top:var(--s3)}
 .kt .nb{display:block;margin-top:var(--s2);font-size:13px;line-height:1.45;color:var(--grey)}
 .kt-more{margin-top:var(--s4);font-size:16px;color:var(--ink-2)}
 .kt-more b{font-weight:600;color:var(--ink)}
@@ -221,7 +231,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .kt-ph .ph{aspect-ratio:4/3}
 .kt-ph figcaption{padding:10px var(--g) 0;font-size:13px;line-height:1.45;color:var(--ink-2)}
 .kt-ph figcaption .lgs{display:block;margin-bottom:4px}
-.anat{margin-top:var(--s8)}
+.anat{margin-top:var(--s7)}
 .anat summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:44px;font:500 15px/1 var(--sans)}
 .anat summary::-webkit-details-marker{display:none}
 .anat summary::after{content:"+";font:300 20px/1 var(--sans)}
@@ -248,11 +258,11 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .sense dd p{margin-top:var(--s2);font-size:15px;color:var(--ink-2);max-width:32em}
 .to-kitchen{display:block;margin-top:var(--s9);padding:var(--s6) var(--g) var(--s7);background:var(--butter);text-decoration:none}
 .to-kitchen .lbl{color:var(--ink-2)}
-.to-kitchen .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s7)}
+.to-kitchen .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .to-kitchen .s{display:block;margin-top:var(--s3);font-size:14px;color:var(--ink-2)}
 
 /* ---------- indeks (artslister, resultater, fund) ---------- */
-.ix{margin:0 var(--g);border-top:1px solid var(--rule)}
+.ix{margin:0 var(--g)}
 .ph-head+.ix,.ph-head+.flt{margin-top:var(--s7)}
 .ix>a{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:start;padding:16px 0;border-bottom:1px solid var(--rule);text-decoration:none}
 .ix .ph{aspect-ratio:4/5}
@@ -292,22 +302,27 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 
 /* ---------- start ---------- */
 .home-area{padding:var(--s6) var(--g) 0}
+.area-tag{height:28px;padding:0 8px 0 12px;font-size:10.5px}
+.area-tag .chev{width:14px;height:14px;margin-left:2px}
+.area-name{font:inherit;letter-spacing:inherit;text-align:left}
+.home-area .meta{margin-top:var(--s3);font-size:14px}
+.num.rust{color:var(--rust);font-weight:700}
 .home-area>.lbl{color:var(--grey)}
-.home-area .t-display{margin-top:var(--s3)}
+.home-area .t-display{margin-top:var(--s4)}
 .home-area .txt-link{margin-top:var(--s2);color:var(--ink-2)}
 .hm-hero{display:block;margin-top:var(--s6);text-decoration:none}
 .hm-hero .ph{aspect-ratio:4/5}
-.hm-now{display:block;background:var(--moss);padding:14px var(--g) var(--s6);text-decoration:none}
+.hm-now{display:block;background:var(--moss);padding:var(--s5) var(--g) var(--s6);text-decoration:none}
 .hm-now .cap{font-size:13px;color:var(--ink)}
 .hm-now .cap i{font-family:var(--serif);font-size:15px}
-.hm-now .lbl{display:block;margin-top:var(--s8)}
+.hm-now .lbl{display:block;margin-top:var(--s2)}
 .hm-now .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s3)}
-.hm-go{margin:var(--s8) var(--g) 0}
-.hm-go a{display:grid;grid-template-columns:30px 1fr auto;gap:6px 0;align-items:baseline;padding:22px 0 24px;border-top:1px solid var(--rule);text-decoration:none}
-.hm-go a:last-child{border-bottom:1px solid var(--rule)}
+.hm-go{margin:var(--s7) var(--g) 0}
+.hm-go a{display:grid;grid-template-columns:30px 1fr auto;gap:6px 0;align-items:baseline;padding:20px 0 22px;border-top:1px solid var(--rule);text-decoration:none}
+.hm-go a:first-child{border-top:0;padding-top:0}
 .hm-go .num{grid-column:1;grid-row:1}
 .hm-go .t-cat{grid-column:2}
-.hm-go .arr{grid-column:3;grid-row:1;font-size:22px}
+.hm-go .arr{grid-column:3;grid-row:1;font-size:20px}
 .hm-go .s{grid-column:2/4;font-size:15px;color:var(--ink-2)}
 .hm-go .alpha{grid-column:2/4;display:flex;gap:14px;margin-top:10px}
 
@@ -477,7 +492,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .rg-field textarea{min-height:104px;resize:vertical}
 
 /* ---------- område ---------- */
-.area-h{margin:var(--s7) var(--g) 0;padding-top:var(--s3);border-top:1px solid var(--rule)}
+.area-h{margin:var(--s6) var(--g) var(--s6)}
 .area-h .t-obs{margin-top:var(--s3)}
 .area-h .meta{margin-top:var(--s2)}
 .area-h .cov{margin-top:var(--s4);font-size:13px;color:var(--grey);max-width:32em}
@@ -531,15 +546,16 @@ body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
 .k-id>.lbl{color:var(--grey)}
 .k-id .t-display{margin-top:var(--s3)}
 .k-id .la{margin-top:var(--s3)}
-.k-safe{margin-top:var(--s5);font-size:14px;line-height:1.45;color:var(--ink-2);max-width:26em}
-.k-sense{display:grid;gap:var(--s5);margin:var(--s8) var(--g) 0}
+.k-safe{margin-top:var(--s5);font-size:14px;line-height:1.5;color:var(--ink-2);max-width:26em}
+.k-safe b{font-weight:600;color:var(--ink)}
+.k-sense{display:grid;gap:var(--s5);margin:var(--s7) var(--g) 0}
 .k-sense dt{color:var(--grey)}
-.k-sense dd{margin-top:6px;font:400 30px/1.1 var(--serif);letter-spacing:-.01em}
+.k-sense dd{margin-top:4px;font:400 28px/1.1 var(--serif);letter-spacing:-.01em}
 .k-img{margin-top:var(--s8)}
 .k-img .ph{aspect-ratio:4/5}
 .k-img figcaption{padding:10px var(--g) 0;font-size:13px;color:var(--ink-2)}
 .k-list{padding:0;list-style:none}
-.k-list li{padding:10px 0;border-bottom:1px solid var(--rule)}
+.k-list li{padding:6px 0}
 .k-list li:first-child{padding-top:0}
 .k-pair{font:400 24px/1.3 var(--serif)}
 .k-pair+.meta{margin-top:var(--s3)}
@@ -581,7 +597,7 @@ body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
 .sec .ix,.sec .pl{margin-left:0;margin-right:0}
 .sec .pl>a .t{padding-left:0;padding-right:0}
 .sec .pl .ab{margin:0 calc(-1 * var(--g))}
-.sense .t-obs{display:block}
+.sense .t-obs{display:block;font-size:24px;line-height:1.2}
 .sec .say{margin-left:0;margin-right:0}
 .ix>a.found-t{}
 .ph-head .qz-score{margin-top:var(--s3)}
@@ -2371,7 +2387,7 @@ function stInfo(s){
   if(s.st==="meget") return {t:s.deadly?"Dødeligt giftig":"Meget giftig",c:"rust"};
   return ({god:{t:"God spisesvamp",c:"moss"},spis:{t:"Spiselig",c:""},ikke:{t:"Ikke spiselig",c:""},fra:{t:"Frarådes",c:""},gift:{t:"Giftig",c:"rust-pale"}})[s.st];
 }
-function statusTag(s,c){const x=stInfo(s);return `<span class="tag ${c==null?x.c:c}">${x.t}</span>`}
+function statusTag(s,c){const x=stInfo(s),k=c==null?x.c:c;return k?`<span class="tag ${k}">${x.t}</span>`:`<span class="st-plain">${x.t}</span>`}
 const stTxt=s=>statusTag(s);
 function monthsHTML(m){const now=new Date().getMonth()+1;return `<div class="months" role="img" aria-label="Sæson: ${m.map(x=>MONN[x-1]).join(", ")}">${MONTHS.map((l,i)=>`<span class="${m.includes(i+1)?"on":""}${now===i+1?" now":""}">${l}</span>`).join("")}</div>`}
 const arrow=`<span class="arr" aria-hidden="true">→</span>`;
@@ -2496,7 +2512,7 @@ function tasteWords(s){const t=tagsOf(s);if(!t)return "";const w=[...t.s.map(x=>
 function ixRow(s,o={}){
   const p=photo(s.id,"typisk")||photo(s.id), tw=tasteWords(s);
   return `<a href="#/art/${s.id}">${phHTML(p,s.da,{ann:false,thumb:true})}<span class="t">${o.n?`<span class="num">${o.n}</span>`:""}<b class="nm">${s.da}</b><i class="la2">${s.la}</i>${statusTag(s)}
-    ${o.spot&&s.spot?`<span class="kd">${s.spot}</span>`:`<span class="m">${pg(underIcon(s),16)}${underLabel(s)} · ${monthRange(s.m)}</span>${o.taste&&tw?`<span class="m">${tw}</span>`:""}`}
+    ${o.spot&&s.spot?`<span class="kd">${s.spot}</span>`:`<span class="m">${underLabel(s)} · ${monthRange(s.m)}</span>${o.taste&&tw?`<span class="m">${tw}</span>`:""}`}
     ${foundToday(s.id)?`<span class="m">Set i dag</span>`:""}</span></a>`;
 }
 const ixList=(l,o={})=>`<div class="ix">${l.map((s,i)=>ixRow(s,o.num?{...o,n:nn(i+1)}:o)).join("")}</div>`;
@@ -2509,27 +2525,28 @@ function russula(){return `<aside class="note"><span class="lbl">Skørhatte og m
    ===================================================================== */
 V.home=()=>{
   const a=area(), top=watchList(a), hero=top[0]&&top[0].s;
-  const meta=[MONN[new Date().getMonth()],a.skov?SKOV[a.skov]:null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · ");
+  const meta=cap1([MONN[new Date().getMonth()],a.skov?SKOV[a.skov].toLowerCase():null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · "));
   const alpha=["lameller","ror","ribber","pigge","ring","basis"];
   const hp=hero&&(photo(hero.id,"typisk")||photo(hero.id));
   const best=LS.get("quizBest",null);
   return `
   <section class="home-area">
-    <p class="lbl">${esc(meta)}</p>
-    <h1 class="t-display">${esc(a.name)}</h1>
-    <button class="txt-link" data-area>Skift område ${arrow}</button>
+    <button class="tag moss area-tag" data-area aria-label="Skift område">Område${CHEV}</button>
+    <h1 class="t-display"><button class="area-name" data-area>${esc(a.name)}</button></h1>
+    <p class="meta">${esc(meta)}</p>
   </section>
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
-  <a class="hm-now" href="#/omraade">${hero?`<p class="cap">${hero.da}, <i>${hero.la}</i></p>`:""}<span class="lbl">I skoven nu</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
+  <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Indgange">
     <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span></a>
     <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
     <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span>${arrow}<span class="s">Smag, kendetegn og forvekslinger.</span></a>
+    <a href="#/arter/pas"><span class="num rust">04</span><span class="t-cat">Pas på</span>${arrow}<span class="s">Giftige arter og farlige forvekslinger.</span></a>
   </nav>
-  <div class="cta-wrap"><a class="btn big" href="#/registrer"><span class="bl">${pg("kamera",24)}Registrér et fund</span>${arrow}</a></div>
-  <nav class="util" aria-label="Mere">
-    <a href="#/arter/pas">Pas på</a><a href="#/forskelle">Se forskellen</a>
-    <a href="#/quiz">Quiz${best!=null?`<span class="m">${best}/10</span>`:""}</a><a href="#/fund">Mine fund${FINDS.length?`<span class="m">${FINDS.length}</span>`:""}</a>
+  <nav class="more" aria-label="Mere"><p class="lbl">Mere</p>
+    <a href="#/forskelle">Se forskellen${arrow}</a>
+    <a href="#/quiz">Quiz${best!=null?`<span class="m">Bedst ${best}/10</span>`:""}${arrow}</a>
+    <a href="#/fund">Mine fund${FINDS.length?`<span class="m">${FINDS.length}</span>`:""}${arrow}</a>
   </nav>`;
 };
 
@@ -2554,7 +2571,7 @@ V.lesson=()=>{
   return `${pageHead("Før du går i skoven","Lær at se","Næsten al bestemmelse begynder under hatten. Fire slags underside – og to steder på stokken, der skiller spisesvampe fra de farligste fluesvampe. Tegnene går igen overalt i guiden.")}
     <nav class="alphabet" aria-label="Indhold">${L.map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,44,l.t)}<span>${l.t}</span></a>`).join("")}</nav>
     ${L.map((l,i)=>`<section class="lesson" id="les-${l.id}">
-      <div class="lock-n"><span class="num">${nn(i+1)}</span>${pg(l.id,24,l.t)}</div>
+      <div class="lock-n">${pg(l.id,24,l.t)}</div>
       <h2 class="t-state">${l.t}</h2>
       ${l.tech?`<p class="tech">${l.tech}</p>`:""}
       <p class="t-read">${l.x}</p>
@@ -2582,7 +2599,7 @@ const FILT={
 };
 let F={}, FOPEN=null;
 const allCats=()=>[...FILT.skov.c,...FILT.koekken.c];
-const fTone=c=>FILT.koekken.c.includes(c)?"butter":c.id==="saeson"?"lilac":"moss";
+const fTone=()=>"moss";
 const CHEV=`<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>`;
 function filterUI(groups){
   const active=allCats().filter(c=>F[c.id]&&groups.some(g=>FILT[g].c.includes(c)));
@@ -2664,7 +2681,7 @@ function kendetegn(s){
     const ph=all.filter((p,i)=>i>0&&views.includes(p.v)&&!used.has(p)); ph.forEach(p=>used.add(p));
     const [f,...rest]=e, pre=f[0]!==title0&&f[0]!==title?`${f[0]}. `:"";
     html+=`<div class="kt">
-      <div class="lock-n kt-h"><span class="num">${nn(++no)}</span>${icon?pg(icon,22,title):""}<span class="lbl">${title}</span></div>
+      <div class="lock-n kt-h">${icon?pg(icon,22,title):""}<span class="lbl">${title}</span></div>
       <p class="t-obs">${pre}${f[1]}</p>${f[2]?`<span class="nb">${f[2]}</span>`:""}
       ${rest.map(([k,v,n])=>`<p class="kt-more"><b>${k}.</b> ${v}${n?`<span class="nb">${n}</span>`:""}</p>`).join("")}
       ${ph.map(p=>`<figure class="kt-ph">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${legend(p.a)}${esc(p.c||"")}</figcaption></figure>`).join("")}
@@ -2705,8 +2722,8 @@ V.species=(id)=>{
   <section class="sec">${sh("Kendetegn")}${KT.html}</section>
 
   <section class="sec">${sh("Voksested")}
-    ${vv.length?`<p class="hab-r lock">${pg("trae",22)}<span>${vv.map(v=>VVN[v]).join(" · ")}</span></p>`:""}
-    ${bund.length?`<p class="hab-r lock">${pg("bund",22)}<span>${[...new Set(bund)].join(" · ")}</span></p>`:""}
+    ${vv.length?`<p class="hab-r"><span>${vv.map(v=>VVN[v]).join(" · ")}</span></p>`:""}
+    ${bund.length?`<p class="hab-r"><span>${[...new Set(bund)].join(" · ")}</span></p>`:""}
     <p class="hab">${s.hab}</p>
     ${s.rare?`<p class="meta">${s.rare}</p>`:""}
     <div class="season"><p class="lbl">Sæson</p>${monthsHTML(s.m)}</div>
@@ -2726,8 +2743,7 @@ V.species=(id)=>{
     ${likeOnly.map(x=>`<a href="#/art/${x}">${phHTML(photo(x,"typisk")||photo(x),"",{ann:false,thumb:true})}<span class="t"><b class="nm">${S[x].da}</b>${statusTag(S[x])}</span></a>`).join("")}</div>
     ${s.extra?`<p class="say">${s.extra}</p>`:""}</section>`:""}
 
-  ${tags&&g?`<a class="to-kitchen" href="#/art/${id}/koekken"><span class="lbl">I køkkenet</span><span class="row"><b class="t-display">Gå i køkkenet</b>${arrow}</span><span class="s">Hvorfor den opfører sig, som den gør – og tre måder at lave den på.</span></a>`:""}
-  <a class="quiet" href="#/registrer/art/${id}">${pg("kamera",20)}<span>Registrér et fund af arten</span></a>`;
+  ${tags&&g?`<a class="to-kitchen" href="#/art/${id}/koekken"><span class="row"><b class="t-display">Gå i køkkenet</b>${arrow}</span><span class="s">Hvorfor den opfører sig, som den gør – og tre måder at lave den på.</span></a>`:""}`;
 };
 
 /* =====================================================================
@@ -2749,10 +2765,10 @@ V.pair=(pid)=>{
     const pa=view&&photo(a.id,view), pb=view&&photo(b.id,view);
     const show=pa&&pb&&!used.has(pa)&&!used.has(pb); if(show){used.add(pa);used.add(pb)}
     const ic=ROWICON[lbl];
-    return `<section class="cmp-row"><div class="lock-n"><span class="num">${nn(++no)}</span>${ic?pg(ic,22,lbl):""}<span class="lbl">${lbl}</span></div>
+    return `<section class="cmp-row"><div class="lock-n">${ic?pg(ic,22,lbl):""}<span class="lbl">${lbl}</span></div>
       ${show?`<div class="pair">${phHTML(pa,a.da,{lb:photoKey(pa)})}${phHTML(pb,b.da,{lb:photoKey(pb)})}</div>`:""}
       <div class="txt"><p>${lead(a,lbl)}${show?legend(pa.a):""}${ta}</p><p>${lead(b,lbl)}${show?legend(pb.a):""}${tb}</p></div></section>`}).join("")}
-  <nav class="util"><a href="#/art/${a.id}">${a.da} ${arrow}</a><a href="#/art/${b.id}">${b.da} ${arrow}</a></nav>`;
+  <nav class="more"><a href="#/art/${a.id}">${a.da}${arrow}</a><a href="#/art/${b.id}">${b.da}${arrow}</a></nav>`;
 };
 
 /* =====================================================================
@@ -2824,8 +2840,7 @@ function keyResult(){
       if(pr) html+=`<div class="btn-row"><a class="btn fill" href="#/forskel/${pr.id}">Se forskellen side om side</a></div>`;
     }
   }
-  html+=`<div class="btn-row"><button class="btn" id="kBack">Ret svar</button><button class="btn" id="kRestart">Start forfra</button></div>
-  <a class="quiet" href="#/registrer">${pg("kamera",20)}<span>Registrér et fund</span></a>`;
+  html+=`<div class="btn-row"><button class="btn" id="kBack">Ret svar</button><button class="btn" id="kRestart">Start forfra</button></div>`;
   return html;
 }
 function showStop(){
@@ -3249,7 +3264,7 @@ async function bindFinds(root){
   for(const f of list){const dk=dayKey(f.created);if(dk!==last){if(last)html+=`</div>`;html+=`<div class="fd-day"><h2 class="t-obs">${dayLabel(f.created)}</h2><span class="lbl">${DAYN[new Date(f.created).getDay()]}</span></div><div class="ix">`;last=dk}
     const slot=["hele","hat","under","stok"].find(k=>f.photos&&f.photos[k]);const ui=f.obs&&f.obs.under;const unk=!f.ident||f.ident.status==="ukendt";
     const img=slot?`<div class="ph"><img src="${objURL(f.photos[slot].thumb)}" alt=""></div>`:`<div class="ph none">${pg(ui?(ui==="andet"?"form":ui):"hele",32)}</div>`;
-    html+=`<a href="#/fund/${f.id}">${img}<span class="t"><b class="nm${unk?" unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span>${obsLine(f.obs||{})?`<span class="m">${ui?pg(ui==="andet"?"form":ui,16):""}${esc(obsLine(f.obs||{}))}</span>`:""}</span></a>`}
+    html+=`<a href="#/fund/${f.id}">${img}<span class="t"><b class="nm${unk?" unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span>${obsLine(f.obs||{})?`<span class="m">${esc(obsLine(f.obs||{}))}</span>`:""}</span></a>`}
   box.innerHTML=html+`</div>`;
 }
 V.find=(id)=>`<div id="fdDetail"><p class="meta pad" style="padding-top:48px">Henter …</p></div>`;
@@ -3258,7 +3273,7 @@ async function bindFind(root,id){
   if(!f){box.innerHTML=`<p class="t-obs pad" style="padding-top:48px">Fundet findes ikke længere.</p><div class="btn-row"><a class="btn" href="#/fund">Til fund</a></div>`;return}
   const s=S[f.ident&&f.ident.species], st=(f.ident||{}).status||"ukendt", d=new Date(f.created);
   const slots=SLOTS.map(([k],i)=>{const p=f.photos&&f.photos[k];return `<figure class="fd-slot">${p?`<button class="ph" data-full="${k}"><img src="${objURL(p.thumb)}" alt=""></button>`:`<div class="ph none">${pg(SLOTI[k],28)}</div>`}<figcaption><span class="num">${nn(i+1)}</span><span class="lbl">${SLOTN[k]}</span></figcaption></figure>`}).join("");
-  const row=(l,v,ic)=>v?`<div class="fd-row"><span class="lbl">${l}</span><p>${ic?pg(ic,20):""}${v}</p></div>`:"";
+  const row=(l,v)=>v?`<div class="fd-row"><span class="lbl">${l}</span><p>${v}</p></div>`:"";
   const idHTML=st==="ukendt"?`<p class="lbl">Identifikation</p><p class="meta">Ubestemt. Et ukendt fund er stadig en observation.</p>`
     :st==="bud"?`<p class="lbl">Identifikation</p><p class="meta">Dit eget bud – ikke en bestemmelse.</p>`:`<p class="lbl">Identifikation</p><p class="meta">Bestemt af en kyndig${f.ident.by?": "+esc(f.ident.by):""}.</p>`;
   const gastroOK=s&&typeof GASTRO!=="undefined"&&GASTRO[s.id]&&!s.noGastro;
@@ -3277,7 +3292,7 @@ async function bindFind(root,id){
     ${s&&isDanger(s)?`<p class="say danger"><b>${stInfo(s).t}.</b> ${s.danger||""}</p>`:""}
     <div class="btn-col"><button class="btn fill" id="fdCmp">Sammenlign med guiden</button><div class="btn-row in"><a class="btn" href="#/registrer/ret/${f.id}">Redigér</a>${navigator.canShare?`<button class="btn" id="fdShare">Del billeder</button>`:""}</div></div>
     ${gastroOK?`${st!=="bestemt"?`<p class="say"><b>Ikke sikkert bestemt.</b> Spis ikke svampen, før en kyndig har bestemt netop dette eksemplar.</p>`:""}
-      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="lbl">I køkkenet</span><span class="row"><b class="t-state">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
+      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="row"><b class="t-state">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
     <div class="btn-row"><button class="txt-link del" id="fdDel">Slet fund</button></div>`;
   box.querySelectorAll("[data-full]").forEach(b=>b.onclick=async()=>{const r=await DB.photo(f.id+":"+b.dataset.full);const u=r?objURL(r):$("img",b).src;showLB(u,`${SLOTN[b.dataset.full]} · ${esc(identTitle(f))}`,dayLabel(f.created)+" · "+hhmm(f.created))});
   $("#fdDel",box).onclick=async()=>{if(!confirm("Slet dette fund og dets billeder fra enheden?"))return;await DB.del(f.id);await loadFinds();location.hash="#/fund"};
@@ -3300,7 +3315,7 @@ V.omraade=()=>{
   const a=area(), top=watchList(a);
   return `${pageHead("I skoven nu · "+MONN[new Date().getMonth()],"Arter, du kan møde","Ud fra årstiden, skoven og hvor arterne er fundet før. Det siger, hvad du kan møde – ikke hvad du har fundet.")}
   ${areaHead(a)}
-  <div style="height:32px"></div>${ixList(top.map(x=>x.s),{num:true,spot:true})}
+  ${ixList(top.map(x=>x.s),{num:true,spot:true})}
   ${russula()}
   <div class="btn-row"><a class="btn fill" href="#/noegle">Find en art</a><a class="btn" href="#/arter">Alle arter</a></div>`;
 };
@@ -3313,7 +3328,7 @@ V.kitchen=(id)=>{
   const W=o=>cap1(o.join(" · ").toLowerCase());
   const im=photo(id,"kod")||photo(id,"typisk")||photo(id);
   return `<header class="k-id"><p class="lbl">I køkkenet</p><h1 class="t-display">${s.da}</h1><p class="la">${s.la}</p>
-    <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund. Kun efter sikker artsbestemmelse.</p></header>
+    <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund.<br><b>Kun efter sikker artsbestemmelse.</b></p></header>
   ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
   ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="t-read">${g.hvorfor}</p></section>`:""}
   ${im?`<figure class="k-img">${phHTML(im,s.da,{ann:false,lb:photoKey(im)})}<figcaption>${esc(im.c||"")}</figcaption></figure>`:""}
@@ -3324,7 +3339,7 @@ V.kitchen=(id)=>{
     ${g.retter.map(r=>`<details class="k-dish"><summary><span class="k-n">${r.n}</span><span class="k-t"><span class="lbl">${r.type} · ${r.ker}</span><b class="nm">${r.titel}</b><span class="meta">${[r.tid,r.til].filter(Boolean).join(" · ")}</span></span></summary>
       <div class="k-body"><h4 class="lbl">Ingredienser</h4><ul>${li(r.ingr)}</ul><h4 class="lbl">Fremgangsmåde</h4><ol>${li(r.metode)}</ol>${r.tip?`<p class="k-tip"><span class="lbl">Tip</span>${r.tip}</p>`:""}</div></details>`).join("")}
   </section>
-  <a class="quiet" href="#/art/${id}">Tilbage til ${lcName(s)} ${arrow}</a>`;
+  <nav class="more"><a href="#/art/${id}">Tilbage til ${lcName(s)}${arrow}</a></nav>`;
 };
 
 /* ---------- offline: gem alle guidens billeder ---------- */

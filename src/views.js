@@ -52,7 +52,7 @@ function stInfo(s){
   if(s.st==="meget") return {t:s.deadly?"Dødeligt giftig":"Meget giftig",c:"rust"};
   return ({god:{t:"God spisesvamp",c:"moss"},spis:{t:"Spiselig",c:""},ikke:{t:"Ikke spiselig",c:""},fra:{t:"Frarådes",c:""},gift:{t:"Giftig",c:"rust-pale"}})[s.st];
 }
-function statusTag(s,c){const x=stInfo(s);return `<span class="tag ${c==null?x.c:c}">${x.t}</span>`}
+function statusTag(s,c){const x=stInfo(s),k=c==null?x.c:c;return k?`<span class="tag ${k}">${x.t}</span>`:`<span class="st-plain">${x.t}</span>`}
 const stTxt=s=>statusTag(s);
 function monthsHTML(m){const now=new Date().getMonth()+1;return `<div class="months" role="img" aria-label="Sæson: ${m.map(x=>MONN[x-1]).join(", ")}">${MONTHS.map((l,i)=>`<span class="${m.includes(i+1)?"on":""}${now===i+1?" now":""}">${l}</span>`).join("")}</div>`}
 const arrow=`<span class="arr" aria-hidden="true">→</span>`;
@@ -177,7 +177,7 @@ function tasteWords(s){const t=tagsOf(s);if(!t)return "";const w=[...t.s.map(x=>
 function ixRow(s,o={}){
   const p=photo(s.id,"typisk")||photo(s.id), tw=tasteWords(s);
   return `<a href="#/art/${s.id}">${phHTML(p,s.da,{ann:false,thumb:true})}<span class="t">${o.n?`<span class="num">${o.n}</span>`:""}<b class="nm">${s.da}</b><i class="la2">${s.la}</i>${statusTag(s)}
-    ${o.spot&&s.spot?`<span class="kd">${s.spot}</span>`:`<span class="m">${pg(underIcon(s),16)}${underLabel(s)} · ${monthRange(s.m)}</span>${o.taste&&tw?`<span class="m">${tw}</span>`:""}`}
+    ${o.spot&&s.spot?`<span class="kd">${s.spot}</span>`:`<span class="m">${underLabel(s)} · ${monthRange(s.m)}</span>${o.taste&&tw?`<span class="m">${tw}</span>`:""}`}
     ${foundToday(s.id)?`<span class="m">Set i dag</span>`:""}</span></a>`;
 }
 const ixList=(l,o={})=>`<div class="ix">${l.map((s,i)=>ixRow(s,o.num?{...o,n:nn(i+1)}:o)).join("")}</div>`;
@@ -190,27 +190,28 @@ function russula(){return `<aside class="note"><span class="lbl">Skørhatte og m
    ===================================================================== */
 V.home=()=>{
   const a=area(), top=watchList(a), hero=top[0]&&top[0].s;
-  const meta=[MONN[new Date().getMonth()],a.skov?SKOV[a.skov]:null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · ");
+  const meta=cap1([MONN[new Date().getMonth()],a.skov?SKOV[a.skov].toLowerCase():null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · "));
   const alpha=["lameller","ror","ribber","pigge","ring","basis"];
   const hp=hero&&(photo(hero.id,"typisk")||photo(hero.id));
   const best=LS.get("quizBest",null);
   return `
   <section class="home-area">
-    <p class="lbl">${esc(meta)}</p>
-    <h1 class="t-display">${esc(a.name)}</h1>
-    <button class="txt-link" data-area>Skift område ${arrow}</button>
+    <button class="tag moss area-tag" data-area aria-label="Skift område">Område${CHEV}</button>
+    <h1 class="t-display"><button class="area-name" data-area>${esc(a.name)}</button></h1>
+    <p class="meta">${esc(meta)}</p>
   </section>
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
-  <a class="hm-now" href="#/omraade">${hero?`<p class="cap">${hero.da}, <i>${hero.la}</i></p>`:""}<span class="lbl">I skoven nu</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
+  <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Indgange">
     <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span></a>
     <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
     <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span>${arrow}<span class="s">Smag, kendetegn og forvekslinger.</span></a>
+    <a href="#/arter/pas"><span class="num rust">04</span><span class="t-cat">Pas på</span>${arrow}<span class="s">Giftige arter og farlige forvekslinger.</span></a>
   </nav>
-  <div class="cta-wrap"><a class="btn big" href="#/registrer"><span class="bl">${pg("kamera",24)}Registrér et fund</span>${arrow}</a></div>
-  <nav class="util" aria-label="Mere">
-    <a href="#/arter/pas">Pas på</a><a href="#/forskelle">Se forskellen</a>
-    <a href="#/quiz">Quiz${best!=null?`<span class="m">${best}/10</span>`:""}</a><a href="#/fund">Mine fund${FINDS.length?`<span class="m">${FINDS.length}</span>`:""}</a>
+  <nav class="more" aria-label="Mere"><p class="lbl">Mere</p>
+    <a href="#/forskelle">Se forskellen${arrow}</a>
+    <a href="#/quiz">Quiz${best!=null?`<span class="m">Bedst ${best}/10</span>`:""}${arrow}</a>
+    <a href="#/fund">Mine fund${FINDS.length?`<span class="m">${FINDS.length}</span>`:""}${arrow}</a>
   </nav>`;
 };
 
@@ -235,7 +236,7 @@ V.lesson=()=>{
   return `${pageHead("Før du går i skoven","Lær at se","Næsten al bestemmelse begynder under hatten. Fire slags underside – og to steder på stokken, der skiller spisesvampe fra de farligste fluesvampe. Tegnene går igen overalt i guiden.")}
     <nav class="alphabet" aria-label="Indhold">${L.map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,44,l.t)}<span>${l.t}</span></a>`).join("")}</nav>
     ${L.map((l,i)=>`<section class="lesson" id="les-${l.id}">
-      <div class="lock-n"><span class="num">${nn(i+1)}</span>${pg(l.id,24,l.t)}</div>
+      <div class="lock-n">${pg(l.id,24,l.t)}</div>
       <h2 class="t-state">${l.t}</h2>
       ${l.tech?`<p class="tech">${l.tech}</p>`:""}
       <p class="t-read">${l.x}</p>
@@ -263,7 +264,7 @@ const FILT={
 };
 let F={}, FOPEN=null;
 const allCats=()=>[...FILT.skov.c,...FILT.koekken.c];
-const fTone=c=>FILT.koekken.c.includes(c)?"butter":c.id==="saeson"?"lilac":"moss";
+const fTone=()=>"moss";
 const CHEV=`<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>`;
 function filterUI(groups){
   const active=allCats().filter(c=>F[c.id]&&groups.some(g=>FILT[g].c.includes(c)));
@@ -345,7 +346,7 @@ function kendetegn(s){
     const ph=all.filter((p,i)=>i>0&&views.includes(p.v)&&!used.has(p)); ph.forEach(p=>used.add(p));
     const [f,...rest]=e, pre=f[0]!==title0&&f[0]!==title?`${f[0]}. `:"";
     html+=`<div class="kt">
-      <div class="lock-n kt-h"><span class="num">${nn(++no)}</span>${icon?pg(icon,22,title):""}<span class="lbl">${title}</span></div>
+      <div class="lock-n kt-h">${icon?pg(icon,22,title):""}<span class="lbl">${title}</span></div>
       <p class="t-obs">${pre}${f[1]}</p>${f[2]?`<span class="nb">${f[2]}</span>`:""}
       ${rest.map(([k,v,n])=>`<p class="kt-more"><b>${k}.</b> ${v}${n?`<span class="nb">${n}</span>`:""}</p>`).join("")}
       ${ph.map(p=>`<figure class="kt-ph">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${legend(p.a)}${esc(p.c||"")}</figcaption></figure>`).join("")}
@@ -386,8 +387,8 @@ V.species=(id)=>{
   <section class="sec">${sh("Kendetegn")}${KT.html}</section>
 
   <section class="sec">${sh("Voksested")}
-    ${vv.length?`<p class="hab-r lock">${pg("trae",22)}<span>${vv.map(v=>VVN[v]).join(" · ")}</span></p>`:""}
-    ${bund.length?`<p class="hab-r lock">${pg("bund",22)}<span>${[...new Set(bund)].join(" · ")}</span></p>`:""}
+    ${vv.length?`<p class="hab-r"><span>${vv.map(v=>VVN[v]).join(" · ")}</span></p>`:""}
+    ${bund.length?`<p class="hab-r"><span>${[...new Set(bund)].join(" · ")}</span></p>`:""}
     <p class="hab">${s.hab}</p>
     ${s.rare?`<p class="meta">${s.rare}</p>`:""}
     <div class="season"><p class="lbl">Sæson</p>${monthsHTML(s.m)}</div>
@@ -407,8 +408,7 @@ V.species=(id)=>{
     ${likeOnly.map(x=>`<a href="#/art/${x}">${phHTML(photo(x,"typisk")||photo(x),"",{ann:false,thumb:true})}<span class="t"><b class="nm">${S[x].da}</b>${statusTag(S[x])}</span></a>`).join("")}</div>
     ${s.extra?`<p class="say">${s.extra}</p>`:""}</section>`:""}
 
-  ${tags&&g?`<a class="to-kitchen" href="#/art/${id}/koekken"><span class="lbl">I køkkenet</span><span class="row"><b class="t-display">Gå i køkkenet</b>${arrow}</span><span class="s">Hvorfor den opfører sig, som den gør – og tre måder at lave den på.</span></a>`:""}
-  <a class="quiet" href="#/registrer/art/${id}">${pg("kamera",20)}<span>Registrér et fund af arten</span></a>`;
+  ${tags&&g?`<a class="to-kitchen" href="#/art/${id}/koekken"><span class="row"><b class="t-display">Gå i køkkenet</b>${arrow}</span><span class="s">Hvorfor den opfører sig, som den gør – og tre måder at lave den på.</span></a>`:""}`;
 };
 
 /* =====================================================================
@@ -430,10 +430,10 @@ V.pair=(pid)=>{
     const pa=view&&photo(a.id,view), pb=view&&photo(b.id,view);
     const show=pa&&pb&&!used.has(pa)&&!used.has(pb); if(show){used.add(pa);used.add(pb)}
     const ic=ROWICON[lbl];
-    return `<section class="cmp-row"><div class="lock-n"><span class="num">${nn(++no)}</span>${ic?pg(ic,22,lbl):""}<span class="lbl">${lbl}</span></div>
+    return `<section class="cmp-row"><div class="lock-n">${ic?pg(ic,22,lbl):""}<span class="lbl">${lbl}</span></div>
       ${show?`<div class="pair">${phHTML(pa,a.da,{lb:photoKey(pa)})}${phHTML(pb,b.da,{lb:photoKey(pb)})}</div>`:""}
       <div class="txt"><p>${lead(a,lbl)}${show?legend(pa.a):""}${ta}</p><p>${lead(b,lbl)}${show?legend(pb.a):""}${tb}</p></div></section>`}).join("")}
-  <nav class="util"><a href="#/art/${a.id}">${a.da} ${arrow}</a><a href="#/art/${b.id}">${b.da} ${arrow}</a></nav>`;
+  <nav class="more"><a href="#/art/${a.id}">${a.da}${arrow}</a><a href="#/art/${b.id}">${b.da}${arrow}</a></nav>`;
 };
 
 /* =====================================================================
@@ -505,8 +505,7 @@ function keyResult(){
       if(pr) html+=`<div class="btn-row"><a class="btn fill" href="#/forskel/${pr.id}">Se forskellen side om side</a></div>`;
     }
   }
-  html+=`<div class="btn-row"><button class="btn" id="kBack">Ret svar</button><button class="btn" id="kRestart">Start forfra</button></div>
-  <a class="quiet" href="#/registrer">${pg("kamera",20)}<span>Registrér et fund</span></a>`;
+  html+=`<div class="btn-row"><button class="btn" id="kBack">Ret svar</button><button class="btn" id="kRestart">Start forfra</button></div>`;
   return html;
 }
 function showStop(){
