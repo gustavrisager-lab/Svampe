@@ -296,9 +296,10 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 /* ---------- start ---------- */
 .home-area{padding:var(--s6) var(--g) 0}
 .home-area>.lbl{color:var(--grey)}
-.area-name{display:block;width:100%;min-height:48px;font:inherit;letter-spacing:inherit;text-align:left}
+.area-name{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;width:100%;min-height:48px;font:inherit;letter-spacing:inherit;text-align:left}
+.area-name .an{min-width:0}
 .area-name .nw{white-space:nowrap}
-.area-chev{width:.44em;height:.44em;margin-left:.16em;vertical-align:.06em;stroke-width:1.6}
+.area-chev{flex:none;width:.44em;height:.44em;margin-top:.3em;stroke-width:1.6}
 .area-chev path{vector-effect:non-scaling-stroke}
 .home-area .meta{margin-top:var(--s3);font-size:14px}
 .num.rust{color:var(--rust);font-weight:700}
@@ -608,7 +609,7 @@ body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
 .ph-head .qz-score{margin-top:var(--s3)}
 .pl .t{display:block}
 .txt .lgs,.ex .lgs{display:block;margin-bottom:6px}
-.home-area .t-display{font-size:clamp(48px,15vw,72px);letter-spacing:-.028em;overflow-wrap:anywhere}
+.home-area .t-display{font-size:clamp(48px,15vw,72px);letter-spacing:-.028em;overflow-wrap:break-word;-webkit-hyphens:auto;hyphens:auto}
 .fd-slot .ph.none{display:flex}
 
 body.kitchen .sec{margin-top:48px}

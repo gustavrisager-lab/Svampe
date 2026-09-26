@@ -193,7 +193,7 @@ function russula(){return `<aside class="note"><span class="lbl">Skørhatte og m
    ===================================================================== */
 /* Stednavnet er selve kontrollen: sidste ord og chevron hænger sammen ved linjeskift */
 const AREA_CHEV=`<svg class="area-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>`;
-function areaTitle(n){const w=esc(n).split(" "),l=w.pop();return `${w.length?w.join(" ")+" ":""}<span class="nw">${l}${AREA_CHEV}</span>`}
+function areaTitle(n){return `<span class="an">${esc(n)}</span>${AREA_CHEV}`}
 V.home=()=>{
   const a=area(), top=watchList(a), hero=top[0]&&top[0].s;
   const meta=cap1([MONN[new Date().getMonth()],a.skov?SKOV[a.skov].toLowerCase():null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · "));
