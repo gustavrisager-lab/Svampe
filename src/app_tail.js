@@ -83,6 +83,7 @@ async function geoName(lat,lon){try{const r=await fetch(`${NOMI}/reverse?format=
 const r3=x=>Math.round(x*1000)/1000; /* ca. 100 m – præcis GPS gemmes ikke */
 
 let AOV=null;
+const XICON=`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>`;
 function openArea(){
   const cur=area();
   AOV={d:{...cur},step:"map",map:null,circle:null,mark:null};
@@ -94,22 +95,23 @@ function drawArea(){
   const el=$("#areaov"), d=AOV.d;
   if(AOV.step==="map"){
     const rec=LS.get("omraader",[]).filter(x=>x.name!==d.name).slice(0,4);
-    el.innerHTML=`<div class="ov-top"><span class="lbl">Vælg område</span><button class="ov-x" aria-label="Luk">×</button></div>
+    el.innerHTML=`<div class="ov-top"><span class="lbl">Vælg område</span><button class="ov-x" aria-label="Luk">${XICON}</button></div>
     <div class="ov-q"><h1>Hvor skal du på svampetur?</h1></div>
-    <form class="ov-search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Søg efter et sted"><button class="lbl">Søg</button></form>
+    <form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Søg efter et sted"><button aria-label="Søg">${arrow}</button></form>
+    <button id="myPos" class="txt-link ov-pos">Brug min position</button>
     <div class="ov-res"></div>
     <div id="map"><div class="map-msg">Henter kort …</div></div>
     <div class="ov-bottom">
-      <div class="ov-sel"><span class="lbl dim">Valgt</span><b id="selName">${esc(d.name)}</b><span class="dim" id="selReg">${esc(d.region||"")}</span></div>
-      <div class="ov-rad">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div>
-      ${rec.length?`<div class="ov-recent"><span class="lbl dim">Tidligere</span>${rec.map((x,i)=>`<button data-rec="${i}">${esc(x.name)}</button>`).join("")}</div>`:""}
-      <div class="ov-btns"><button id="myPos" class="btn">Brug min position</button><button id="useArea" class="btn fill">Brug dette område</button></div>
+      <div class="ov-sel"><span class="lbl">Valgt område</span><b id="selName">${esc(d.name)}</b><span id="selReg">${esc(d.region||"")}</span></div>
+      <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div>
+      ${rec.length?`<div class="ov-recent"><span class="lbl">Tidligere</span>${rec.map((x,i)=>`<button data-rec="${i}">${esc(x.name)}</button>`).join("")}</div>`:""}
+      <button id="useArea" class="btn fill ov-use">Brug dette område</button>
     </div>`;
     $(".ov-x",el).onclick=closeArea;
     const setSel=(p,move)=>{Object.assign(d,{name:p.name,region:p.region||"",lat:r3(p.lat),lon:r3(p.lon)});$("#selName").textContent=d.name;$("#selReg").textContent=d.region||"";
       if(AOV.map){AOV.mark.setLatLng([d.lat,d.lon]);AOV.circle.setLatLng([d.lat,d.lon]);if(move)AOV.map.setView([d.lat,d.lon],11)}};
     el.querySelectorAll("[data-rec]").forEach(b=>b.onclick=()=>{const x=rec[+b.dataset.rec];Object.assign(d,x);setSel(x,true)});
-    el.querySelectorAll(".ov-rad button").forEach(b=>b.onclick=()=>{d.radius=+b.dataset.r;el.querySelectorAll(".ov-rad button").forEach(x=>x.classList.toggle("on",x===b));if(AOV.circle)AOV.circle.setRadius(d.radius*1000)});
+    el.querySelectorAll(".ov-rad button").forEach(b=>b.onclick=()=>{d.radius=+b.dataset.r;el.querySelectorAll(".ov-rad button").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-checked",x===b)});if(AOV.circle)AOV.circle.setRadius(d.radius*1000)});
     $(".ov-search",el).onsubmit=async e=>{e.preventDefault();const q=$("input",e.target).value.trim();const box=$(".ov-res",el);if(!q)return;box.innerHTML=`<p class="dim">Søger …</p>`;
       try{const res=await geoSearch(q);box.innerHTML=res.length?res.map((x,i)=>`<button data-i="${i}"><b>${esc(x.name)}</b><span>${esc(x.region)}</span></button>`).join(""):`<p class="dim">Ingen steder fundet.</p>`;
         box.querySelectorAll("button").forEach(b=>b.onclick=()=>{setSel(res[+b.dataset.i],true);box.innerHTML="";$("input",e.target).blur()})}
@@ -121,6 +123,7 @@ function drawArea(){
     $("#useArea").onclick=()=>{ if(!(d.name===area().name&&d.lat===area().lat)){d.skov=null;d.trees=[];d.bund=[]} AOV.step="skov";drawArea()};
     loadLeaflet().then(()=>{
       if(!AOV||AOV.step!=="map")return;
+      $("#map").innerHTML="";
       const m=L.map("map",{zoomControl:false,attributionControl:true}).setView([d.lat,d.lon],10);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap"}).addTo(m);
       AOV.circle=L.circle([d.lat,d.lon],{radius:d.radius*1000,color:"#111",weight:1,fillColor:"#111",fillOpacity:.05}).addTo(m);
@@ -136,7 +139,7 @@ function drawArea(){
     bund:{t:"Skovbunden",h:"Hvad dækker jorden?",multi:true,o:[["mos","Mos"],["naale","Nåledække"],["blade","Blade"],["graes","Græs"],["sand","Sandet"]],next:null}
   };
   const st=steps[AOV.step], key=AOV.step, val=d[key]||(st.multi?[]:null);
-  el.innerHTML=`<div class="ov-top"><span class="lbl">${esc(d.name)}</span><button class="ov-x" aria-label="Luk">×</button></div>
+  el.innerHTML=`<div class="ov-top"><span class="lbl">${esc(d.name)}</span><button class="ov-x" aria-label="Luk">${XICON}</button></div>
     <div class="ov-q"><span class="lbl dim">${["skov","trees","bund"].indexOf(key)+1} / 3</span><h1>${st.t}</h1><p class="dim">${st.h}</p></div>
     <div class="hab-opts">${st.o.map(([v,l])=>`<button data-v="${v}" class="${(st.multi?val.includes(v):val===v)?"on":""}">${l}</button>`).join("")}</div>
     <div class="ov-btns col">${st.multi?`<button class="btn fill" id="habNext">${st.next?"Videre":"Færdig"}</button>`:""}<button class="btn" id="habDk">Ved ikke</button><button class="lbl dim ov-skip" id="habSkip">Spring over</button></div>`;
