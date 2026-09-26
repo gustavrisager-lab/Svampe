@@ -345,7 +345,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .ab.tall .ph{aspect-ratio:3/4}
 .pl .t{padding:12px var(--g) 0}
 .pl .nm{display:block;font:400 22px/1.15 var(--serif)}
-.pl .nm .vs{font-family:var(--sans);font-size:17px;color:var(--grey);margin:0 4px}
+.pl .nm .vs{width:.8em;height:.8em;margin:0 .22em;vertical-align:-.06em}
 .pl .q{display:block;margin-top:6px;font-size:14px;color:var(--ink-2)}
 .ab-names{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px var(--g) 0}
 .ab-names a{display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-decoration:none}
@@ -618,3 +618,4 @@ body.kitchen .sec{margin-top:48px}
 @media (max-height:700px){#areaov>#map{flex-basis:200px;min-height:200px}}
 .hm-go .arr,.flt-h .arr{align-self:center}
 .more a,.to-kitchen .row,.hm-now .row{align-items:center}
+.arr.back{transform:rotate(180deg)}
