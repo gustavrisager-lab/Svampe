@@ -34,7 +34,7 @@ function annSVG(a){
   if(!a||!a.length) return "";
   let g="",m="";
   a.forEach(([x,y,r],i)=>{
-    g+=`<circle class="o" cx="${x*4}" cy="${y*3}" r="${r*4}"/><circle class="i" cx="${x*4}" cy="${y*3}" r="${r*4}"/>`;
+    g+=`<circle class="o" cx="${x*4}" cy="${y*3}" r="${r*4+1.5}"/><circle class="i" cx="${x*4}" cy="${y*3}" r="${r*4-1.5}"/>`;
     const lx=Math.min(94,Math.max(6,x+r*.72)), ly=Math.min(92,Math.max(8,y-r*4/3*.72));
     m+=`<span class="ann-m" style="left:${lx.toFixed(1)}%;top:${ly.toFixed(1)}%">${i+1}</span>`;
   });
@@ -42,7 +42,7 @@ function annSVG(a){
 }
 function legend(a){return a&&a.some(x=>x[3])?`<span class="lgs">${a.map((x,i)=>x[3]?`<span class="lg"><i>${i+1}</i>${esc(x[3])}</span>`:"").join("")}</span>`:""}
 function phHTML(p,label,opts={}){
-  if(!p) return `<div class="ph none">${pg(opts.icon||"hele",32)}</div>`;
+  if(!p) return `<div class="ph none">${opts.icon?pg(opts.icon,32):""}</div>`;
   const src=opts.thumb?p.t:p.s, att=opts.defer?`data-src="${src}"`:`src="${src}" loading="lazy"`;
   return `<div class="ph"${opts.lb?` data-lb="${opts.lb}"`:""}><img ${att} alt="${esc(p.c||label||"")}" decoding="async">${opts.ann===false?"":annSVG(p.a)}</div>`;
 }
@@ -181,7 +181,8 @@ function ixRow(s,o={}){
     ${foundToday(s.id)?`<span class="m">Set i dag</span>`:""}</span></a>`;
 }
 const ixList=(l,o={})=>`<div class="ix">${l.map((s,i)=>ixRow(s,o.num?{...o,n:nn(i+1)}:o)).join("")}</div>`;
-function pairItem(p){const a=S[p.a],b=S[p.b];return `<a href="#/forskel/${p.id}"><div class="ab">${phHTML(photo(a.id,"typisk")||photo(a.id),"",{ann:false,thumb:true})}${phHTML(photo(b.id,"typisk")||photo(b.id),"",{ann:false,thumb:true})}</div><span class="t"><b class="nm">${a.da}<span class="vs">↔</span>${b.da}</b><span class="q">${p.q}</span></span></a>`}
+function pairItem(p){const a=S[p.a],b=S[p.b],pa=photo(a.id,"typisk")||photo(a.id),pb=photo(b.id,"typisk")||photo(b.id),both=pa&&pb;
+  return `<a href="#/forskel/${p.id}"${both?"":` class="txt-only"`}>${both?`<div class="ab">${phHTML(pa,"",{ann:false,thumb:true})}${phHTML(pb,"",{ann:false,thumb:true})}</div>`:""}<span class="t"${both?"":` style="padding:0"`}><b class="nm">${a.da}<span class="vs">↔</span>${b.da}</b><span class="q">${p.q}${arrow}</span></span></a>`}
 const pairList=l=>`<div class="pl">${l.map(pairItem).join("")}</div>`;
 function russula(){return `<aside class="note"><span class="lbl">Skørhatte og mælkehatte</span><p>Du vil møde mange skørhatte (<i>Russula</i>). Kødet knækker som kridt, og der kommer ingen mælk. Der er mange arter, flere er skarpe eller giftige, og ingen er med i guiden. Mælkehatte ligner dem, men bløder mælk, når du brækker en lamel.</p></aside>`}
 
@@ -301,7 +302,7 @@ V.list=(grp)=>{
   if(kitchenOn) base=base.filter(s=>tagsOf(s));
   const res=ord(applyFilters(base,groups));
   const head=grp==="godt"?pageHead("","Spisesvampe","Spiselig betyder spiselig efter sikker artsbestemmelse. Hver art har en forveksling – se den altid.")
-    :pageHead("","Arter",`${SP.length} arter – et udvalg, ikke en komplet liste. Ordnet efter, hvad du kan møde i ${esc(A.name)} nu.`);
+    :pageHead("","Arter",`<b>${SP.length} arter</b>, ordnet efter, hvad du kan møde i ${esc(A.name)} nu.`);
   const body=filtering||grp==="godt"
     ?`<p class="res-n">${res.length?res.length+" "+(res.length===1?"art.":"arter."):"Ingen arter passer."}${kitchenOn&&grp!=="godt"?" Kun arter, der regnes for spiselige.":""}</p>${res.length?ixList(res,{taste:kitchenOn||grp==="godt"}):""}`
     :`<section class="sec">${sh("Spisesvampe",`<a href="#/arter/godt">Alle ${arrow}</a>`)}${ixList(ord(SP.filter(s=>s.grp==="godt")))}</section>
@@ -349,7 +350,7 @@ function kendetegn(s){
       <div class="lock-n kt-h">${icon?pg(icon,22,title):""}<span class="lbl">${title}</span></div>
       <p class="t-obs">${pre}${f[1]}</p>${f[2]?`<span class="nb">${f[2]}</span>`:""}
       ${rest.map(([k,v,n])=>`<p class="kt-more"><b>${k}.</b> ${v}${n?`<span class="nb">${n}</span>`:""}</p>`).join("")}
-      ${ph.map(p=>`<figure class="kt-ph">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${legend(p.a)}${esc(p.c||"")}</figcaption></figure>`).join("")}
+      ${ph.map(p=>`<figure class="kt-ph${["under","kod","ring"].includes(p.v)&&!(p.a&&p.a.length)?" detail":""}">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${legend(p.a)}${esc(p.c||"")}</figcaption></figure>`).join("")}
     </div>`;
   }
   if(s.under!=="andet") html+=`<details class="anat"><summary>Se anatomien</summary><figure class="plate"><div class="dia">${diaFor(s,null)}</div><figcaption class="meta">Skematisk tegning: underside${s.k.ring&&s.k.ring[0]==="ja"?", ring":""}${s.k.basis&&(s.k.basis.includes("pose")||s.k.basis.includes("knold"))?" og basis":""} hos ${lcName(s)}.</figcaption></figure></details>`;
@@ -399,7 +400,7 @@ V.species=(id)=>{
     <dl class="sense">
       <div><dt class="lbl">Smag</dt><dd>${tags.s.length?`<span class="t-obs">${W(tags.s.map(x=>GVOC.s[x]))}</span>`:""}<p>${g.smag}</p></dd></div>
       <div><dt class="lbl">Tekstur</dt><dd><span class="t-obs">${W(tags.t.map(x=>GVOC.t[x]))}</span><p>${g.tekstur}</p></dd></div>
-      <div><dt class="lbl">Bedst</dt><dd><span class="t-obs">${W(tags.k.map(x=>GVOC.k[x]))}</span></dd></div>
+      <div><dt class="lbl">Bedst til</dt><dd><span class="t-obs">${W(tags.k.map(x=>GVOC.k[x]))}</span></dd></div>
     </dl></section>`:""}
   ${s.noGastro&&SPIS(s)?`<section class="sec">${sh("Smag og tekstur")}<p class="say">Ingen køkkenbeskrivelse: arten har en dødelig dobbeltgænger og er kun for meget erfarne samlere.</p></section>`:""}
 
@@ -423,7 +424,7 @@ V.pair=(pid)=>{
   const lead=(sp,lbl)=>lbl==="Underside"||lbl==="Lameller"||lbl==="Porer"?pg(underIcon(sp),20,underLabel(sp)):"";
   const used=new Set([ha,hb]); let no=0;
   return `<div class="cmp-head"><a href="#/art/${a.id}">${a.da}</a><a href="#/art/${b.id}">${b.da}</a></div>
-  <div class="ab tall">${phHTML(ha,a.da,{ann:false,lb:photoKey(ha)})}${phHTML(hb,b.da,{ann:false,lb:photoKey(hb)})}</div>
+  ${ha&&hb?`<div class="ab tall">${phHTML(ha,a.da,{ann:false,lb:photoKey(ha)})}${phHTML(hb,b.da,{ann:false,lb:photoKey(hb)})}</div>`:""}
   <div class="ab-names"><a href="#/art/${a.id}"><b class="nm">${a.da}</b>${statusTag(a)}</a><a href="#/art/${b.id}"><b class="nm">${b.da}</b>${statusTag(b)}</a></div>
   <section class="decisive"><p class="lbl">Det afgørende</p><h1 class="t-state">${p.q}</h1><p class="k">${p.key}</p></section>
   ${p.rows.map(([lbl,view,ta,tb])=>{
@@ -475,7 +476,7 @@ V.key=()=>{
   const opts=q.o.map(([v,l,h])=>tiles
     ?`<button class="opt tile" data-v="${v}">${withIcon?pg(icon(v),52,l):`<i class="sw" style="background:${SWATCH[v]}"></i>`}${body(l,h)}</button>`
     :`<button class="opt rowo" data-v="${v}">${body(l,h)}${arrow}</button>`).join("");
-  const dk=`<button class="opt ${tiles?"tile":"rowo"} dk" data-v="vedikke">${body("Ved ikke")}${tiles?"":arrow}</button>`;
+  const dk=`<button class="opt ${tiles?"tile":"rowo"} dk" data-v="vedikke">${body("Ved ikke")}${arrow}</button>`;
   return `<div class="key-top"><span class="lbl">Undersøg · ${K.step+1} / ${total}</span>${K.step?`<button class="txt-link" id="kRestart">Start forfra</button>`:""}</div>
   <div class="key-prog" aria-hidden="true">${Array.from({length:total},(_,i)=>`<i class="${i<=K.step?"on":""}"></i>`).join("")}</div>
   <div class="key-q"><p class="lbl">Hvad ser du?</p><h1 class="t-state">${q.t}</h1><p class="intro">${q.h}</p></div>
