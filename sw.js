@@ -1,7 +1,7 @@
 /* SVAMPEGUIDEN – service worker. Shell: netværk først (så opdateringer når frem),
    billeder: cache først (hentes første gang, de vises), kort-fliser: netværk med
    lille cache. Intet brugerindhold passerer herigennem – fund ligger i IndexedDB. */
-const VER="85f96eef6e";
+const VER="33b5b88d43";
 const SHELL=["./","./index.html","./manifest.webmanifest","./icons/icon-180.png","./icons/icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open("shell-"+VER).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith("shell-")&&k!=="shell-"+VER).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});

@@ -304,7 +304,7 @@ async function bindFinds(root){
   for(const f of list){const dk=dayKey(f.created);if(dk!==last){if(last)html+=`</div>`;html+=`<div class="fd-day"><h2 class="t-obs">${dayLabel(f.created)}</h2><span class="lbl">${DAYN[new Date(f.created).getDay()]}</span></div><div class="ix">`;last=dk}
     const slot=["hele","hat","under","stok"].find(k=>f.photos&&f.photos[k]);const ui=f.obs&&f.obs.under;const unk=!f.ident||f.ident.status==="ukendt";
     const img=slot?`<div class="ph"><img src="${objURL(f.photos[slot].thumb)}" alt=""></div>`:`<div class="ph none">${pg(ui?(ui==="andet"?"form":ui):"hele",32)}</div>`;
-    html+=`<a href="#/fund/${f.id}">${img}<span class="t"><b class="nm${unk?" unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span>${obsLine(f.obs||{})?`<span class="m">${ui?pg(ui==="andet"?"form":ui,16):""}${esc(obsLine(f.obs||{}))}</span>`:""}</span></a>`}
+    html+=`<a href="#/fund/${f.id}">${img}<span class="t"><b class="nm${unk?" unk":""}">${esc(identTitle(f))}</b><span class="m">${hhmm(f.created)}${f.area?" · "+esc(f.area.name):""}</span>${obsLine(f.obs||{})?`<span class="m">${esc(obsLine(f.obs||{}))}</span>`:""}</span></a>`}
   box.innerHTML=html+`</div>`;
 }
 V.find=(id)=>`<div id="fdDetail"><p class="meta pad" style="padding-top:48px">Henter …</p></div>`;
@@ -313,7 +313,7 @@ async function bindFind(root,id){
   if(!f){box.innerHTML=`<p class="t-obs pad" style="padding-top:48px">Fundet findes ikke længere.</p><div class="btn-row"><a class="btn" href="#/fund">Til fund</a></div>`;return}
   const s=S[f.ident&&f.ident.species], st=(f.ident||{}).status||"ukendt", d=new Date(f.created);
   const slots=SLOTS.map(([k],i)=>{const p=f.photos&&f.photos[k];return `<figure class="fd-slot">${p?`<button class="ph" data-full="${k}"><img src="${objURL(p.thumb)}" alt=""></button>`:`<div class="ph none">${pg(SLOTI[k],28)}</div>`}<figcaption><span class="num">${nn(i+1)}</span><span class="lbl">${SLOTN[k]}</span></figcaption></figure>`}).join("");
-  const row=(l,v,ic)=>v?`<div class="fd-row"><span class="lbl">${l}</span><p>${ic?pg(ic,20):""}${v}</p></div>`:"";
+  const row=(l,v)=>v?`<div class="fd-row"><span class="lbl">${l}</span><p>${v}</p></div>`:"";
   const idHTML=st==="ukendt"?`<p class="lbl">Identifikation</p><p class="meta">Ubestemt. Et ukendt fund er stadig en observation.</p>`
     :st==="bud"?`<p class="lbl">Identifikation</p><p class="meta">Dit eget bud – ikke en bestemmelse.</p>`:`<p class="lbl">Identifikation</p><p class="meta">Bestemt af en kyndig${f.ident.by?": "+esc(f.ident.by):""}.</p>`;
   const gastroOK=s&&typeof GASTRO!=="undefined"&&GASTRO[s.id]&&!s.noGastro;
@@ -332,7 +332,7 @@ async function bindFind(root,id){
     ${s&&isDanger(s)?`<p class="say danger"><b>${stInfo(s).t}.</b> ${s.danger||""}</p>`:""}
     <div class="btn-col"><button class="btn fill" id="fdCmp">Sammenlign med guiden</button><div class="btn-row in"><a class="btn" href="#/registrer/ret/${f.id}">Redigér</a>${navigator.canShare?`<button class="btn" id="fdShare">Del billeder</button>`:""}</div></div>
     ${gastroOK?`${st!=="bestemt"?`<p class="say"><b>Ikke sikkert bestemt.</b> Spis ikke svampen, før en kyndig har bestemt netop dette eksemplar.</p>`:""}
-      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="lbl">I køkkenet</span><span class="row"><b class="t-state">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
+      <a class="to-kitchen" href="#/art/${s.id}/koekken"><span class="row"><b class="t-state">Arten i køkkenet</b>${arrow}</span><span class="s">Gælder arten – ikke dit konkrete fund.</span></a>`:""}
     <div class="btn-row"><button class="txt-link del" id="fdDel">Slet fund</button></div>`;
   box.querySelectorAll("[data-full]").forEach(b=>b.onclick=async()=>{const r=await DB.photo(f.id+":"+b.dataset.full);const u=r?objURL(r):$("img",b).src;showLB(u,`${SLOTN[b.dataset.full]} · ${esc(identTitle(f))}`,dayLabel(f.created)+" · "+hhmm(f.created))});
   $("#fdDel",box).onclick=async()=>{if(!confirm("Slet dette fund og dets billeder fra enheden?"))return;await DB.del(f.id);await loadFinds();location.hash="#/fund"};
@@ -355,7 +355,7 @@ V.omraade=()=>{
   const a=area(), top=watchList(a);
   return `${pageHead("I skoven nu · "+MONN[new Date().getMonth()],"Arter, du kan møde","Ud fra årstiden, skoven og hvor arterne er fundet før. Det siger, hvad du kan møde – ikke hvad du har fundet.")}
   ${areaHead(a)}
-  <div style="height:32px"></div>${ixList(top.map(x=>x.s),{num:true,spot:true})}
+  ${ixList(top.map(x=>x.s),{num:true,spot:true})}
   ${russula()}
   <div class="btn-row"><a class="btn fill" href="#/noegle">Find en art</a><a class="btn" href="#/arter">Alle arter</a></div>`;
 };
@@ -368,7 +368,7 @@ V.kitchen=(id)=>{
   const W=o=>cap1(o.join(" · ").toLowerCase());
   const im=photo(id,"kod")||photo(id,"typisk")||photo(id);
   return `<header class="k-id"><p class="lbl">I køkkenet</p><h1 class="t-display">${s.da}</h1><p class="la">${s.la}</p>
-    <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund. Kun efter sikker artsbestemmelse.</p></header>
+    <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund.<br><b>Kun efter sikker artsbestemmelse.</b></p></header>
   ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
   ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="t-read">${g.hvorfor}</p></section>`:""}
   ${im?`<figure class="k-img">${phHTML(im,s.da,{ann:false,lb:photoKey(im)})}<figcaption>${esc(im.c||"")}</figcaption></figure>`:""}
@@ -379,7 +379,7 @@ V.kitchen=(id)=>{
     ${g.retter.map(r=>`<details class="k-dish"><summary><span class="k-n">${r.n}</span><span class="k-t"><span class="lbl">${r.type} · ${r.ker}</span><b class="nm">${r.titel}</b><span class="meta">${[r.tid,r.til].filter(Boolean).join(" · ")}</span></span></summary>
       <div class="k-body"><h4 class="lbl">Ingredienser</h4><ul>${li(r.ingr)}</ul><h4 class="lbl">Fremgangsmåde</h4><ol>${li(r.metode)}</ol>${r.tip?`<p class="k-tip"><span class="lbl">Tip</span>${r.tip}</p>`:""}</div></details>`).join("")}
   </section>
-  <a class="quiet" href="#/art/${id}">Tilbage til ${lcName(s)} ${arrow}</a>`;
+  <nav class="more"><a href="#/art/${id}">Tilbage til ${lcName(s)}${arrow}</a></nav>`;
 };
 
 /* ---------- offline: gem alle guidens billeder ---------- */
