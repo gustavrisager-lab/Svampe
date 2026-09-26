@@ -1,6 +1,6 @@
-# Svampe · Tisvilde Hegn
+# Svampe · Asserbo
 
-En visuel feltguide til svampe i Tisvilde Hegn (Nordsjælland, efterår).
+En visuel feltguide til svampe i nåleskoven ved Asserbo (Nordsjælland, sidst i september).
 
 Hele guiden er én selvstændig fil: `index.html` (HTML, CSS, JavaScript og indlejrede fotos). Den virker offline, når den først er åbnet.
 
