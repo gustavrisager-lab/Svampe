@@ -788,6 +788,58 @@ body,.look .row p,.fd-row p,.cmp-row .txt p,.sides-body p,.k-list li,.k-body li,
 .k-two>div+div{margin-top:28px}
 .card .st,.as-card .st{margin-top:6px}
 .sp-ctx p{color:var(--moss)}
+/* =====================================================================
+   v7 — større kontrast, mere luft
+   ===================================================================== */
+:root{--ink:#000;--ink2:#1F1F1F;--ink3:#555;--rule:#A8A8A8;--rule2:#D0D0D0}
+.home-h{padding-top:36px}
+.home-area{margin-top:0;padding-top:16px;border-top-width:2px}
+.home-area .place{font:400 clamp(48px,14vw,64px)/1 var(--serif);margin-top:14px;letter-spacing:-.01em}
+.home-area .ln{margin-top:14px}
+.lbl.link{margin-top:18px}
+.home-row{margin-top:72px;padding-top:16px}
+.home-area-mod{margin-top:64px;padding-top:16px}
+.hm-ph{margin-top:22px}
+.home-choices{margin-top:80px}
+.choice{padding:32px 20px;min-height:132px}
+.home-reg{margin-top:64px}
+.home-links{margin-top:64px}
+.home-links a{padding:20px 0;min-height:62px}
+.sec{padding-top:80px}
+.subh{padding-top:80px;padding-bottom:22px}
+.list-h{padding-top:56px;padding-bottom:44px}
+.list-h p{margin-top:18px}
+.h2{margin-bottom:28px;padding-top:12px}
+.grid,.as-grid{row-gap:56px;column-gap:16px}
+.sp-head{padding-top:40px}
+.status{margin-top:26px}
+.lede{padding-top:36px}
+.spotline,.danger-box,.sp-ctx{margin-top:40px}
+.sp-actions{padding-top:32px}
+.note-box{margin-top:56px}
+.look .row{padding:20px 0}
+.sides-body{margin-top:28px}
+.cmp-row{padding-top:56px}
+.cmp-key{margin-top:32px}
+.les-card{padding:48px 0 40px}
+.les-intro{padding:48px 20px 36px}
+.key-q{padding:40px 20px 12px}
+.opts{gap:14px;padding-top:28px}
+.res{margin-top:28px}
+.area-h{margin-bottom:56px}
+.fd-rows{margin-top:48px}
+.fd-row{padding:18px 0}
+.fd-grid{row-gap:40px}
+.fd-day{padding-top:64px}
+.k-sec{padding-top:60px}
+.rg-q{padding-top:44px}
+.rg-obs{padding-top:44px}
+.qz-opts{gap:12px;padding-top:24px}
+.safety{margin-top:96px}
+.bfoot{margin-top:96px}
+.status-note,.small-note,.credit,.gal-n{color:var(--ink3)}
+.chip{border-color:var(--rule)}
+.card .st,.as-card .st{margin-top:8px}
 </style>
 </head>
 <body>
@@ -2653,7 +2705,6 @@ V.home=()=>{
   const a=area(), top=watchList(a).slice(0,5);
   return `
   <div class="home-h">
-    <p class="sub">En visuel feltguide</p>
     <button class="home-area" data-area><span class="lbl dim">Område</span><span class="place">${esc(a.name)}</span><span class="ln">${esc([a.region,areaLine(a)].filter(Boolean).join(" · "))}</span><span class="lbl link">Skift område →</span></button>
   </div>
   <a class="home-row" href="#/laer"><span class="lbl dim">Før du går i skoven</span><b>De seks ting, du skal kunne se</b><span class="arr">→</span></a>
