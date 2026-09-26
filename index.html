@@ -2716,7 +2716,7 @@ V.home=()=>{
   <a class="home-area-mod" href="#/omraade"><span class="lbl">I dit område</span><b>10 svampe at holde øje med</b>
     <div class="hm-ph">${top.map(x=>phHTML(photo(x.s.id,"typisk")||photo(x.s.id),"",{ann:false,thumb:true})).join("")}</div><span class="arr">→</span></a>
   <div class="home-choices">
-  <a class="choice" href="#/arter/godt"><div><h2>GODT AT VIDE</h2><p>Spisesvampe – og hvordan de varierer.</p></div>${phHTML(photo("kantarel","under")||photo("kantarel"),"",{ann:false,thumb:true})}</a>
+  <a class="choice" href="#/arter/godt"><div><h2>SPISESVAMPE</h2><p>Og hvad de kan forveksles med.</p></div>${phHTML(photo("kantarel","under")||photo("kantarel"),"",{ann:false,thumb:true})}</a>
   <a class="choice" href="#/noegle"><div><h2>HVAD SER DU?</h2><p>Svar på et par spørgsmål om det, du kan se.</p></div>${phHTML(photo("karljohan","under")||photo("karljohan"),"",{ann:false,thumb:true})}</a>
   <a class="choice warn" href="#/arter/pas"><div><h2>PAS PÅ</h2><p>Giftige arter og de klassiske forvekslinger.</p></div>${phHTML(photo("gron","basis")||photo("gron"),"",{ann:false,thumb:true})}</a>
   </div>
@@ -2775,10 +2775,10 @@ V.list=(grp)=>{
     <div class="subh"><div class="h2"><span class="lbl">Se forskellen</span></div></div>
     <div class="cmp-list">${PAIRS.map(cmpLink).join("")}</div>${russula()}${safety()}`;
   }
-  const head=grp==="godt"?`<span class="lbl" style="color:var(--moss)">Godt at vide</span><h1 style="margin-top:8px">GODT AT VIDE</h1><p>Spisesvampe, sorteret efter hvor relevante de er i ${esc(A.name)} lige nu. Hver art har en forveksling – se den altid.</p>`
+  const head=grp==="godt"?`<span class="lbl" style="color:var(--moss)">Spisesvampe</span><h1 style="margin-top:8px">SPISESVAMPE</h1><p>Spisesvampe, sorteret efter hvor relevante de er i ${esc(A.name)} lige nu. Hver art har en forveksling – se den altid.</p>`
     :`<span class="lbl dim">Alle arter</span><h1 style="margin-top:8px">${SP.length} ARTER</h1><p>Et kurateret udvalg – ikke en komplet liste. Sorteret efter relevans i ${esc(A.name)} lige nu; ingen arter skjules.</p>`;
   if(!grp) return `<div class="list-h">${head}</div>
-    <div class="subh" style="padding-top:6px"><div class="h2"><span class="lbl" style="color:var(--moss)">Godt at vide</span><a class="lbl dim" href="#/arter/godt">Se</a></div></div>
+    <div class="subh" style="padding-top:6px"><div class="h2"><span class="lbl" style="color:var(--moss)">Spisesvampe</span><a class="lbl dim" href="#/arter/godt">Se</a></div></div>
     <div class="grid">${ord(SP.filter(s=>s.grp==="godt")).map(card).join("")}</div>
     <div class="subh"><div class="h2"><span class="lbl" style="color:var(--rust)">Pas på</span><a class="lbl dim" href="#/arter/pas">Se</a></div></div>
     <div class="grid">${ord(SP.filter(s=>s.grp==="pas")).map(card).join("")}</div>${safety()}`;
@@ -3515,7 +3515,7 @@ function route(){
     case "": case undefined: return {v:V.home(),t:"",tab:"hjem",home:true};
     case "omraade": case "asserbo": return {v:V.omraade(),t:"I dit område",tab:"hjem"};
     case "laer": return {v:V.lesson(),t:"Før du går i skoven",tab:"hjem"};
-    case "arter": return {v:V.list(b),t:b==="godt"?"Godt at vide":b==="pas"?"Pas på":"Arter",tab:"arter"};
+    case "arter": return {v:V.list(b),t:b==="godt"?"Spisesvampe":b==="pas"?"Pas på":"Arter",tab:"arter"};
     case "art": if(c==="koekken") return {v:V.kitchen(b),t:"Gastronomi",tab:"arter",kitchen:true};
       return {v:V.species(b),t:S[b]?S[b].da:"",tab:"arter",sp:b};
     case "forskelle": return {v:V.pairs(),t:"Se forskellen",tab:"forskelle"};
