@@ -13,8 +13,8 @@
 <title>Svampe</title>
 <style>
 :root{
-  --bg:#FFFFFF; --paper:#FFFFFF; --ink:#111111; --ink2:#4D4D4D; --ink3:#8C8C8C;
-  --rule:#DADADA; --rule2:#EBEBEB; --kitchen:#FFF5CF;
+  --bg:#FFFFFF; --paper:#FFFFFF; --ink:#0A0A0A; --ink2:#333333; --ink3:#6E6E6E;
+  --rule:#C4C4C4; --rule2:#E2E2E2; --brand:#3E2E22; --brandh:76px; --kitchen:#FFF5CF;
   --moss:#3E5233; --moss-l:#E2E5D6; --rust:#9A3A22; --rust-l:#F2E2D9; --ochre:#9C7424;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -638,9 +638,50 @@ body.kitchen #tabs{background:rgba(255,245,207,.97)}
 .k-tip .lbl{margin-right:6px}
 .empty-note{padding:34px 20px}
 
+
+/* ---------- v4: brand band, footer, contrast, air ---------- */
+#brand{background:var(--brand);color:#F5EFE6;padding-top:var(--sat)}
+#brand .in{max-width:620px;margin:0 auto;height:var(--brandh);display:flex;align-items:center;gap:6px;padding:0 20px}
+#bback{width:40px;height:44px;margin-left:-12px;display:none;align-items:center;justify-content:center;color:#F5EFE6}
+#bback svg{width:22px;height:22px}
+.bname{flex:1;font:800 12px/1 var(--sans);letter-spacing:.16em;text-decoration:none;color:#F5EFE6}
+.breg{font:650 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#F5EFE6;padding:14px 0 14px 12px}
+#top{transform:translateY(-100%);transition:transform .22s ease,border-color .2s;border-bottom:1px solid var(--rule)}
+#top.show{transform:none}
+#reg{font-size:12px}
+main{padding-top:0!important}
+.bfoot{margin:72px 0 0;background:var(--brand);color:#F5EFE6;padding:26px 20px 30px;display:flex;flex-direction:column;gap:8px}
+.bfoot b{font:800 12px/1 var(--sans);letter-spacing:.16em}
+.bfoot span{font:500 12px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.home-h{padding-top:40px}
+.home-h .sub{margin-top:0;font:400 20px/1.3 var(--serif);color:var(--ink)}
+.choice{grid-template-columns:1fr 84px;padding:26px 20px;min-height:120px}
+.choice .ph{width:84px;height:84px}
+.choice h2{font-size:25px}
+.choice p{font-size:14.5px;margin-top:7px}
+.sec{padding-top:60px}
+.subh{padding-top:60px}
+.list-h{padding-top:48px;padding-bottom:34px}
+.home-area{margin-top:32px}
+.home-row{margin-top:52px}
+.home-area-mod{margin-top:44px}
+.home-choices{margin-top:60px}
+.home-reg{margin-top:48px}
+.home-links{margin-top:48px}
+.safety{margin-top:72px;color:var(--ink2)}
+.grid,.as-grid{row-gap:44px}
+.h2{border-top-width:2px}
+.lbl.dim{color:var(--ink3)}
+.card .la,.as-card .la{color:var(--ink2)}
+body.kitchen #brand{background:var(--brand)}
 </style>
 </head>
 <body>
+<div id="brand"><div class="in">
+  <button id="bback" aria-label="Gå tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 4 7 12l8 8"/></svg></button>
+  <a class="bname" href="#/">SVAMPEGUIDEN</a>
+  <a class="breg" href="#/registrer" aria-label="Registrér en svamp">+ Fund</a>
+</div></div>
 <header id="top"><div class="in">
   <button id="back" aria-label="Gå tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 4 7 12l8 8"/></svg></button>
   <div id="ttl" class="lbl"></div>
@@ -2498,7 +2539,6 @@ V.home=()=>{
   const a=area(), top=watchList(a).slice(0,5);
   return `
   <div class="home-h">
-    <h1>SVAMPE</h1>
     <p class="sub">En visuel feltguide</p>
     <button class="home-area" data-area><span class="lbl dim">Område</span><span class="place">${esc(a.name)}</span><span class="ln">${esc([a.region,areaLine(a)].filter(Boolean).join(" · "))}</span><span class="lbl link">Skift område →</span></button>
   </div>
@@ -2506,9 +2546,9 @@ V.home=()=>{
   <a class="home-area-mod" href="#/omraade"><span class="lbl">I dit område</span><b>10 svampe at holde øje med</b>
     <div class="hm-ph">${top.map(x=>phHTML(photo(x.s.id,"typisk")||photo(x.s.id),"",{ann:false,thumb:true})).join("")}</div><span class="arr">→</span></a>
   <div class="home-choices">
-  <a class="choice" href="#/arter/godt"><span class="no">01</span><div><h2>GODT AT KENDE</h2><p>Spisesvampe – og hvordan de varierer.</p></div>${phHTML(photo("kantarel","under")||photo("kantarel"),"",{ann:false,thumb:true})}</a>
-  <a class="choice warn" href="#/arter/pas"><span class="no">02</span><div><h2>PAS PÅ</h2><p>Giftige arter og de klassiske forvekslinger.</p></div>${phHTML(photo("gron","basis")||photo("gron"),"",{ann:false,thumb:true})}</a>
-  <a class="choice" href="#/noegle"><span class="no">03</span><div><h2>HVAD SER DU?</h2><p>Svar på et par spørgsmål om det, du kan se.</p></div>${phHTML(photo("karljohan","under")||photo("karljohan"),"",{ann:false,thumb:true})}</a>
+  <a class="choice" href="#/arter/godt"><div><h2>GODT AT VIDE</h2><p>Spisesvampe – og hvordan de varierer.</p></div>${phHTML(photo("kantarel","under")||photo("kantarel"),"",{ann:false,thumb:true})}</a>
+  <a class="choice" href="#/noegle"><div><h2>HVAD SER DU?</h2><p>Svar på et par spørgsmål om det, du kan se.</p></div>${phHTML(photo("karljohan","under")||photo("karljohan"),"",{ann:false,thumb:true})}</a>
+  <a class="choice warn" href="#/arter/pas"><div><h2>PAS PÅ</h2><p>Giftige arter og de klassiske forvekslinger.</p></div>${phHTML(photo("gron","basis")||photo("gron"),"",{ann:false,thumb:true})}</a>
   </div>
   <div class="pad home-reg"><a class="btn fill wide" href="#/registrer">+ Registrér en svamp</a></div>
   <div class="home-links">
@@ -2558,17 +2598,17 @@ V.list=(grp)=>{
   const card=s=>`<a class="card" href="#/art/${s.id}"><div style="position:relative">${phHTML(photo(s.id,"typisk")||photo(s.id),s.da,{ann:false,thumb:true})}${foundToday(s.id)?`<span class="found">Fundet</span>`:""}</div><h3>${s.da}</h3><div class="la">${s.la}</div>${stTxt(s)}${vvHTML(s,true)}${whyHTML(REL[s.id])}</a>`;
   if(grp==="pas"){
     const four=["snehvid","gron","giftslor","hjelmhat"].map(id=>{const s=S[id];return `<a href="#/art/${id}">${phHTML(photo(id,"typisk")||photo(id),s.da,{ann:false,thumb:true})}<div class="t"><b>${s.da}</b><span>${STATUS[s.st].t}${s.deadly?" · dødelig":""}</span></div></a>`}).join("");
-    return `<div class="list-h"><span class="lbl" style="color:var(--rust)">02 · Pas på</span><h1 style="margin-top:8px">PAS PÅ</h1><p>Lær disse fire først. Alle fire kan slå et menneske ihjel. De to fluesvampe kendes på pose ved basis, gift-slørhatten på rustbrune lameller, hjelmhatten på sølvtrævler og dødt træ.</p></div>
+    return `<div class="list-h"><span class="lbl" style="color:var(--rust)">Pas på</span><h1 style="margin-top:8px">PAS PÅ</h1><p>Lær disse fire først. Alle fire kan slå et menneske ihjel. De to fluesvampe kendes på pose ved basis, gift-slørhatten på rustbrune lameller, hjelmhatten på sølvtrævler og dødt træ.</p></div>
     <div class="four">${four}</div>
     <div class="subh"><div class="h2"><span class="lbl">Alle giftige og ikke-spiselige</span></div></div>
     <div class="grid">${list.map(card).join("")}</div>
     <div class="subh"><div class="h2"><span class="lbl">Se forskellen</span></div></div>
     <div class="cmp-list">${PAIRS.map(cmpLink).join("")}</div>${russula()}${safety()}`;
   }
-  const head=grp==="godt"?`<span class="lbl" style="color:var(--moss)">01 · Godt at kende</span><h1 style="margin-top:8px">GODT AT KENDE</h1><p>Spisesvampe, sorteret efter hvor relevante de er i ${esc(A.name)} lige nu. Hver art har en forveksling – se den altid.</p>`
+  const head=grp==="godt"?`<span class="lbl" style="color:var(--moss)">Godt at vide</span><h1 style="margin-top:8px">GODT AT VIDE</h1><p>Spisesvampe, sorteret efter hvor relevante de er i ${esc(A.name)} lige nu. Hver art har en forveksling – se den altid.</p>`
     :`<span class="lbl dim">Alle arter</span><h1 style="margin-top:8px">${SP.length} ARTER</h1><p>Et kurateret udvalg – ikke en komplet liste. Sorteret efter relevans i ${esc(A.name)} lige nu; ingen arter skjules.</p>`;
   if(!grp) return `<div class="list-h">${head}</div>
-    <div class="subh" style="padding-top:6px"><div class="h2"><span class="lbl" style="color:var(--moss)">Godt at kende</span><a class="lbl dim" href="#/arter/godt">Se</a></div></div>
+    <div class="subh" style="padding-top:6px"><div class="h2"><span class="lbl" style="color:var(--moss)">Godt at vide</span><a class="lbl dim" href="#/arter/godt">Se</a></div></div>
     <div class="grid">${ord(SP.filter(s=>s.grp==="godt")).map(card).join("")}</div>
     <div class="subh"><div class="h2"><span class="lbl" style="color:var(--rust)">Pas på</span><a class="lbl dim" href="#/arter/pas">Se</a></div></div>
     <div class="grid">${ord(SP.filter(s=>s.grp==="pas")).map(card).join("")}</div>${safety()}`;
@@ -3297,6 +3337,7 @@ V.info=()=>{
    ROUTER
    ===================================================================== */
 const app=$("#app");
+const UPDATED="26. september 2026";
 function route(){
   const h=(location.hash||"#/").slice(2).split("/");
   const [a,b,c]=h;
@@ -3304,7 +3345,7 @@ function route(){
     case "": case undefined: return {v:V.home(),t:"",tab:"hjem",home:true};
     case "omraade": case "asserbo": return {v:V.omraade(),t:"I dit område",tab:"hjem"};
     case "laer": return {v:V.lesson(),t:"Før du går i skoven",tab:"hjem"};
-    case "arter": return {v:V.list(b),t:b==="godt"?"Godt at kende":b==="pas"?"Pas på":"Arter",tab:"arter"};
+    case "arter": return {v:V.list(b),t:b==="godt"?"Godt at vide":b==="pas"?"Pas på":"Arter",tab:"arter"};
     case "art": if(c==="koekken") return {v:V.kitchen(b),t:"Gastronomi",tab:"arter",kitchen:true};
       return {v:V.species(b),t:S[b]?S[b].da:"",tab:"arter",sp:b};
     case "forskelle": return {v:V.pairs(),t:"Se forskellen",tab:"forskelle"};
@@ -3329,9 +3370,9 @@ function render(keepScroll){
   const y=window.scrollY;
   document.body.classList.toggle("kitchen",!!r.kitchen);
   document.querySelector('meta[name="theme-color"]').content=r.kitchen?"#FFF5CF":"#FFFFFF";
-  app.innerHTML=`<div class="view">${r.v}</div>`;
+  app.innerHTML=`<div class="view">${r.v}</div><footer class="bfoot"><b>SVAMPEGUIDEN</b><span>Testversion · Opdateret ${UPDATED}</span></footer>`;
   $("#ttl").textContent=r.t;
-  $("#back").style.visibility=r.home?"hidden":"visible";
+  $("#back").style.visibility=r.home?"hidden":"visible";$("#bback").style.display=r.home?"none":"flex";$(".breg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
   $("#reg").style.visibility=(r.reg||r.loadEdit)?"hidden":"visible";
   document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("on",a.dataset.t===r.tab));
   initGalleries(app);
@@ -3359,10 +3400,11 @@ function updBadge(){
   if(!b){b=document.createElement("span");b.className="n";a.appendChild(b)} b.textContent=n;
 }
 document.addEventListener("click",e=>{if(e.target.closest("[data-area]")){e.preventDefault();openArea()}});
+$("#bback").onclick=()=>$("#back").click();
 $("#back").onclick=()=>{if(history.length>1&&lastHashStack>0){history.back()}else location.hash="#/"};
 let lastHashStack=0;
 window.addEventListener("hashchange",()=>{lastHashStack++;render()});
-window.addEventListener("scroll",()=>$("#top").classList.toggle("line",scrollY>8),{passive:true});
+const topUpd=()=>{$("#top").classList.toggle("show",scrollY>$("#brand").offsetHeight-8)};window.addEventListener("scroll",topUpd,{passive:true});
 try{localStorage.removeItem("svampe.felt")}catch(e){}
 render();
 migrateOld().then(loadFinds).then(()=>{if(location.hash===""||location.hash==="#/"||location.hash.startsWith("#/arter"))render(true)});
