@@ -58,7 +58,7 @@ function monthsHTML(m){const now=new Date().getMonth()+1;return `<div class="mon
 const arrow=`<span class="arr" aria-hidden="true">→</span>`;
 
 /* =====================================================================
-   PIKTOGRAMMER — SVAMPEs botaniske alfabet.
+   PIKTOGRAMMER — SVAMPEGUIDENs botaniske alfabet.
    Én silhuet (hat + stok); den del, der tales om, er fyldt sort.
    Undersidetyperne har hver sin tekstur. Samme tegn betyder altid det samme.
    ===================================================================== */

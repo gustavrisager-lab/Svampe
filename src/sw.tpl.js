@@ -1,4 +1,4 @@
-/* Svampe – service worker. Shell: netværk først (så opdateringer når frem),
+/* SVAMPEGUIDEN – service worker. Shell: netværk først (så opdateringer når frem),
    billeder: cache først (hentes første gang, de vises), kort-fliser: netværk med
    lille cache. Intet brugerindhold passerer herigennem – fund ligger i IndexedDB. */
 const VER="__VER__";
