@@ -722,6 +722,72 @@ body{font-size:16px;line-height:1.55}
 a.btn[href="#/registrer"]{min-height:84px;gap:12px}
 a.btn[href="#/registrer"]::before{content:"";width:24px;height:24px;flex:none;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M6 15h9l3-5h12l3 5h9v23H6z'/%3E%3Ccircle cx='24' cy='26' r='7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M6 15h9l3-5h12l3 5h9v23H6z'/%3E%3Ccircle cx='24' cy='26' r='7.5'/%3E%3C/svg%3E") center/contain no-repeat}
 .home-reg .btn,#app .pad>a.btn.fill[href="#/registrer"]{min-height:96px}
+/* =====================================================================
+   TYPOGRAFISK SYSTEM (v6) — 9 roller, intet andet:
+   SerifXL 34 · Titel 26/700 · Mellemtitel 18/700 · Serif 20 · Brød 16 (600 = fremhævning)
+   Lille 14 · Latin 15 kursiv · Etiket 11/600 VERSAL · Knap 13/600 VERSAL
+   ===================================================================== */
+:root{--t-xl:400 34px/1.08 var(--serif);--t-1:700 26px/1.12 var(--sans);--t-2:700 18px/1.25 var(--sans);--t-s:400 20px/1.35 var(--serif);
+  --t-b:400 16px/1.55 var(--sans);--t-sm:400 14px/1.45 var(--sans);--t-la:italic 400 15px/1.3 var(--serif);--t-lbl:600 11px/1.3 var(--sans);--t-btn:600 13px/1 var(--sans)}
+/* Serif XL */
+.sp-head h1,.home-area .place,.area-h h2,.k-head h1,.fd-head h1,.ov-sel b,.fd-row .bud,.fd-row .unk-big,.rg-field p,.qz-end h1{font:var(--t-xl);letter-spacing:0;text-transform:none}
+.home-area .place,.area-h h2{font-style:normal}
+/* Titel */
+.list-h h1,.key-q h1,.res-h h1,.les-intro h1,.rg-q h1,.ov-q h1,.les-card h2,.qz-score,.phone,.stop-body h2{font:var(--t-1);letter-spacing:0;text-transform:none}
+.stop-body h2{font:var(--t-2)}
+/* Mellemtitel */
+.choice h2,.home-area-mod b,.k-n,.rg-n,.as-n,.hab-opts button{font:var(--t-2);letter-spacing:0;text-transform:none}
+.as-n{font:var(--t-lbl);letter-spacing:.06em}
+/* Serif */
+.home-h .sub,.home-row b,.lede,.les-intro p,.les-card p.t,.rg-q p,.qz-q h1,.cmp-key p,.k-two p,.k-why,.big-safe,.empty-note,
+.card h3,.as-card h3,.fd-card b,.res h3,.cmp-head b,.la-card .t b,.cmp-list a b,.k-t b,.gastro-row b,.gastro-link span:last-child,
+.four .t b,.as-also b,.fd h3,.stop-sign p,.qz-end p{font:var(--t-s);letter-spacing:0;text-transform:none}
+.fd-card b.unk{font-style:italic}
+/* Brødtekst */
+body,.look .row p,.fd-row p,.cmp-row .txt p,.sides-body p,.k-list li,.k-body li,.prose p,.prose li,.danger-box p,.note-box p,.k-first p,.warn-line p,
+.qz-opt,.qz-exp,.k-pair,.spotline p,.stop-body li,.sep td,.rg-id button span,.rg-chips button,.ov-res b,.presets b,.home-links span,.as-spot p,.sp-ctx p,.rare,.k-tip,
+.opt b,.rg-id button b,.ov-rad button,.hab-opts button{font:var(--t-b);letter-spacing:0;text-transform:none}
+.spotline p,.as-spot p,.sp-ctx p,.opt b,.rg-id button b,.ov-rad button,.hab-opts button,.sides-body h3{font-weight:600}
+.sides-body h3{font:600 16px/1.3 var(--sans)}
+.as-spot p{font-size:15px}
+/* Lille */
+.choice p,.list-h p,.key-q p,.res-h p,.home-area .ln,.area-h p,.area-h .cov,.gal-cap,.status-note,.safety,.credits,.alt,.sp-head .alt,.opt small,.fd-card .m,.fd .m,
+.k-t small,.les-card .ex,.sides-body .why,.sides-ph .cap,.cap,.stop-fig div.c,.rg-note,.ov-sel span.dim,.ov-rad button small,.ov-res span,.presets span,.map-msg,.ov-res p,
+.why,.vvmini,.rg-q p.dim,.qz-top,.cmp-list a span,.gal-n,.credit,.res-h p,.sec.dim,.dim[style],.home-links span,.home-links b{font:var(--t-sm);letter-spacing:0;text-transform:none}
+.why{color:var(--moss);font-weight:600}.vvmini{color:var(--ink2)}
+.credit,.gal-n{font-size:12px;color:var(--ink3)}
+/* Latin */
+.sp-head .la,.k-head .la,.card .la,.as-card .la,.res .la,.les-card .tech,.la-card .vs,.stop-body i{font:var(--t-la);color:var(--ink2)}
+/* Etiket */
+.lbl,.chip,.status,.st,.card .st,.as-card .st,.res .st,.cmp-head .st,.four .t span,.as-also .st,.tree,.months div,.sides-tabs button,.gal-cap b,.les-toc a,.prose h2,
+.rg-obs h2,.rg-prog li button,.fd-day span,.k-dish .lbl,.rank,.fd-slot figcaption,.found,.given span,.sep th,.res .danger,.as-n,.fd-card .ph.guide span,.vv span,.bfoot span,.bfoot b,.bname,.breg,#reg,
+.home-links b,.rg-cam b{font:var(--t-lbl);letter-spacing:.12em;text-transform:uppercase}
+.home-links b{font:var(--t-btn);letter-spacing:.1em;text-transform:uppercase}
+.bname,.bfoot b{font-weight:700;font-size:12px;letter-spacing:.16em}.breg,#reg{font-size:12px}
+.status{height:30px}.vv span{height:34px;line-height:31px}
+/* Knap */
+.btn,.rg-cam b,.opt.dk b,.ov-search button,.del,.x,#rgCancel,.rg-top button{font:var(--t-btn);letter-spacing:.1em;text-transform:uppercase}
+.stop-sign h1{font:800 64px/.9 var(--sans)}
+.qz-score{font-variant-numeric:tabular-nums}
+/* v6 opsamling */
+.h2 .lbl,.h2 a.lbl{font:var(--t-lbl);letter-spacing:.12em}
+.les-toc a span,.rg-prog li button span{font:var(--t-lbl);letter-spacing:.12em;margin-bottom:3px}
+.look .row p small,.status-note{font:var(--t-sm);color:var(--ink2);margin-top:4px}
+.credits b,.sep td b,.prose b{font-weight:600}
+.la-card .t span{font:var(--t-lbl);letter-spacing:.12em;text-transform:uppercase}
+#app .la-card .t b,#app .four .t b{font:var(--t-s)}
+
+.as-spot p{font:600 14px/1.45 var(--sans)}
+.small-note{font:var(--t-sm);color:var(--ink3)}
+.les-card p.t b{font-weight:400;font-style:italic}
+/* v6: færre lag på kort */
+.card .vvmini,.as-card .vvmini{display:none}
+.why{color:var(--ink2)!important;font-weight:400!important;margin-top:4px}
+.why.off{color:var(--ink3)!important}
+.k-two{grid-template-columns:1fr;gap:0}
+.k-two>div+div{margin-top:28px}
+.card .st,.as-card .st{margin-top:6px}
+.sp-ctx p{color:var(--moss)}
 </style>
 </head>
 <body>
@@ -2700,9 +2766,9 @@ V.species=(id)=>{
   <section class="sec"><div class="h2"><span class="lbl">Vokser ved</span></div>
     ${vvHTML(s)}
     ${s.bund&&s.bund.length?`<div class="trees">${s.bund.map(t=>`<span class="tree">${BUND[t]}</span>`).join("")}</div>`:""}
-    <p style="font-size:15.5px;margin-top:10px" class="x-more">${s.hab}</p>
+    <p style="margin-top:12px" class="x-more">${s.hab}</p>
     ${s.rare?`<p class="rare">${s.rare}</p>`:""}
-    <p class="x-more" style="font-size:12.5px;color:var(--ink3);margin-top:8px">Voksestedet støtter en bestemmelse – det afgør den aldrig.</p>
+    <p class="x-more small-note" style="margin-top:8px">Voksestedet støtter en bestemmelse – det afgør den aldrig.</p>
     <div class="h2" style="margin-top:22px"><span class="lbl">Sæson</span><span class="lbl dim">Nu: ${MONTHS[new Date().getMonth()]===undefined?"":["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec"][new Date().getMonth()]}</span></div>
     ${monthsHTML(s.m)}
   </section>
