@@ -196,7 +196,7 @@ const AREA_CHEV=`<svg class="area-chev" viewBox="0 0 24 24" fill="none" stroke="
 function areaTitle(n){return `<span class="an">${esc(n)}</span>${AREA_CHEV}`}
 V.home=()=>{
   const a=area(), top=watchList(a), hero=top[0]&&top[0].s;
-  const meta=cap1([MONN[new Date().getMonth()],a.skov?SKOV[a.skov].toLowerCase():null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · "));
+  const meta=cap1([a.skov?SKOV[a.skov].toLowerCase():null,(a.trees||[]).length?a.trees.map(t=>TREEN[t]).join("/"):null].filter(Boolean).join(" · "));
   const alpha=["lameller","ror","ribber","pigge","ring","basis"];
   const hp=hero&&(photo(hero.id,"typisk")||photo(hero.id));
   const best=LS.get("quizBest",null);
@@ -204,10 +204,10 @@ V.home=()=>{
   <section class="home-area">
     <p class="lbl">Område</p>
     <h1 class="t-display"><button class="area-name" data-area aria-label="${esc(a.name)} – skift område">${areaTitle(a.name)}</button></h1>
-    <p class="meta">${esc(meta)}</p>
+    ${meta?`<p class="meta">${esc(meta)}</p>`:""}
   </section>
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
-  <a class="hm-now" href="#/omraade"><span class="lbl">${esc(a.name)} · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
+  <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Guiden"><p class="lbl">Guiden</p>
     <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span></a>
     <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
