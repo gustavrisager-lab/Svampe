@@ -369,7 +369,7 @@ V.kitchen=(id)=>{
   const im=photo(id,"kod")||photo(id,"typisk")||photo(id);
   return `<header class="k-id"><p class="lbl">I køkkenet</p><h1 class="t-display">${s.da}</h1><p class="la">${s.la}</p>
     <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund.<br><b>Kun efter sikker artsbestemmelse.</b></p></header>
-  ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
+  ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst til</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
   ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="t-read">${g.hvorfor}</p></section>`:""}
   ${im?`<figure class="k-img">${phHTML(im,s.da,{ann:false,lb:photoKey(im)})}<figcaption>${esc(im.c||"")}</figcaption></figure>`:""}
   <section class="sec">${sh("Hvad den kan")}<ul class="k-list">${li(g.bedstTil)}</ul></section>

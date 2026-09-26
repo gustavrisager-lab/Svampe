@@ -796,7 +796,7 @@ const GASTRO = {
 const GVOC={
   s:{mild:"Mild",noedde:"Nøddeagtig",dyb:"Dyb",krydret:"Krydret",jordet:"Jordet"},
   t:{fast:"Fast",koedfuld:"Kødfuld",bloed:"Blød",sej:"Sej",sproed:"Sprød"},
-  k:{pande:"Pande",sauce:"Sauce",suppe:"Suppe",pasta:"Pasta og risotto",toerring:"Tørring",paneret:"Paneret"}
+  k:{pande:"Pandestegning",sauce:"Sauce",suppe:"Suppe",pasta:"Pasta og risotto",toerring:"Tørring",paneret:"Paneret"}
 };
 const GTAG={
   kantarel:{s:["mild","krydret"],t:["fast"],k:["pande","pasta"]},

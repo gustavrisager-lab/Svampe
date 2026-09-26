@@ -101,7 +101,7 @@ ul,ol{margin:0}
 #top.root #back,#top.root #ttl{display:none}
 #top.root #wm{flex:1}
 #top:not(.root) #wm{display:none}
-.pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 13px;border-radius:999px;background:var(--wash);color:var(--ink);font:600 13px/1 var(--sans);text-decoration:none;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 15px;border-radius:999px;background:var(--wash);color:var(--ink);font:600 11.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
 #tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);box-shadow:0 -1px 0 var(--rule);padding-bottom:var(--sab);transition:background-color .4s}
 #tabs .in{max-width:620px;margin:0 auto;display:flex}
 #tabs a{position:relative;flex:1;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-decoration:none;color:var(--grey)}
@@ -111,21 +111,23 @@ ul,ol{margin:0}
 #tabs a.on span{font-weight:700}
 #tabs a.on::before{content:"";position:absolute;top:0;left:50%;width:20px;height:2px;margin-left:-10px;background:var(--ink)}
 #tabs a .n{position:absolute;top:7px;left:calc(50% + 7px);min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:var(--ink);color:#fff;font:700 9.5px/15px var(--sans);text-align:center}
+body{padding-bottom:calc(var(--tab) + var(--sab))}
 main{max-width:620px;margin:0 auto}
 .view{animation:vin .18s ease-out;min-height:60vh}
 @keyframes vin{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.view,body{animation:none;transition:none}}
-.foot{margin-top:var(--s9);background:var(--chestnut);color:#fff;padding:var(--s7) var(--g) calc(var(--tab) + var(--sab) + var(--s7))}
+.foot{margin-top:var(--s9);background:var(--chestnut);color:#fff;padding:var(--s6) var(--g) var(--s6)}
 .foot .wmk{font:700 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase}
-.foot p{margin-top:var(--s5);font:400 21px/1.35 var(--serif);max-width:24em}
-.foot a{display:inline-flex;gap:8px;margin-top:var(--s5);font:500 15px/1 var(--sans);text-decoration:none}
-.foot small{display:block;margin-top:var(--s7);font:500 11px/1.4 var(--sans);letter-spacing:.04em;opacity:.72}
+.foot p{margin-top:var(--s4);font:400 21px/1.35 var(--serif);max-width:24em}
+.foot a{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:var(--s2);font:500 15px/1 var(--sans);text-decoration:none}
+.foot small{display:block;margin-top:var(--s5);font:500 11px/1.4 var(--sans);letter-spacing:.04em;opacity:.72}
 
 /* ---------- sidehoved, sektioner ---------- */
 .ph-head{padding:var(--s7) var(--g) 0}
 .ph-head>.lbl{margin-bottom:var(--s4);color:var(--grey)}
 .ph-head.danger>.lbl{color:var(--rust)}
 .intro{margin-top:var(--s5);color:var(--ink-2);max-width:32em}
+.intro b{font-weight:600;color:var(--ink)}
 .sec{margin-top:var(--s8);padding:0 var(--g)}
 .sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 var(--s5);font:600 11px/1.3 var(--sans);letter-spacing:.11em;text-transform:uppercase}
 .sh a{font:500 13px/1 var(--sans);letter-spacing:0;text-transform:none;text-decoration:none;color:var(--grey)}
@@ -179,14 +181,15 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 /* ---------- fotos og annotationer ---------- */
 .ph{position:relative;overflow:hidden;background:var(--wash)}
 .ph img{width:100%;height:100%;object-fit:cover}
+.ph.none{background:rgba(20,20,20,.03)}
 .ph.empty,.ph.none{display:flex;align-items:center;justify-content:center;color:var(--grey)}
 .ph.empty span{font:500 11px/1.3 var(--sans);color:var(--grey);text-align:center;padding:6px}
 .ann{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.ann .o{fill:none;stroke:#141414;stroke-width:4.5;vector-effect:non-scaling-stroke}
-.ann .i{fill:none;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
-.ann-m{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#141414;color:#fff;font:700 11px/22px var(--sans);text-align:center;box-shadow:0 0 0 2px #fff;pointer-events:none}
+.ann .o{fill:none;stroke:#141414;stroke-width:3;vector-effect:non-scaling-stroke}
+.ann .i{fill:none;stroke:#fff;stroke-width:3;vector-effect:non-scaling-stroke}
+.ann-m{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#141414;color:#fff;font:600 9.5px/16px var(--sans);text-align:center;pointer-events:none}
 .lg{display:inline-flex;align-items:center;gap:7px;margin-right:14px;color:var(--ink);font-weight:500}
-.lg i{display:inline-block;width:17px;height:17px;border-radius:50%;background:var(--ink);color:#fff;font:700 9.5px/17px var(--sans);font-style:normal;text-align:center}
+.lg i{display:inline-block;width:15px;height:15px;border-radius:50%;background:var(--ink);color:#fff;font:600 9px/15px var(--sans);font-style:normal;text-align:center}
 .gal{position:relative}
 .gal-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
 .gal-track::-webkit-scrollbar{display:none}
@@ -220,10 +223,10 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .sig{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin:var(--s4) 0 0;padding:0}
 .sig li{font:500 15px/1.25 var(--sans)}
 .kt+.kt{margin-top:var(--s7)}
-.kt:nth-of-type(even) .kt-ph{margin-left:0;margin-right:0}
-.kt:nth-of-type(even) .kt-ph figcaption{padding-left:0;padding-right:0}
+.kt-ph.detail{margin-left:0;margin-right:0}
+.kt-ph.detail figcaption{padding-left:0;padding-right:0}
 .kt-h .lbl{color:var(--ink)}
-.kt .t-obs{margin-top:var(--s3)}
+.kt .t-obs{margin-top:var(--s3);font:400 19px/1.4 var(--sans);letter-spacing:-.005em}
 .kt .nb{display:block;margin-top:var(--s2);font-size:13px;line-height:1.45;color:var(--grey)}
 .kt-more{margin-top:var(--s4);font-size:16px;color:var(--ink-2)}
 .kt-more b{font-weight:600;color:var(--ink)}
@@ -343,10 +346,12 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 /* ---------- se forskellen ---------- */
 .pl{margin-top:var(--s6)}
 .pl>a{display:block;padding-bottom:var(--s7);text-decoration:none}
+.pl>a.txt-only{padding:0 var(--g) var(--s6)}
+.pl .q .arr{margin-left:6px}
 .ab{display:grid;grid-template-columns:1fr 1fr;gap:2px}
 .ab .ph{aspect-ratio:1/1}
 .ab.tall .ph{aspect-ratio:3/4}
-.pl .t{padding:14px var(--g) 0}
+.pl .t{padding:12px var(--g) 0}
 .pl .nm{display:block;font:400 22px/1.15 var(--serif)}
 .pl .nm .vs{font-family:var(--sans);font-size:17px;color:var(--grey);margin:0 4px}
 .pl .q{display:block;margin-top:6px;font-size:14px;color:var(--ink-2)}
@@ -380,7 +385,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .key-q .t-state{margin-top:var(--s3)}
 .key-q .intro{margin-top:var(--s3);font-size:15px}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:var(--s6) var(--g) 0}
-.tile{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:150px;padding:16px;border-radius:12px;background:var(--wash);text-align:left}
+.tile{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:136px;padding:16px;border-radius:4px;background:rgba(20,20,20,.035);text-align:left}
 .tile b{display:block;font:500 18px/1.2 var(--sans)}
 .tile small{display:block;margin-top:4px;font-size:13px;line-height:1.35;color:var(--ink-2)}
 .tile:active{background:var(--ink);color:#fff}
@@ -393,7 +398,9 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .rowo .arr{margin-left:auto;color:var(--grey)}
 .rowo:active{color:var(--grey)}
 .opt.dk{color:var(--grey)}
-.tiles .opt.dk{grid-column:1/-1;min-height:52px;flex-direction:row;align-items:center;background:none;box-shadow:inset 0 0 0 1px var(--rule)}
+.tiles .opt.dk{grid-column:1/-1;min-height:56px;flex-direction:row;align-items:center;justify-content:space-between;padding:0;margin-top:8px;border-radius:0;background:none;border-bottom:1px solid var(--rule);color:var(--ink-2)}
+.tiles .opt.dk b{font:500 17px/1.2 var(--sans)}
+.tiles .opt.dk:active{background:none;color:var(--grey)}
 .sw{display:block;width:28px;height:28px;flex:none;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
 .given{display:flex;flex-wrap:wrap;gap:6px;padding:var(--s5) var(--g) 0}
 .res-ix{margin-top:var(--s6)}
@@ -548,7 +555,7 @@ body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
 .k-id .la{margin-top:var(--s3)}
 .k-safe{margin-top:var(--s5);font-size:14px;line-height:1.5;color:var(--ink-2);max-width:26em}
 .k-safe b{font-weight:600;color:var(--ink)}
-.k-sense{display:grid;gap:var(--s5);margin:var(--s7) var(--g) 0}
+.k-sense{display:grid;gap:20px;margin:40px var(--g) 0}
 .k-sense dt{color:var(--grey)}
 .k-sense dd{margin-top:4px;font:400 28px/1.1 var(--serif);letter-spacing:-.01em}
 .k-img{margin-top:var(--s8)}
@@ -605,6 +612,8 @@ body.kitchen{--bg:var(--butter);--grey:#5F5A48;--rule:rgba(20,20,20,.14)}
 .txt .lgs,.ex .lgs{display:block;margin-bottom:6px}
 .home-area .t-display{font-size:clamp(48px,15vw,72px);letter-spacing:-.028em;overflow-wrap:anywhere}
 .fd-slot .ph.none{display:flex}
+
+body.kitchen .sec{margin-top:48px}
 
 </style>
 
@@ -1554,7 +1563,7 @@ const GASTRO = {
 const GVOC={
   s:{mild:"Mild",noedde:"Nøddeagtig",dyb:"Dyb",krydret:"Krydret",jordet:"Jordet"},
   t:{fast:"Fast",koedfuld:"Kødfuld",bloed:"Blød",sej:"Sej",sproed:"Sprød"},
-  k:{pande:"Pande",sauce:"Sauce",suppe:"Suppe",pasta:"Pasta og risotto",toerring:"Tørring",paneret:"Paneret"}
+  k:{pande:"Pandestegning",sauce:"Sauce",suppe:"Suppe",pasta:"Pasta og risotto",toerring:"Tørring",paneret:"Paneret"}
 };
 const GTAG={
   kantarel:{s:["mild","krydret"],t:["fast"],k:["pande","pasta"]},
@@ -2369,7 +2378,7 @@ function annSVG(a){
   if(!a||!a.length) return "";
   let g="",m="";
   a.forEach(([x,y,r],i)=>{
-    g+=`<circle class="o" cx="${x*4}" cy="${y*3}" r="${r*4}"/><circle class="i" cx="${x*4}" cy="${y*3}" r="${r*4}"/>`;
+    g+=`<circle class="o" cx="${x*4}" cy="${y*3}" r="${r*4+1.5}"/><circle class="i" cx="${x*4}" cy="${y*3}" r="${r*4-1.5}"/>`;
     const lx=Math.min(94,Math.max(6,x+r*.72)), ly=Math.min(92,Math.max(8,y-r*4/3*.72));
     m+=`<span class="ann-m" style="left:${lx.toFixed(1)}%;top:${ly.toFixed(1)}%">${i+1}</span>`;
   });
@@ -2377,7 +2386,7 @@ function annSVG(a){
 }
 function legend(a){return a&&a.some(x=>x[3])?`<span class="lgs">${a.map((x,i)=>x[3]?`<span class="lg"><i>${i+1}</i>${esc(x[3])}</span>`:"").join("")}</span>`:""}
 function phHTML(p,label,opts={}){
-  if(!p) return `<div class="ph none">${pg(opts.icon||"hele",32)}</div>`;
+  if(!p) return `<div class="ph none">${opts.icon?pg(opts.icon,32):""}</div>`;
   const src=opts.thumb?p.t:p.s, att=opts.defer?`data-src="${src}"`:`src="${src}" loading="lazy"`;
   return `<div class="ph"${opts.lb?` data-lb="${opts.lb}"`:""}><img ${att} alt="${esc(p.c||label||"")}" decoding="async">${opts.ann===false?"":annSVG(p.a)}</div>`;
 }
@@ -2516,7 +2525,8 @@ function ixRow(s,o={}){
     ${foundToday(s.id)?`<span class="m">Set i dag</span>`:""}</span></a>`;
 }
 const ixList=(l,o={})=>`<div class="ix">${l.map((s,i)=>ixRow(s,o.num?{...o,n:nn(i+1)}:o)).join("")}</div>`;
-function pairItem(p){const a=S[p.a],b=S[p.b];return `<a href="#/forskel/${p.id}"><div class="ab">${phHTML(photo(a.id,"typisk")||photo(a.id),"",{ann:false,thumb:true})}${phHTML(photo(b.id,"typisk")||photo(b.id),"",{ann:false,thumb:true})}</div><span class="t"><b class="nm">${a.da}<span class="vs">↔</span>${b.da}</b><span class="q">${p.q}</span></span></a>`}
+function pairItem(p){const a=S[p.a],b=S[p.b],pa=photo(a.id,"typisk")||photo(a.id),pb=photo(b.id,"typisk")||photo(b.id),both=pa&&pb;
+  return `<a href="#/forskel/${p.id}"${both?"":` class="txt-only"`}>${both?`<div class="ab">${phHTML(pa,"",{ann:false,thumb:true})}${phHTML(pb,"",{ann:false,thumb:true})}</div>`:""}<span class="t"${both?"":` style="padding:0"`}><b class="nm">${a.da}<span class="vs">↔</span>${b.da}</b><span class="q">${p.q}${arrow}</span></span></a>`}
 const pairList=l=>`<div class="pl">${l.map(pairItem).join("")}</div>`;
 function russula(){return `<aside class="note"><span class="lbl">Skørhatte og mælkehatte</span><p>Du vil møde mange skørhatte (<i>Russula</i>). Kødet knækker som kridt, og der kommer ingen mælk. Der er mange arter, flere er skarpe eller giftige, og ingen er med i guiden. Mælkehatte ligner dem, men bløder mælk, når du brækker en lamel.</p></aside>`}
 
@@ -2636,7 +2646,7 @@ V.list=(grp)=>{
   if(kitchenOn) base=base.filter(s=>tagsOf(s));
   const res=ord(applyFilters(base,groups));
   const head=grp==="godt"?pageHead("","Spisesvampe","Spiselig betyder spiselig efter sikker artsbestemmelse. Hver art har en forveksling – se den altid.")
-    :pageHead("","Arter",`${SP.length} arter – et udvalg, ikke en komplet liste. Ordnet efter, hvad du kan møde i ${esc(A.name)} nu.`);
+    :pageHead("","Arter",`<b>${SP.length} arter</b>, ordnet efter, hvad du kan møde i ${esc(A.name)} nu.`);
   const body=filtering||grp==="godt"
     ?`<p class="res-n">${res.length?res.length+" "+(res.length===1?"art.":"arter."):"Ingen arter passer."}${kitchenOn&&grp!=="godt"?" Kun arter, der regnes for spiselige.":""}</p>${res.length?ixList(res,{taste:kitchenOn||grp==="godt"}):""}`
     :`<section class="sec">${sh("Spisesvampe",`<a href="#/arter/godt">Alle ${arrow}</a>`)}${ixList(ord(SP.filter(s=>s.grp==="godt")))}</section>
@@ -2684,7 +2694,7 @@ function kendetegn(s){
       <div class="lock-n kt-h">${icon?pg(icon,22,title):""}<span class="lbl">${title}</span></div>
       <p class="t-obs">${pre}${f[1]}</p>${f[2]?`<span class="nb">${f[2]}</span>`:""}
       ${rest.map(([k,v,n])=>`<p class="kt-more"><b>${k}.</b> ${v}${n?`<span class="nb">${n}</span>`:""}</p>`).join("")}
-      ${ph.map(p=>`<figure class="kt-ph">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${legend(p.a)}${esc(p.c||"")}</figcaption></figure>`).join("")}
+      ${ph.map(p=>`<figure class="kt-ph${["under","kod","ring"].includes(p.v)&&!(p.a&&p.a.length)?" detail":""}">${phHTML(p,"",{lb:photoKey(p)})}<figcaption>${legend(p.a)}${esc(p.c||"")}</figcaption></figure>`).join("")}
     </div>`;
   }
   if(s.under!=="andet") html+=`<details class="anat"><summary>Se anatomien</summary><figure class="plate"><div class="dia">${diaFor(s,null)}</div><figcaption class="meta">Skematisk tegning: underside${s.k.ring&&s.k.ring[0]==="ja"?", ring":""}${s.k.basis&&(s.k.basis.includes("pose")||s.k.basis.includes("knold"))?" og basis":""} hos ${lcName(s)}.</figcaption></figure></details>`;
@@ -2734,7 +2744,7 @@ V.species=(id)=>{
     <dl class="sense">
       <div><dt class="lbl">Smag</dt><dd>${tags.s.length?`<span class="t-obs">${W(tags.s.map(x=>GVOC.s[x]))}</span>`:""}<p>${g.smag}</p></dd></div>
       <div><dt class="lbl">Tekstur</dt><dd><span class="t-obs">${W(tags.t.map(x=>GVOC.t[x]))}</span><p>${g.tekstur}</p></dd></div>
-      <div><dt class="lbl">Bedst</dt><dd><span class="t-obs">${W(tags.k.map(x=>GVOC.k[x]))}</span></dd></div>
+      <div><dt class="lbl">Bedst til</dt><dd><span class="t-obs">${W(tags.k.map(x=>GVOC.k[x]))}</span></dd></div>
     </dl></section>`:""}
   ${s.noGastro&&SPIS(s)?`<section class="sec">${sh("Smag og tekstur")}<p class="say">Ingen køkkenbeskrivelse: arten har en dødelig dobbeltgænger og er kun for meget erfarne samlere.</p></section>`:""}
 
@@ -2758,7 +2768,7 @@ V.pair=(pid)=>{
   const lead=(sp,lbl)=>lbl==="Underside"||lbl==="Lameller"||lbl==="Porer"?pg(underIcon(sp),20,underLabel(sp)):"";
   const used=new Set([ha,hb]); let no=0;
   return `<div class="cmp-head"><a href="#/art/${a.id}">${a.da}</a><a href="#/art/${b.id}">${b.da}</a></div>
-  <div class="ab tall">${phHTML(ha,a.da,{ann:false,lb:photoKey(ha)})}${phHTML(hb,b.da,{ann:false,lb:photoKey(hb)})}</div>
+  ${ha&&hb?`<div class="ab tall">${phHTML(ha,a.da,{ann:false,lb:photoKey(ha)})}${phHTML(hb,b.da,{ann:false,lb:photoKey(hb)})}</div>`:""}
   <div class="ab-names"><a href="#/art/${a.id}"><b class="nm">${a.da}</b>${statusTag(a)}</a><a href="#/art/${b.id}"><b class="nm">${b.da}</b>${statusTag(b)}</a></div>
   <section class="decisive"><p class="lbl">Det afgørende</p><h1 class="t-state">${p.q}</h1><p class="k">${p.key}</p></section>
   ${p.rows.map(([lbl,view,ta,tb])=>{
@@ -2810,7 +2820,7 @@ V.key=()=>{
   const opts=q.o.map(([v,l,h])=>tiles
     ?`<button class="opt tile" data-v="${v}">${withIcon?pg(icon(v),52,l):`<i class="sw" style="background:${SWATCH[v]}"></i>`}${body(l,h)}</button>`
     :`<button class="opt rowo" data-v="${v}">${body(l,h)}${arrow}</button>`).join("");
-  const dk=`<button class="opt ${tiles?"tile":"rowo"} dk" data-v="vedikke">${body("Ved ikke")}${tiles?"":arrow}</button>`;
+  const dk=`<button class="opt ${tiles?"tile":"rowo"} dk" data-v="vedikke">${body("Ved ikke")}${arrow}</button>`;
   return `<div class="key-top"><span class="lbl">Undersøg · ${K.step+1} / ${total}</span>${K.step?`<button class="txt-link" id="kRestart">Start forfra</button>`:""}</div>
   <div class="key-prog" aria-hidden="true">${Array.from({length:total},(_,i)=>`<i class="${i<=K.step?"on":""}"></i>`).join("")}</div>
   <div class="key-q"><p class="lbl">Hvad ser du?</p><h1 class="t-state">${q.t}</h1><p class="intro">${q.h}</p></div>
@@ -3329,7 +3339,7 @@ V.kitchen=(id)=>{
   const im=photo(id,"kod")||photo(id,"typisk")||photo(id);
   return `<header class="k-id"><p class="lbl">I køkkenet</p><h1 class="t-display">${s.da}</h1><p class="la">${s.la}</p>
     <p class="k-safe">Gastronomien gælder arten – ikke dit konkrete fund.<br><b>Kun efter sikker artsbestemmelse.</b></p></header>
-  ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
+  ${t?`<dl class="k-sense">${t.s.length?`<div><dt class="lbl">Smag</dt><dd>${W(t.s.map(x=>GVOC.s[x]))}</dd></div>`:""}<div><dt class="lbl">Tekstur</dt><dd>${W(t.t.map(x=>GVOC.t[x]))}</dd></div><div><dt class="lbl">Bedst til</dt><dd>${W(t.k.map(x=>GVOC.k[x]))}</dd></div></dl>`:""}
   ${g.hvorfor?`<section class="sec">${sh("Hvorfor")}<p class="t-read">${g.hvorfor}</p></section>`:""}
   ${im?`<figure class="k-img">${phHTML(im,s.da,{ann:false,lb:photoKey(im)})}<figcaption>${esc(im.c||"")}</figcaption></figure>`:""}
   <section class="sec">${sh("Hvad den kan")}<ul class="k-list">${li(g.bedstTil)}</ul></section>
