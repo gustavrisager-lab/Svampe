@@ -209,10 +209,10 @@ V.home=()=>{
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
   <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Guiden"><p class="lbl">Guiden</p>
-    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span></a>
-    <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
-    <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span>${arrow}<span class="s">Smag, kendetegn og forvekslinger.</span></a>
-    <a href="#/arter/pas"><span class="num rust">04</span><span class="t-cat">Pas på</span>${arrow}<span class="s">Giftige arter og farlige forvekslinger.</span></a>
+    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span><span class="s">Seks tegn under og ved hatten.</span></a>
+    <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span><span class="s">Undersøg det, du står med.</span></a>
+    <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span><span class="s">Smag, kendetegn og forvekslinger.</span></a>
+    <a href="#/arter/pas"><span class="num rust">04</span><span class="t-cat">Pas på</span><span class="s">Giftige arter og farlige forvekslinger.</span></a>
   </nav>
   <nav class="more" aria-label="Mere"><p class="lbl">Mere</p>
     <a href="#/forskelle">Se forskellen${arrow}</a>
@@ -276,7 +276,7 @@ function filterUI(groups){
   return `<div class="flt">${groups.map(g=>{const open=FOPEN===g, n=FILT[g].c.filter(c=>F[c.id]).length;
     return `<button class="flt-h" data-fg="${g}" aria-expanded="${open}"><span class="t-cat">${FILT[g].t}</span>${n?`<span class="k">${n} valgt</span>`:""}${CHEV}</button>
     ${open?`<div class="flt-b">${FILT[g].c.map(c=>`<div class="flt-c"><span class="lbl">${c.t}</span><div class="pills">${c.o.map(([v,l])=>`<button data-fc="${c.id}" data-fv="${v}" class="${F[c.id]===v?"on":""}" aria-pressed="${F[c.id]===v}">${c.icon?pg(c.icon(v),18,l):""}${l}</button>`).join("")}</div></div>`).join("")}</div>`:""}`}).join("")}<div class="flt-end"></div></div>
-  ${active.length?`<div class="flt-act">${active.map(c=>{const l=(c.o.find(o=>o[0]===F[c.id])||[,""])[1];return `<button class="tag ${fTone(c)}" data-fx="${c.id}" aria-label="Fjern ${esc(l)}">${l}<span class="x" aria-hidden="true">×</span></button>`}).join("")}<button class="clr" id="fClear">Nulstil</button></div>`:""}`;
+  ${active.length?`<div class="flt-act">${active.map(c=>{const l=(c.o.find(o=>o[0]===F[c.id])||[,""])[1];return `<button class="tag ${fTone(c)}" data-fx="${c.id}" aria-label="Fjern ${esc(l)}">${l}<svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7L17 17M17 7L7 17"/></svg></button>`}).join("")}<button class="clr" id="fClear">Nulstil</button></div>`:""}`;
 }
 function bindFilters(root){
   root.querySelectorAll("[data-fg]").forEach(b=>b.onclick=()=>{FOPEN=FOPEN===b.dataset.fg?null:b.dataset.fg;render(true)});
