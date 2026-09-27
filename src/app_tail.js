@@ -83,6 +83,7 @@ async function geoName(lat,lon){try{const r=await fetch(`${NOMI}/reverse?format=
 const r3=x=>Math.round(x*1000)/1000; /* ca. 100 m – præcis GPS gemmes ikke */
 
 let AOV=null;
+const POSICON=`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5V5.5M12 18.5V21.5M2.5 12H5.5M18.5 12H21.5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>`;
 /* Kortet viser altid hele radiuscirklen, så valget på kortet kan ses */
 const fitArea=keep=>{if(AOV&&AOV.map&&AOV.circle&&!(keep&&AOV.map.getBounds().contains(AOV.circle.getBounds())))AOV.map.fitBounds(AOV.circle.getBounds(),{paddingTopLeft:[24,32],paddingBottomRight:[24,84],animate:true})};
 const XICON=`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>`;
@@ -97,9 +98,7 @@ function drawArea(){
   const el=$("#areaov"), d=AOV.d;
   if(AOV.step==="map"){
     const rec=LS.get("omraader",[]).filter(x=>x.name!==d.name).slice(0,4);
-    el.innerHTML=`<div class="ov-top"><span class="lbl">Vælg område</span><button class="ov-x" aria-label="Luk">${XICON}</button></div>
-    <form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Søg efter et sted"><button aria-label="Søg">${arrow}</button></form>
-    <button id="myPos" class="txt-link ov-pos">Brug min position</button>
+    el.innerHTML=`<div class="ov-top ov-bar"><form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Vælg område: søg efter et sted"></form><button id="myPos" class="ov-ic" aria-label="Brug min position">${POSICON}</button><button class="ov-x" aria-label="Luk">${XICON}</button></div>
     <div class="ov-res"></div>
     <div class="map-wrap"><div id="map"><div class="map-msg">Henter kort …</div></div>
       <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div></div>
@@ -118,9 +117,9 @@ function drawArea(){
         box.querySelectorAll("button").forEach(b=>b.onclick=()=>{setSel(res[+b.dataset.i],true);box.innerHTML="";$("input",e.target).blur()})}
       catch(err){box.innerHTML=`<p class="dim">Søgning kræver internet. Vælg et forslag:</p>`+presetsHTML();bindPresets(box,setSel)}};
     $("#myPos").onclick=()=>{if(!navigator.geolocation){alert("Din browser kan ikke finde din position.");return}
-      $("#myPos").textContent="Finder position …";
-      navigator.geolocation.getCurrentPosition(async p=>{const lat=r3(p.coords.latitude),lon=r3(p.coords.longitude);const nm=await geoName(lat,lon);setSel({lat,lon,...nm},true);$("#myPos").textContent="Brug min position"},
-        ()=>{$("#myPos").textContent="Brug min position";alert("Positionen kunne ikke hentes. Tjek at Safari har adgang til lokalitet.")},{enableHighAccuracy:false,timeout:10000,maximumAge:300000})};
+      $("#myPos").classList.add("busy");
+      navigator.geolocation.getCurrentPosition(async p=>{const lat=r3(p.coords.latitude),lon=r3(p.coords.longitude);const nm=await geoName(lat,lon);setSel({lat,lon,...nm},true);$("#myPos").classList.remove("busy")},
+        ()=>{$("#myPos").classList.remove("busy");alert("Positionen kunne ikke hentes. Tjek at Safari har adgang til lokalitet.")},{enableHighAccuracy:false,timeout:10000,maximumAge:300000})};
     $("#useArea").onclick=()=>{ if(!(d.name===area().name&&d.lat===area().lat)){d.skov=null;d.trees=[];d.bund=[]} AOV.step="skov";drawArea()};
     loadLeaflet().then(()=>{
       if(!AOV||AOV.step!=="map")return;

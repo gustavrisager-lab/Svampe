@@ -500,7 +500,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 body.noscroll{overflow:hidden}
 #areaov{position:fixed;inset:0;height:100vh;height:100dvh;z-index:70;display:flex;flex-direction:column;overflow-y:auto;background:#fff;padding:calc(var(--sat) + 4px) 0 calc(var(--sab) + 12px);animation:vin .2s ease-out}
 #areaov>*{flex-shrink:0}
-#areaov>.map-wrap{position:relative;flex:1 0 260px;margin-top:var(--s2)}
+#areaov>.map-wrap{position:relative;flex:1 0 260px;margin-top:0}
 .map-wrap>#map{position:absolute;inset:0;margin:0;min-height:0}
 .ov-top{display:flex;justify-content:space-between;align-items:center;height:44px;padding:0 8px 0 var(--g)}
 .ov-top .lbl{color:var(--grey)}
@@ -625,3 +625,8 @@ body.kitchen .sec{margin-top:48px}
 .sec .local-note{margin:0 0 var(--s4)}
 .local-note+.res-n{margin-top:var(--s2)}
 .leaflet-top.leaflet-right .leaflet-control-attribution{margin:0}
+.ov-bar{height:56px;gap:4px;padding:0 8px 0 var(--g)}
+.ov-bar .ov-search{flex:1;margin:0}
+.ov-ic{display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none}
+.ov-ic.busy{opacity:.35}
+.ov-bar+.ov-res{margin-top:4px}
