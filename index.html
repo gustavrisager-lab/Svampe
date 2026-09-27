@@ -322,14 +322,14 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .home-area .txt-link{margin-top:var(--s2);color:var(--ink-2)}
 .hm-hero{display:block;margin-top:var(--s6);text-decoration:none}
 .hm-hero .ph{aspect-ratio:4/5}
-.hm-now{display:block;background:var(--moss);padding:var(--s5) var(--g) var(--s6);text-decoration:none}
+.hm-now{display:block;background:var(--moss);padding:30px var(--g) 38px;text-decoration:none}
 .hm-now .cap{font-size:13px;color:var(--ink)}
 .hm-now .cap i{font-family:var(--serif);font-size:15px}
 .hm-now .lbl{display:block;margin-top:var(--s2)}
 .hm-now .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s3)}
-.hm-go{margin:var(--s7) var(--g) 0}
+.hm-go{margin:40px var(--g) 0}
 .hm-go a{display:grid;grid-template-columns:30px 1fr auto;gap:6px 0;align-items:baseline;padding:20px 0 22px;border-top:1px solid var(--rule);text-decoration:none}
-.hm-go>.lbl{margin-bottom:var(--s4);color:var(--grey)}
+.hm-go>.lbl{margin-bottom:10px;color:var(--grey)}
 .hm-go>.lbl+a{border-top:0;padding-top:0}
 .hm-go .num{grid-column:1;grid-row:1}
 .hm-go .t-cat{grid-column:2}
@@ -341,7 +341,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .alphabet{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:var(--s7) var(--g) 0}
 .alphabet a{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1;padding:14px;border-radius:12px;background:var(--wash);text-decoration:none;font:500 14px/1.2 var(--sans)}
 .lesson{margin-top:var(--s9);padding:0 var(--g)}
-.lesson .t-state{margin-top:var(--s4)}
+.lesson .t-state{margin-top:0}
 .tech{margin-top:var(--s2);font-size:13px;color:var(--grey)}
 .lesson .t-read{margin-top:var(--s4);max-width:34em}
 .lesson-fig{display:grid;grid-template-columns:40% 1fr;gap:2px;margin:var(--s5) calc(-1 * var(--g)) 0;align-items:center}
@@ -514,7 +514,8 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 body.noscroll{overflow:hidden}
 #areaov{position:fixed;inset:0;height:100vh;height:100dvh;z-index:70;display:flex;flex-direction:column;overflow-y:auto;background:#fff;padding:calc(var(--sat) + 4px) 0 calc(var(--sab) + 12px);animation:vin .2s ease-out}
 #areaov>*{flex-shrink:0}
-#areaov>#map{flex:1 0 260px}
+#areaov>.map-wrap{position:relative;flex:1 0 260px;margin-top:var(--s3)}
+.map-wrap>#map{position:absolute;inset:0;margin:0;min-height:0}
 .ov-top{display:flex;justify-content:space-between;align-items:center;height:48px;padding:0 8px 0 var(--g)}
 .ov-top .lbl{color:var(--grey)}
 .ov-x{display:flex;align-items:center;justify-content:center;width:44px;height:44px}
@@ -534,25 +535,24 @@ body.noscroll{overflow:hidden}
 .ov-res span,.presets span{font-size:13px;color:var(--grey)}
 #map{position:relative;flex:1;min-height:180px;margin-top:var(--s3);background:var(--wash)}
 #map .leaflet-tile-pane{filter:grayscale(1) contrast(1.02) brightness(1.04)}
-.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g);font-size:14px;color:var(--ink-2)}
+.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g) 84px;font-size:14px;color:var(--ink-2)}
 .map-msg p{margin-bottom:12px}
 .map-msg .lbl{display:block;color:var(--grey)}
-.pin{background:var(--ink);border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px var(--ink)}
+.pin{background:var(--ink);border-radius:50%}
 .leaflet-control-attribution{font-size:9px!important;background:rgba(255,255,255,.75)!important}
-.ov-bottom{padding:var(--s3) var(--g) 0}
+.ov-bottom{padding:14px var(--g) 0}
 .ov-sel .lbl{color:var(--grey)}
 .ov-sel b{display:block;margin-top:4px;font:400 30px/1.05 var(--serif);letter-spacing:-.02em;overflow-wrap:anywhere}
 .ov-sel span{display:block;margin-top:3px;font-size:13px;color:var(--grey)}
-.ov-rad{display:grid;grid-template-columns:1fr 1fr;margin-top:var(--s3);border:1px solid var(--ink);border-radius:4px;overflow:hidden}
-.ov-rad button{min-height:52px;padding:8px 12px;font:600 11px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase}
-.ov-rad button+button{border-left:1px solid var(--ink)}
-.ov-rad button small{display:block;margin-top:3px;font:400 13px/1.2 var(--sans);letter-spacing:0;text-transform:none;color:var(--grey)}
+.ov-rad{position:absolute;left:var(--g);right:var(--g);bottom:14px;z-index:500;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:6px;background:rgba(255,255,255,.94);box-shadow:0 0 0 1px rgba(20,20,20,.14)}
+.ov-rad button{min-height:44px;padding:6px 10px;border-radius:4px;font:600 10.5px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-align:center}
+.ov-rad button small{display:block;margin-top:2px;font:400 12.5px/1.2 var(--sans);letter-spacing:0;text-transform:none;color:var(--grey)}
 .ov-rad button.on{background:var(--ink);color:#fff}
 .ov-rad button.on small{color:rgba(255,255,255,.72)}
-.ov-recent{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:var(--s3)}
+.ov-recent{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px}
 .ov-recent .lbl{color:var(--grey);margin-right:4px}
 .ov-recent button{height:30px;padding:0 12px;border-radius:999px;background:var(--wash);font-size:13px}
-.ov-use{width:100%;margin-top:var(--s4);min-height:52px;border-radius:6px}
+.ov-use{width:100%;margin-top:14px;min-height:52px;border-radius:6px}
 .ov-btns{display:flex;gap:8px;margin-top:12px}
 .ov-btns .btn{flex:1;padding:0 10px}
 .ov-btns.col{flex-direction:column;padding:var(--s6) var(--g) 0}
@@ -631,13 +631,14 @@ body.kitchen .sec{margin-top:48px}
 .ov-search input:focus{outline:none}
 .ov-search:focus-within{box-shadow:0 1px 0 var(--ink)}
 .ov-search input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
-@media (max-height:700px){#areaov>#map{flex-basis:200px;min-height:200px}}
+@media (max-height:700px){#areaov>.map-wrap{flex-basis:220px}}
 .hm-go .arr,.flt-h .arr{align-self:center}
 .more a,.to-kitchen .row,.hm-now .row{align-items:center}
 .arr.back{transform:rotate(180deg)}
 .local-note{margin:var(--s6) var(--g) 0;color:var(--grey)}
 .sec .local-note{margin:0 0 var(--s4)}
 .local-note+.res-n{margin-top:var(--s2)}
+.leaflet-top.leaflet-right .leaflet-control-attribution{margin:0}
 
 </style>
 
@@ -2577,7 +2578,7 @@ V.home=()=>{
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
   <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Guiden"><p class="lbl">Guiden</p>
-    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span></a>
+    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span></a>
     <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
     <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span>${arrow}<span class="s">Smag, kendetegn og forvekslinger.</span></a>
     <a href="#/arter/pas"><span class="num rust">04</span><span class="t-cat">Pas på</span>${arrow}<span class="s">Giftige arter og farlige forvekslinger.</span></a>
@@ -2610,7 +2611,6 @@ V.lesson=()=>{
   return `${pageHead("Før du går i skoven","Lær at se","Næsten al bestemmelse begynder under hatten. Fire slags underside – og to steder på stokken, der skiller spisesvampe fra de farligste fluesvampe. Tegnene går igen overalt i guiden.")}
     <nav class="alphabet" aria-label="Indhold">${L.map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,44,l.t)}<span>${l.t}</span></a>`).join("")}</nav>
     ${L.map((l,i)=>`<section class="lesson" id="les-${l.id}">
-      <div class="lock-n">${pg(l.id,24,l.t)}</div>
       <h2 class="t-state">${l.t}</h2>
       ${l.tech?`<p class="tech">${l.tech}</p>`:""}
       <p class="t-read">${l.x}</p>
@@ -3084,6 +3084,8 @@ async function geoName(lat,lon){try{const r=await fetch(`${NOMI}/reverse?format=
 const r3=x=>Math.round(x*1000)/1000; /* ca. 100 m – præcis GPS gemmes ikke */
 
 let AOV=null;
+/* Kortet viser altid hele radiuscirklen, så valget på kortet kan ses */
+const fitArea=keep=>{if(AOV&&AOV.map&&AOV.circle&&!(keep&&AOV.map.getBounds().contains(AOV.circle.getBounds())))AOV.map.fitBounds(AOV.circle.getBounds(),{paddingTopLeft:[24,32],paddingBottomRight:[24,84],animate:true})};
 const XICON=`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>`;
 function openArea(){
   const cur=area();
@@ -3100,18 +3102,18 @@ function drawArea(){
     <form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Søg efter et sted"><button aria-label="Søg">${arrow}</button></form>
     <button id="myPos" class="txt-link ov-pos">Brug min position</button>
     <div class="ov-res"></div>
-    <div id="map"><div class="map-msg">Henter kort …</div></div>
+    <div class="map-wrap"><div id="map"><div class="map-msg">Henter kort …</div></div>
+      <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div></div>
     <div class="ov-bottom">
       <div class="ov-sel"><span class="lbl">Valgt område</span><b id="selName">${esc(d.name)}</b><span id="selReg">${esc(d.region||"")}</span></div>
-      <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div>
       ${rec.length?`<div class="ov-recent"><span class="lbl">Tidligere</span>${rec.map((x,i)=>`<button data-rec="${i}">${esc(x.name)}</button>`).join("")}</div>`:""}
       <button id="useArea" class="btn fill ov-use">Brug dette område</button>
     </div>`;
     $(".ov-x",el).onclick=closeArea;
     const setSel=(p,move)=>{Object.assign(d,{name:p.name,region:p.region||"",lat:r3(p.lat),lon:r3(p.lon)});$("#selName").textContent=d.name;$("#selReg").textContent=d.region||"";
-      if(AOV.map){AOV.mark.setLatLng([d.lat,d.lon]);AOV.circle.setLatLng([d.lat,d.lon]);if(move)AOV.map.setView([d.lat,d.lon],11)}};
+      if(AOV.map){AOV.mark.setLatLng([d.lat,d.lon]);AOV.circle.setLatLng([d.lat,d.lon]);if(move)fitArea()}};
     el.querySelectorAll("[data-rec]").forEach(b=>b.onclick=()=>{const x=rec[+b.dataset.rec];Object.assign(d,x);setSel(x,true)});
-    el.querySelectorAll(".ov-rad button").forEach(b=>b.onclick=()=>{d.radius=+b.dataset.r;el.querySelectorAll(".ov-rad button").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-checked",x===b)});if(AOV.circle)AOV.circle.setRadius(d.radius*1000)});
+    el.querySelectorAll(".ov-rad button").forEach(b=>b.onclick=()=>{d.radius=+b.dataset.r;el.querySelectorAll(".ov-rad button").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-checked",x===b)});if(AOV.circle){AOV.circle.setRadius(d.radius*1000);fitArea(true)}});
     $(".ov-search",el).onsubmit=async e=>{e.preventDefault();const q=$("input",e.target).value.trim();const box=$(".ov-res",el);if(!q)return;box.innerHTML=`<p class="dim">Søger …</p>`;
       try{const res=await geoSearch(q);box.innerHTML=res.length?res.map((x,i)=>`<button data-i="${i}"><b>${esc(x.name)}</b><span>${esc(x.region)}</span></button>`).join(""):`<p class="dim">Ingen steder fundet.</p>`;
         box.querySelectorAll("button").forEach(b=>b.onclick=()=>{setSel(res[+b.dataset.i],true);box.innerHTML="";$("input",e.target).blur()})}
@@ -3124,12 +3126,13 @@ function drawArea(){
     loadLeaflet().then(()=>{
       if(!AOV||AOV.step!=="map")return;
       $("#map").innerHTML="";
-      const m=L.map("map",{zoomControl:false,attributionControl:true}).setView([d.lat,d.lon],10);
+      const m=L.map("map",{zoomControl:false,attributionControl:false}).setView([d.lat,d.lon],10);
+      L.control.attribution({position:"topright",prefix:false}).addTo(m);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap"}).addTo(m);
-      AOV.circle=L.circle([d.lat,d.lon],{radius:d.radius*1000,color:"#111",weight:1,fillColor:"#111",fillOpacity:.05}).addTo(m);
-      AOV.mark=L.marker([d.lat,d.lon],{icon:L.divIcon({className:"pin",iconSize:[14,14]})}).addTo(m);
+      AOV.circle=L.circle([d.lat,d.lon],{radius:d.radius*1000,color:"#141414",weight:1.5,dashArray:"3 5",lineCap:"round",fillColor:"#fff",fillOpacity:.38,interactive:false}).addTo(m);
+      AOV.mark=L.marker([d.lat,d.lon],{icon:L.divIcon({className:"pin",iconSize:[10,10]})}).addTo(m);
       m.on("click",async e=>{const lat=r3(e.latlng.lat),lon=r3(e.latlng.lng);setSel({lat,lon,name:"…",region:""});const nm=await geoName(lat,lon);if(AOV&&d.lat===lat)setSel({lat,lon,...nm})});
-      AOV.map=m;
+      AOV.map=m;fitArea();
     }).catch(()=>{const mp=$("#map");if(mp){mp.innerHTML=`<div class="map-msg"><p>Kortet kræver internet. Resten af guiden virker stadig.</p><span class="lbl dim">Vælg et område</span>${presetsHTML()}</div>`;bindPresets(mp,setSel)}});
     return;
   }

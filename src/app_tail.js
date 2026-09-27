@@ -83,6 +83,8 @@ async function geoName(lat,lon){try{const r=await fetch(`${NOMI}/reverse?format=
 const r3=x=>Math.round(x*1000)/1000; /* ca. 100 m – præcis GPS gemmes ikke */
 
 let AOV=null;
+/* Kortet viser altid hele radiuscirklen, så valget på kortet kan ses */
+const fitArea=keep=>{if(AOV&&AOV.map&&AOV.circle&&!(keep&&AOV.map.getBounds().contains(AOV.circle.getBounds())))AOV.map.fitBounds(AOV.circle.getBounds(),{paddingTopLeft:[24,32],paddingBottomRight:[24,84],animate:true})};
 const XICON=`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>`;
 function openArea(){
   const cur=area();
@@ -99,18 +101,18 @@ function drawArea(){
     <form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Søg efter et sted"><button aria-label="Søg">${arrow}</button></form>
     <button id="myPos" class="txt-link ov-pos">Brug min position</button>
     <div class="ov-res"></div>
-    <div id="map"><div class="map-msg">Henter kort …</div></div>
+    <div class="map-wrap"><div id="map"><div class="map-msg">Henter kort …</div></div>
+      <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div></div>
     <div class="ov-bottom">
       <div class="ov-sel"><span class="lbl">Valgt område</span><b id="selName">${esc(d.name)}</b><span id="selReg">${esc(d.region||"")}</span></div>
-      <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div>
       ${rec.length?`<div class="ov-recent"><span class="lbl">Tidligere</span>${rec.map((x,i)=>`<button data-rec="${i}">${esc(x.name)}</button>`).join("")}</div>`:""}
       <button id="useArea" class="btn fill ov-use">Brug dette område</button>
     </div>`;
     $(".ov-x",el).onclick=closeArea;
     const setSel=(p,move)=>{Object.assign(d,{name:p.name,region:p.region||"",lat:r3(p.lat),lon:r3(p.lon)});$("#selName").textContent=d.name;$("#selReg").textContent=d.region||"";
-      if(AOV.map){AOV.mark.setLatLng([d.lat,d.lon]);AOV.circle.setLatLng([d.lat,d.lon]);if(move)AOV.map.setView([d.lat,d.lon],11)}};
+      if(AOV.map){AOV.mark.setLatLng([d.lat,d.lon]);AOV.circle.setLatLng([d.lat,d.lon]);if(move)fitArea()}};
     el.querySelectorAll("[data-rec]").forEach(b=>b.onclick=()=>{const x=rec[+b.dataset.rec];Object.assign(d,x);setSel(x,true)});
-    el.querySelectorAll(".ov-rad button").forEach(b=>b.onclick=()=>{d.radius=+b.dataset.r;el.querySelectorAll(".ov-rad button").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-checked",x===b)});if(AOV.circle)AOV.circle.setRadius(d.radius*1000)});
+    el.querySelectorAll(".ov-rad button").forEach(b=>b.onclick=()=>{d.radius=+b.dataset.r;el.querySelectorAll(".ov-rad button").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-checked",x===b)});if(AOV.circle){AOV.circle.setRadius(d.radius*1000);fitArea(true)}});
     $(".ov-search",el).onsubmit=async e=>{e.preventDefault();const q=$("input",e.target).value.trim();const box=$(".ov-res",el);if(!q)return;box.innerHTML=`<p class="dim">Søger …</p>`;
       try{const res=await geoSearch(q);box.innerHTML=res.length?res.map((x,i)=>`<button data-i="${i}"><b>${esc(x.name)}</b><span>${esc(x.region)}</span></button>`).join(""):`<p class="dim">Ingen steder fundet.</p>`;
         box.querySelectorAll("button").forEach(b=>b.onclick=()=>{setSel(res[+b.dataset.i],true);box.innerHTML="";$("input",e.target).blur()})}
@@ -123,12 +125,13 @@ function drawArea(){
     loadLeaflet().then(()=>{
       if(!AOV||AOV.step!=="map")return;
       $("#map").innerHTML="";
-      const m=L.map("map",{zoomControl:false,attributionControl:true}).setView([d.lat,d.lon],10);
+      const m=L.map("map",{zoomControl:false,attributionControl:false}).setView([d.lat,d.lon],10);
+      L.control.attribution({position:"topright",prefix:false}).addTo(m);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap"}).addTo(m);
-      AOV.circle=L.circle([d.lat,d.lon],{radius:d.radius*1000,color:"#111",weight:1,fillColor:"#111",fillOpacity:.05}).addTo(m);
-      AOV.mark=L.marker([d.lat,d.lon],{icon:L.divIcon({className:"pin",iconSize:[14,14]})}).addTo(m);
+      AOV.circle=L.circle([d.lat,d.lon],{radius:d.radius*1000,color:"#141414",weight:1.5,dashArray:"3 5",lineCap:"round",fillColor:"#fff",fillOpacity:.38,interactive:false}).addTo(m);
+      AOV.mark=L.marker([d.lat,d.lon],{icon:L.divIcon({className:"pin",iconSize:[10,10]})}).addTo(m);
       m.on("click",async e=>{const lat=r3(e.latlng.lat),lon=r3(e.latlng.lng);setSel({lat,lon,name:"…",region:""});const nm=await geoName(lat,lon);if(AOV&&d.lat===lat)setSel({lat,lon,...nm})});
-      AOV.map=m;
+      AOV.map=m;fitArea();
     }).catch(()=>{const mp=$("#map");if(mp){mp.innerHTML=`<div class="map-msg"><p>Kortet kræver internet. Resten af guiden virker stadig.</p><span class="lbl dim">Vælg et område</span>${presetsHTML()}</div>`;bindPresets(mp,setSel)}});
     return;
   }
