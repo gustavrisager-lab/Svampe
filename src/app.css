@@ -64,7 +64,7 @@ ul,ol{margin:0}
 .num{font:500 11px/1 var(--sans);font-variant-numeric:tabular-nums;letter-spacing:.04em;color:var(--grey)}
 .g{color:var(--grey)}
 .pad{padding-left:var(--g);padding-right:var(--g)}
-.arr{display:inline-block;flex:none;width:1.1em;height:1.1em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.arr{display:inline-block;flex:none;width:1.1em;height:1.1em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .arr path{vector-effect:non-scaling-stroke}
 
 /* ---------- piktogrammer: 24-gitter, 1,5 px linje, fyldt = det, der tales om ---------- */
@@ -92,7 +92,7 @@ ul,ol{margin:0}
 #tabs{position:-webkit-sticky;position:sticky;bottom:0;z-index:30;background:var(--bg);box-shadow:0 -1px 0 var(--rule);padding-bottom:var(--sab);transition:background-color .4s}
 #tabs .in{max-width:620px;margin:0 auto;display:flex}
 #tabs a{position:relative;flex:1;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-decoration:none;color:var(--grey)}
-#tabs a svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linejoin:round;stroke-linecap:round}
+#tabs a svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
 #tabs a span{font:500 10px/1 var(--sans);letter-spacing:.02em}
 #tabs a.on{color:var(--ink)}
 #tabs a.on span{font-weight:700}
@@ -144,7 +144,7 @@ main{max-width:620px;margin:0 auto}
 .tag.rust-pale{background:var(--rust-pale);color:var(--rust-ink)}
 .tag.paper{background:#fff;color:var(--rust)}
 button.tag{height:30px;padding:0 8px 0 12px;font-size:11px}
-button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
+button.tag .x{width:12px;height:12px}
 
 /* ---------- knapper: primær · sekundær · tekst · kompakt ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 20px;border-radius:var(--r);background:var(--wash);color:var(--ink);font:500 16px/1.2 var(--sans);text-decoration:none;text-align:center;position:relative}
@@ -299,7 +299,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .area-name{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;width:100%;min-height:48px;font:inherit;letter-spacing:inherit;text-align:left}
 .area-name .an{min-width:0}
 .area-name .nw{white-space:nowrap}
-.area-chev{flex:none;width:.44em;height:.44em;margin-top:.3em;stroke-width:1.6}
+.area-chev{flex:none;width:.44em;height:.44em;margin-top:.3em;stroke-width:1.5}
 .area-chev path{vector-effect:non-scaling-stroke}
 .home-area .meta{margin-top:var(--s3);font-size:14px}
 .num.rust{color:var(--rust);font-weight:700}
@@ -313,14 +313,14 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .hm-now .cap i{font-family:var(--serif);font-size:15px}
 .hm-now .lbl{display:block;margin-top:var(--s2)}
 .hm-now .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s3)}
-.hm-go{margin:40px var(--g) 0}
-.hm-go a{display:grid;grid-template-columns:30px 1fr auto;gap:6px 0;align-items:baseline;padding:20px 0 22px;border-top:1px solid var(--rule);text-decoration:none}
-.hm-go>.lbl{margin-bottom:10px;color:var(--grey)}
+.hm-go{margin:32px var(--g) 0}
+.hm-go a{display:grid;grid-template-columns:30px 1fr;gap:6px 0;align-items:baseline;padding:20px 0 22px;border-top:1px solid var(--rule);text-decoration:none}
+.hm-go>.lbl{margin-bottom:12px;color:var(--grey)}
 .hm-go>.lbl+a{border-top:0;padding-top:0}
 .hm-go .num{grid-column:1;grid-row:1}
 .hm-go .t-cat{grid-column:2}
 .hm-go .arr{grid-column:3;grid-row:1;font-size:20px}
-.hm-go .s{grid-column:2/4;font-size:15px;color:var(--ink-2)}
+.hm-go .s{grid-column:2;font-size:15px;color:var(--ink-2)}
 .hm-go .alpha{grid-column:2/4;display:flex;gap:14px;margin-top:10px}
 
 /* ---------- lær at se ---------- */
@@ -628,3 +628,7 @@ body.kitchen .sec{margin-top:48px}
 .ov-ic{display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none}
 .ov-ic.busy{opacity:.35}
 .ov-bar+.ov-res{margin-top:4px}
+#tabs a svg *,#top svg *,.ov-x svg *,.ov-ic svg *,.chev *{vector-effect:non-scaling-stroke}
+.pill .plus,button.tag .x{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.pill .plus{width:13px;height:13px;margin-right:-1px}
+.pill .plus *,button.tag .x *{vector-effect:non-scaling-stroke}
