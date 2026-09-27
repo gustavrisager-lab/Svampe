@@ -223,33 +223,43 @@ V.home=()=>{
 /* =====================================================================
    LÆR AT SE — alfabetet, som resten af guiden bruger
    ===================================================================== */
+/* Lær at se: piktogram = orientering (kun i indekset), tegning = forklaring, foto = genkendelse */
 V.lesson=()=>{
+  const ex=(pairs)=>pairs.map(([id,v,i])=>{const p=i!=null?photos(id)[i]:photo(id,v);return p?{id,p}:null}).filter(Boolean);
   const L=[
-    {id:"lameller",t:"Lameller",tech:"",d:dia("lameller","under"),p:photo("snehvid","under")||photo("kliddet","under"),
-      x:"Tynde, bladagtige plader under hatten – som siderne i en bog, der står på højkant.", ex:["gron","parasol","falsk"]},
-    {id:"ror",t:"Rør og porer",tech:"",d:dia("ror","under"),p:photo("karljohan","under"),
-      x:"En svampet flade af tætte små huller. Hvert hul er åbningen på et rør. Svampe med rør hedder rørhatte.", ex:["karljohan","brunstokket","galde"]},
-    {id:"ribber",t:"Ribber",tech:"Også kaldet lister eller folder",d:dia("ribber","under"),p:photo("kantarel","under"),
-      x:"Lave, butte, grenede folder, der løber ned ad stokken. Mere som rynker end som blade.", ex:["kantarel","tragt"]},
-    {id:"pigge",t:"Pigge",tech:"",d:dia("pigge","under"),p:photo("pigsvamp","under"),
-      x:"Små tapper, der hænger ned som istapper. Ingen blade, ingen huller.", ex:["pigsvamp"]},
-    {id:"ring",t:"Ring",tech:"Fagord: annulus",d:dia("lameller","ring",{ring:true}),p:photo("parasol","ring")||photo("parasol","stok"),
-      x:"Et skørt eller en krave om stokken – resten af en hinde, der dækkede lamellerne på den unge svamp. Den kan falde af.", ex:["parasol","rod","slimror"]},
-    {id:"basis",t:"Basis",tech:"Volva: en pose om stokkens fod",d:dia("lameller","basis",{ring:true,volva:"pose"}),p:photo("gron","basis")||photo("snehvid","basis"),
-      x:"Nederst på stokken kan der sidde en pose eller en knold. Hos de giftigste fluesvampe sidder posen ofte skjult i jorden. Grav altid hele svampen fri.", ex:["gron","snehvid","kliddet"]}
+    {id:"lameller",g:"hat",i:"Lameller",t:"Lameller",d:dia("lameller","under"),
+      x:"Tynde, bladagtige plader under hatten – som siderne i en bog, der står på højkant.",
+      e:ex([["snehvid","under"],["gron","under"],["falsk","under"],["rodbrun","under"]])},
+    {id:"ror",g:"hat",i:"Rør / porer",t:"Rør og porer",d:dia("ror","under"),
+      x:"En svampet flade af tætte små huller. Hvert hul er åbningen på et rør. Svampe med rør hedder rørhatte.",
+      e:ex([["karljohan","under"],["brunstokket","under"],["galde","under"],["slimror","under"]])},
+    {id:"ribber",g:"hat",i:"Ribber",t:"Ribber",d:dia("ribber","under"),
+      x:"Lave, butte, grenede folder, der løber ned ad stokken. Mere som rynker end som blade.",
+      e:ex([["kantarel","under"],["tragt","under"],["trompet","under"]])},
+    {id:"pigge",g:"hat",i:"Pigge",t:"Pigge",d:dia("pigge","under"),
+      x:"Små tapper, der hænger ned som istapper. Ingen blade, ingen huller.",
+      e:ex([["pigsvamp",null,1],["pigsvamp",null,2]])},
+    {id:"ring",g:"stok",i:"Ring",t:"Ring",d:dia("lameller","ring",{ring:true}),
+      x:"Et skørt eller en krave om stokken – resten af en hinde, der dækkede lamellerne på den unge svamp. Den kan falde af.",
+      e:ex([["parasol","ring"],["gron","ring"],["slimror","stok"],["rodmende","stok"]])},
+    {id:"basis",g:"stok",i:"Basis",t:"Basis",tech:"Volva – en pose om stokkens fod",d:dia("lameller","basis",{ring:true,volva:"pose"}),
+      x:"Nederst på stokken kan der sidde en pose eller en knold. Hos de giftigste fluesvampe sidder den ofte i jorden – grav altid hele svampen fri.",
+      e:ex([["gron","basis"],["snehvid","basis"],["kliddet","basis"],["panter","basis"]])}
   ];
-  return `${pageHead("Før du går i skoven","Lær at se","Næsten al bestemmelse begynder under hatten. Fire slags underside – og to steder på stokken, der skiller spisesvampe fra de farligste fluesvampe. Tegnene går igen overalt i guiden.")}
-    <nav class="alphabet" aria-label="Indhold">${L.map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,44,l.t)}<span>${l.t}</span></a>`).join("")}</nav>
-    ${L.map((l,i)=>`<section class="lesson" id="les-${l.id}">
+  const idx=(g,lbl)=>`<div class="lt-grp"><p class="lbl">${lbl}</p><div class="lt-idx">${L.filter(l=>l.g===g).map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,40,l.i)}<span>${l.i}</span></a>`).join("")}</div></div>`;
+  return `${pageHead("","Lær at se","Næsten al bestemmelse begynder under hatten. Seks tegn går igen i hele guiden.")}
+    <nav class="lt-index" aria-label="De seks tegn">${idx("hat","Under hatten")}${idx("stok","På stokken")}</nav>
+    ${L.map(l=>`<section class="lt-sec" id="les-${l.id}">
       <h2 class="t-state">${l.t}</h2>
       ${l.tech?`<p class="tech">${l.tech}</p>`:""}
-      <p class="t-read">${l.x}</p>
-      <div class="lesson-fig"><div class="dia">${l.d}</div>${phHTML(l.p,l.t,{lb:l.p?photoKey(l.p):null})}</div>
-      ${legend(l.p&&l.p.a)?`<p class="ex">${legend(l.p.a)}</p>`:""}
-      <p class="ex">Fx ${l.ex.map(id=>`<a href="#/art/${id}">${S[id].da}</a>`).join(", ")}</p>
+      <p class="lt-x">${l.x}</p>
+      <div class="lt-track" role="list">
+        <figure class="lt-draw" role="listitem"><div class="dia">${l.d}</div></figure>
+        ${l.e.map(({id,p})=>`<figure class="lt-ph" role="listitem">${phHTML(p,S[id].da,{ann:false,lb:photoKey(p)})}<figcaption><a href="#/art/${id}">${S[id].da} ${arrow}</a></figcaption></figure>`).join("")}
+      </div>
     </section>`).join("")}
-    <section class="lesson"><h2 class="t-state">Husk</h2><p class="t-read">Se under hatten. Se på stokken. Grav basis fri. Se, hvilke træer den står ved. Og smag aldrig på en svamp, du ikke kender.</p>
-    <div class="btn-row"><a class="btn fill" href="#/quiz">Test dig selv</a><a class="btn" href="#/noegle">Find en art</a></div></section>`;
+    <section class="lt-end"><p class="t-read">Se under hatten. Se på stokken. Grav basis fri.</p>
+    <div class="btn-row in"><a class="btn fill" href="#/quiz">Test dig selv</a></div></section>`;
 };
 
 /* =====================================================================
