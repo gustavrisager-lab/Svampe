@@ -316,7 +316,7 @@ button.tag .x{width:12px;height:12px}
 .area-chev{flex:none;width:.44em;height:.44em;margin-top:.3em;stroke-width:1.5}
 .area-chev path{vector-effect:non-scaling-stroke}
 .home-area .meta{margin-top:var(--s3);font-size:14px}
-.num.rust{color:var(--rust);font-weight:700}
+
 .home-area>.lbl{color:var(--grey)}
 .home-area .t-display{margin-top:var(--s2)}
 .home-area .txt-link{margin-top:var(--s2);color:var(--ink-2)}
@@ -328,13 +328,11 @@ button.tag .x{width:12px;height:12px}
 .hm-now .lbl{display:block;margin-top:var(--s2)}
 .hm-now .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s3)}
 .hm-go{margin:32px var(--g) 0}
-.hm-go a{display:grid;grid-template-columns:30px 1fr;gap:6px 0;align-items:baseline;padding:20px 0 22px;border-top:1px solid var(--rule);text-decoration:none}
+.hm-go a{display:grid;grid-template-columns:1fr;gap:4px 0;align-items:baseline;padding:20px 0 22px;border-top:1px solid var(--rule);text-decoration:none}
 .hm-go>.lbl{margin-bottom:16px;color:var(--grey)}
 .hm-go a:last-child{border-bottom:1px solid var(--rule)}
-.hm-go .num{grid-column:1;grid-row:1}
-.hm-go .t-cat{grid-column:2}
-.hm-go .arr{grid-column:3;grid-row:1;font-size:20px}
-.hm-go .s{grid-column:2;font-size:15px;color:var(--ink-2)}
+.hm-go .t-cat{grid-column:1}
+.hm-go .s{grid-column:1;font-size:15px;color:var(--ink-2)}
 .hm-go .alpha{grid-column:2/4;display:flex;gap:14px;margin-top:10px}
 
 /* ---------- lær at se ---------- */
@@ -2585,10 +2583,10 @@ V.home=()=>{
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
   <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Guiden"><p class="lbl">Guiden</p>
-    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span><span class="s">Seks tegn under og ved hatten.</span></a>
-    <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span><span class="s">Undersøg det, du står med.</span></a>
-    <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span><span class="s">Smag, kendetegn og forvekslinger.</span></a>
-    <a href="#/arter/pas"><span class="num rust">04</span><span class="t-cat">Pas på</span><span class="s">Giftige arter og farlige forvekslinger.</span></a>
+    <a href="#/laer"><span class="t-cat">Lær at se</span><span class="s">Seks tegn under og ved hatten.</span></a>
+    <a href="#/noegle"><span class="t-cat">Find en art</span><span class="s">Undersøg det, du står med.</span></a>
+    <a href="#/arter/godt"><span class="t-cat">Spisesvampe</span><span class="s">Smag, kendetegn og forvekslinger.</span></a>
+    <a href="#/arter/pas"><span class="t-cat">Pas på</span><span class="s">Giftige arter og farlige forvekslinger.</span></a>
   </nav>
   <nav class="more" aria-label="Mere"><p class="lbl">Mere</p>
     <a href="#/forskelle">Se forskellen${arrow}</a>
