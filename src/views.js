@@ -207,11 +207,10 @@ V.home=()=>{
     ${meta?`<p class="meta">${esc(meta)}</p>`:""}
   </section>
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
-  <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
+  <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} svampe, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Guiden"><p class="lbl">Guiden</p>
     <a href="#/laer"><span class="t-cat">Lær at se</span><span class="s">Seks tegn under og ved hatten.</span></a>
     <a href="#/noegle"><span class="t-cat">Find en art</span><span class="s">Undersøg det, du står med.</span></a>
-    <a href="#/arter/godt"><span class="t-cat">Spisesvampe</span><span class="s">Smag, kendetegn og forvekslinger.</span></a>
     <a href="#/arter/pas"><span class="t-cat">Pas på</span><span class="s">Giftige arter og farlige forvekslinger.</span></a>
   </nav>
   <nav class="more" aria-label="Mere"><p class="lbl">Mere</p>
