@@ -209,7 +209,7 @@ V.home=()=>{
   ${hero?`<a class="hm-hero" href="#/art/${hero.id}" aria-label="${hero.da}">${phHTML(hp,hero.da,{ann:false})}</a>`:""}
   <a class="hm-now" href="#/omraade"><span class="lbl">I skoven nu · ${MONN[new Date().getMonth()]}</span><span class="row"><b class="t-state">${top.length} arter, du kan møde</b>${arrow}</span></a>
   <nav class="hm-go" aria-label="Guiden"><p class="lbl">Guiden</p>
-    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span><span class="alpha" aria-hidden="true">${alpha.map(n=>pg(n,22)).join("")}</span></a>
+    <a href="#/laer"><span class="num">01</span><span class="t-cat">Lær at se</span>${arrow}<span class="s">Seks tegn under og ved hatten.</span></a>
     <a href="#/noegle"><span class="num">02</span><span class="t-cat">Find en art</span>${arrow}<span class="s">Undersøg det, du står med.</span></a>
     <a href="#/arter/godt"><span class="num">03</span><span class="t-cat">Spisesvampe</span>${arrow}<span class="s">Smag, kendetegn og forvekslinger.</span></a>
     <a href="#/arter/pas"><span class="num rust">04</span><span class="t-cat">Pas på</span>${arrow}<span class="s">Giftige arter og farlige forvekslinger.</span></a>
@@ -242,7 +242,6 @@ V.lesson=()=>{
   return `${pageHead("Før du går i skoven","Lær at se","Næsten al bestemmelse begynder under hatten. Fire slags underside – og to steder på stokken, der skiller spisesvampe fra de farligste fluesvampe. Tegnene går igen overalt i guiden.")}
     <nav class="alphabet" aria-label="Indhold">${L.map(l=>`<a href="#/laer" data-jump="les-${l.id}">${pg(l.id,44,l.t)}<span>${l.t}</span></a>`).join("")}</nav>
     ${L.map((l,i)=>`<section class="lesson" id="les-${l.id}">
-      <div class="lock-n">${pg(l.id,24,l.t)}</div>
       <h2 class="t-state">${l.t}</h2>
       ${l.tech?`<p class="tech">${l.tech}</p>`:""}
       <p class="t-read">${l.x}</p>

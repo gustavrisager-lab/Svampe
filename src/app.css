@@ -308,14 +308,14 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .home-area .txt-link{margin-top:var(--s2);color:var(--ink-2)}
 .hm-hero{display:block;margin-top:var(--s6);text-decoration:none}
 .hm-hero .ph{aspect-ratio:4/5}
-.hm-now{display:block;background:var(--moss);padding:var(--s5) var(--g) var(--s6);text-decoration:none}
+.hm-now{display:block;background:var(--moss);padding:30px var(--g) 38px;text-decoration:none}
 .hm-now .cap{font-size:13px;color:var(--ink)}
 .hm-now .cap i{font-family:var(--serif);font-size:15px}
 .hm-now .lbl{display:block;margin-top:var(--s2)}
 .hm-now .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:var(--s3)}
-.hm-go{margin:var(--s7) var(--g) 0}
+.hm-go{margin:40px var(--g) 0}
 .hm-go a{display:grid;grid-template-columns:30px 1fr auto;gap:6px 0;align-items:baseline;padding:20px 0 22px;border-top:1px solid var(--rule);text-decoration:none}
-.hm-go>.lbl{margin-bottom:var(--s4);color:var(--grey)}
+.hm-go>.lbl{margin-bottom:10px;color:var(--grey)}
 .hm-go>.lbl+a{border-top:0;padding-top:0}
 .hm-go .num{grid-column:1;grid-row:1}
 .hm-go .t-cat{grid-column:2}
@@ -327,7 +327,7 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 .alphabet{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:var(--s7) var(--g) 0}
 .alphabet a{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1;padding:14px;border-radius:12px;background:var(--wash);text-decoration:none;font:500 14px/1.2 var(--sans)}
 .lesson{margin-top:var(--s9);padding:0 var(--g)}
-.lesson .t-state{margin-top:var(--s4)}
+.lesson .t-state{margin-top:0}
 .tech{margin-top:var(--s2);font-size:13px;color:var(--grey)}
 .lesson .t-read{margin-top:var(--s4);max-width:34em}
 .lesson-fig{display:grid;grid-template-columns:40% 1fr;gap:2px;margin:var(--s5) calc(-1 * var(--g)) 0;align-items:center}
@@ -500,7 +500,8 @@ button.tag .x{font:400 15px/1 var(--sans);opacity:.6}
 body.noscroll{overflow:hidden}
 #areaov{position:fixed;inset:0;height:100vh;height:100dvh;z-index:70;display:flex;flex-direction:column;overflow-y:auto;background:#fff;padding:calc(var(--sat) + 4px) 0 calc(var(--sab) + 12px);animation:vin .2s ease-out}
 #areaov>*{flex-shrink:0}
-#areaov>#map{flex:1 0 260px}
+#areaov>.map-wrap{position:relative;flex:1 0 260px;margin-top:var(--s3)}
+.map-wrap>#map{position:absolute;inset:0;margin:0;min-height:0}
 .ov-top{display:flex;justify-content:space-between;align-items:center;height:48px;padding:0 8px 0 var(--g)}
 .ov-top .lbl{color:var(--grey)}
 .ov-x{display:flex;align-items:center;justify-content:center;width:44px;height:44px}
@@ -520,25 +521,24 @@ body.noscroll{overflow:hidden}
 .ov-res span,.presets span{font-size:13px;color:var(--grey)}
 #map{position:relative;flex:1;min-height:180px;margin-top:var(--s3);background:var(--wash)}
 #map .leaflet-tile-pane{filter:grayscale(1) contrast(1.02) brightness(1.04)}
-.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g);font-size:14px;color:var(--ink-2)}
+.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g) 84px;font-size:14px;color:var(--ink-2)}
 .map-msg p{margin-bottom:12px}
 .map-msg .lbl{display:block;color:var(--grey)}
-.pin{background:var(--ink);border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px var(--ink)}
+.pin{background:var(--ink);border-radius:50%}
 .leaflet-control-attribution{font-size:9px!important;background:rgba(255,255,255,.75)!important}
-.ov-bottom{padding:var(--s3) var(--g) 0}
+.ov-bottom{padding:14px var(--g) 0}
 .ov-sel .lbl{color:var(--grey)}
 .ov-sel b{display:block;margin-top:4px;font:400 30px/1.05 var(--serif);letter-spacing:-.02em;overflow-wrap:anywhere}
 .ov-sel span{display:block;margin-top:3px;font-size:13px;color:var(--grey)}
-.ov-rad{display:grid;grid-template-columns:1fr 1fr;margin-top:var(--s3);border:1px solid var(--ink);border-radius:4px;overflow:hidden}
-.ov-rad button{min-height:52px;padding:8px 12px;font:600 11px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase}
-.ov-rad button+button{border-left:1px solid var(--ink)}
-.ov-rad button small{display:block;margin-top:3px;font:400 13px/1.2 var(--sans);letter-spacing:0;text-transform:none;color:var(--grey)}
+.ov-rad{position:absolute;left:var(--g);right:var(--g);bottom:14px;z-index:500;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:6px;background:rgba(255,255,255,.94);box-shadow:0 0 0 1px rgba(20,20,20,.14)}
+.ov-rad button{min-height:44px;padding:6px 10px;border-radius:4px;font:600 10.5px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-align:center}
+.ov-rad button small{display:block;margin-top:2px;font:400 12.5px/1.2 var(--sans);letter-spacing:0;text-transform:none;color:var(--grey)}
 .ov-rad button.on{background:var(--ink);color:#fff}
 .ov-rad button.on small{color:rgba(255,255,255,.72)}
-.ov-recent{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:var(--s3)}
+.ov-recent{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px}
 .ov-recent .lbl{color:var(--grey);margin-right:4px}
 .ov-recent button{height:30px;padding:0 12px;border-radius:999px;background:var(--wash);font-size:13px}
-.ov-use{width:100%;margin-top:var(--s4);min-height:52px;border-radius:6px}
+.ov-use{width:100%;margin-top:14px;min-height:52px;border-radius:6px}
 .ov-btns{display:flex;gap:8px;margin-top:12px}
 .ov-btns .btn{flex:1;padding:0 10px}
 .ov-btns.col{flex-direction:column;padding:var(--s6) var(--g) 0}
@@ -617,10 +617,11 @@ body.kitchen .sec{margin-top:48px}
 .ov-search input:focus{outline:none}
 .ov-search:focus-within{box-shadow:0 1px 0 var(--ink)}
 .ov-search input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
-@media (max-height:700px){#areaov>#map{flex-basis:200px;min-height:200px}}
+@media (max-height:700px){#areaov>.map-wrap{flex-basis:220px}}
 .hm-go .arr,.flt-h .arr{align-self:center}
 .more a,.to-kitchen .row,.hm-now .row{align-items:center}
 .arr.back{transform:rotate(180deg)}
 .local-note{margin:var(--s6) var(--g) 0;color:var(--grey)}
 .sec .local-note{margin:0 0 var(--s4)}
 .local-note+.res-n{margin-top:var(--s2)}
+.leaflet-top.leaflet-right .leaflet-control-attribution{margin:0}
