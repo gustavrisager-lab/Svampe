@@ -104,7 +104,7 @@ function drawArea(){
     <div class="map-wrap"><div id="map"><div class="map-msg">Henter kort …</div></div>
       <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div></div>
     <div class="ov-bottom">
-      <div class="ov-sel"><span class="lbl">Valgt område</span><b id="selName">${esc(d.name)}</b><span id="selReg">${esc(d.region||"")}</span></div>
+      <div class="ov-sel" aria-live="polite"><b id="selName">${esc(d.name)}</b><span id="selReg">${esc(d.region||"")}</span></div>
       ${rec.length?`<div class="ov-recent"><span class="lbl">Tidligere</span>${rec.map((x,i)=>`<button data-rec="${i}">${esc(x.name)}</button>`).join("")}</div>`:""}
       <button id="useArea" class="btn fill ov-use">Brug dette område</button>
     </div>`;
