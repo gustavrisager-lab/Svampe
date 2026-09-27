@@ -85,7 +85,7 @@ const r3=x=>Math.round(x*1000)/1000; /* ca. 100 m – præcis GPS gemmes ikke */
 let AOV=null;
 const POSICON=`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5V5.5M12 18.5V21.5M2.5 12H5.5M18.5 12H21.5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>`;
 /* Kortet viser altid hele radiuscirklen, så valget på kortet kan ses */
-const fitArea=keep=>{if(AOV&&AOV.map&&AOV.circle&&!(keep&&AOV.map.getBounds().contains(AOV.circle.getBounds())))AOV.map.fitBounds(AOV.circle.getBounds(),{paddingTopLeft:[24,32],paddingBottomRight:[24,84],animate:true})};
+const fitArea=keep=>{if(AOV&&AOV.map&&AOV.circle&&!(keep&&AOV.map.getBounds().contains(AOV.circle.getBounds())))AOV.map.fitBounds(AOV.circle.getBounds(),{paddingTopLeft:[24,32],paddingBottomRight:[24,32],animate:true})};
 const XICON=`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>`;
 function openArea(){
   const cur=area();
@@ -99,9 +99,9 @@ function drawArea(){
   if(AOV.step==="map"){
     const rec=LS.get("omraader",[]).filter(x=>x.name!==d.name).slice(0,4);
     el.innerHTML=`<div class="ov-top ov-bar"><form class="ov-search" role="search"><input type="search" enterkeyhint="search" placeholder="Søg efter et sted …" aria-label="Vælg område: søg efter et sted"></form><button id="myPos" class="ov-ic" aria-label="Brug min position">${POSICON}</button><button class="ov-x" aria-label="Luk">${XICON}</button></div>
+    <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t} · ${s.replace("ca. ","")}</button>`).join("")}</div>
     <div class="ov-res"></div>
-    <div class="map-wrap"><div id="map"><div class="map-msg">Henter kort …</div></div>
-      <div class="ov-rad" role="radiogroup" aria-label="Størrelse">${[[5,"Nærområde","ca. 5 km"],[15,"Større område","ca. 15 km"]].map(([r,t,s])=>`<button role="radio" aria-checked="${d.radius==r}" data-r="${r}" class="${d.radius==r?"on":""}">${t}<small>${s}</small></button>`).join("")}</div></div>
+    <div class="map-wrap"><div id="map"><div class="map-msg">Henter kort …</div></div></div>
     <div class="ov-bottom">
       <div class="ov-sel" aria-live="polite"><b id="selName">${esc(d.name)}</b><span id="selReg">${esc(d.region||"")}</span></div>
       ${rec.length?`<div class="ov-recent"><span class="lbl">Tidligere</span>${rec.map((x,i)=>`<button data-rec="${i}">${esc(x.name)}</button>`).join("")}</div>`:""}

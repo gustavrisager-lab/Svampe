@@ -521,7 +521,7 @@ body.noscroll{overflow:hidden}
 .ov-res span,.presets span{font-size:13px;color:var(--grey)}
 #map{position:relative;flex:1;min-height:180px;margin-top:var(--s3);background:var(--wash)}
 #map .leaflet-tile-pane{filter:grayscale(1) contrast(1.02) brightness(1.04)}
-.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g) 84px;font-size:14px;color:var(--ink-2)}
+.map-msg{position:absolute;inset:0;overflow:auto;padding:20px var(--g);font-size:14px;color:var(--ink-2)}
 .map-msg p{margin-bottom:12px}
 .map-msg .lbl{display:block;color:var(--grey)}
 .pin{background:var(--ink);border-radius:50%}
@@ -530,11 +530,9 @@ body.noscroll{overflow:hidden}
 .ov-sel .lbl{color:var(--grey)}
 .ov-sel b{display:block;font:400 28px/1.1 var(--serif);letter-spacing:-.01em;overflow-wrap:break-word}
 .ov-sel span{display:block;margin-top:2px;font-size:13px;color:var(--grey)}
-.ov-rad{position:absolute;left:var(--g);right:var(--g);bottom:14px;z-index:500;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:6px;background:rgba(255,255,255,.94);box-shadow:0 0 0 1px rgba(20,20,20,.14)}
-.ov-rad button{min-height:44px;padding:5px 10px;border-radius:4px;font:500 14px/1.2 var(--sans);text-align:center}
-.ov-rad button small{display:block;margin-top:1px;font:400 12px/1.2 var(--sans);color:var(--grey)}
-.ov-rad button.on{background:var(--ink);color:#fff}
-.ov-rad button.on small{color:rgba(255,255,255,.72)}
+.ov-rad{display:flex;gap:24px;margin:0 var(--g)}
+.ov-rad button{min-height:40px;padding:0;border-bottom:1px solid transparent;font:400 15px/1 var(--sans);color:var(--grey)}
+.ov-rad button.on{color:var(--ink);border-bottom-color:var(--ink)}
 .ov-recent{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px}
 .ov-recent .lbl{color:var(--grey);margin-right:4px}
 .ov-recent button{height:30px;padding:0 12px;border-radius:999px;background:var(--wash);font-size:13px}
